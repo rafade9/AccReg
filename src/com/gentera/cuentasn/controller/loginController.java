@@ -17,6 +17,7 @@ public class loginController {
 	public String printWelcome(ModelMap model) {
 		System.out.println("Entra a welcome");
 		model.addAttribute("message", 2);
+		System.out.print("hola");
 		return "loginYastas";
  
 	}

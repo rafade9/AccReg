@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Yastás</title>
 <!-- FormValidation CSS file -->
-<script src="jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="resources/jquery.maskedinput.min.js" type="text/javascript"></script>
 <script src="resources/js/jquery.js"></script>
-<script src="resources/js/jquery.validate.js"></script>
+<script src="resources/js/jquery.validate.min.js"></script>
 <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" title="" href="resources/css/cssYastasContenido.css" type="text/css">
 

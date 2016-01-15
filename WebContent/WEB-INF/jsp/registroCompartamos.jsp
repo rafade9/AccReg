@@ -16,6 +16,19 @@
 
 
 $(document).ready(function(){
+	
+	var htmlPaises = "";
+	
+	$.getJSON("http://localhost:8888/CuentasN2/catalogos/paises", function(allData) {
+			paises = $.map(allData, function(item) {
+				htmlPaises += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+			});
+	})
+	.done(function() {
+		document.getElementById("selectPais").innerHTML = htmlPaises;
+  	});
+	
+	
 
 $('#txNumIdent').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '');
@@ -157,7 +170,7 @@ body {
 				<option value="">Español</option>
 		</select><br><br>
 		<label class="texGris09_13">Pais Nacimiento * </label>
-		<select class="select">
+		<select class="select" name="selectPais" id="selectPais">
 				<option value="">Mexico</option>
 		</select><br><br>
 		<label class="texGris09_13">Lugar de Nacimiento * </label>

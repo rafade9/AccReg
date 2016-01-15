@@ -5,51 +5,89 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Yastás</title>
-<link href="http://www.yastas.com/wps/themes/html/YastasOrg/images/favicon.ico" rel="shortcut icon">
-<link href="./Yastás_files/styles.jsp" rel="styleSheet" type="text/css">
-<link href="./Yastás_files/cssYastasContenido.css" rel="stylesheet" type="text/css">
-<link href="./Yastás_files/YastasGen.css" rel="stylesheet" type="text/css">
-<link href="./Yastás_files/menu.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="/resources/css/screen.css">
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
-<script src="/resources/js/jquery.validate.js"></script>
-</head>
+<!-- FormValidation CSS file -->
+<script src="jquery.maskedinput.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery.validate.js"></script>
+<link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" title="" href="resources/css/cssYastasContenido.css" type="text/css">
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+$('#txNumIdent').keyup(function (){
+            this.value = (this.value + '').replace(/[^0-9]/g, '');
+ });
+ 
+ 	$("#commentForm2").validate({
+			messages: {
+				email: {
+					required: 'Enter this!'
+				}
+			}
+		});
+
+ 
+	   var res="";
+       $.ajax({
+		type:"GET", 
+		url: "http://localhost:8888/CuentasN2/catalogos/paises", 
+		dataType: "json",
+		success: function(data) {
+         $.each( data, function( key, val ) {
+            console.log("Paises: " + key + ", Clave: " + val);
+         });
+           //$("body").append(JSON.stringify(data));
+   }, 
+		error: function(jqXHR, textStatus, errorThrown) {
+           console.log(jqXHR.status);
+   }
+  
+});
+
+ 	
+ 	
+ 	
+ 	
+});
+
+
+$(function($){
+$("#fecha").mask("99/99/9999");
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+
 <style>
+ .select
+  {
+  border: 2px solid #DBE1EB;
+  border-radius: 4px;
+  width:270px;
+}
+ .select:hover
+  {
+  border-color: #CE4676;
+  }
+.text:hover{
+   border-color: #FF6347;	
+}
 
-		#contact label{
-			display: inline-block;
-			width: 100px;
-			text-align: right;
-		}
-		#contact_submit{
-			padding-left: 100px;
-		}
-		#contact div{
-			margin-top: 1em;
-		}
-		textarea{
-			vertical-align: top;
-			height: 5em;
-		}
-			
-		.error{
-			display: none;
-			margin-left: 10px;
-		}		
-		
-		.error_show{
-			color: red;
-			margin-left: 10px;
-		}
-		
-		input.invalid, textarea.invalid{
-			border: 2px solid red;
-		}
-		
-		input.valid, textarea.valid{
-			border: 2px solid green;
-		}
-
+tr.spaceUnder > td
+{
+  padding-bottom: 1em;
+}
 
 input
 {
@@ -76,14 +114,7 @@ label { display: inline-block; width: 160px; text-align: right; }
 input[type="radio"] {
     width: 40px;
   }
- 
-input[type="button"] {
-	height: 25px; 
-    width: 90px;
-	background:#CA005D;
-	color: white;
-	font-size: 16px;
-  }
+  
 select{
 	border-radius: 5px
 	-moz-border-radius: 5px; 
@@ -97,70 +128,87 @@ select{
 body {
     background-color: #ce4676;
 }
-
-	form label.error, form input.submit {
-		margin-left: 253px;
-	}
-	
-	#formularioCompartamos label.error {
-		margin-left: 10px;
-		width: auto;
-		display: inline;
-	}
-
-
 </style>
 
-
-<script type="text/javascript">
-	$.validator.setDefaults({
-		submitHandler: function() {
-			alert("submitted!");
-		}
-	});
-
-	$(document).ready(function(){
-		$("#formularioCompartamos").validate({
-			rules: {
-				txUsuario: {
-					required: true,
-					minlength: 5
-					}
-				},
-			messages: {
-				txUsuario: {
-					required: 'Por favor proporciona el usuario',
-					minlength: "La logitud del usuario debe ser mayor 5"
-				}
-			}
-	});
-});
-</script>
-
-
-<body>
 <div id="main">
   <div id="top">
-    <div id="logo"><a href="http://www.yastas.com/"><img src="./Compartamos Banco_files/logo_banco.png"></a></div>
+    <div id="logo"><a href="http://www.yastas.com/"><img src="resources/img/logo_banco.png"></a></div>
+  </div>
    <div class="cf"></div>
-  <div id="portalContent" > 
-	<p class="tituloMango"><br><br>
-			Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
-	</p>
-	<br><br>
-	<div>
+  <div id="portalContent"> 
+	<p class="tituloMango">Datos Personales<br></p>
+	<br><br><br><br>
+	
+	<div id="formulario">
 	<center>
-	<form id="formularioCompartamos" class="cmxform" method="post" action="">
-			<label class="texGris09_13" for="txUsuario">Usuario: </label><input type="text" id="txUsuario" name="txUsuario" title="Por favor ingrese su Usuario" required ><br><br>
-			<label class="texGris09_13">Contraseña: </label><input type="text" required title="Por favor ingrese su Password"><br><br>
-			<input type="submit" id="submitCom" value="Enviar">
+	<form>
+		<label class="texGris09_13">Tipo de identificación * </label><label class="texGris09_13"><input type="radio" name="tIdentificacion" id="rdIdent" value="ine" checked>IFE/INE</label><label class="texGris09_13"><input type="radio" name="tIdentificacion" id="rdIdent" value="pasaporte">Pasaporte</label><br>
+		<label class="texGris09_13">Número de identificación * </label><input type="text" id="txNumIdent"><br>
+		<label class="texGris09_13">Primer nombre * </label><input type="text"><br>
+		<label class="texGris09_13">Segundo nombre </label><input type="text"><br>
+		<label class="texGris09_13">Apellido Paterno * </label><input type="text"><br>
+		<label class="texGris09_13">Apellido Materno </label><input type="text"><br>
+		<label class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fecha" id="fecha" size="11" class="texGris09_13"><br>
+		<label class="texGris09_13">Nacionalidad * </label>
+		<select class="select">
+				<option value="">Mexicano</option>
+				<option value="">Uruguayo</option>
+				<option value="">Canadiense</option>
+				<option value="">Español</option>
+		</select><br><br>
+		<label class="texGris09_13">Pais Nacimiento * </label>
+		<select class="select">
+				<option value="">Mexico</option>
+		</select><br><br>
+		<label class="texGris09_13">Lugar de Nacimiento * </label>
+		<select class="select">
+				<option value="">--lugar nacimiento--</option>
+		</select><br><br>
+
+		<label class="texGris09_13">Género * </label><label class="texGris09_13"><input type="radio" name="genero" value="ine" checked>Masculino</label><label class="texGris09_13"><input type="radio" name="genero" value="pasaporte">Femenino</label><br>
+		<label class="texGris09_13">¿Desea notificaciones SMS? * </label><label class="texGris09_13"><input type="radio" name="sms" value="ine" checked>Si</label><label class="texGris09_13"><input type="radio" name="sms" value="pasaporte">No</label><br>
+		<label class="texGris09_13">Teléfono de contacto * </label><input type="text">
+		<p class="tituloMango">Dirección</p><br><br>
+	
+		<label class="texGris09_13">Código Postal * </label><input type="text" id="codigoPostal"><br>
+		<label class="texGris09_13">Estado * </label>
+		<select class="select" id="estado" name="estado">
+				<option value="">--Estado--</option>
+				<option value="">Aguscalientes</option>
+				<option value="">México</option>
+				<option value="">Hidalgo</option>
+				<option value="">Tlaxcala</option>
+		</select><br><br>
+		<label class="texGris09_13">Delegación/Municipio * </label> 
+		<select class="select" id="delegacion" name="delegacion">
+				<option value="">--Delegación/Municipio--</label></option>
+				<option value="">Tlalpan</label></option>
+				<option value="">Azcapotzalco</option>
+		</select><br><br>
+		<label class="texGris09_13">Ciudad * </label>
+		<select class="select" id="ciudad" name="ciudad">
+				<option value="">--Ciudad--</option>
+				<option value="">Aguscalientes</label></option>
+				<option value="">México</option>
+		</select><br><br>
+		<label class="texGris09_13">Colonia * </label></td><td> 
+		<select class="select" id="colonia" name="colonia">
+				<option value="">--Colonia--</option>
+				<option value="">Polanco</label></option>
+				<option value="">Heroes</option>
+		</select><br><br>
+		<label class="texGris09_13">Calle * </label> <input type="text"><br>
+		<label class="texGris09_13">Número Exterior * </label> <input type="text"><br>
+		<label class="texGris09_13">Número Interior * </label><input type="text"><br><br>
+		<input type="button" name="enviar" value="Enviar">
 	</form>
+	</center>	
 	</div>
-	</div>
-		    <div id="footer">	
+	
+	    <div id="footer">	
   	<!-- bottomMenu -->
       	
-        <img src="./Yastás_files/PieYastas.png" width="945" height="25" usemap="#barnav_inf" border="0">
+        <img src="resources/img/PieYastas.png" width="945" height="25" usemap="#barnav_inf" border="0">
         <map name="barnav_inf">		
 			<area shape="rect" coords="0,6,56,19" href="http://www.yastas.com/wps/portal/Yastas/AvisoPrivacidad" title="Aviso de Privacidad">
 			<area shape="rect" coords="87,6,167,19" href="http://www.yastas.com/wps/portal/Yastas/MapaSitio" title="Mapa de Sitio">
@@ -171,8 +219,9 @@ body {
 
 
     <!-- ends bottomMenu -->
-	
+    </div>
   </div>
 </div>
+
 </body>
 </html>

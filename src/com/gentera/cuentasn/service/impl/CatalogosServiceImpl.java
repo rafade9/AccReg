@@ -18,6 +18,14 @@ public class CatalogosServiceImpl implements CatalogosService {
 		pMex.setNombre("Mexico");
 		pMex.setClave("MEX");
 		paises.add(pMex);
+		pMex = new Pais();
+		pMex.setNombre("Afganistan");
+		pMex.setClave("AFG");
+		paises.add(pMex);
+		pMex = new Pais();
+		pMex.setNombre("Albania");
+		pMex.setClave("ALB");
+		paises.add(pMex);
 		return paises;
 	}
 

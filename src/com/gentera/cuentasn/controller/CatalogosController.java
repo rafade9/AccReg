@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.service.CatalogosService;
 
@@ -21,5 +22,10 @@ public class CatalogosController {
 	@RequestMapping(value = "/paises", method = RequestMethod.GET)
 	public @ResponseBody List<Pais> getPaises() {
 		return catalogos.getPaises();
+	}
+	
+	@RequestMapping(value = "/estados", method = RequestMethod.GET)
+	public @ResponseBody List<Estado> getEstados() {
+		return catalogos.getEstados();
 	}
 }

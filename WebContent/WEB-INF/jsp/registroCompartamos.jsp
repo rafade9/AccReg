@@ -7,7 +7,7 @@
 <title>Yastás</title>
 <!-- FormValidation CSS file -->
 <script src="resources/jquery.maskedinput.min.js" type="text/javascript"></script>
-<script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery-1.11.0.js"></script>
 <script src="resources/js/jquery.validate.min.js"></script>
 <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" title="" href="resources/css/cssYastasContenido.css" type="text/css">
@@ -17,6 +17,15 @@
 
 $(document).ready(function(){
 	
+	var codPost = "";
+	$.getJSON("https://www.compartamos.com.mx/FormularioProspectacion/getPostalCode.htm?cp=54710", function(allData) {
+		codPost = $.map(allData, function(item) {
+			console('Entre');
+		});
+	});
+	
+	
+	
 	var htmlPaises = "";
 	
 	$.getJSON("http://localhost:8888/CuentasN2/catalogos/paises", function(allData) {
@@ -25,61 +34,43 @@ $(document).ready(function(){
 			});
 	})
 	.done(function() {
-		document.getElementById("selectPais").innerHTML = htmlPaises;
+		document.getElementById("paisNacimiento").innerHTML = htmlPaises;
+  	});
+	
+	
+	
+	var htmlEstados = "";
+	
+	$.getJSON("http://localhost:8888/CuentasN2/catalogos/estados", function(allData) {
+			estados = $.map(allData, function(item) {
+				htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+			});
+	})
+	.done(function() {
+		document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
   	});
 	
 	
 
-$('#txNumIdent').keyup(function (){
+	$('#txNumIdent').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '');
- });
- 
- 	$("#commentForm2").validate({
-			messages: {
-				email: {
-					required: 'Enter this!'
-				}
-			}
-		});
-
- 
-	   var res="";
-       $.ajax({
-		type:"GET", 
-		url: "http://localhost:8888/CuentasN2/catalogos/paises", 
-		dataType: "json",
-		success: function(data) {
-         $.each( data, function( key, val ) {
-            console.log("Paises: " + key + ", Clave: " + val);
-         });
-           //$("body").append(JSON.stringify(data));
-   }, 
-		error: function(jqXHR, textStatus, errorThrown) {
-           console.log(jqXHR.status);
-   }
-  
+ 	});
+	
+	
+	$("#selNacionalidad").change(function(){
+		var valor=$("#selNacionalidad").val();
+			if(valor=='Otro'){
+				alert(valor);
+				document.getElementById('mensajeNac').style.display = 'block';
+				}        
+	});
+  	
 });
 
- 	
- 	
- 	
- 	
-});
-
-
-$(function($){
-$("#fecha").mask("99/99/9999");
-});
-
-
-
-
-
-
-
-
-
-
+	$(function($){
+		$("#fecha").mask("99/99/9999");
+	});
+	
 </script>
 
 <style>
@@ -154,36 +145,32 @@ body {
 	
 	<div id="formulario">
 	<center>
-	<form>
-		<label class="texGris09_13">Tipo de identificación * </label><label class="texGris09_13"><input type="radio" name="tIdentificacion" id="rdIdent" value="ine" checked>IFE/INE</label><label class="texGris09_13"><input type="radio" name="tIdentificacion" id="rdIdent" value="pasaporte">Pasaporte</label><br>
-		<label class="texGris09_13">Número de identificación * </label><input type="text" id="txNumIdent"><br>
-		<label class="texGris09_13">Primer nombre * </label><input type="text"><br>
-		<label class="texGris09_13">Segundo nombre </label><input type="text"><br>
-		<label class="texGris09_13">Apellido Paterno * </label><input type="text"><br>
-		<label class="texGris09_13">Apellido Materno </label><input type="text"><br>
-		<label class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fecha" id="fecha" size="11" class="texGris09_13"><br>
+	<form action="/" method="get" name="Persona">
+		<label class="texGris09_13">Tipo de identificación * </label><label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="tipoIdentificacion" value="ine" checked>IFE/INE</label><label class="texGris09_13"><input type="radio" name="tIdentificacion" id="rdIdent" value="pasaporte">Pasaporte</label><br>
+		<label class="texGris09_13">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion"><br>
+		<label class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre"><br>
+		<label class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre"><br>
+		<label class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno"><br>
+		<label class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno"><br>
+		<label class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fecha" id="fecha" size="11" class="texGris09_13" id="fechaNacimiento" name="fechaNacimiento"><br>
 		<label class="texGris09_13">Nacionalidad * </label>
-		<select class="select">
-				<option value="">Mexicano</option>
-				<option value="">Uruguayo</option>
-				<option value="">Canadiense</option>
-				<option value="">Español</option>
+		<select class="select" id="selNacionalidad" name="selNacionalidad" id="nacionalidad" name="nacionalidad">
+				<option value="Mexicano">Mexicano</option>
+				<option value="Otro">Otro</option>
 		</select><br><br>
 		<label class="texGris09_13">Pais Nacimiento * </label>
-		<select class="select" name="selectPais" id="selectPais">
-				<option value="">Mexico</option>
+		<select class="select" name="paisNacimiento" id="paisNacimiento">
 		</select><br><br>
 		<label class="texGris09_13">Lugar de Nacimiento * </label>
-		<select class="select">
-				<option value="">--lugar nacimiento--</option>
+		<select class="select" name="lugarNacimiento" id="lugarNacimiento">
 		</select><br><br>
 
-		<label class="texGris09_13">Género * </label><label class="texGris09_13"><input type="radio" name="genero" value="ine" checked>Masculino</label><label class="texGris09_13"><input type="radio" name="genero" value="pasaporte">Femenino</label><br>
-		<label class="texGris09_13">¿Desea notificaciones SMS? * </label><label class="texGris09_13"><input type="radio" name="sms" value="ine" checked>Si</label><label class="texGris09_13"><input type="radio" name="sms" value="pasaporte">No</label><br>
-		<label class="texGris09_13">Teléfono de contacto * </label><input type="text">
+		<label class="texGris09_13">Género * </label><label class="texGris09_13"><input type="radio" name="genero" value="ine" checked id ="genero" name="genero">Masculino</label><label class="texGris09_13"><input type="radio" id="genero" name="genero" value="pasaporte">Femenino</label><br>
+		<label class="texGris09_13">¿Desea notificaciones SMS? * </label><label class="texGris09_13"><input type="radio" name="sms" id="sms" value="ine" checked>Si</label><label class="texGris09_13"><input type="radio" name="sms" value="pasaporte">No</label><br>
+		<label class="texGris09_13">Teléfono de contacto * </label><input type="text" id="tipoTelefono" name"tipoTelefono">
 		<p class="tituloMango">Dirección</p><br><br>
 	
-		<label class="texGris09_13">Código Postal * </label><input type="text" id="codigoPostal"><br>
+		<label class="texGris09_13">Código Postal * </label><input type="text" id="codigoPostal" name="codigoPostal" class="inputText"><br>
 		<label class="texGris09_13">Estado * </label>
 		<select class="select" id="estado" name="estado">
 				<option value="">--Estado--</option>
@@ -213,9 +200,13 @@ body {
 		<label class="texGris09_13">Calle * </label> <input type="text"><br>
 		<label class="texGris09_13">Número Exterior * </label> <input type="text"><br>
 		<label class="texGris09_13">Número Interior * </label><input type="text"><br><br>
-		<input type="button" name="enviar" value="Enviar">
+		<input type="submit" name="enviar" value="Enviar">
 	</form>
 	</center>	
+	</div>
+	
+	<div id="mensajeNac" style='display:none;'>
+		<p>Lo sentimos pero este tipo de cuentas sólo se encuentran disponibles para personas de Nacionalidad Mexicana</p>
 	</div>
 	
 	    <div id="footer">	
@@ -236,5 +227,9 @@ body {
   </div>
 </div>
 
+<!-- Mensaje para no otra nacionalidad -->
+
+
+<!-- Fin mensaje para otra nacionalidad -->
 </body>
 </html>

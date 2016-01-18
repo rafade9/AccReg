@@ -1,161 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<link href="resources/css/cssYastasContenido.css" rel="stylesheet" type="text/css">
-<link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
-<link href="resources/css/menu.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="resources/css/screen.css">
-<script type="text/javascript" src="resources/js/jquery.js"></script>
-<script src="resources/js/jquery.validatejs"></script>
-</head>
-<style>
-
-		#contact label{
-			display: inline-block;
-			width: 100px;
-			text-align: right;
-		}
-		#contact_submit{
-			padding-left: 100px;
-		}
-		#contact div{
-			margin-top: 1em;
-		}
-		textarea{
-			vertical-align: top;
-			height: 5em;
-		}
-			
-		.error{
-			display: none;
-			margin-left: 10px;
-		}		
-		
-		.error_show{
-			color: red;
-			margin-left: 10px;
-		}
-		
-		input.invalid, textarea.invalid{
-			border: 2px solid red;
-		}
-		
-		input.valid, textarea.valid{
-			border: 2px solid green;
-		}
-
-
-input
-{
-   width: 220px; 
-   height: 20px; 
-   padding: 5px 20px 0px 20px; 
-   margin: 0 0 20px 0;
-   border-radius: 5px; 
-   -moz-border-radius: 5px; 
-   -webkit-border-radius: 5px;
-   -moz-box-shadow: 0px 0px 0px #f2f2f2;
-   -webkit-box-shadow: 0px 1px 0px #f2f2f2;
-   font-family: Arial; 
-   font-size: 16px;
-}
-
-input:focus, textarea:focus {
-   background: white;
-   }
-   
-   
-label { display: inline-block; width: 160px; text-align: right; }
-
-input[type="radio"] {
-    width: 40px;
-  }
- 
-input[type="button"] {
-	height: 25px; 
-    width: 90px;
-	background:#CA005D;
-	color: white;
-	font-size: 16px;
-  }
-select{
-	border-radius: 5px
-	-moz-border-radius: 5px; 
-    -webkit-border-radius: 5px;
-	-moz-box-shadow: 0px 0px 0px #f2f2f2;
-    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
-	height: 30px;
-	width: 265px;
-}
-
-body {
-    background-color: #ce4676;
-}
-
-	form label.error, form input.submit {
-		margin-left: 253px;
-	}
-	
-	#formularioCompartamos label.error {
-		margin-left: 10px;
-		width: auto;
-		display: inline;
-	}
-
-
-</style>
-
-
-<script type="text/javascript">
-	$.validator.setDefaults({
-		submitHandler: function() {
-			alert("submitted!");
-		}
-	});
-
-	$(document).ready(function(){
-		$("#formularioCompartamos").validate({
-			rules: {
-				txUsuario: {
-					required: true,
-					minlength: 5
-					}
-				},
-			messages: {
-				txUsuario: {
-					required: 'Por favor proporciona el usuario',
-					minlength: "La logitud del usuario debe ser mayor 5"
-				}
-			}
-	});
-});
-</script>
-
-
+  
+  <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" title="" href="resources/css/cssYastasContenido.css" type="text/css">
+   <link rel="stylesheet" href="resources/css/estilo.css">
+  
+  <script src="resources/js/jquery-1.11.0.js"></script>
+  <script src="resources/js/jquery.validate.js"></script>
+  <script src="resources/js/additional-methods.js"></script>
+  <script src="resources/js/messages_es.js"></script>
+ </head>
 <body>
 <div id="main">
-  <div id="top">
-    <div id="logo"><a href="http://www.yastas.com/"><img src="./Compartamos Banco_files/logo_banco.png"></a></div>
-   <div class="cf"></div>
-  <div id="portalContent" > 
-	<p class="tituloMango"><br><br>
-			Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
-	</p>
-	<br><br>
-	<div>
-	<center>
-	<form id="formularioCompartamos" class="cmxform" method="post" action="">
-			<label class="texGris09_13" for="txUsuario">Usuario: </label><input type="text" id="txUsuario" name="txUsuario" title="Por favor ingrese su Usuario" required ><br><br>
-			<label class="texGris09_13">Contraseña: </label><input type="text" required title="Por favor ingrese su Password"><br><br>
-			<input type="submit" id="submitCom" value="Enviar">
-	</form>
-	</div>
-	</div>
-		    <div id="footer">	
+   <div id="top">
+      <div id="logo"><a href="http://www.compartamos.com.mx/"><img src="resources/img/logo_banco.png"></a></div>
+   		<div class="cf"></div>
+  			<div id="portalContent" > 
+   					<p class="tituloMango"><br><br>
+						Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
+					</p><br><br>
+					<form id="formularioCompartamos" action="" novalidate align="center" commandName="Persona">
+
+	     				<label for="nombre"  class="texGris09_13" >Usuario  *</label> <input type="text" id="nombre" name="nombre"  class="texGris09_13" >
+	     				<div class="clear"> </div>
+	     				<label for="apellidos"  class="texGris09_13" >Password  *</label> <input type="text" id="apellidos" name="apellidos"  class="texGris09_13" >
+	     				<div class="clear"> </div>
+	     				<input class="enviar" type="submit" value="Enviar">
+
+					</form>
+					<div class="clear"> </div>
+			
+			</div>
+ <div id="footer">	
   	<!-- bottomMenu -->
       	
         <img src="./Yastás_files/PieYastas.png" width="945" height="25" usemap="#barnav_inf" border="0">
@@ -170,7 +44,67 @@ body {
 
     <!-- ends bottomMenu -->
 	
-  </div>
+</div>
+</div>
 </div>
 </body>
 </html>
+
+
+<style>
+
+	body {
+    background-color: #ce4676;
+}
+
+	form label.error, form input.submit {
+		margin-left: 253px;
+	}
+
+	form {
+  	width: 80%;
+  	margin: 0 auto;
+  	text-align: center; /* Este es para Internet Explorer ¬¬, que de lo contrario no lo centrará (en los navegadores antiguos) */
+}
+
+
+input[type="submit"] {
+    background: #ca005d none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 25px;
+    width: 90px;
+}
+
+</style>
+
+
+
+
+<script>
+$("#formularioCompartamos").validate({
+    rules: {
+      nombre: {
+        required: true,
+        lettersonly: true
+      },
+      apellidos: {
+        required: true
+      }
+    },
+    messages: {
+      nombre: {
+    	  required: "Por favor proporcione su usuario",
+    	  lettersonly: "Por favor sólo proporcione letras"
+      },
+
+      apellidos: {
+    	  required: "Por favor proporcione su password"
+      }
+    },
+    submitHandler: function() {
+      alert("formulario enviado");
+    }
+  });
+
+</script>

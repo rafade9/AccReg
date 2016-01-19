@@ -7,6 +7,7 @@ public class Usuario {
 	private String password;
 	private String folioTarjeta;
 	private String origen;
+	private String captcha;
 	
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -37,6 +38,12 @@ public class Usuario {
 	}
 	public void setOrigen(String origen) {
 		this.origen = origen;
+	}
+	public String getCaptcha() {
+		return captcha;
+	}
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
 	
 }

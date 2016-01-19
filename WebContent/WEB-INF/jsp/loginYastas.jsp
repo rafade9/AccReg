@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,14 +17,32 @@
 	<p class="tituloMango">
 			Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
 	</p><br/><br/><br/>
+	<c:if test="${not empty error}">
+						<div class="error">${error}</div>
+					</c:if>
 	<div id="formulario">
 	<center>
-	<form>
-		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text"><br><br>
-		<label class="texGris09_13">Ingresa el número de folio de la tarjeta:</label> <input type="text"><br><br>
-		<label class="texGris09_13">Ingresa la secuencia </label><br><br>
-		<input type="textArea"><br>
-		<input type="button" value="Enviar">
+	<form action="./loginProcessCompartamos" method="post">
+		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username"><br><br>
+	<table>
+			<tr>
+				<td style="border: 1px solid #7F9DB9;"><img alt="Captcha"
+					src="captcha.htm"></td>
+				<td width="31"></td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="4">
+			<tr>
+				<td valign="top"><input type="text" style="width: 173px;"
+					name="captcha" id="captcha"
+					class="requerido captcha captchaBloquear"></td>
+				<td valign="middle"><a href="loginPrueba"><img
+						src="resources/img/imgRefresh.jpg" width="23" height="23"></a></td>
+				<td width="29"></td>
+			</tr>
+		</table>
+		<input type="hidden" id="origen" name="origen" value="yastas">		
+		<input type="submit" value="Enviar">
 	</form>
 	
 	</div>

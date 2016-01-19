@@ -1,27 +1,29 @@
   
-  <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" title="" href="resources/css/cssYastasContenido.css" type="text/css">
-   <link rel="stylesheet" href="resources/css/estilo.css">
+  <link href="../resources/css/YastasGen.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" title="" href="../resources/css/cssYastasContenido.css" type="text/css">
+   <link rel="stylesheet" href="../resources/css/estilo.css">
   
-  <script src="resources/js/jquery-1.11.0.js"></script>
-  <script src="resources/js/jquery.validate.js"></script>
-  <script src="resources/js/additional-methods.js"></script>
-  <script src="resources/js/messages_es.js"></script>
+  <script src="../resources/js/jquery-1.11.0.js"></script>
+  <script src="../resources/js/jquery.validate.js"></script>
+  <script src="../resources/js/additional-methods.js"></script>
+  <script src="../resources/js/messages_es.js"></script>
  </head>
 <body>
 <div id="main">
    <div id="top">
-      <div id="logo"><a href="http://www.compartamos.com.mx/"><img src="resources/img/logo_banco.png"></a></div>
+      <div id="logo"><a href="http://www.compartamos.com.mx/"><img src="../resources/img/logo_banco.png"></a></div>
    		<div class="cf"></div>
   			<div id="portalContent" > 
    					<p class="tituloMango"><br><br>
 						Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
 					</p><br><br>
-					<form id="formularioCompartamos" action="" novalidate align="center" commandName="Persona">
+					<form id="formularioCompartamos"action="../loginProcessCompartamos" method="post" novalidate align="center" commandName="Persona">
 
-	     				<label for="nombre"  class="texGris09_13" >Usuario  *</label> <input type="text" id="nombre" name="nombre"  class="texGris09_13" >
+	     				<label for="nombre"  class="texGris09_13" >Usuario  *</label> <input type="text" id="username" name="username"  class="texGris09_13" >
 	     				<div class="clear"> </div>
-	     				<label for="apellidos"  class="texGris09_13" >Password  *</label> <input type="text" id="apellidos" name="apellidos"  class="texGris09_13" >
+	     				<label for="apellidos"  class="texGris09_13" >Password  *</label> <input type="text" id="password" name="password"  class="texGris09_13" >
+	     				<div class="clear"> </div>
+	     				<label for="apellidos"  class="texGris09_13" >Folio  *</label> <input type="text" id="folioTarjeta" name="folioTarjeta"  class="texGris09_13" >
 	     				<div class="clear"> </div>
 	     				<input class="enviar" type="submit" value="Enviar">
 
@@ -32,7 +34,6 @@
  <div id="footer">	
   	<!-- bottomMenu -->
       	
-        <img src="./Yastás_files/PieYastas.png" width="945" height="25" usemap="#barnav_inf" border="0">
         <map name="barnav_inf">		
 			<area shape="rect" coords="0,6,56,19" href="http://www.yastas.com/wps/portal/Yastas/AvisoPrivacidad" title="Aviso de Privacidad">
 			<area shape="rect" coords="87,6,167,19" href="http://www.yastas.com/wps/portal/Yastas/MapaSitio" title="Mapa de Sitio">
@@ -103,7 +104,7 @@ $("#formularioCompartamos").validate({
       }
     },
     submitHandler: function() {
-      alert("formulario enviado");
+    	form.submit();
     }
   });
 

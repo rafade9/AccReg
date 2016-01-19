@@ -31,7 +31,7 @@ public class loginController {
 
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login/compartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
 		System.out.println("Entra a welcome Compartamos");
 		return "loginCompartamos";
@@ -49,6 +49,7 @@ public class loginController {
 		ModelAndView model;
 		try {
 			System.out.println(usuario.getUsername());
+			System.out.println(usuario.getFolioTarjeta());
 			req.login(usuario.getUsername(), usuario.getPassword());
 			
 		} catch (ServletException e) {

@@ -7,17 +7,18 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<intercept-url pattern="/app/**" access="ROLE_USER" />
+		<intercept-url pattern="/app**" access="ROLE_USER" />
+		<intercept-url pattern="/catalogos/**" access="ROLE_USER" />
 		
 		<form-login 
-		    
+		    login-page="/loginPrueba"
 		    default-target-url="/welcome" 
 			authentication-failure-url="/login?error" 
 			username-parameter="username"
 			password-parameter="password" />
 		<logout logout-url="/logout"/>
 		<!-- enable csrf protection -->
-		<csrf/>
+		
 	</http>
 
 	<authentication-manager>

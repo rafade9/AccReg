@@ -1,0 +1,71 @@
+@CHARSET "ISO-8859-1";
+
+*{
+ margin:0px;
+ padding:0px;
+}
+
+	body {
+    background-color: #ce4676;
+}
+
+	form label.error, form input.submit {
+		margin-left: 253px;
+	}
+	
+	#error{
+		 color: #d60404;
+	}
+
+	form {
+  	width: 80%;
+  	margin: 0 auto;
+  	text-align: center;
+}
+
+
+input[type="submit"] {
+    background: #ca005d none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 25px;
+    width: 90px;
+}
+
+label.error {
+    color: #d60404;
+}
+
+#mensajeError{
+	color: #d60404;
+	text-align: center;
+}
+
+#portalContent {
+    background-color: #ffffff;
+    padding: 30px;
+}
+
+
+.tituloMango {
+    color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.texGris09_13 {
+    color: #9a8b7d;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}

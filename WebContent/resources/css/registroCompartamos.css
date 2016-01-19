@@ -62,14 +62,76 @@ select{
 	width: 265px;
 }
 
-body {
+	body {
     background-color: #ce4676;
 }
-
-		form label.error, form input.submit {
+	form label.error, form input.submit {
 		margin-left: 253px;
-		}
+}
 	
 	label.error {
     color: #d60404;
+}
+
+
+#mensajeNac{
+	background-color: #ffffff;
+	left:35%;
+	top:110%;
+   	z-index:20;
+   	position:absolute;
+   	border: 2px solid #ce4676;
+   	text-align:center;
+   	color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    font-style: italic;
+
+}
+
+#mensajeNac{
+	background-color: #ffffff;
+	left:35%;
+	top:110%;
+   	z-index:20;
+   	position:absolute;
+   	border: 2px solid #ce4676;
+   	text-align:center;
+   	color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    font-style: italic;
+
+}
+
+.texGris09_13 {
+    color: #9a8b7d;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.tituloMango {
+    color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+
+input[type="submit"] {
+    background: #ca005d none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 25px;
+    width: 90px;
 }

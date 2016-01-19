@@ -37,11 +37,23 @@ $(document).ready(function(){
 	$("#selNacionalidad").change(function(){
 		var valor=$("#selNacionalidad").val();
 			if(valor=='Otro'){
-				alert(valor);
 				document.getElementById('mensajeNac').style.display = 'block';
-				}        
+				jQuery("#paisNacimiento").attr('disabled',true);
+				jQuery("#lugarNacimiento").attr('disabled',true);
+				$('input[name=genero]').attr("disabled",true);
+			}else{
+				document.getElementById('mensajeNac').style.display = 'none';
+				jQuery("#paisNacimiento").attr('disabled',false);
+				jQuery("#lugarNacimiento").attr('disabled',false);
+				$('input[name=genero]').attr("disabled",false);
+				
+			}
 	});
-	
+
+//Cerramos el mensaje de nacionalidad	
+	$("#btMensaje").click( function(){
+    	document.getElementById('mensajeNac').style.display = 'none';
+    });	
 
 	
 //realiza la validación del formulario	
@@ -171,6 +183,7 @@ $(document).ready(function(){
 	         }
 	    },
 	    submitHandler: function() {
+	    	alert('Voy a enviar el formulario');
 	    	
 	    	jsonObj = {}; 
 	        
@@ -183,7 +196,7 @@ $(document).ready(function(){
             $(".inputRadio").each(function(){
                    var keyInput = $(this).attr("name");
                    if(document.getElementById($(this).attr("id")).checked){
-                                 jsonObj[keyInput] = $(this).val();
+                      jsonObj[keyInput] = $(this).val();
                           }
             });
      	    	
@@ -203,6 +216,19 @@ $(document).ready(function(){
 	    
 	    }
 	  });
+	
+	
+//desabilita los radio buttons para saber que tipo de telefono proporcionan
+	$('input[name=tipoTel]').attr("disabled",true);
+	
+//Obtenemos si el cliente desea envió de SMS
+	$("input[name=sms]").click(function () {
+		if($(this).val() == 'no'){
+			$('input[name=tipoTel]').attr("disabled",false);
+		}else{
+			$('input[name=tipoTel]').attr("disabled",true);
+		}
+    });	
   	
 });
 
@@ -212,21 +238,6 @@ $(document).ready(function(){
 		$("#fecha").mask("99/99/9999");
 	});
 	
-	$.fn.serializeObject = function() {
-	    var o = {};
-	    var a = this.serializeArray();
-	    $.each(a, function() {
-	        if (o[this.tipoIdentificacion]) {
-	            if (!o[this.tipoIdentificacion].push) {
-	                o[this.tipoIdentificacion] = [o[this.tipoIdentificacion]];
-	            }
-	            o[this.tipoIdentificacion].push(this.value || '');
-	        } else {
-	            o[this.tipoIdentificacion] = this.value || '';
-	        }
-	    });
-	    return o;
-	};
 	
 //Funcion para obtener los datos dependiendo del codigo postal	
 	$(function() {
@@ -273,5 +284,6 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
 	
 	

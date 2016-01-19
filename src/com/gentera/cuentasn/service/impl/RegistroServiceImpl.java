@@ -1,4 +1,4 @@
-package com.gentera.cuentasn.service;
+package com.gentera.cuentasn.service.impl;
 
 import java.util.Random;
 
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.service.RegistroService;
 
 @Service
 public class RegistroServiceImpl implements RegistroService {

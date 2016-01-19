@@ -124,29 +124,5 @@ public class loginController {
 			e.printStackTrace();
 		}
 	}
-	
-	@RequestMapping(value = "/loginPrueba", method = RequestMethod.GET)
-	public ModelAndView loginPrueba(Usuario usuario){
-		ModelAndView model = new ModelAndView("loginPrueba");
-		return model;
-	}
-	
-	@RequestMapping(value = "/loginPruebaCaptcha", method = RequestMethod.POST)
-	public ModelAndView loginPruebaCaptcha(HttpServletRequest request, Usuario usuario){
-		ModelAndView model = new ModelAndView("index");
-		String captchaId = request.getSession().getId();
-		System.out.println(captchaId);
-		System.out.println(usuario.getCaptcha());
-		boolean captchaPassed = false;
-		
-		try{
-    		captchaPassed = miCaptchaService.validateResponseForID(captchaId, usuario.getCaptcha());
-    		System.out.println("Resultado de evaluación: " + captchaPassed);
-    	}catch(CaptchaServiceException ex){
-    		throw new LockedException("Captcha incorrecto.");
-    	}
-
-		return model;
-	}
 
 }

@@ -26,5 +26,19 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	
+	<!--Definicion del mapeo de las solicitudes -->
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+			    <prop key="/captcha.htm">imagenCaptchaController</prop>
+            </props>
+		</property>
+	</bean>
+
+    <bean id="imagenCaptchaController" class="com.gentera.cuentasn.controller.ImagenCaptchaController">
+        <property name="captchaService" ref="miCaptchaService" />
+    </bean>
  
 </beans>

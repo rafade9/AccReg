@@ -11,13 +11,18 @@
 		<intercept-url pattern="/catalogos/**" access="ROLE_USER" />
 		
 		<form-login 
-		    login-page="/login/compartamos"
+		    login-page="/loginCompartamos"
 		    default-target-url="/welcome" 
 			authentication-failure-url="/login?error" 
 			username-parameter="username"
 			password-parameter="password" />
-		<logout logout-url="/logout"/>
+		<logout logout-success-url="/loginCompartamos" logout-url="/logout"/>
 		<!-- enable csrf protection -->
+		
+		<session-management>
+			<concurrency-control error-if-maximum-exceeded="false" expired-url="/login.htm?errorMax=true"
+				max-sessions="1" />
+		</session-management>
 		
 	</http>
 

@@ -95,7 +95,10 @@ public class loginController {
 			
 			return model;
 				
-		} catch (ServletException e) {
+		} catch(CaptchaServiceException ex){
+    		throw new LockedException("Captcha incorrecto.");
+    		
+    	}catch (ServletException e) {
 			
 			if(usuario.getOrigen().toLowerCase().equals("compartamos"))
 				model = new ModelAndView("loginCompartamos");

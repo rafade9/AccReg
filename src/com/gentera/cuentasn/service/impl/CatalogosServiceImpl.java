@@ -20,21 +20,9 @@ public class CatalogosServiceImpl implements CatalogosService {
 	@Override
 	public List<Pais> getPaises() {
 		
-//		leerCatalogos.leerCsvPaises();
+		List<Pais> paises = leerCatalogos.leerCsvPaises();
 		
-		List<Pais> paises = new ArrayList<Pais>();
-		Pais pMex = new Pais();
-		pMex.setNombre("Mexico");
-		pMex.setClave("MEX");
-		paises.add(pMex);
-		pMex = new Pais();
-		pMex.setNombre("Afganistan");
-		pMex.setClave("AFG");
-		paises.add(pMex);
-		pMex = new Pais();
-		pMex.setNombre("Albania");
-		pMex.setClave("ALB");
-		paises.add(pMex);
+		
 		return paises;
 	}
 

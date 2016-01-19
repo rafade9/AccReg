@@ -17,51 +17,73 @@ public class loginController {
 	HttpServletRequest httpServlet;
 
 	/**
-	 * Funcion para atender recurso /welcome por GET
+	 * Muestra el login de Yastas
 	 * 
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginYastas", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		System.out.println("Entra a welcome");
-		model.addAttribute("message", 2);
-		System.out.print("hola");
 		return "loginYastas";
 
 	}
 
-	@RequestMapping(value = "/login/compartamos", method = RequestMethod.GET)
+	/**
+	 * Muestra el login de Compartamos
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/loginCompartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
 		System.out.println("Entra a welcome Compartamos");
 		return "loginCompartamos";
 
 	}
 
-	@RequestMapping(value = "/loginPrueba", method = RequestMethod.GET)
-	public String loginPrueba() {
-		System.out.println("Entra a login Prueba");
-		return "loginPrueba";
-	}
-
+	/**
+	 * Servicio para realizar el login
+	 * @param req
+	 * @param usuario
+	 * @return
+	 */
 	@RequestMapping(value = "/loginProcessCompartamos", method = RequestMethod.POST)
 	public ModelAndView loginProcessCompartamos(HttpServletRequest req, Usuario usuario) {
 		ModelAndView model;
 		try {
-			System.out.println(usuario.getUsername());
-			System.out.println(usuario.getFolioTarjeta());
-			req.login(usuario.getUsername(), usuario.getPassword());
 			
+			//Verifica el origen
+			if(usuario.getOrigen().toLowerCase().equals("compartamos"))
+				model = new ModelAndView("registroCompartamos");
+			else if(usuario.getOrigen().toLowerCase().equals("yastas"))
+				model = new ModelAndView("registroYastas");
+			else{
+				model = new ModelAndView("paginaError");
+				model.addObject("error", "No se puede detectar el origen.");
+			}
+			
+			//Realiza el login con las credenciales dadas por el usuario
+			req.login(usuario.getUsername(), usuario.getPassword());	
+			
+			return model;
+				
 		} catch (ServletException e) {
 			
+			if(usuario.getOrigen().toLowerCase().equals("compartamos"))
+				model = new ModelAndView("loginCompartamos");
+			else if(usuario.getOrigen().toLowerCase().equals("yastas"))
+				model = new ModelAndView("loginYastas");
+			else
+				model = new ModelAndView("paginaError");
+			
+			
 			if(e.getMessage().startsWith("Bad credentials")){
-				model = new ModelAndView("loginPrueba");
 				model.addObject("error", "Usuario o password incorrecto");
-				return model;
 			}
+			else{
+				model.addObject("error", "No se ha podido conectar");
+			}
+			return model;
 		}
-		model = new ModelAndView("index");
-		return model;
 	}
 
 	@RequestMapping(value = "/logoutCompartamos", method = RequestMethod.GET)

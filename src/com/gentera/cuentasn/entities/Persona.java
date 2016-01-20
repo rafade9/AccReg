@@ -25,6 +25,7 @@ public class Persona {
 	private String calle;
 	private String numExterior;
 	private String numInterior;
+	private String folio;
 
 	public String getTipoIdentificacion() {
 		return tipoIdentificacion;
@@ -201,5 +202,14 @@ public class Persona {
 	public void setNumInterior(String numInterior) {
 		this.numInterior = numInterior;
 	}
+
+	public String getFolio() {
+		return folio;
+	}
+
+	public void setFolio(String folio) {
+		this.folio = folio;
+	}
+	
 
 }

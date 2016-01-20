@@ -18,6 +18,15 @@ public class Persona {
 	private boolean sms;
 	private String tipoTelefono;
 	private String telefono;
+	// Direccion
+	private String codigoPostal;
+	private String estado;
+	private String delegacion;
+	private String ciudad;
+	private String colonia;
+	private String calle;
+	private String numExterior;
+	private String numInterior;
 
 	public String getTipoIdentificacion() {
 		return tipoIdentificacion;
@@ -129,6 +138,70 @@ public class Persona {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
+
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getDelegacion() {
+		return delegacion;
+	}
+
+	public void setDelegacion(String delegacion) {
+		this.delegacion = delegacion;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public String getColonia() {
+		return colonia;
+	}
+
+	public void setColonia(String colonia) {
+		this.colonia = colonia;
+	}
+
+	public String getCalle() {
+		return calle;
+	}
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+	public String getNumExterior() {
+		return numExterior;
+	}
+
+	public void setNumExterior(String numExterior) {
+		this.numExterior = numExterior;
+	}
+
+	public String getNumInterior() {
+		return numInterior;
+	}
+
+	public void setNumInterior(String numInterior) {
+		this.numInterior = numInterior;
 	}
 
 }

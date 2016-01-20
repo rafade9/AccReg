@@ -1,7 +1,5 @@
 package com.gentera.cuentasn.entities;
 
-import java.util.Date;
-
 public class Persona {
 
 	private String tipoIdentificacion;
@@ -10,7 +8,7 @@ public class Persona {
 	private String segundoNombre;
 	private String paterno;
 	private String materno;
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 	private String nacionalidad;
 	private String paisNacimiento;
 	private String lugarNacimiento;
@@ -76,11 +74,11 @@ public class Persona {
 		this.materno = materno;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

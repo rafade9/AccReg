@@ -3,10 +3,17 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script src="resources/js/jquery-1.11.0.js"></script>
+<script src="resources/js/jquery.validate.js"></script>
+<script src="resources/js/messages_es.js"></script>
+<script src="resources/js/loginYastas.js"></script>
+
+<link rel="stylesheet" type="text/css" href="resources/css/YastasGen.css"/>
+<link rel="stylesheet" type="text/css" href="resources/css/loginYastas.css"/>
+
 <title>Yastás</title>
 
-
-<link rel="stylesheet" type="text/css" href="resources/css/cssYastasContenido.css"/>
 </head>
 <body>
 <div id="main">
@@ -14,16 +21,23 @@
     <div id="logo"><a href="http://www.yastas.com/"><img src="resources/img/logo.png"></a></div>
   </div>
    <div class="cf"></div>
+   <div id="portalContent" >
 	<p class="tituloMango">
 			Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
 	</p><br/><br/><br/>
 	<c:if test="${not empty error}">
 						<div class="error">${error}</div>
 					</c:if>
-	<div id="formulario">
+	<div id="formYastas">
 	<center>
-	<form action="./loginProcessCompartamos" method="post">
-		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username"><br><br>
+	<form id="formularioYastas" action="./loginProcessCompartamos" method="post">
+		
+		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="idUsuario" name="idUsuario" class="texGris09_13">
+		<div class="clear"> </div>
+		<label class="texGris09_13">Ingresa el número de folio de la tarjeta:</label> <input type="text" id="folioTarjeta" name="folioTarjeta" class="texGris09_13">
+		<div class="clear"> </div>
+		
+		
 	<table>
 			<tr>
 				<td style="border: 1px solid #7F9DB9;"><img alt="Captcha"
@@ -36,7 +50,7 @@
 				<td valign="top"><input type="text" style="width: 173px;"
 					name="captcha" id="captcha"
 					class="requerido captcha captchaBloquear"></td>
-				<td valign="middle"><a href="loginPrueba"><img
+				<td valign="middle"><a href="/loginYastas"><img
 						src="resources/img/imgRefresh.jpg" width="23" height="23"></a></td>
 				<td width="29"></td>
 			</tr>
@@ -63,5 +77,4 @@
 	
   </div>
 </div>
-<a href="/logout">Salir</a>
 </body></html>

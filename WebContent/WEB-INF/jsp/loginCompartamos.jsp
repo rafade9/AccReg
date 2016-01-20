@@ -42,7 +42,6 @@
 			</div>
  <div id="footer">	
   	<!-- bottomMenu -->
-      	
 
     <!-- ends bottomMenu -->
 	

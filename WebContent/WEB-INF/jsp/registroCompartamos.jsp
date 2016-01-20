@@ -10,41 +10,40 @@
 
   <script src="resources/js/jquery-1.11.0.js"></script>
   <script src="resources/js/jquery.validate.js"></script>
-  <script src="resources/js/additional-methods.js"></script>
   <script src="resources/js/messages_es.js"></script>
   <script src="resources/js/registroCompartamos.js"></script>
   <script src="resources/js/jquery.maskedinput.min.js" type="text/javascript"></script>
   
 <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
 <link href="resources/css/registroCompartamos.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" title="" href="resources/css/cssYastasContenido.css" type="text/css">
-
+</head>
+<body>
 <div id="main">
   <div id="top">
-    <div id="logo"><a href="http://www.yastas.com/"><img src="resources/img/logo_banco.png"></a></div>
+    <div id="logo"><img src="resources/img/logo_banco.png"></a></div>
   </div>
    <div class="cf"></div>
   <div id="portalContent"> 
 	<p class="tituloMango">Datos Personales<br></p>
 	<br><br><br><br>	
-	<div id="formulario">
-	<form id="formularioCompartamos" action="" novalidate>
+	<div id="formCompartamos">
+	<form id="formularioCompartamos" action="" novalidate align="center">
 		<label class="texGris09_13">Tipo de identificación * </label>
 		<label class="texGris09_13">
-		<input type="radio" name="tipoIdentificacion" id="ine" value="ine" class="inputRadio">IFE/INE</label>
+		<input type="radio" name="tipoIdentificacion" id="ine" value="ine" class="inputRadio" checked>IFE/INE</label>
 		<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="pasaporte" class="inputRadio">Pasaporte</label><br>
 		<div class="clear"> </div>
-		<label class="texGris09_13">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText"><br>
+		<label for="numeroIdentificacion" class="texGris09_13">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText"><br>
 		<div class="clear"> </div>
-		<label class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" ><br>
+		<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" ><br>
 		<div class="clear"> </div>
-		<label class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText" ><br>
+		<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText" ><br>
 		<div class="clear"> </div>
-		<label class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText" ><br>
+		<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText" ><br>
 		<div class="clear"> </div>
-		<label class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="inputText inputText"><br>
+		<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="inputText inputText"><br>
 		<div class="clear"> </div>
-		<label class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText" id="fechaNacimiento" ><br>
+		<label for="fechaNacimiento" class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText" id="fechaNacimiento" ><br>
 		<div class="clear"> </div>
 		
 		<label class="texGris09_13">Nacionalidad * </label>
@@ -67,22 +66,22 @@
 		<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="femenino" class="inputRadio">Femenino</label><br>
 		
 		<label class="texGris09_13">¿Desea notificaciones SMS? * </label>
-		<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="si">Si</label>
-		<label class="texGris09_13"><input type="radio" name="sms" id="smsNo" class="inputRadio" value="no">No</label><br>
+		<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label>
+		<label class="texGris09_13"><input type="radio" name="sms" id="smsNo" class="inputRadio" value="false">No</label><br>
 		
 		<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular"  class="inputRadio" value="celular" checked>Celular</label>
 		<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="casa" >Casa</label>
 		<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="negocio">Negocio</label><br>
 		
-		<label class="texGris09_13">Teléfono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText">
+		<label for="telefono" class="texGris09_13">Teléfono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText">
 		
 		<p class="tituloMango">Dirección</p><br><br>
 	
-		<label class="texGris09_13">Código Postal * </label><input type="text" id="codigoPostal" name="codigoPostal" class="texGris09_13 inputText" ><br>
+		<label for="codigoPostal" class="texGris09_13">Código Postal * </label><input type="text" id="codigoPostal" name="codigoPostal" class="texGris09_13 inputText" ><br>
 		
 		<label class="texGris09_13">Estado * </label>
 		<select class="select inputText" id="estado" name="estado" >
-		<option value="##" class="texGris09_13">--- Selecciona ---</option><option value="Aguascalientes" class="texGris09_13">Aguascalientes</option><option value="Baja California" class="texGris09_13">Baja California</option><option value="Baja California Sur" class="texGris09_13">Baja California Sur</option><option value="Campeche" class="texGris09_13">Campeche</option><option value="Chiapas" class="texGris09_13">Chiapas</option><option value="Chihuahua" class="texGris09_13">Chihuahua</option><option value="Coahuila De Zaragoza" class="texGris09_13">Coahuila De Zaragoza</option><option value="Colima" class="texGris09_13">Colima</option><option value="Distrito Federal" class="texGris09_13">Distrito Federal</option><option value="Durango" class="texGris09_13">Durango</option><option value="Guanajuato" class="texGris09_13">Guanajuato</option><option value="Guerrero" class="texGris09_13">Guerrero</option><option value="Hidalgo" class="texGris09_13">Hidalgo</option><option value="Jalisco" class="texGris09_13">Jalisco</option><option value="Mexico" class="texGris09_13">Mexico</option><option value="Michoacan" class="texGris09_13">Michoacan</option><option value="Morelos" class="texGris09_13">Morelos</option><option value="Nayarit" class="texGris09_13">Nayarit</option><option value="Nuevo Leon" class="texGris09_13">Nuevo Leon</option><option value="Oaxaca" class="texGris09_13">Oaxaca</option><option value="Puebla" class="texGris09_13">Puebla</option><option value="Queretaro" class="texGris09_13">Queretaro</option><option value="Quintana Roo" class="texGris09_13">Quintana Roo</option><option value="San Luis Potosi" class="texGris09_13">San Luis Potosi</option><option value="Sinaloa" class="texGris09_13">Sinaloa</option><option value="Sonora" class="texGris09_13">Sonora</option><option value="Tabasco" class="texGris09_13">Tabasco</option><option value="Tamaulipas" class="texGris09_13">Tamaulipas</option><option value="Tlaxcala" class="texGris09_13">Tlaxcala</option><option value="Veracruz" class="texGris09_13">Veracruz</option><option value="Yucatan" class="texGris09_13">Yucatan</option><option value="Zacatecas" class="texGris09_13">Zacatecas</option>
+		<option value="" class="texGris09_13">--- Selecciona ---</option><option value="Aguascalientes" class="texGris09_13">Aguascalientes</option><option value="Baja California" class="texGris09_13">Baja California</option><option value="Baja California Sur" class="texGris09_13">Baja California Sur</option><option value="Campeche" class="texGris09_13">Campeche</option><option value="Chiapas" class="texGris09_13">Chiapas</option><option value="Chihuahua" class="texGris09_13">Chihuahua</option><option value="Coahuila De Zaragoza" class="texGris09_13">Coahuila De Zaragoza</option><option value="Colima" class="texGris09_13">Colima</option><option value="Distrito Federal" class="texGris09_13">Distrito Federal</option><option value="Durango" class="texGris09_13">Durango</option><option value="Guanajuato" class="texGris09_13">Guanajuato</option><option value="Guerrero" class="texGris09_13">Guerrero</option><option value="Hidalgo" class="texGris09_13">Hidalgo</option><option value="Jalisco" class="texGris09_13">Jalisco</option><option value="Mexico" class="texGris09_13">Mexico</option><option value="Michoacan" class="texGris09_13">Michoacan</option><option value="Morelos" class="texGris09_13">Morelos</option><option value="Nayarit" class="texGris09_13">Nayarit</option><option value="Nuevo Leon" class="texGris09_13">Nuevo Leon</option><option value="Oaxaca" class="texGris09_13">Oaxaca</option><option value="Puebla" class="texGris09_13">Puebla</option><option value="Queretaro" class="texGris09_13">Queretaro</option><option value="Quintana Roo" class="texGris09_13">Quintana Roo</option><option value="San Luis Potosi" class="texGris09_13">San Luis Potosi</option><option value="Sinaloa" class="texGris09_13">Sinaloa</option><option value="Sonora" class="texGris09_13">Sonora</option><option value="Tabasco" class="texGris09_13">Tabasco</option><option value="Tamaulipas" class="texGris09_13">Tamaulipas</option><option value="Tlaxcala" class="texGris09_13">Tlaxcala</option><option value="Veracruz" class="texGris09_13">Veracruz</option><option value="Yucatan" class="texGris09_13">Yucatan</option><option value="Zacatecas" class="texGris09_13">Zacatecas</option>
 		</select><br><br>
 		
 		<label class="texGris09_13">Delegación/Municipio * </label> 
@@ -100,7 +99,7 @@
 		<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText"><br>
 		<label class="texGris09_13">Número Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText"><br>
 		<label class="texGris09_13">Número Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText"><br><br>
-		<input type="submit" name="enviar" value="Enviar">
+		<input type="submit" id="enviar" name="enviar" value="Enviar">
 	</form>
 	</div>
 

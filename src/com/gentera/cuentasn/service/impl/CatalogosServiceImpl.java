@@ -40,4 +40,9 @@ public class CatalogosServiceImpl implements CatalogosService {
 		return estados;
 	}
 
+	@Override
+	public Estado[] getEstadosByClavePais(String clavePais) {
+		return leerCatalogos.getEstadosByIdPais(clavePais);
+	}
+
 }

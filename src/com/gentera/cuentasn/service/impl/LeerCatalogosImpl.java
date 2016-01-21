@@ -6,17 +6,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.service.LeerCatalogos;
+import com.google.gson.Gson;
 
 @Service
 public class LeerCatalogosImpl implements LeerCatalogos {
 	
 	ClassLoader loader = LeerCatalogosImpl.class.getClassLoader();
+	private static Gson gson = new Gson();
+	private static Properties prop = new Properties();
 
 	@Override
 	public List<Pais> leerCsvPaises() {
@@ -58,7 +62,18 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 
 	@Override
 	public List<Estado> leerCsvEstados() {
-		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Estado[] getEstadosByIdPais(String idPais) {
+		try{
+			prop.load(LeerCatalogosImpl.class.getClassLoader().getResourceAsStream("resources/Estados.properties"));
+			Estado estado[] = gson.fromJson(prop.getProperty(idPais.toUpperCase()), Estado[].class);
+			return estado;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 

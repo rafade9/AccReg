@@ -18,5 +18,11 @@ public interface CatalogosService {
 	 * @return Lista de estados
 	 */
 	public List<Estado> getEstados();
+	
+	/**
+	 * Metodo para recuperar lista de estados por clave de pais
+	 * @return
+	 */
+	public Estado[] getEstadosByClavePais(String clavePais);
 
 }

@@ -18,5 +18,12 @@ public interface LeerCatalogos {
 	 * @return
 	 */
 	public List<Estado> leerCsvEstados();
+	
+	/**
+	 * Leer archivo csv de los estados y recuperar por clave de pais
+	 * @param idPais la clave del pais
+	 * @return Lista de estados pertenecientes a la clave
+	 */
+	public Estado[] getEstadosByIdPais(String idPais);
 
 }

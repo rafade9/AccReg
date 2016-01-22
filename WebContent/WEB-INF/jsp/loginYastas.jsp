@@ -32,7 +32,7 @@
 	<center>
 	<form id="formularioYastas" action="./loginProcessCompartamos" method="post">
 		
-		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="idUsuario" name="idUsuario" class="texGris09_13">
+		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username" class="texGris09_13">
 		<div class="clear"> </div>
 		<label class="texGris09_13">Ingresa el número de folio de la tarjeta:</label> <input type="text" id="folioTarjeta" name="folioTarjeta" class="texGris09_13">
 		<div class="clear"> </div>

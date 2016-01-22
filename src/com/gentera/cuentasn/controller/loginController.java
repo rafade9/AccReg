@@ -2,11 +2,16 @@ package com.gentera.cuentasn.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,13 +68,13 @@ public class loginController {
 			
 			//Origen compartamos
 			if(usuario.getOrigen()!=null && usuario.getOrigen().toLowerCase().equals("compartamos")){
-				model = new ModelAndView("registroCompartamos");
+				model = new ModelAndView("redirect:/registroCompartamos");
 				//Realiza el login con las credenciales dadas por el usuario mediante el authentication manager
 				req.login(usuario.getUsername(), usuario.getPassword());
 			}
 			//Origen Yastas
 			else if(usuario.getOrigen()!= null && usuario.getOrigen().toLowerCase().equals("yastas")){
-				model = new ModelAndView("registroYastas");
+				model = new ModelAndView("redirect:/index");
 				
 				/**
 				 * Valida captcha
@@ -119,13 +124,29 @@ public class loginController {
 		}
 	}
 
-	@RequestMapping(value = "/logoutCompartamos", method = RequestMethod.GET)
-	public void logoutCompartamos(HttpServletRequest req) {
+	@RequestMapping(value = "/logout/{origen}", method = RequestMethod.GET)
+	public String logoutCompartamos(HttpServletRequest req, HttpServletResponse res, @PathVariable String origen) {
+		
 		try {
-			req.logout();
-		} catch (ServletException e) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if(auth != null){
+				new SecurityContextLogoutHandler().logout(req, res, auth);
+			}
+			
+			if(origen.toUpperCase().equals("COMPARTAMOS")){
+				return "redirect:/loginCompartamos";
+			}else if(origen.toUpperCase().equals("YASTAS")){
+				return "redirect:/loginYastas";
+			}else{
+				return "redirect:/paginaError";
+			}
+		} 
+		catch(Exception e){
 			e.printStackTrace();
+			return "redirect:/paginaError";
 		}
+		
+		
 	}
 
 }

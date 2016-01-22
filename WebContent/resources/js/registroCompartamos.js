@@ -4,7 +4,8 @@
 
 $(document).ready(function(){
 	
-//Catalogo de paises	
+//Catalogo de paises
+	
 	var htmlPaises = "";
 	$.getJSON("/CuentasN2/catalogos/paises", function(allData) {
 			paises = $.map(allData, function(item) {
@@ -16,36 +17,39 @@ $(document).ready(function(){
   	});
 	
 	
-//Catalogo de lugar Lugar de nacimiento	
-	var htmlEstados = "";
-	$.getJSON("/CuentasN2/catalogos/estados", function(allData) {
-			estados = $.map(allData, function(item) {
-				htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
-			});
-	})
-	.done(function() {
-		document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
-  	});
+	//Dependiendo del pais se colocan sus correspondientes estados
 	
+	$("#paisNacimiento").change(function (){
+			var valor=$("#paisNacimiento").val();          
+			var htmlEstados = "";
+			$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+					estados = $.map(allData, function(item) {
+						htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+					});
+			})
+			.done(function() {
+				document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
+		  	});
+						
+	});
 	
+	//fin catalogo de paises
+
 
 	$('#txNumIdent').keyup(function (){
             this.value = (this.value + '').replace(/[^0-9]/g, '');
  	});
 	
 //Obtenemos que tipo de nacionalidad fue seleccionada	
-	$("#selNacionalidad").change(function(){
-		var valor=$("#selNacionalidad").val();
+	$("#nacionalidad").change(function(){
+		var valor=$("#nacionalidad").val();
 			if(valor=='Otro'){
-				document.getElementById('mensajeNac').style.display = 'block';
-				jQuery("#paisNacimiento").attr('disabled',true);
-				jQuery("#lugarNacimiento").attr('disabled',true);
-				$('input[name=genero]').attr("disabled",true);
+//				document.getElementById('mensajeNac').style.display = 'block';
+				$("#mensajeNac").toggle("slow");
+				jQuery("#enviar").attr('disabled',true);
 			}else{
 				document.getElementById('mensajeNac').style.display = 'none';
-				jQuery("#paisNacimiento").attr('disabled',false);
-				jQuery("#lugarNacimiento").attr('disabled',false);
-				$('input[name=genero]').attr("disabled",false);
+				jQuery("#enviar").attr('disabled',false);
 				
 			}
 	});
@@ -59,20 +63,25 @@ $(document).ready(function(){
 //realiza la validación del formulario	
 	$("#formularioCompartamos").validate({
 	    rules: {
+	    	folio: {
+		       required: true,
+		       number: true,
+		       minlength: 15
+		      },
 	    	tipoIdentificacion: {
 	        required: true,
-	      },
-	      numeroIdentificacion: {
+	          },
+	        numeroIdentificacion: {
 	          required: true,
 	          number: true
 	        },
 	        primerNombre: {
-	        required: true
-	      },
+	           required: true
+	        },
 	       paterno: {
 	            required: true
 	          },
-	        fecha: {
+	          fechaNacimiento: {
 	           required: true
 	         },
 	         nacionalidad: {
@@ -90,8 +99,10 @@ $(document).ready(function(){
 	         sms: {
 	             required: true
 	         },
-	         tipoTelefono: {
-	             required: true
+	         telefono: {
+	             required: true,
+	             number: true,
+	             minlength: 10
 	         },
 	         codigoPostal: {
 	             required: true,
@@ -115,18 +126,25 @@ $(document).ready(function(){
 	             required: true
 	         },
 	         numExterior: {
-	             required: true
+	             required: true,
+	             number: true
 	         },
 	         numInterior: {
 	             number: true
 	         }
 	    },
 	    messages: {
+	    	folio: {
+		        required: "Por favor proporcione el número de folio",
+		        number:"Por favor proporciona sólo números",
+		        minlength: "El folio debe ir a 15 digitos"
+		        	
+		      },	
 	    	tipoIdentificacion: {
 	    	  required: "Por favor elige el tipo de identificación"
 	      },
 	      numeroIdentificacion: {
-	          required: "Por favor proporcione el numero de identificación",
+	          required: "Por favor proporcione el número de identificación",
 	          number: "Por favor proporciona sólo números"
 	        },
 	      primerNombre: {
@@ -135,7 +153,7 @@ $(document).ready(function(){
 	      paterno: {
 	    	  required: "Por favor proporcione el Apellido"
 	      },
-	      fecha: {
+	      fechaNacimiento: {
 	          required: "Por favor porporcione la fecha"
 	      },
 	        nacionalidad: {
@@ -153,8 +171,11 @@ $(document).ready(function(){
 	        sms: {
 	           required: "Elige si desean envio SMS"
 	             },
-	        tipoTelefono: {
-	           required: "Por favor proporcione el número de telefono"
+	        telefono: {
+	           required: "Por favor proporcione el número de telefono",
+	           number: "Por favor proporcione sólo números",
+	           minlength: "El número de telefono debe ir a 10 digitos"
+	          
 	             },
 	        codigoPostal: {
 	           required: "Por favor proporcione el código Postal",
@@ -176,17 +197,16 @@ $(document).ready(function(){
 	          required: "Por favor proporciona la calle"
 	            },
 	         numExterior: {
-	          required: "Por favor proporciona el numero Exterior"
+	          required: "Por favor proporciona el numero Exterior",
+	          number: "Por favor proporcione sólo números"
 	         },
 	         numInterior: {
 	             number: "Por favor proporcione sólo números"
 	         }
 	    },
-	    submitHandler: function() {
-	    	alert('Voy a enviar el formulario');
-	    	
+	    submitHandler: function() {	    	
 	    	jsonObj = {}; 
-	        
+	    	
             $(".inputText").each(function(){
                    var keyInput = $(this).attr("name");
                    var valueInput = $(this).val();
@@ -197,7 +217,7 @@ $(document).ready(function(){
                    var keyInput = $(this).attr("name");
                    if(document.getElementById($(this).attr("id")).checked){
                       jsonObj[keyInput] = $(this).val();
-                          }
+                     }
             });
      	    	
 	    	console.log(jsonObj);
@@ -209,7 +229,17 @@ $(document).ready(function(){
                 url: "./registro",
                 success: function(datar){
                     $("#localhost:8888").html(datar);
-                    console.log("Bien");
+                    if(datar.codigo == '1' || datar.codigo == '2'){
+                    	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
+                    	document.getElementById('mensajeRegistro').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	$('#mensajeRegistro').html(datar.mensaje);
+                    	console.log("Bien");
+                    }else{
+                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                    	document.getElementById('mensajeRegistro').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	$('#mensajeRegistro').html(datar.mensaje);
+                    	
+                    }
                 }
             });
 	            return false; 
@@ -219,24 +249,191 @@ $(document).ready(function(){
 	
 	
 //desabilita los radio buttons para saber que tipo de telefono proporcionan
-	$('input[name=tipoTel]').attr("disabled",true);
+	$('input[name=tipoTelefono]').attr("disabled",true);
 	
 //Obtenemos si el cliente desea envió de SMS
 	$("input[name=sms]").click(function () {
-		if($(this).val() == 'no'){
-			$('input[name=tipoTel]').attr("disabled",false);
+		if($(this).val() == 'false'){
+			$('input[name=tipoTelefono]').attr("disabled",false);
 		}else{
-			$('input[name=tipoTel]').attr("disabled",true);
+			$('input[name=tipoTelefono]').attr("disabled",true);
 		}
     });	
   	
+
+	//Funcion que enmascara el campo de fecha
+	$(function($){
+		$("#fechaNacimiento").mask("99/99/9999");
+	});
+	
+	
+	
+//Autocompletar
+	
+	  (function( $ ) {
+		    $.widget( "custom.combobox", {
+		      _create: function() {
+		        this.wrapper = $( "<span>" )
+		          .addClass( "custom-combobox" )
+		          .insertAfter( this.element );
+		 
+		        this.element.hide();
+		        this._createAutocomplete();
+		        this._createShowAllButton();
+		      },
+		 
+		      _createAutocomplete: function() {
+		        var selected = this.element.children( ":selected" ),
+		          value = selected.val() ? selected.text() : "";
+		        this.input = $( "<input>" )
+		          .appendTo( this.wrapper )
+		          .val( value )
+		          .attr( "title", "" )
+		          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+		          .autocomplete({
+		            delay: 0,
+		            minLength: 0,
+		            source: $.proxy( this, "_source" )
+		          })
+		          .tooltip({
+		            tooltipClass: "ui-state-highlight"
+		          });
+			    
+		        this._on( this.input, {
+		          autocompleteselect: function( event, ui ) {
+		            ui.item.option.selected = true;
+		            this._trigger( "select", event, {
+		              item: ui.item.option
+					  
+		            });
+		          },
+		 
+		          autocompletechange: "_removeIfInvalid"
+		        });
+		      },
+		 
+				 _createShowAllButton: function() {
+		        var input = this.input,
+		          wasOpen = false;
+		 
+		        $( "<a>" )
+		          .attr( "tabIndex", -1 )
+		          .attr( "title", "Show All Items" )
+		          .tooltip()
+		          .appendTo( this.wrapper )
+		          .button({
+		            icons: {
+		              primary: "ui-icon-triangle-1-s"
+		            },
+		            text: false
+		          })
+		          .removeClass( "ui-corner-all" )
+		          .addClass( "custom-combobox-toggle ui-corner-right" )
+		          .mousedown(function() {
+		            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+		          })
+		          .click(function() {
+		            input.focus();
+		 
+		            // Close if already visible
+		            if ( wasOpen ) {
+		              return;
+		            }
+		 
+		            // Pass empty string as value to search for, displaying all results
+		            input.autocomplete( "search", "" );
+		          });
+		      },
+		 
+		 
+		 
+		      _source: function( request, response ) {
+		        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+		        response( this.element.children( "option" ).map(function() {		
+		          var text = $( this ).text();
+		          if ( this.value && ( !request.term || matcher.test(text) ) )
+				   
+		            return {
+		              label: text,
+		              value: text,
+		              option: this
+		            };
+		        }) );
+		      },
+		 
+		      _removeIfInvalid: function( event, ui ) {
+		 
+		        // Selected an item, nothing to do
+		        if ( ui.item ) {
+		        var cla = ui.item.clave;
+		        var res = cla.substring(0,3);
+				alert(cla);//Aqui va
+				
+				var htmlEstados = "";
+				$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+"MX", function(allData) {
+						estados = $.map(allData, function(item) {
+							htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+						});
+				})
+				.done(function() {
+					document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
+			  	});
+				
+				
+		          return;
+		        }
+		 
+		        // Search for a match (case-insensitive)
+		        var value = this.input.val(),
+		          valueLowerCase = value.toLowerCase(),
+		          valid = false;
+		        this.element.children( "option" ).each(function() {
+		          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+		            this.selected = valid = true;
+		            return false;
+		          }
+		        });
+		 
+		        // Found a match, nothing to do
+		        if ( valid ) {
+		          return;
+		        }
+		 
+		        // Remove invalid value
+		        this.input
+		          .val( "" )
+		          .attr( "title", value + " didn't match any item" )
+		          .tooltip( "open" );
+		        this.element.val( "" );
+		        this._delay(function() {
+		          this.input.tooltip( "close" ).attr( "title", "" );
+		        }, 2500 );
+		        this.input.autocomplete( "instance" ).term = "";
+		      },
+		 
+		      _destroy: function() {
+		        this.wrapper.remove();
+		        this.element.show();
+		      }
+		    });
+		  })( jQuery );
+		 
+		  $(function() {
+		    $( "#paisNacimiento" ).combobox();
+		    $( "#toggle" ).click(function() {
+		      $( "#combobox" ).toggle();
+		    });
+		  });	
+	
+	
+	
+	
+	
+	
+	
 });
 
 
-//Funcion que enmascara el campo de fecha
-	$(function($){
-		$("#fecha").mask("99/99/9999");
-	});
 	
 	
 //Funcion para obtener los datos dependiendo del codigo postal	
@@ -285,5 +482,4 @@ $(document).ready(function(){
 		});
 	});
 	
-	
-	
+

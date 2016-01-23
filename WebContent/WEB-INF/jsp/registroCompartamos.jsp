@@ -34,8 +34,26 @@
   }
   .custom-combobox-input {
     margin: 0;
-    padding: 5px 10px;
+    padding: 5px 21px;
   }
+  
+  .ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.ui-widget-content {
+    background: #ffffff  repeat-x scroll 50% 50%;
+    border: 1px solid #aaaaaa;
+    color: #222222;
+}
+
   </style>
 
 </head>
@@ -87,7 +105,7 @@
 				</select><br><br>
 		
 				<label class="texGris09_13">Pais Nacimiento * </label>
-				<select class="select inputText texGris09_13" name="paisNacimiento" id="paisNacimiento"  ></select><br><br>
+				<select class="select inputText texGris09_13" name="paisNacimiento" id="paisNacimiento" ></select><br><br>
 		
 				<label class="texGris09_13">Lugar de Nacimiento * </label>
 				<select class="select inputText" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
@@ -141,14 +159,18 @@
 	
 
 <!--Mensaje que se enviaran como respuesta del servicio de registro  -->
-	<div id="mensajeRegistro" style='display:none;' class="tituloMango"></div>
+	<div id="principalMensaje" style='display:none;' align="center">	
+		<div id="mensajeRegistro"  class="tituloMango"></div><br><br><br>
+			<input type="hidden" id="origen" name="origen" value="compartamos">
+			<input type="button" value=Salir id="btSalir" />
+	</div>
 <!--Fin de mensaje-->
 
 	
 <!--Mensaje que se enviara para los clientes que no son de Nacionalidad Mexicana -->	
-	<div id="mensajeNac" class="" style='display:none;'>
+	<div id="mensajeNac" class="" style='display:none;' class="tituloMango">
 		<p>Por el momento este producto sólo aplica para ciudadanos Mexicanos</p><br>
-		<input type="button" value="Aceptar" id="btMensaje" >
+		<input type="button" value="Aceptar" id="btMensaje" />
 	
 	</div>
 <!-- Fin del mensaje que se enviará validando la nacionalidad -->	

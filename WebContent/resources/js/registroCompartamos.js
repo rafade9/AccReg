@@ -16,29 +16,7 @@ $(document).ready(function(){
 		document.getElementById("paisNacimiento").innerHTML = htmlPaises;
   	});
 	
-	
-	//Dependiendo del pais se colocan sus correspondientes estados
-	
-	$("#paisNacimiento").change(function (){
-			var valor=$("#paisNacimiento").val();          
-			var htmlEstados = "";
-			$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
-					estados = $.map(allData, function(item) {
-						htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
-					});
-			})
-			.done(function() {
-				document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
-		  	});
-						
-	});
-	
-	//fin catalogo de paises
 
-
-	$('#txNumIdent').keyup(function (){
-            this.value = (this.value + '').replace(/[^0-9]/g, '');
- 	});
 	
 //Obtenemos que tipo de nacionalidad fue seleccionada	
 	$("#nacionalidad").change(function(){
@@ -139,69 +117,69 @@ $(document).ready(function(){
 		        number:"Por favor proporciona sólo números",
 		        minlength: "El folio debe ir a 15 digitos"
 		        	
-		      },	
-	    	tipoIdentificacion: {
-	    	  required: "Por favor elige el tipo de identificación"
-	      },
-	      numeroIdentificacion: {
-	          required: "Por favor proporcione el número de identificación",
-	          number: "Por favor proporciona sólo números"
-	        },
-	      primerNombre: {
-	    	  required: "Por favor proporcione el Nombre"
-	      },
-	      paterno: {
-	    	  required: "Por favor proporcione el Apellido"
-	      },
-	      fechaNacimiento: {
-	          required: "Por favor porporcione la fecha"
-	      },
+		      		},	
+		    tipoIdentificacion: {
+		      	required: "Por favor elige el tipo de identificación"
+		      		},
+		    numeroIdentificacion: {
+		      	required: "Por favor proporcione el número de identificación",
+		      	number: "Por favor proporciona sólo números"
+		      		},
+		    primerNombre: {
+		      	required: "Por favor proporcione el Nombre"
+		      		},
+		    paterno: {
+		      		required: "Por favor proporcione el Apellido"
+		    		},
+		    fechaNacimiento: {
+		    		required: "Por favor porporcione la fecha"
+		    		},
 	        nacionalidad: {
-	            required: "Por favor elige una Nacionalidad"
-	          },
+	            	required: "Por favor elige una Nacionalidad"
+	          		},
 	        paisNacimiento: {
 	              required: "Por favor elige un Pais"
-	         },
+	         		},
 	        lugarNacimiento: {
-	            required: "Por favor elige un Lugar"
-	         },
+	              required: "Por favor elige un Lugar"
+	         		},
 	        genero: {
-	        	required: "Por favor elige un genero"
-	         },
+	        	  required: "Por favor elige un genero"
+	         		},
 	        sms: {
-	           required: "Elige si desean envio SMS"
+	        	  required: "Elige si desean envio SMS"
 	             },
 	        telefono: {
-	           required: "Por favor proporcione el número de telefono",
-	           number: "Por favor proporcione sólo números",
-	           minlength: "El número de telefono debe ir a 10 digitos"
+	        	required: "Por favor proporcione el número de telefono",
+	        	number: "Por favor proporcione sólo números",
+	        	minlength: "El número de telefono debe ir a 10 digitos"
 	          
 	             },
 	        codigoPostal: {
-	           required: "Por favor proporcione el código Postal",
-	           number: "Por favor proporcione sólo números"
-	             },
+	        	required: "Por favor proporcione el código Postal",
+	        	number: "Por favor proporcione sólo números"
+	        	},
 	        estado: {
-	           required: "Por favor elige un estado"
+	        	required: "Por favor elige un estado"
 	             },
 	        delegacion: {
-	          required: "Por favor proporciona la delegación"
+	        	required: "Por favor proporciona la delegación"
 	             },
 	        ciudad: {
-	          required: "Por favor proporciona la ciudad"
+	        	required: "Por favor proporciona la ciudad"
 	            },
 	        colonia: {
-	          required: "Por favor proporciona la colonia"
-	            },
+	        	required: "Por favor proporciona la colonia"
+	            	},
 	        calle: {
-	          required: "Por favor proporciona la calle"
-	            },
+	        	required: "Por favor proporciona la calle"
+	            	},
 	         numExterior: {
-	          required: "Por favor proporciona el numero Exterior",
-	          number: "Por favor proporcione sólo números"
-	         },
+	        	 required: "Por favor proporciona el numero Exterior",
+	        	 number: "Por favor proporcione sólo números"
+	         	},
 	         numInterior: {
-	             number: "Por favor proporcione sólo números"
+	        	 number: "Por favor proporcione sólo números"
 	         }
 	    },
 	    submitHandler: function() {	    	
@@ -231,12 +209,12 @@ $(document).ready(function(){
                     $("#localhost:8888").html(datar);
                     if(datar.codigo == '1' || datar.codigo == '2'){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
-                    	document.getElementById('mensajeRegistro').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
                     	console.log("Bien");
                     }else{
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
-                    	document.getElementById('mensajeRegistro').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
                     	
                     }
@@ -318,7 +296,7 @@ $(document).ready(function(){
 		 
 		        $( "<a>" )
 		          .attr( "tabIndex", -1 )
-		          .attr( "title", "Show All Items" )
+		          .attr( "title", "Muestra todos los paises" )
 		          .tooltip()
 		          .appendTo( this.wrapper )
 		          .button({
@@ -365,12 +343,9 @@ $(document).ready(function(){
 		 
 		        // Selected an item, nothing to do
 		        if ( ui.item ) {
-		        var cla = ui.item.clave;
-		        var res = cla.substring(0,3);
-				alert(cla);//Aqui va
-				
+				var valor=$("#paisNacimiento").val();
 				var htmlEstados = "";
-				$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+"MX", function(allData) {
+				$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
 						estados = $.map(allData, function(item) {
 							htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
 						});
@@ -390,19 +365,30 @@ $(document).ready(function(){
 		        this.element.children( "option" ).each(function() {
 		          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
 		            this.selected = valid = true;
+		            var valor=$("#paisNacimiento").val();
+		            alert("case sentive"+valor);
+			        var htmlEstados = "";
+					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+							estados = $.map(allData, function(item) {
+								htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+							});
+					});
+			        
 		            return false;
 		          }
 		        });
 		 
 		        // Found a match, nothing to do
 		        if ( valid ) {
+		        	var valor=$("#paisNacimiento").val();
+		            alert(valor);	
 		          return;
 		        }
 		 
 		        // Remove invalid value
 		        this.input
 		          .val( "" )
-		          .attr( "title", value + " didn't match any item" )
+		          .attr( "title", value + " no coincide con ningún pais" )
 		          .tooltip( "open" );
 		        this.element.val( "" );
 		        this._delay(function() {
@@ -424,12 +410,6 @@ $(document).ready(function(){
 		      $( "#combobox" ).toggle();
 		    });
 		  });	
-	
-	
-	
-	
-	
-	
 	
 });
 
@@ -479,6 +459,18 @@ $(document).ready(function(){
 						}
 					});
 			}
+		});
+	});
+	
+
+//Funcion para el logOut
+	
+		$(function() {
+		$("#btSalir").click(
+			function() {
+				var origenReg = $('#origen').val();	
+				window.location.href = "logout/"+origenReg;
+				
 		});
 	});
 	

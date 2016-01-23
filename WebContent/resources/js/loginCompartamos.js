@@ -1,4 +1,6 @@
+//19/01/2015
 //js para validar loginCompartamos
+//Mara Yazmin Vazquez Cruz
 
 $(document).ready(function(){
 	
@@ -11,10 +13,6 @@ $("#formularioCompartamos").validate({
       password: {
         required: true,
         minlength: 5
-      },
-      folioTarjeta:{
-    	required: true,
-    	minlength: 15
       }
     },
     messages: {
@@ -26,10 +24,6 @@ $("#formularioCompartamos").validate({
       password: {
     	  required: "Por favor proporcione su password",
     	  minlength: "El password debe tener mínimo 5 caracteres"
-      },
-      folioTarjeta: {
-    	  required: "Por favor proporcione el folio",
-    	  minlength: "El folio debe tener mínimo 15 caracteres"
       }
     },
     submitHandler: function() {

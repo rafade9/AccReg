@@ -31,8 +31,6 @@
 	     				<div class="clear"> </div>
 	     				<label for="password"  class="texGris09_13" >Password  *</label> <input type="password" id="password" name="password"  class="texGris09_13" >
 	     				<div class="clear"> </div>
-	     				<label for="folioTarjeta"  class="texGris09_13" >Folio  *</label> <input type="text" id="folioTarjeta" name="folioTarjeta"  class="texGris09_13" >
-	     				<div class="clear"> </div>
 	     				<input type="hidden" id="origen" name="origen" value="compartamos">
 	     				<input class="enviar" type="submit" value="Enviar">
 

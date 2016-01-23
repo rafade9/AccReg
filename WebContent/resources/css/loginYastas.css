@@ -73,9 +73,9 @@ select{
 	}
 
 	#mensajeError{
-	color: #d60404;
-	text-align: center;
-}
+		color: #d60404;
+		text-align: center;
+	}
 
 	form {
   	width: 80%;
@@ -106,4 +106,12 @@ table {margin:auto;}
     line-height: 15px;
     text-align: left;
     text-decoration: none;
+}
+
+input[type="submit"] {
+    background: #64247c none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 25px;
+    width: 90px;
 }

@@ -26,17 +26,14 @@
 			Bienvenido al módulo de apertura de <br/> Cuenta a mi favor Compartamos
 	</p><br/><br/><br/>
 	<c:if test="${not empty error}">
-						<div class="error">${error}</div>
+						<div class="error" id="mensajeError">${error}</div>
 					</c:if>
 	<div id="formYastas">
-	<center>
+
 	<form id="formularioYastas" action="./loginProcessCompartamos" method="post">
 		
 		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username" class="texGris09_13">
 		<div class="clear"> </div>
-		<label class="texGris09_13">Ingresa el número de folio de la tarjeta:</label> <input type="text" id="folioTarjeta" name="folioTarjeta" class="texGris09_13">
-		<div class="clear"> </div>
-		
 		
 	<table>
 			<tr>
@@ -47,10 +44,11 @@
 		</table>
 		<table border="0" cellpadding="0" cellspacing="4">
 			<tr>
+				<label class="texGris09_13">Ingrese la secuencia:</label>
 				<td valign="top"><input type="text" style="width: 173px;"
 					name="captcha" id="captcha"
 					class="requerido captcha captchaBloquear"></td>
-				<td valign="middle"><a href="/loginYastas"><img
+				<td valign="middle"><a href="loginYastas"><img
 						src="resources/img/imgRefresh.jpg" width="23" height="23"></a></td>
 				<td width="29"></td>
 			</tr>
@@ -74,7 +72,7 @@
 
 
     <!-- ends bottomMenu -->
-	
+	</div>
   </div>
 </div>
 </body></html>

@@ -7,7 +7,7 @@ $(document).ready(function(){
 	
 $("#formularioYastas").validate({
     rules: {
-      idUsuario: {
+     username: {
         required: true
       },
       folioTarjeta:{
@@ -20,7 +20,7 @@ $("#formularioYastas").validate({
         }
     },
     messages: {
-      idUsuario: {
+      username: {
     	  required: "Por favor proporcione su ID de Operador"
       },
       folioTarjeta: {

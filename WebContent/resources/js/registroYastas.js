@@ -359,7 +359,7 @@ $(document).ready(function(){
 		          return;
 		        }
 		 
-		        // Search for a match (case-insensitive)
+		        // Search for a match (case-insensitive)verificar
 		        var value = this.input.val(),
 		          valueLowerCase = value.toLowerCase(),
 		          valid = false;
@@ -367,7 +367,6 @@ $(document).ready(function(){
 		          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
 		            this.selected = valid = true;
 		            var valor=$("#paisNacimiento").val();
-		            alert("case sentive"+valor);
 			        var htmlEstados = "";
 					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
 							estados = $.map(allData, function(item) {

@@ -55,4 +55,19 @@ public class RegistroController {
 		return "registroCompartamos";
  
 	}
+	
+	@RequestMapping(value = "/registroYastas", method = RequestMethod.GET)
+	public String registroYastas(ModelMap model) {
+		System.out.println("Entra a registro Yastas");
+		return "registroYastas";
+ 
+	}
+	
+	@RequestMapping(value = "/registroPrueba", method = RequestMethod.GET)
+	public ResponseEntity<Persona> registroPrueba() {
+//		registroService.pruebaWs();
+		System.out.println("Entra a registro prueba");
+		return new ResponseEntity<Persona>(HttpStatus.OK);
+ 
+	}
 }

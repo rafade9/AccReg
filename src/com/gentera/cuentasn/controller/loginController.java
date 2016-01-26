@@ -74,7 +74,7 @@ public class loginController {
 			}
 			//Origen Yastas
 			else if(usuario.getOrigen()!= null && usuario.getOrigen().toLowerCase().equals("yastas")){
-				model = new ModelAndView("redirect:/index");
+				model = new ModelAndView("redirect:/registroYastas");
 				
 				/**
 				 * Valida captcha

@@ -29,7 +29,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    margin-left: -1px;
+    margin-left: -28px;
     padding: 0;
   }
   .custom-combobox-input {
@@ -81,8 +81,8 @@
 			<p class="tituloMango">Datos Personales<br></p>
 			<br><br><br><br>
 				<label class="texGris09_13">Tipo de identificación * </label>
-				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ine" class="inputRadio" checked>IFE/INE</label>
-				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="pasaporte" class="inputRadio">Pasaporte</label><br>
+				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio" checked>IFE/INE</label>
+				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="FS0002" class="inputRadio">Pasaporte</label><br>
 				<div class="clear"> </div>
 				<label for="numeroIdentificacion" class="texGris09_13">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText"><br>
 				<div class="clear"> </div>
@@ -111,16 +111,16 @@
 				<select class="select inputText" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
 
 				<label class="texGris09_13">Género * </label>
-				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="masculino" class="inputRadio">Masculino</label>
-				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="femenino" class="inputRadio">Femenino</label><br>
+				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="1" class="inputRadio">Masculino</label>
+				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="2" class="inputRadio">Femenino</label><br>
 		
 				<label class="texGris09_13">¿Desea notificaciones SMS? * </label>
 				<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label>
 				<label class="texGris09_13"><input type="radio" name="sms" id="smsNo" class="inputRadio" value="false">No</label><br>
 		
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular"  class="inputRadio" value="celular" checked>Celular</label>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="casa" >Casa</label>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="negocio">Negocio</label><br>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular"  class="inputRadio" value="2" checked>Celular</label>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="1" >Casa</label>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="3">Negocio</label><br>
 		
 				<label for="telefono" class="texGris09_13">Teléfono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText">
 				

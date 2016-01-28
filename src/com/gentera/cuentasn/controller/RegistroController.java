@@ -65,7 +65,7 @@ public class RegistroController {
 	
 	@RequestMapping(value = "/registroPrueba", method = RequestMethod.GET)
 	public ResponseEntity<Persona> registroPrueba() {
-//		registroService.pruebaWs();
+		registroService.pruebaWs();
 		System.out.println("Entra a registro prueba");
 		return new ResponseEntity<Persona>(HttpStatus.OK);
  

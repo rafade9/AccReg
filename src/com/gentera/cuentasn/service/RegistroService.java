@@ -11,4 +11,6 @@ public interface RegistroService {
 	 * @return Respuesta del servicio web procesada para el front
 	 */
 	public Respuesta registrar(Persona persona);
+	
+	public String pruebaWs();
 }

@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.axis2.AxisFault;
+import org.apache.axis2.client.Options;
+import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.databinding.types.Token;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -61,7 +63,13 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 		try {
 			// Se genera el stub con el endpoint al cual apunta
 			SI_LEVEL2ACCOUNTMANAGESYStub stub = new SI_LEVEL2ACCOUNTMANAGESYStub(endPoint);
-			
+			ServiceClient serviceClient = stub._getServiceClient();
+			Options options = serviceClient.getOptions();
+			options.setUserName("CONCCN");
+	        options.setPassword("s4tCCN01@");
+	        serviceClient.setOptions(options);
+	        stub._setServiceClient(serviceClient);
+	        
 			//Objeto MT sync
 			MT_Level2AccountCreationReq_sync mtSync = new MT_Level2AccountCreationReq_sync();
 			

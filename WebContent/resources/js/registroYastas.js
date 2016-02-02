@@ -38,7 +38,7 @@ $(document).ready(function(){
     });	
 
 	
-//realiza la validación del formulario	
+//realiza la validaci?n del formulario	
 	$("#formularioCompartamos").validate({
 	    rules: {
 	    	folio: {
@@ -114,17 +114,17 @@ $(document).ready(function(){
 	    },
 	    messages: {
 	    	folio: {
-		        required: "Por favor proporcione el número de folio",
-		        number:"Por favor proporciona sólo números",
+		        required: "Por favor proporcione el n?mero de folio",
+		        number:"Por favor proporciona s?lo n?meros",
 		        minlength: "El folio debe ir a 15 digitos"
 		        	
 		      		},	
 		    tipoIdentificacion: {
-		      	required: "Por favor elige el tipo de identificación"
+		      	required: "Por favor elige el tipo de identificaci?n"
 		      		},
 		    numeroIdentificacion: {
-		      	required: "Por favor proporcione el número de identificación",
-		      	number: "Por favor proporciona sólo números"
+		      	required: "Por favor proporcione el n?mero de identificaci?n",
+		      	number: "Por favor proporciona s?lo n?meros"
 		      		},
 		    primerNombre: {
 		      	required: "Por favor proporcione el Nombre"
@@ -151,20 +151,20 @@ $(document).ready(function(){
 	        	  required: "Elige si desean envio SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el número de telefono",
-	        	number: "Por favor proporcione sólo números",
-	        	minlength: "El número de telefono debe ir a 10 digitos"
+	        	required: "Por favor proporcione el n?mero de telefono",
+	        	number: "Por favor proporcione s?lo n?meros",
+	        	minlength: "El n?mero de telefono debe ir a 10 digitos"
 	          
 	             },
 	        codigoPostal: {
-	        	required: "Por favor proporcione el código Postal",
-	        	number: "Por favor proporcione sólo números"
+	        	required: "Por favor proporcione el c?digo Postal",
+	        	number: "Por favor proporcione s?lo n?meros"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor proporciona la delegación"
+	        	required: "Por favor proporciona la delegaci?n"
 	             },
 	        ciudad: {
 	        	required: "Por favor proporciona la ciudad"
@@ -177,10 +177,10 @@ $(document).ready(function(){
 	            	},
 	         numExterior: {
 	        	 required: "Por favor proporciona el numero Exterior",
-	        	 number: "Por favor proporcione sólo números"
+	        	 number: "Por favor proporcione s?lo n?meros"
 	         	},
 	         numInterior: {
-	        	 number: "Por favor proporcione sólo números"
+	        	 number: "Por favor proporcione s?lo n?meros"
 	         }
 	    },
 	    submitHandler: function() {	    	
@@ -230,7 +230,7 @@ $(document).ready(function(){
 //desabilita los radio buttons para saber que tipo de telefono proporcionan
 	$('input[name=tipoTelefono]').attr("disabled",true);
 	
-//Obtenemos si el cliente desea envió de SMS
+//Obtenemos si el cliente desea envi? de SMS
 	$("input[name=sms]").click(function () {
 		if($(this).val() == 'false'){
 			$('input[name=tipoTelefono]').attr("disabled",false);
@@ -388,7 +388,7 @@ $(document).ready(function(){
 		        // Remove invalid value
 		        this.input
 		          .val( "" )
-		          .attr( "title", value + " no coincide con ningún pais" )
+		          .attr( "title", value + " no coincide con ning?n pais" )
 		          .tooltip( "open" );
 		        this.element.val( "" );
 		        this._delay(function() {
@@ -425,7 +425,9 @@ $(document).ready(function(){
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
-							$("#estado").val(data.result.state);
+							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();
+							console.log(est);
+							$("#estado").val(est);
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
 							$("#colonia option[value='#']").remove();

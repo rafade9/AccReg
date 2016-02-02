@@ -100,7 +100,7 @@
 				<label class="texGris09_13">Nacionalidad * </label>
 				<select class="select inputText"  id="nacionalidad" name="nacionalidad">
 					<option value="" class="texGris09_13">--Nacionalidad--</option>
-					<option value="Mexicano" class="texGris09_13">Mexicano</option>
+					<option value="MX" class="texGris09_13">Mexicano</option>
 					<option value="Otro" class="texGris09_13">Otro</option>
 				</select><br><br>
 		

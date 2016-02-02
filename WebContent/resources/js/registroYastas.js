@@ -50,8 +50,7 @@ $(document).ready(function(){
 	        required: true,
 	          },
 	        numeroIdentificacion: {
-	          required: true,
-	          number: true
+	          required: true
 	        },
 	        primerNombre: {
 	           required: true
@@ -114,17 +113,16 @@ $(document).ready(function(){
 	    },
 	    messages: {
 	    	folio: {
-		        required: "Por favor proporcione el n?mero de folio",
-		        number:"Por favor proporciona s?lo n?meros",
+		        required: "Por favor proporcione el n&uacutemero de folio",
+		        number:"Por favor proporciona s&oacutelo n&uacutemeros",
 		        minlength: "El folio debe ir a 15 digitos"
 		        	
 		      		},	
 		    tipoIdentificacion: {
-		      	required: "Por favor elige el tipo de identificaci?n"
+		      	required: "Por favor elige el tipo de identificaci&oacuten"
 		      		},
 		    numeroIdentificacion: {
-		      	required: "Por favor proporcione el n?mero de identificaci?n",
-		      	number: "Por favor proporciona s?lo n?meros"
+		      	required: "Por favor proporcione el n&uacutemero de identificaci&oacuten"
 		      		},
 		    primerNombre: {
 		      	required: "Por favor proporcione el Nombre"
@@ -151,20 +149,20 @@ $(document).ready(function(){
 	        	  required: "Elige si desean envio SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el n?mero de telefono",
-	        	number: "Por favor proporcione s?lo n?meros",
+	        	required: "Por favor proporcione el n&uacutemero de telefono",
+	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
 	        	minlength: "El n?mero de telefono debe ir a 10 digitos"
 	          
 	             },
 	        codigoPostal: {
-	        	required: "Por favor proporcione el c?digo Postal",
-	        	number: "Por favor proporcione s?lo n?meros"
+	        	required: "Por favor proporcione el c&oacutedigo Postal",
+	        	number: "Por favor proporcione sólo números"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor proporciona la delegaci?n"
+	        	required: "Por favor proporciona la delegaci&oacuten"
 	             },
 	        ciudad: {
 	        	required: "Por favor proporciona la ciudad"
@@ -177,10 +175,10 @@ $(document).ready(function(){
 	            	},
 	         numExterior: {
 	        	 required: "Por favor proporciona el numero Exterior",
-	        	 number: "Por favor proporcione s?lo n?meros"
+	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros"
 	         	},
 	         numInterior: {
-	        	 number: "Por favor proporcione s?lo n?meros"
+	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros"
 	         }
 	    },
 	    submitHandler: function() {	    	

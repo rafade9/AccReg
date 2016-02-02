@@ -132,16 +132,16 @@ public class ZBankCardContractID extends com.compartamos.common.gdt.ZBankCardCon
         writeStartElement(prefix, namespace, parentQName.getLocalPart(),
             xmlWriter);
 
-        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                "http://compartamos.com/common/gdt");
+//        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+//                "http://compartamos.com/common/gdt");
 
-        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", namespacePrefix + ":ZBankCardContractID", xmlWriter);
-        } else {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", "ZBankCardContractID", xmlWriter);
-        }
+//        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
+//            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+//                "type", namespacePrefix + ":ZBankCardContractID", xmlWriter);
+//        } else {
+//            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+//                "type", "ZBankCardContractID", xmlWriter);
+//        }
 
         if (localSchemeID != null) {
             writeAttribute("", "schemeID", localSchemeID.toString(), xmlWriter);

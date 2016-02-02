@@ -10,7 +10,7 @@ public interface RegistroService {
 	 * @param persona
 	 * @return Respuesta del servicio web procesada para el front
 	 */
-	public Respuesta registrar(Persona persona);
+	public Respuesta registrar(Persona persona) throws Exception;
 	
 	public String pruebaWs();
 }

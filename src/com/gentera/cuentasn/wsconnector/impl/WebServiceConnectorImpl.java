@@ -1,10 +1,13 @@
 package com.gentera.cuentasn.wsconnector.impl;
 
 import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerName;
@@ -33,6 +36,8 @@ import com.compartamos.common.gdt.StreetName;
 import com.compartamos.common.gdt.ZBankCardContractID;
 import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
+import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
 import mx.com.gentera.crm.level2accountmanage.int_0133.BusinessPartnerCreateLevel2AccountData;
@@ -46,13 +51,16 @@ import mx.com.gentera.global.MT_Level2AccountCreationResp_sync;
 
 @Service
 public class WebServiceConnectorImpl implements WebServiceConnector {
+	
+	final static Logger logger = Logger.getLogger(WebServiceConnectorImpl.class);
+	final static String endPoint = Properties.getProp("EndPoint");
 
 	@Override
-	public String sendData(Persona persona) {
+	public Respuesta sendData(Persona persona) {
+		Respuesta respuesta = new Respuesta();
 		try {
 			// Se genera el stub con el endpoint al cual apunta
-			SI_LEVEL2ACCOUNTMANAGESYStub stub = new SI_LEVEL2ACCOUNTMANAGESYStub(
-					"http://EXTUSCOMUNICA03:8088/mockSSL_SOAP12");
+			SI_LEVEL2ACCOUNTMANAGESYStub stub = new SI_LEVEL2ACCOUNTMANAGESYStub(endPoint);
 			
 			//Objeto MT sync
 			MT_Level2AccountCreationReq_sync mtSync = new MT_Level2AccountCreationReq_sync();
@@ -77,24 +85,24 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * IDENTIFIERS
 			 */
 			Identifiers identifiers = new Identifiers();
-			//ID Oficina
+			//ID Oficina ---Viene de CRM
 			OrganisationalCentreID officeId = new OrganisationalCentreID();
-			officeId.setOrganisationalCentreID(new Token("12345678901234567890"));
+			officeId.setOrganisationalCentreID(new Token("156"));
 			identifiers.setServiceOfficeID(officeId);
 			
-			//ID BP Empleado
+			//ID BP Empleado ---Viene de CRM
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
-			bpEmpleado.setBusinessPartnerInternalID(new Token("1234567890"));
+			bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
 			identifiers.setBusinessPartnerID(bpEmpleado);
 			
-			//ID Comercio
+			//ID Comercio --- Propio
 			CommercelD commerce = new CommercelD();
-			commerce.setCommercelD("1234567890");
+			commerce.setCommercelD("J211");
 			identifiers.setCommerceID(commerce);
 			
-			//ID Origen
+			//ID Origen --- 
 			PartyID origin = new PartyID();
-			origin.setPartyIDContent(new Token("1234567890"));
+			origin.setPartyIDContent(new Token("Z06"));
 			identifiers.setOriginID(origin);
 			
 			data.setIdentifiers(identifiers);
@@ -118,19 +126,21 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			LANGUAGEINDEPENDENT_MEDIUM_Name colonia = new LANGUAGEINDEPENDENT_MEDIUM_Name();
 			
 			//Primer nombre
-			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name("Mario");
+			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre());
 			nameData.setGivenName(givenName);
 			
 			//Segundo nombre
-			middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name("Rafael");
-			nameData.setMiddleName(middleName);
+			if(persona.getSegundoNombre()!=null){
+				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre());
+				nameData.setMiddleName(middleName);
+			}
 			
 			//Primer apellido
-			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name("Delgadillo");
+			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno());
 			nameData.setFamilyName(familyName);
 			
 			//Segundo apellido
-			aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name("Esparza");
+			aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno());
 			nameData.setAditionalFamilyName(aditionalFamilyName);
 			
 			bp.setNameData(nameData);
@@ -138,26 +148,30 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			/**
 			 * Fecha de Nacimiento
 			 */
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			java.util.Date fechaDateUtil = dateFormat.parse(persona.getFechaNacimiento());
 			Date fechaNacimiento = new Date();
-			fechaNacimiento.setDate(new java.util.Date()); //Verificar
+			fechaNacimiento.setDate(fechaDateUtil); 
 			bp.setBirthDate(fechaNacimiento);
 			
 			/**
 			 * Genero
 			 */
 			GenderCode genero = new GenderCode();
-			genero.setGenderCode(new Token("1"));
+			genero.setGenderCode(new Token(persona.getGenero()));
 			bp.setGender(genero);
 			
 			/**
 			 * Identificacion
 			 */
 			BusinessPartnerDocumentIdentifier documentIdentifier = new BusinessPartnerDocumentIdentifier();
+			//Tipo de identificacion
 			PartyIdentifierTypeCode codeIdentifier = new PartyIdentifierTypeCode();
-			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token("ZCVELE"));
+			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion()));
 			documentIdentifier.setCode(codeIdentifier);
+			//Numero de identificacion
 			ItemID idIdentifier = new ItemID();
-			idIdentifier.setItemID("abcdefghijklmno");
+			idIdentifier.setItemID(persona.getNumeroIdentificacion());
 			documentIdentifier.setID(idIdentifier);
 			bp.setDocumentIdentifier(documentIdentifier);
 			
@@ -165,7 +179,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * Folio de tarjeta
 			 */
 			ZBankCardContractID cardIdentification = new ZBankCardContractID();
-			cardIdentification.setZBankCardContractIDContent(new Token("123451234512345"));
+			cardIdentification.setZBankCardContractIDContent(new Token(persona.getFolio()));
 			bp.setCardIdentification(cardIdentification);
 			
 			/**
@@ -173,14 +187,14 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 */
 			
 			RegionCode regionBirth = new RegionCode();
-			regionBirth.setRegionCode(new Token("MX"));
+			regionBirth.setRegionCode(new Token(persona.getPaisNacimiento()));
 			bp.setRegionBirth(regionBirth);
 			
 			/**
 			 * Entidad nacimiento
 			 */
 			CountryCode countryCode = new CountryCode();
-			countryCode.setCountryCode(new Token("AGS"));
+			countryCode.setCountryCode(new Token(persona.getLugarNacimiento()));
 			bp.setBirthCountryCode(countryCode);
 			
 			/**
@@ -195,12 +209,18 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * Telefono
 			 */
 			AcctOriginationBusinessPartnerPhone phoneData = new AcctOriginationBusinessPartnerPhone();
+			//Tipo de telefono
 			PhoneTypeID phoneType = new PhoneTypeID();
-			phoneType.setPhoneTypeID(new Token("1"));
+			if(persona.isSms()){
+				phoneType.setPhoneTypeID(new Token("6")); //Si cliente acepta sms, se pone por decreto el 6 (celular para sms)
+			}else{
+				phoneType.setPhoneTypeID(new Token(persona.getTipoTelefono()));
+			}
+			
 			phoneData.setPhoneTypeID(phoneType);
 			PhoneNumberV1 phoneNumber = new PhoneNumberV1();
 			PhoneNumberSubscriberID number = new PhoneNumberSubscriberID();
-			number.setPhoneNumberSubscriberID(new Token("5512345678"));
+			number.setPhoneNumberSubscriberID(new Token(persona.getTelefono()));
 			phoneNumber.setSubscriberID(number);
 			phoneData.setPhoneNumber(phoneNumber);
 			bp.setPhoneData(phoneData);
@@ -215,7 +235,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			addressData.setAddressTypeCode(addressTypeCode);
 			//Codigo Postal
 			PostalCode pc = new PostalCode();
-			pc.setPostalCode(new Token("12345"));
+			pc.setPostalCode(new Token(persona.getCodigoPostal()));
 			addressData.setStreetPostalCode(pc);
 			//Pais
 			pais.setLANGUAGEINDEPENDENT_MEDIUM_Name("MX");
@@ -225,27 +245,28 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			regionCode.setRegionCode(new Token("AGS"));
 			addressData.setRegionCode(regionCode);
 			//Municipio o Delegacion
-			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name("Benito Juarez");
+			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion());
 			addressData.setDistrictName(municipio);
 			//Ciudad
-			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name("Algo");
+			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad());
 			addressData.setCityName(ciudad);
 			//Colonia
-			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name("Progreso");
+			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia());
 			addressData.setAdditionalCityName(colonia);
 			//Calle
 			StreetName streetName = new StreetName();
-			streetName.setStreetName("Av Independencia");
+			streetName.setStreetName(persona.getCalle());
 			addressData.setStreetName(streetName);
 			//No Ext
 			HouseID numExt = new HouseID();
-			numExt.setHouseID(new Token("100"));
+			numExt.setHouseID(new Token(persona.getNumExterior()));
 			addressData.setHouseID(numExt);
 			//No Int
-			HouseID numInt = new HouseID();
-			numInt.setHouseID(new Token("1"));
-			addressData.setAdditionalHouseID(numInt);
-			
+			if(persona.getNumInterior()!=null && !persona.getNumInterior().equals("")){
+				HouseID numInt = new HouseID();
+				numInt.setHouseID(new Token(persona.getNumInterior()));
+				addressData.setAdditionalHouseID(numInt);
+			}
 			bp.setAddressData(addressData);
 			
 			data.setBusinessPartnerCreateLevel2AccountData(bp);
@@ -253,17 +274,35 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			dtSync.setMessageHeader(messageHeader);
 			dtSync.setLevel2AccountCreationData(data);
 			mtSync.setMT_Level2AccountCreationReq_sync(dtSync);
+			logger.info("Se prepara para enviar petición al endpoint: " + endPoint);
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
-			String bpId = response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBusinessPartnerIDCreated().toString();
-			System.out.println("Exito: " + bpId);
+			
+			String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode().toString();
+			System.out.println("CODIGO: " + code);
+			if(code!=null){
+				if(code.equals("0")){
+					respuesta.setIdBP(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBusinessPartnerIDCreated().toString());
+					respuesta.setCLABE(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getCLABEAccount().toString());
+					respuesta.setCuenta(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBankAccountContractID().toString());
+					respuesta.setIdOportunidad(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getOpportunityID().toString());
+				}
+				respuesta.setCodigo(Integer.valueOf(code));
+			}
+			
 		} catch (AxisFault e) {
+			logger.error("Error AxisFault " +e);
 			e.printStackTrace();
 		} catch (RemoteException e) {
+			logger.error("Error Remote " +e);
 			e.printStackTrace();
 		} catch (ExchangeFaultData e) {
+			logger.error("Error Exchange Data " +e);
+			e.printStackTrace();
+		} catch (ParseException e) {
+			logger.error("Error General " +e);
 			e.printStackTrace();
 		}
-		return null;
+		return respuesta;
 	}
 
 }

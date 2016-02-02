@@ -201,16 +201,16 @@ public class PartyIdentifierTypeCode extends com.compartamos.common.gdt.PartyIde
         writeStartElement(prefix, namespace, parentQName.getLocalPart(),
             xmlWriter);
 
-        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                "http://compartamos.com/common/gdt");
+//        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+//                "http://compartamos.com/common/gdt");
 
-        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", namespacePrefix + ":PartyIdentifierTypeCode", xmlWriter);
-        } else {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", "PartyIdentifierTypeCode", xmlWriter);
-        }
+//        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
+//            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+//                "type", namespacePrefix + ":PartyIdentifierTypeCode", xmlWriter);
+//        } else {
+//            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+//                "type", "PartyIdentifierTypeCode", xmlWriter);
+//        }
 
         if (localListID != null) {
             writeAttribute("", "listID", localListID.toString(), xmlWriter);

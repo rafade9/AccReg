@@ -1,5 +1,6 @@
 package com.gentera.cuentasn.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import com.gentera.cuentasn.service.RegistroService;
 
 @Controller
 public class RegistroController {
+	
+	final static Logger logger = Logger.getLogger(RegistroController.class);
 	
 	@Autowired
 	RegistroService registroService;
@@ -37,10 +40,15 @@ public class RegistroController {
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
 	public ResponseEntity<Respuesta> registrar(@RequestBody Persona persona) {
 		try{
+			logger.info("Entra a metodo registro");
 			Respuesta respuesta = registroService.registrar(persona);
 			return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		}catch(Exception e){
-			return new ResponseEntity<Respuesta>(HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.error(e);
+			e.printStackTrace();
+			Respuesta respuesta = new Respuesta();
+			respuesta.setMensaje(e.getMessage());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -51,7 +59,7 @@ public class RegistroController {
 	 */
 	@RequestMapping(value = "/registroCompartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
-		System.out.println("Entra a registro Compartamos");
+		logger.info("Entra a registro Compartamos");
 		return "registroCompartamos";
  
 	}

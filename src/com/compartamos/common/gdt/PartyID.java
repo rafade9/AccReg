@@ -178,16 +178,16 @@ public class PartyID extends com.compartamos.common.gdt.PartyIDContent
         writeStartElement(prefix, namespace, parentQName.getLocalPart(),
             xmlWriter);
 
-        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                "http://compartamos.com/common/gdt");
+//        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+//                "http://compartamos.com/common/gdt");
 
-        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", namespacePrefix + ":PartyID", xmlWriter);
-        } else {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", "PartyID", xmlWriter);
-        }
+//        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
+//            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+//                "type", namespacePrefix + ":PartyID", xmlWriter);
+//        } else {
+//            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
+//                "type", "PartyID", xmlWriter);
+//        }
 
         if (localSchemeID != null) {
             writeAttribute("", "schemeID", localSchemeID.toString(), xmlWriter);

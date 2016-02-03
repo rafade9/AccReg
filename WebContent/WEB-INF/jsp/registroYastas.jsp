@@ -152,6 +152,7 @@
 			</div>	
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">
+				<input type="button" value=Salir id="btCancelar" />
 			</div>	
 		</form>
 	</div>

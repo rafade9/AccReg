@@ -43,8 +43,7 @@ $(document).ready(function(){
 	    rules: {
 	    	folio: {
 		       required: true,
-		       number: true,
-		       minlength: 15
+		       number: true
 		      },
 	    	tipoIdentificacion: {
 	        required: true,
@@ -114,8 +113,7 @@ $(document).ready(function(){
 	    messages: {
 	    	folio: {
 		        required: "Por favor proporcione el n&uacutemero de folio",
-		        number:"Por favor proporciona s&oacutelo n&uacutemeros",
-		        minlength: "El folio debe ir a 15 digitos"
+		        number:"Por favor proporciona s&oacutelo n&uacutemeros"
 		        	
 		      		},	
 		    tipoIdentificacion: {
@@ -216,6 +214,10 @@ $(document).ready(function(){
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
                     	
+                    }else{
+                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	$('#mensajeRegistro').html(datar.mensaje);
                     }
                 }
             });
@@ -475,6 +477,15 @@ $(document).ready(function(){
 				
 		});
 	});
+		
+		$(function() {
+			$("#btCancelar").click(
+				function() {
+					var origenReg = $('#origen').val();	
+					window.location.href = "logout/"+origenReg;
+					
+			});
+		});
 	
 
 //Valida el formato correcto de la fecha

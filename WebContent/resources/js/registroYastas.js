@@ -43,8 +43,7 @@ $(document).ready(function(){
 	    rules: {
 	    	folio: {
 		       required: true,
-		       number: true,
-		       minlength: 15
+		       number: true
 		      },
 	    	tipoIdentificacion: {
 	        required: true,
@@ -114,8 +113,7 @@ $(document).ready(function(){
 	    messages: {
 	    	folio: {
 		        required: "Por favor proporcione el n&uacutemero de folio",
-		        number:"Por favor proporciona s&oacutelo n&uacutemeros",
-		        minlength: "El folio debe ir a 15 digitos"
+		        number:"Por favor proporciona s&oacutelo n&uacutemeros"
 		        	
 		      		},	
 		    tipoIdentificacion: {
@@ -156,7 +154,7 @@ $(document).ready(function(){
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione sólo números"
+	        	number: "Por favor proporcione sï¿½lo nï¿½meros"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
@@ -473,7 +471,16 @@ $(document).ready(function(){
 				
 		});
 	});
-	
+		
+		$(function() {
+			$("#btCancelar").click(
+				function() {
+					var origenReg = $('#origen').val();	
+					window.location.href = "logout/"+origenReg;
+					
+			});
+		});
+		
 
 //Valida el formato correcto de la fecha
 		

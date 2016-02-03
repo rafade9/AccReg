@@ -151,6 +151,7 @@
 			</div>	
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">
+				<input type="button" value=Salir id="btSalir" />
 			</div>	
 		</form>
 	</div>
@@ -161,7 +162,7 @@
 	<div id="principalMensaje" style='display:none;' align="center">	
 		<div id="mensajeRegistro"  class="tituloMango"></div><br><br><br>
 			<input type="hidden" id="origen" name="origen" value="compartamos">
-			<input type="button" value=Salir id="btSalir" />
+			<input type="button" value=Salir id="btCancelar" />
 	</div>
 <!--Fin de mensaje-->
 

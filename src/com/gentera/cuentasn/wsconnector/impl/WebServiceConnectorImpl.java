@@ -6,9 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.axis2.AxisFault;
-import org.apache.axis2.client.Options;
-import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.databinding.types.Token;
+import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -63,12 +62,14 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 		try {
 			// Se genera el stub con el endpoint al cual apunta
 			SI_LEVEL2ACCOUNTMANAGESYStub stub = new SI_LEVEL2ACCOUNTMANAGESYStub(endPoint);
-			ServiceClient serviceClient = stub._getServiceClient();
-			Options options = serviceClient.getOptions();
-			options.setUserName("CONCCN");
-	        options.setPassword("s4tCCN01@");
-	        serviceClient.setOptions(options);
-	        stub._setServiceClient(serviceClient);
+			
+			//Se configura autenticación
+			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
+			ba.setUsername("CONCCN");
+			ba.setPassword("s4tCCN01@");
+			
+			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
+			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
 	        
 			//Objeto MT sync
 			MT_Level2AccountCreationReq_sync mtSync = new MT_Level2AccountCreationReq_sync();
@@ -95,7 +96,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			Identifiers identifiers = new Identifiers();
 			//ID Oficina ---Viene de CRM
 			OrganisationalCentreID officeId = new OrganisationalCentreID();
-			officeId.setOrganisationalCentreID(new Token("156"));
+			officeId.setOrganisationalCentreID(new Token("156")); //Poza Rica
 			identifiers.setServiceOfficeID(officeId);
 			
 			//ID BP Empleado ---Viene de CRM
@@ -110,7 +111,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//ID Origen --- 
 			PartyID origin = new PartyID();
-			origin.setPartyIDContent(new Token("Z06"));
+			origin.setPartyIDContent(new Token("Z06")); //Yastas
 			identifiers.setOriginID(origin);
 			
 			data.setIdentifiers(identifiers);
@@ -138,7 +139,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			nameData.setGivenName(givenName);
 			
 			//Segundo nombre
-			if(persona.getSegundoNombre()!=null){
+			if(persona.getSegundoNombre()!=null && !persona.getSegundoNombre().equals("")){
 				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre());
 				nameData.setMiddleName(middleName);
 			}
@@ -148,8 +149,10 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			nameData.setFamilyName(familyName);
 			
 			//Segundo apellido
-			aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno());
-			nameData.setAditionalFamilyName(aditionalFamilyName);
+			if(persona.getMaterno()!=null && !persona.getMaterno().equals("")){
+				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno());
+				nameData.setAditionalFamilyName(aditionalFamilyName);
+			}
 			
 			bp.setNameData(nameData);
 			

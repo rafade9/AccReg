@@ -39,6 +39,9 @@ public class RegistroServiceImpl implements RegistroService {
 				else if(respuesta.getCodigo()==1 || respuesta.getCodigo()==2){
 					respuesta.setMensaje("El folio de la Tarjeta es inv&aacute;lido. Capture uno diferente.");
 				}
+				else if(respuesta.getCodigo()==7){
+					respuesta.setMensaje("El solicitante se encuentra en listas de bloqueo. Imprimir Carta de Lista de Personas Bloqueadas (En construcci&oacute;n).");
+				}
 				else {
 					respuesta.setMensaje("Su operaci&oacute;n no se pudo completar. Intente m&aacute;s tarde.");
 				}

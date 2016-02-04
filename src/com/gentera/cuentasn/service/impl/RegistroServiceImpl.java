@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.RegistroService;
@@ -74,9 +75,22 @@ public class RegistroServiceImpl implements RegistroService {
 
 	@Override
 	public String pruebaWs() {
-		Persona persona = new Persona();
-		wsConnector.sendData(persona);
+		CardNumbers[] cns = wsConnector.getTarjetas();
+		for(CardNumbers cn : cns){
+			if(validaNumeroTarjeta(cn.getCardNumber())){
+				System.out.println("Tarjeta encontrada");
+			}
+		}
 		return null;
+	}
+	
+	
+	private boolean validaNumeroTarjeta(Long numero){
+		String numStr = numero.toString().substring(7, 9);
+		if(Integer.valueOf(numStr)>80 && Integer.valueOf(numStr)<99)
+			return true;
+		else
+			return false;
 	}
 
 }

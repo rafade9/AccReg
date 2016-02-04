@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.client.Options;
@@ -12,6 +13,10 @@ import org.apache.axis2.databinding.types.Token;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_BancaMovil_Query_BP_CardStub;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.Execute;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.ExecuteResponse;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerName;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerPhone;
 import com.compartamos.common.gdt.AddressTypeID;
@@ -56,6 +61,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	
 	final static Logger logger = Logger.getLogger(WebServiceConnectorImpl.class);
 	final static String endPoint = Properties.getProp("EndPoint");
+	
+	final static String endPointCardManager = Properties.getProp("EndPointCardManager");
 
 	@Override
 	public Respuesta sendData(Persona persona) {
@@ -311,6 +318,31 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			e.printStackTrace();
 		}
 		return respuesta;
+	}
+
+	@Override
+	public CardNumbers[] getTarjetas() {
+		try {
+			CMS_BancaMovil_Query_BP_CardStub stub = new CMS_BancaMovil_Query_BP_CardStub(endPointCardManager);
+			
+			Execute execute0 = new Execute();
+			execute0.setBankBP("60042067");
+			execute0.setCardStatus("6");
+			execute0.setExternalUser("SMP");
+			execute0.setCMSUserId("SMP");
+			
+			ExecuteResponse response = stub.execute(execute0);
+			
+			return response.getExecuteResult().getCardNumbers().getCardNumbers();
+			
+			
+		} catch (AxisFault e) {
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

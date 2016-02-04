@@ -54,7 +54,7 @@ import mx.com.gentera.global.MT_Level2AccountCreationResp_sync;
 public class WebServiceConnectorImpl implements WebServiceConnector {
 	
 	final static Logger logger = Logger.getLogger(WebServiceConnectorImpl.class);
-	final static String endPoint = Properties.getProp("EndPoint");
+	final static String endPoint = Properties.getProp("EndPointCRM");
 
 	@Override
 	public Respuesta sendData(Persona persona) {
@@ -65,8 +65,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//Se configura autenticación
 			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
-			ba.setUsername("CONCCN");
-			ba.setPassword("s4tCCN01@");
+			ba.setUsername(Properties.getProp("UserCRM"));
+			ba.setPassword(Properties.getProp("PasswordCRM"));
 			
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
@@ -198,14 +198,16 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 */
 			
 			RegionCode regionBirth = new RegionCode();
-			regionBirth.setRegionCode(new Token(persona.getPaisNacimiento()));
+//			regionBirth.setRegionCode(new Token(persona.getPaisNacimiento()));
+			regionBirth.setRegionCode(new Token(persona.getLugarNacimiento()));
 			bp.setRegionBirth(regionBirth);
 			
 			/**
 			 * Entidad nacimiento
 			 */
 			CountryCode countryCode = new CountryCode();
-			countryCode.setCountryCode(new Token(persona.getLugarNacimiento()));
+//			countryCode.setCountryCode(new Token(persona.getLugarNacimiento()));
+			countryCode.setCountryCode(new Token(persona.getPaisNacimiento()));
 			bp.setBirthCountryCode(countryCode);
 			
 			/**

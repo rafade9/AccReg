@@ -197,7 +197,6 @@ $(document).ready(function(){
                      }
             });
      	    	
-	    	console.log(jsonObj);
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',
@@ -210,7 +209,6 @@ $(document).ready(function(){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
-                    	console.log("Bien");
                     }else{
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
@@ -424,7 +422,6 @@ $(document).ready(function(){
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
 							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();
-							console.log(est);
 							$("#estado").val(est);
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);

@@ -197,7 +197,6 @@ $(document).ready(function(){
                      }
             });
      	    	
-	    	console.log(jsonObj);
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',
@@ -206,21 +205,25 @@ $(document).ready(function(){
                 url: "./registro",
                 success: function(datar){
                     $("#localhost:8888").html(datar);
-                    if(datar.codigo == '1' || datar.codigo == '2'){
-                    	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
+                    if(datar.codigo == '1' || datar.codigo == '2' || datar.codigo == '5' || datar.codigo >= '8' ){
+                    	document.getElementById('seccionCliente').style.display = 'none';//sólo mostramos area para captura de folio
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
-                    	console.log("Bien");
-                    }else if(datar.codigo == '0' || datar.codigo == '4' || datar.codigo == '6' || datar.codigo == '7'){
+                    }else if(datar.codigo == '4' || datar.codigo == '6'){
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	document.getElementById('botonSal').style.display = 'block';//mostramos boton para salir
+                    	$('#mensajeRegistro').html(datar.mensaje);	
+                    }else if(datar.codigo == '0' || datar.codigo == '7'){
+                       	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	document.getElementById('botonImpr').style.display = 'block';//mostramos area con boton de impresion
                     	$('#mensajeRegistro').html(datar.mensaje);
-                    	
+ 
                     }
                 }
             });
 	            return false; 
-	    
 	    }
 	  });
 	
@@ -378,8 +381,13 @@ $(document).ready(function(){
 		 
 		        // Found a match, nothing to do
 		        if ( valid ) {
-		        	var valor=$("#paisNacimiento").val();
-		            alert(valor);	
+		            var valor=$("#paisNacimiento").val();
+			        var htmlEstados = "";
+					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+							estados = $.map(allData, function(item) {
+								htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+							});
+					});
 		          return;
 		        }
 		 
@@ -424,9 +432,7 @@ $(document).ready(function(){
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
-							console.log(data.result.state);
 							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();
-							console.log(est);
 							$("#estado").val(est);
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
@@ -467,7 +473,7 @@ $(document).ready(function(){
 
 //Funcion para el logOut
 	
-		$(function() {
+	$(function() {
 		$("#btSalir").click(
 			function() {
 				var origenReg = $('#origen').val();	
@@ -476,6 +482,28 @@ $(document).ready(function(){
 		});
 	});
 	
+	
+	$(function() {
+		$("#btSalida").click(
+			function() {
+				var origenReg = $('#origen').val();	
+				window.location.href = "logout/"+origenReg;
+				
+		});
+	});
+	
+		
+//Funcion para la impresión
+		
+		$(function() {
+		$("#btImprimir").click(
+			function() {
+				var origenReg = $('#origen').val();	
+				window.location.href = "imprimir";
+		});
+	});
+			
+		
 
 //Valida el formato correcto de la fecha
 		

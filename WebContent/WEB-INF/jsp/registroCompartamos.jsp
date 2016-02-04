@@ -110,8 +110,8 @@
 				<select class="select inputText" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
 
 				<label class="texGris09_13">G&eacutenero * </label>
-				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="1" class="inputRadio">Masculino</label>
-				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="2" class="inputRadio">Femenino</label><br>
+				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="2" class="inputRadio">Masculino</label>
+				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="1" class="inputRadio">Femenino</label><br>
 		
 				<label class="texGris09_13">¿Desea notificaciones SMS? * </label>
 				<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label>

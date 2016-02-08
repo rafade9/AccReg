@@ -36,6 +36,15 @@ public class RegistroServiceImpl implements RegistroService {
 				
 				if(respuesta.getCodigo()==0){
 					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
+					
+					//Se busca el número de tarjeta
+					CardNumbers[] cns = wsConnector.getTarjetas();
+					for(CardNumbers cn : cns){
+						if(validaNumeroTarjeta(cn.getCardNumber())){
+							System.out.println("Tarjeta encontrada");
+						}
+					}
+					
 				}
 				else if(respuesta.getCodigo()==1 || respuesta.getCodigo()==2){
 					respuesta.setMensaje("El folio de la Tarjeta es inv&aacute;lido. Capture uno diferente.");

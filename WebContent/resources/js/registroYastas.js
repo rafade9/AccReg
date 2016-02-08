@@ -187,7 +187,7 @@ $(document).ready(function(){
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s�lo n�meros"
+	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"

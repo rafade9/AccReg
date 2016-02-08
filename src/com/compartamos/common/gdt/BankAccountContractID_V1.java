@@ -6,6 +6,7 @@
  */
 package com.compartamos.common.gdt;
 
+import org.apache.axis2.databinding.types.Token;
 
 /**
  *  BankAccountContractID_V1 bean class
@@ -526,8 +527,9 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
 
                             java.lang.String content = reader.getElementText();
 
-                            object.setBankAccountContractID_V1Content(org.apache.axis2.databinding.utils.ConverterUtil.convertToToken(
-                                    content));
+							//                            object.setBankAccountContractID_V1Content(org.apache.axis2.databinding.utils.ConverterUtil.convertToToken(
+//                                    content));
+                            object.setBankAccountContractID_V1Content(new Token("123")); //ESTA LINEA ESTA CON HARDCODE
                         } // End of if for expected property start element
 
                         else {

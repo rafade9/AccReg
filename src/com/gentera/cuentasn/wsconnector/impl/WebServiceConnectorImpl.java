@@ -290,16 +290,21 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			logger.info("Se prepara para enviar petición al endpoint: " + endPoint);
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
 			
-			String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode().toString();
-			System.out.println("CODIGO: " + code);
-			if(code!=null){
-				if(code.equals("0")){
+			if(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()!=null){
+				String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode().toString();
+				respuesta.setCodigo(Integer.valueOf(code));
+			}
+			else{
+				respuesta.setCodigo(0); //Cambia?
+			}
+			
+			if(respuesta.getCodigo()!=null){
+				if(respuesta.getCodigo()==0){
 					respuesta.setIdBP(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBusinessPartnerIDCreated().toString());
 					respuesta.setCLABE(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getCLABEAccount().toString());
 					respuesta.setCuenta(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBankAccountContractID().toString());
 					respuesta.setIdOportunidad(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getOpportunityID().toString());
 				}
-				respuesta.setCodigo(Integer.valueOf(code));
 			}
 			
 		} catch (AxisFault e) {

@@ -1,9 +1,11 @@
 package com.gentera.cuentasn.service.impl;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -32,7 +34,8 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 		List<Pais> paises = new ArrayList<Pais>();
 		
 		try{
-			br = new BufferedReader(new FileReader(csvPaises));
+//			br = new BufferedReader(new FileReader(csvPaises));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(csvPaises), "UTF8"));
 			while ((line = br.readLine()) != null) {
 
 			        // use comma as separator

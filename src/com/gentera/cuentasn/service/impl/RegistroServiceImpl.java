@@ -42,8 +42,11 @@ public class RegistroServiceImpl implements RegistroService {
 					for(CardNumbers cn : cns){
 						if(validaNumeroTarjeta(cn.getCardNumber())){
 							System.out.println("Tarjeta encontrada");
+							respuesta.setNumTarjeta(String.valueOf(cn.getCardNumber()));
 						}
 					}
+					
+					respuesta.setPersona(persona);
 					
 				}
 				else if(respuesta.getCodigo()==1 || respuesta.getCodigo()==2){

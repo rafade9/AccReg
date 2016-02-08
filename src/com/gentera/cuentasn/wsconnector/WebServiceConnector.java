@@ -8,5 +8,5 @@ public interface WebServiceConnector {
 	
 	public Respuesta sendData(Persona persona);
 
-	public CardNumbers[] getTarjetas();
+	public CardNumbers[] getTarjetas(String bp);
 }

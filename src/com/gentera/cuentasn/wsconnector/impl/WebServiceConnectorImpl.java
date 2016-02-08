@@ -329,12 +329,20 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	}
 
 	@Override
-	public CardNumbers[] getTarjetas() {
+	public CardNumbers[] getTarjetas(String bp) {
 		try {
 			CMS_BancaMovil_Query_BP_CardStub stub = new CMS_BancaMovil_Query_BP_CardStub(endPointCardManager);
 			
+			//Se configura autenticación
+			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
+			ba.setUsername(Properties.getProp("UserCRM"));
+			ba.setPassword(Properties.getProp("PasswordCRM"));
+			
+			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
+			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
+			
 			Execute execute0 = new Execute();
-			execute0.setBankBP("60042067");
+			execute0.setBankBP(bp);
 			execute0.setCardStatus("6");
 			execute0.setExternalUser("SMP");
 			execute0.setCMSUserId("SMP");

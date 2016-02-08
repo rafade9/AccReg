@@ -233,7 +233,7 @@ $(document).ready(function(){
                      }
             });
      	    	
-	    	console.log(jsonObj);
+	    	console.log(JSON.stringify(jsonObj));
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',

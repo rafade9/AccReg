@@ -72,7 +72,7 @@
 		<div id="seccionTarjeta">
 		<!-- Folio de la tarjeta -->
 			<p class="tituloMango">Datos de Tarjeta<br></p><br><br>
-				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText" ><br>
+				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText" maxlength="15"><br>
 				<div class="clear"> </div><br><br>
 		</div>
 		<div id="seccionCliente" style='display:block;'>
@@ -83,15 +83,15 @@
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio" checked>IFE/INE</label>
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="FS0002" class="inputRadio">Pasaporte</label><br>
 				<div class="clear"> </div>
-				<label for="numeroIdentificacion" class="texGris09_13">N&uacutemero de identificaci&oacuten * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText"><br>
+				<label for="numeroIdentificacion" class="texGris09_13">N&uacutemero de identificaci&oacuten * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText" maxlength="18"><br>
 				<div class="clear"> </div>
-				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" ><br>
+				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText" ><br>
+				<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText" ><br>
+				<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText"><br>
+				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
 				<label for="fechaNacimiento" class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText" id="fechaNacimiento" ><br>
 				<div class="clear"> </div>
@@ -110,8 +110,8 @@
 				<select class="select inputText" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
 
 				<label class="texGris09_13">G&eacutenero * </label>
-				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="1" class="inputRadio">Masculino</label>
-				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="2" class="inputRadio">Femenino</label><br>
+				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="2" class="inputRadio">Masculino</label>
+				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="1" class="inputRadio">Femenino</label><br>
 		
 				<label class="texGris09_13">¿Desea notificaciones SMS? * </label>
 				<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label>
@@ -121,12 +121,12 @@
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="1" >Casa</label>
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="3">Negocio</label><br>
 		
-				<label for="telefono" class="texGris09_13">Tel&eacutefono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText">
+				<label for="telefono" class="texGris09_13">Tel&eacutefono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
 				
 		<!-- Direccion -->
 			<p class="tituloMango">Direcci&oacuten</p><br><br>
 	
-				<label for="codigoPostal" class="texGris09_13">C&oacutedigo Postal * </label><input type="text" id="codigoPostal" name="codigoPostal" class="texGris09_13 inputText" ><br>
+				<label for="codigoPostal" class="texGris09_13">C&oacutedigo Postal * </label><input type="text" id="codigoPostal" name="codigoPostal" class="texGris09_13 inputText" maxlength="5"><br>
 		
 				<label class="texGris09_13">Estado * </label>
 				<select class="select inputText" id="estado" name="estado" >
@@ -145,12 +145,13 @@
 				<select class="select inputText" id="colonia" name="colonia">
 				</select><br><br>
 		
-				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText"><br>
-				<label class="texGris09_13">N&uacutemero Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText"><br>
-				<label class="texGris09_13">N&uacutemero Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText"><br><br>
+				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText" maxlength="60"><br>
+				<label class="texGris09_13">N&uacutemero Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText" maxlength="10"><br>
+				<label class="texGris09_13">N&uacutemero Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText" maxlength="10"><br><br>
 			</div>	
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">
+				<input type="button" value=Salir id="btSalir" />
 			</div>	
 		</form>
 	</div>
@@ -161,7 +162,7 @@
 	<div id="principalMensaje" style='display:none;' align="center">	
 		<div id="mensajeRegistro"  class="tituloMango"></div><br><br><br>
 			<input type="hidden" id="origen" name="origen" value="compartamos">
-			<input type="button" value=Salir id="btSalir" />
+			<input type="button" value=Salir id="btCancelar" />
 	</div>
 <!--Fin de mensaje-->
 

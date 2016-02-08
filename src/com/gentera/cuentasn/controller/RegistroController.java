@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +61,9 @@ public class RegistroController {
 	@RequestMapping(value = "/registroCompartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
 		logger.info("Entra a registro Compartamos");
+		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
+			return "redirect:/loginCompartamos";
+		}
 		return "registroCompartamos";
  
 	}
@@ -67,6 +71,9 @@ public class RegistroController {
 	@RequestMapping(value = "/registroYastas", method = RequestMethod.GET)
 	public String registroYastas(ModelMap model) {
 		System.out.println("Entra a registro Yastas");
+		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
+			return "redirect:/loginYastas";
+		}
 		return "registroYastas";
  
 	}

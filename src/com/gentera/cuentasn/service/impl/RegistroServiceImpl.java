@@ -38,7 +38,7 @@ public class RegistroServiceImpl implements RegistroService {
 					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
 					
 					//Se busca el número de tarjeta
-					CardNumbers[] cns = wsConnector.getTarjetas();
+					CardNumbers[] cns = wsConnector.getTarjetas(respuesta.getIdBP());
 					for(CardNumbers cn : cns){
 						if(validaNumeroTarjeta(cn.getCardNumber())){
 							System.out.println("Tarjeta encontrada");
@@ -90,7 +90,7 @@ public class RegistroServiceImpl implements RegistroService {
 
 	@Override
 	public String pruebaWs() {
-		CardNumbers[] cns = wsConnector.getTarjetas();
+		CardNumbers[] cns = wsConnector.getTarjetas("78027");
 		for(CardNumbers cn : cns){
 			if(validaNumeroTarjeta(cn.getCardNumber())){
 				System.out.println("Tarjeta encontrada");

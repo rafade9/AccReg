@@ -31,6 +31,15 @@ $(document).ready(function(){
 				
 			}
 	});
+	
+	//Se cambia maxlength de numero de identificacion
+	$("input[name=tipoIdentificacion]").click(function () {
+		if($(this).val() == 'ZCVELE'){
+			document.getElementById("numeroIdentificacion").maxLength = "18";
+		}else{
+			document.getElementById("numeroIdentificacion").maxLength = "9";
+		}
+	});
 
 //Cerramos el mensaje de nacionalidad	
 	$("#btMensaje").click( function(){
@@ -40,7 +49,8 @@ $(document).ready(function(){
 	
 //realiza la validaci?n del formulario	
 	$("#formularioCompartamos").validate({
-	    rules: {
+		onkeyup: false,
+		rules: {
 	    	folio: {
 		       required: true,
 		       number: true
@@ -49,15 +59,28 @@ $(document).ready(function(){
 	        required: true,
 	          },
 	        numeroIdentificacion: {
-	          required: true
+	          required: true,
+	          identificacion: true
 	        },
 	        primerNombre: {
-	           required: true
+	           required: true,
+	           lettersonly: true,
+	           maxlength: 40
 	        },
-	       paterno: {
-	            required: true
+	        segundoNombre: {
+	           lettersonly: true,
+	           maxlength: 40
+	        },
+	        paterno: {
+	            required: true,
+		        lettersonly: true,
+		        maxlength: 40
 	          },
-	          fechaNacimiento: {
+	        materno: {
+		        lettersonly: true,
+		        maxlength: 40
+	          },
+	        fechaNacimiento: {
 	           required: true,
 	           dateFormat: true
 	         },
@@ -79,7 +102,8 @@ $(document).ready(function(){
 	         telefono: {
 	             required: true,
 	             number: true,
-	             minlength: 10
+	             minlength: 10,
+	             maxlength: 10
 	         },
 	         codigoPostal: {
 	             required: true,
@@ -100,14 +124,15 @@ $(document).ready(function(){
 	             required: true
 	         },
 	         calle: {
-	             required: true
+	             required: true,
+	             maxlength: 60
 	         },
 	         numExterior: {
 	             required: true,
-	             number: true
+	             maxlength: 10
 	         },
 	         numInterior: {
-	             number: true
+	             maxlength: 10
 	         }
 	    },
 	    messages: {
@@ -122,11 +147,19 @@ $(document).ready(function(){
 		    numeroIdentificacion: {
 		      	required: "Por favor proporcione el n&uacutemero de identificaci&oacuten"
 		      		},
-		    primerNombre: {
-		      	required: "Por favor proporcione el Nombre"
+      		primerNombre: {
+		      	required: "Por favor proporcione el Nombre",
+		      	maxlength: "El primer nombre debe ir a 40 d&iacute;gitos"
 		      		},
+		    segundoNombre: {
+		    	maxlength: "El segundo nombre debe ir a 40 d&iacute;gitos"
+		    		},
 		    paterno: {
-		      		required: "Por favor proporcione el Apellido"
+		      		required: "Por favor proporcione el Apellido",
+		      		maxlength: "El apellido paterno debe ir a 40 d&iacute;gitos"
+		    		},
+		    materno: {
+		    		maxlength: "El apellido materno debe ir a 40 d&iacute;gitos"
 		    		},
 		    fechaNacimiento: {
 		    		required: "Por favor porporcione la fecha"
@@ -149,8 +182,8 @@ $(document).ready(function(){
 	        telefono: {
 	        	required: "Por favor proporcione el n&uacutemero de telefono",
 	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	minlength: "El n?mero de telefono debe ir a 10 digitos"
-	          
+	        	minlength: "El n?mero de telefono debe ir a 10 digitos",
+	        	maxlength: "El n&uacutemero de telefono debe ir a 10 digitos"
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
@@ -168,15 +201,18 @@ $(document).ready(function(){
 	        colonia: {
 	        	required: "Por favor proporciona la colonia"
 	            	},
-	        calle: {
-	        	required: "Por favor proporciona la calle"
+        	calle: {
+	        	required: "Por favor proporciona la calle",
+	        	maxlength: "El nombre de la calle debe ir a 60 d&iacute;gitos"
 	            	},
 	         numExterior: {
 	        	 required: "Por favor proporciona el numero Exterior",
-	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros"
+	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros",
+	        	 maxlength: "El n&uacutemero exterior debe ir a 10 d&iacute;gitos"
 	         	},
 	         numInterior: {
-	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros"
+	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros",
+	        	 maxlength: "El n&uacutemero interior debe ir a 10 d&iacute;gitos"
 	         }
 	    },
 	    submitHandler: function() {	    	
@@ -209,7 +245,14 @@ $(document).ready(function(){
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
                     	console.log("Bien");
-                    }else{
+                    }
+                    else if(datar.codigo== '0'){
+                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	$('#mensajeRegistro').html(datar.mensaje + "Realiza la  transacci&oacute;n de DEPOSITO INICIAL, ingresando al menu Compartamos Banco de tu terminal ");
+                    	
+                    }
+                    else{
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
@@ -377,7 +420,7 @@ $(document).ready(function(){
 		        // Found a match, nothing to do
 		        if ( valid ) {
 		        	var valor=$("#paisNacimiento").val();
-		            alert(valor);	
+//		            alert(valor);	
 		          return;
 		        }
 		 
@@ -489,3 +532,23 @@ $(document).ready(function(){
 			        return value.match(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
 			    },
 			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
+		
+		
+		//Valida el campo de numero de identificacion
+		var patron;
+        $.validator.addMethod("identificacion",
+                   function(value, element) {
+                                   if($('input:radio[name=tipoIdentificacion]:checked').val() == 'FS0002'){
+                                          patron = /^[a-zA-Z0-9]{9}$/;
+                                   }else{
+                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
+                                   }
+                                   
+                      return value.match(patron,'');
+               },
+        "Por favor, proporcione el numero de identificaci&oacuten correcto.");   
+        
+        //Solo letras
+        jQuery.validator.addMethod("lettersonly", function(value, element) {
+        	  return this.optional(element) || /^[a-z]+$/i.test(value);
+        	}, "Por favor, proporcione solo letras."); 

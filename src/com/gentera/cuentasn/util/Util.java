@@ -2,7 +2,11 @@ package com.gentera.cuentasn.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.TimeZone;
+
+import com.gentera.cuentasn.entities.Persona;
 
 public class Util {
 	
@@ -107,4 +111,131 @@ public class Util {
         dateString.append(minits);
     }
 
+
+	/**
+	 * Metodo para obtener el nombre proporcionado por el cliente para el pdf de listas bloqueadas
+	 * @param persona
+	 * @return
+	 */
+	public static String obtenerNombreC(Persona persona){
+		String nombreCompleto = "";
+		
+		nombreCompleto = persona.getPrimerNombre();
+		
+		if(persona.getSegundoNombre()!=null)
+			nombreCompleto += " " +persona.getSegundoNombre();
+		nombreCompleto += " " +persona.getPaterno();
+		if(persona.getMaterno()!=null)
+			nombreCompleto += " " +persona.getMaterno();
+		
+		return nombreCompleto.toUpperCase();
+	}
+	
+	
+	
+	/**
+	 * Método para obtener a fecha del comprobante de apertura de cuentaN2
+	 * @return
+	 */
+	public static String getDateTime() {
+
+	    String time = "";
+	    String hora = "";
+	    String minutos = "";
+	    String segundos = "";
+	    String diaC = "";
+	    String mesC = "";
+	    
+	    Calendar cal = Calendar.getInstance();
+	    
+	    Integer dia = cal.get(Calendar.DAY_OF_MONTH);
+	    Integer mes = cal.get(Calendar.MONTH)+1;
+	    Integer anio = cal.get(Calendar.YEAR);
+	    
+	    if(dia<=9)
+			diaC = "0"+ dia.toString();
+		else
+			diaC = dia.toString();
+		if(mes<=9)
+			mesC = "0"+ mes.toString();
+		else
+			 mesC = mes.toString();
+		
+	    if(cal.get(Calendar.HOUR)<=9 && cal.get(Calendar.HOUR)>0)
+	    	hora = "0"+cal.get(Calendar.HOUR);
+	    
+	    else if(cal.get(Calendar.HOUR)==0)
+	    	hora = "12";
+	    else
+	    	hora = String.valueOf(cal.get(Calendar.HOUR));
+	    if(cal.get(Calendar.MINUTE)<=9)
+	    	minutos = "0"+ cal.get(Calendar.MINUTE);
+	    else
+	    	minutos = String.valueOf(cal.get(Calendar.MINUTE));
+	    if(cal.get(Calendar.SECOND)<=9)
+	    	segundos = "0" + cal.get(Calendar.SECOND);
+	    else
+	    	segundos = String.valueOf(cal.get(Calendar.SECOND));
+	    time = diaC + "/" + mesC +"/" +anio.toString() + " Hora: "+ hora  + ":" + minutos + ":" +segundos;
+
+	    if(cal.get(Calendar.AM_PM)==0)
+	        time=time+" AM";
+	    else
+	        time=time+" PM";
+
+	    return time;
+
+	}
+	
+	/**
+	 * Metodo para obtener la fecha en el formato del PDF listas bloqueadas
+	 * @return
+	 */
+	public static String generaFecha(){
+
+		Calendar calendario = new GregorianCalendar();
+		HashMap<Integer,String> meses = new HashMap<Integer,String>();
+
+		Integer dia = calendario.get(Calendar.DAY_OF_MONTH);
+		int mes = calendario.get(Calendar.MONTH);
+		int anio = calendario.get(Calendar.YEAR);
+
+		String diaC = "";
+
+		if(dia<=9)
+			diaC = "0"+ dia.toString();
+		else
+			diaC = dia.toString();
+
+		meses.put(1, "Enero");
+		meses.put(2, "Febrero");
+		meses.put(3, "Marzo");
+		meses.put(4, "Abril");
+		meses.put(5, "Mayo");
+		meses.put(6, "Junio");
+		meses.put(7, "Julio");
+		meses.put(8, "Agosto");
+		meses.put(9, "Septiembre");
+		meses.put(10, "Octubre");
+		meses.put(11, "Noviembre");
+		meses.put(12, "Diciembre");
+
+		String fecha = diaC+ " de "  +meses.get(mes+1)+ " de " +anio;
+		return fecha;
+
+	}
+	
+	
+	public static String enmascaraTarj(String numTarjeta){
+		String tarjeta = "";
+		if(numTarjeta.length()>5){
+			for(int i=0; i<numTarjeta.length()-4;i++){
+				tarjeta = tarjeta + "*";
+			}
+			tarjeta = tarjeta + numTarjeta.substring(numTarjeta.length()-4, numTarjeta.length());
+		}
+		return tarjeta;
+	}
+
+	
 }

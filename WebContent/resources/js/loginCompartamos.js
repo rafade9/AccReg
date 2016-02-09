@@ -5,6 +5,7 @@
 $(document).ready(function(){
 	
 $("#formularioCompartamos").validate({
+	onkeyup: false,
     rules: {
       username: {
         required: true,
@@ -18,12 +19,12 @@ $("#formularioCompartamos").validate({
     messages: {
       username: {
     	  required: "Por favor proporcione su usuario",
-    	  lettersonly: "Por favor sólo proporcione letras"
+    	  lettersonly: "Por favor sï¿½lo proporcione letras"
       },
 
       password: {
     	  required: "Por favor proporcione su password",
-    	  minlength: "El password debe tener mínimo 5 caracteres"
+    	  minlength: "El password debe tener mï¿½nimo 5 caracteres"
       }
     },
     submitHandler: function() {

@@ -1,101 +1,87 @@
 /**
- * BankAccountContractID_V1.java
+ * ArrayOfCardNumbers.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
  */
-package com.compartamos.common.gdt;
+package com.compartamos.cm.cardmanagement.de_oa_i_104;
 
-import org.apache.axis2.databinding.types.Token;
 
 /**
- *  BankAccountContractID_V1 bean class
+ *  ArrayOfCardNumbers bean class
  */
 @SuppressWarnings({"unchecked",
     "unused"
 })
-public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAccountContractID_V1Content
-    implements org.apache.axis2.databinding.ADBBean {
-    /**
-     * field for SchemeID
-     * This was an Attribute!
-     */
-    protected com.compartamos.common.gdt.SchemeID_type0 localSchemeID;
-
-    /**
-     * field for SchemeAgencyID
-     * This was an Attribute!
-     */
-    protected com.compartamos.common.gdt.SchemeAgencyID_type0 localSchemeAgencyID;
-
+public class ArrayOfCardNumbers implements org.apache.axis2.databinding.ADBBean {
     /* This type was generated from the piece of schema that had
-       name = BankAccountContractID_V1
-       Namespace URI = http://compartamos.com/common/gdt
+       name = ArrayOfCardNumbers
+       Namespace URI = http://compartamos.com/CM/CardManagement/DE-OA-I-104
        Namespace Prefix = ns1
      */
 
     /**
-     * field for BankAccountContractID_V1Content
+     * field for CardNumbers
+     * This was an Array!
      */
+    protected com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[] localCardNumbers;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localCardNumbersTracker = false;
+
+    public boolean isCardNumbersSpecified() {
+        return localCardNumbersTracker;
+    }
 
     /**
      * Auto generated getter method
-     * @return org.apache.axis2.databinding.types.Token
+     * @return com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[]
      */
-    public org.apache.axis2.databinding.types.Token getBankAccountContractID_V1Content() {
-        return localBankAccountContractID_V1Content;
+    public com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[] getCardNumbers() {
+        return localCardNumbers;
+    }
+
+    /**
+     * validate the array for CardNumbers
+     */
+    protected void validateCardNumbers(
+        com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[] param) {
     }
 
     /**
      * Auto generated setter method
-     * @param param BankAccountContractID_V1Content
+     * @param param CardNumbers
      */
-    public void setBankAccountContractID_V1Content(
-        org.apache.axis2.databinding.types.Token param) {
-        if ((1 <= java.lang.String.valueOf(param).length()) &&
-                (java.lang.String.valueOf(param).length() <= 80)) {
-            this.localBankAccountContractID_V1Content = param;
-        } else {
-            throw new java.lang.RuntimeException(
-                "Input values do not follow defined XSD restrictions");
+    public void setCardNumbers(
+        com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[] param) {
+        validateCardNumbers(param);
+
+        localCardNumbersTracker = true;
+
+        this.localCardNumbers = param;
+    }
+
+    /**
+     * Auto generated add method for the array for convenience
+     * @param param com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers
+     */
+    public void addCardNumbers(
+        com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers param) {
+        if (localCardNumbers == null) {
+            localCardNumbers = new com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[] {
+                    
+                };
         }
-    }
 
-    public java.lang.String toString() {
-        return localBankAccountContractID_V1Content.toString();
-    }
+        //update the setting tracker
+        localCardNumbersTracker = true;
 
-    /**
-     * Auto generated getter method
-     * @return com.compartamos.common.gdt.SchemeID_type0
-     */
-    public com.compartamos.common.gdt.SchemeID_type0 getSchemeID() {
-        return localSchemeID;
-    }
-
-    /**
-     * Auto generated setter method
-     * @param param SchemeID
-     */
-    public void setSchemeID(com.compartamos.common.gdt.SchemeID_type0 param) {
-        this.localSchemeID = param;
-    }
-
-    /**
-     * Auto generated getter method
-     * @return com.compartamos.common.gdt.SchemeAgencyID_type0
-     */
-    public com.compartamos.common.gdt.SchemeAgencyID_type0 getSchemeAgencyID() {
-        return localSchemeAgencyID;
-    }
-
-    /**
-     * Auto generated setter method
-     * @param param SchemeAgencyID
-     */
-    public void setSchemeAgencyID(
-        com.compartamos.common.gdt.SchemeAgencyID_type0 param) {
-        this.localSchemeAgencyID = param;
+        java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localCardNumbers);
+        list.add(param);
+        this.localCardNumbers = (com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[]) list.toArray(new com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[list.size()]);
     }
 
     /**
@@ -133,40 +119,60 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
         writeStartElement(prefix, namespace, parentQName.getLocalPart(),
             xmlWriter);
 
-        java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                "http://compartamos.com/common/gdt");
+        if (serializeType) {
+            java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                    "http://compartamos.com/CM/CardManagement/DE-OA-I-104");
 
-        if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", namespacePrefix + ":BankAccountContractID_V1", xmlWriter);
-        } else {
-            writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance",
-                "type", "BankAccountContractID_V1", xmlWriter);
+            if ((namespacePrefix != null) &&
+                    (namespacePrefix.trim().length() > 0)) {
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "type",
+                    namespacePrefix + ":ArrayOfCardNumbers", xmlWriter);
+            } else {
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "type",
+                    "ArrayOfCardNumbers", xmlWriter);
+            }
         }
 
-        if (localSchemeID != null) {
-            writeAttribute("", "schemeID", localSchemeID.toString(), xmlWriter);
-        }
+        if (localCardNumbersTracker) {
+            if (localCardNumbers != null) {
+                for (int i = 0; i < localCardNumbers.length; i++) {
+                    if (localCardNumbers[i] != null) {
+                        localCardNumbers[i].serialize(new javax.xml.namespace.QName(
+                                "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                                "CardNumbers"), xmlWriter);
+                    } else {
+                        writeStartElement(null,
+                            "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                            "CardNumbers", xmlWriter);
 
-        if (localSchemeAgencyID != null) {
-            writeAttribute("", "schemeAgencyID",
-                localSchemeAgencyID.toString(), xmlWriter);
-        }
+                        // write the nil attribute
+                        writeAttribute("xsi",
+                            "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                            "1", xmlWriter);
+                        xmlWriter.writeEndElement();
+                    }
+                }
+            } else {
+                writeStartElement(null,
+                    "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                    "CardNumbers", xmlWriter);
 
-        if (localBankAccountContractID_V1Content == null) {
-            // write the nil attribute
-            throw new org.apache.axis2.databinding.ADBException(
-                "BankAccountContractID_V1.Content cannot be null!!");
-        } else {
-            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localBankAccountContractID_V1Content));
+                // write the nil attribute
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "nil", "1",
+                    xmlWriter);
+                xmlWriter.writeEndElement();
+            }
         }
 
         xmlWriter.writeEndElement();
     }
 
     private static java.lang.String generatePrefix(java.lang.String namespace) {
-        if (namespace.equals("http://compartamos.com/common/gdt")) {
+        if (namespace.equals(
+                    "http://compartamos.com/CM/CardManagement/DE-OA-I-104")) {
             return "ns1";
         }
 
@@ -373,28 +379,28 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
         java.util.ArrayList elementList = new java.util.ArrayList();
         java.util.ArrayList attribList = new java.util.ArrayList();
 
-        attribList.add(new javax.xml.namespace.QName(
-                "http://www.w3.org/2001/XMLSchema-instance", "type"));
-        attribList.add(new javax.xml.namespace.QName(
-                "http://compartamos.com/common/gdt", "BankAccountContractID_V1"));
-
-        elementList.add(org.apache.axis2.databinding.utils.reader.ADBXMLStreamReader.ELEMENT_TEXT);
-
-        if (localBankAccountContractID_V1Content != null) {
-            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                    localBankAccountContractID_V1Content));
-        } else {
-            throw new org.apache.axis2.databinding.ADBException(
-                "BankAccountContractID_V1.Content cannot be null!!");
+        if (localCardNumbersTracker) {
+            if (localCardNumbers != null) {
+                for (int i = 0; i < localCardNumbers.length; i++) {
+                    if (localCardNumbers[i] != null) {
+                        elementList.add(new javax.xml.namespace.QName(
+                                "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                                "CardNumbers"));
+                        elementList.add(localCardNumbers[i]);
+                    } else {
+                        elementList.add(new javax.xml.namespace.QName(
+                                "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                                "CardNumbers"));
+                        elementList.add(null);
+                    }
+                }
+            } else {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                        "CardNumbers"));
+                elementList.add(localCardNumbers);
+            }
         }
-
-        attribList.add(new javax.xml.namespace.QName("", "schemeID"));
-
-        attribList.add(localSchemeID.toString());
-
-        attribList.add(new javax.xml.namespace.QName("", "schemeAgencyID"));
-
-        attribList.add(localSchemeAgencyID.toString());
 
         return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
             elementList.toArray(), attribList.toArray());
@@ -404,32 +410,6 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
      *  Factory class that keeps the parse method
      */
     public static class Factory {
-        public static BankAccountContractID_V1 fromString(
-            java.lang.String value, java.lang.String namespaceURI) {
-            BankAccountContractID_V1 returnValue = new BankAccountContractID_V1();
-
-            returnValue.setBankAccountContractID_V1Content(org.apache.axis2.databinding.utils.ConverterUtil.convertToToken(
-                    value));
-
-            return returnValue;
-        }
-
-        public static BankAccountContractID_V1 fromString(
-            javax.xml.stream.XMLStreamReader xmlStreamReader,
-            java.lang.String content) {
-            if (content.indexOf(":") > -1) {
-                java.lang.String prefix = content.substring(0,
-                        content.indexOf(":"));
-                java.lang.String namespaceUri = xmlStreamReader.getNamespaceContext()
-                                                               .getNamespaceURI(prefix);
-
-                return BankAccountContractID_V1.Factory.fromString(content,
-                    namespaceUri);
-            } else {
-                return BankAccountContractID_V1.Factory.fromString(content, "");
-            }
-        }
-
         /**
          * static method to create the object
          * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -437,9 +417,9 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
          * Postcondition: If this object is an element, the reader is positioned at its end element
          *                If this object is a complex type, the reader is positioned at the end element of its outer element
          */
-        public static BankAccountContractID_V1 parse(
+        public static ArrayOfCardNumbers parse(
             javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-            BankAccountContractID_V1 object = new BankAccountContractID_V1();
+            ArrayOfCardNumbers object = new ArrayOfCardNumbers();
 
             int event;
             java.lang.String nillableValue = null;
@@ -468,12 +448,12 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
                         java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                     ":") + 1);
 
-                        if (!"BankAccountContractID_V1".equals(type)) {
+                        if (!"ArrayOfCardNumbers".equals(type)) {
                             //find namespace for the prefix
                             java.lang.String nsUri = reader.getNamespaceContext()
                                                            .getNamespaceURI(nsPrefix);
 
-                            return (BankAccountContractID_V1) com.compartamos.global.ExtensionMapper.getTypeObject(nsUri,
+                            return (ArrayOfCardNumbers) com.compartamos.cm.cardmanagement.de_oa_i_104.ExtensionMapper.getTypeObject(nsUri,
                                 type, reader);
                         }
                     }
@@ -483,64 +463,87 @@ public class BankAccountContractID_V1 extends com.compartamos.common.gdt.BankAcc
                 // from anyAttributes.
                 java.util.Vector handledAttributes = new java.util.Vector();
 
-                // handle attribute "schemeID"
-                java.lang.String tempAttribSchemeID = reader.getAttributeValue(null,
-                        "schemeID");
+                reader.next();
 
-                if (tempAttribSchemeID != null) {
-                    java.lang.String content = tempAttribSchemeID;
+                java.util.ArrayList list1 = new java.util.ArrayList();
 
-                    object.setSchemeID(com.compartamos.common.gdt.SchemeID_type0.Factory.fromString(
-                            reader, tempAttribSchemeID));
-                } else {
-                }
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
 
-                handledAttributes.add("schemeID");
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                            "CardNumbers").equals(reader.getName())) {
+                    // Process the array and step past its final element's end.
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
 
-                // handle attribute "schemeAgencyID"
-                java.lang.String tempAttribSchemeAgencyID = reader.getAttributeValue(null,
-                        "schemeAgencyID");
-
-                if (tempAttribSchemeAgencyID != null) {
-                    java.lang.String content = tempAttribSchemeAgencyID;
-
-                    object.setSchemeAgencyID(com.compartamos.common.gdt.SchemeAgencyID_type0.Factory.fromString(
-                            reader, tempAttribSchemeAgencyID));
-                } else {
-                }
-
-                handledAttributes.add("schemeAgencyID");
-
-                while (!reader.isEndElement()) {
-                    if (reader.isStartElement() || reader.hasText()) {
-                        if (reader.isStartElement() || reader.hasText()) {
-                            nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                    "nil");
-
-                            if ("true".equals(nillableValue) ||
-                                    "1".equals(nillableValue)) {
-                                throw new org.apache.axis2.databinding.ADBException(
-                                    "The element: " +
-                                    "BankAccountContractID_V1.Content" +
-                                    "  cannot be null");
-                            }
-
-                            java.lang.String content = reader.getElementText();
-
-							//                            object.setBankAccountContractID_V1Content(org.apache.axis2.databinding.utils.ConverterUtil.convertToToken(
-//                                    content));
-                            object.setBankAccountContractID_V1Content(new Token("123")); //ESTA LINEA ESTA CON HARDCODE
-                        } // End of if for expected property start element
-
-                        else {
-                            // A start element we are not expecting indicates an invalid parameter was passed
-                            throw new org.apache.axis2.databinding.ADBException(
-                                "Unexpected subelement " + reader.getName());
-                        }
-                    } else {
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        list1.add(null);
                         reader.next();
+                    } else {
+                        list1.add(com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers.Factory.parse(
+                                reader));
                     }
-                } // end of while loop
+
+                    //loop until we find a start element that is not part of this array
+                    boolean loopDone1 = false;
+
+                    while (!loopDone1) {
+                        // We should be at the end element, but make sure
+                        while (!reader.isEndElement())
+                            reader.next();
+
+                        // Step out of this element
+                        reader.next();
+
+                        // Step to next element event.
+                        while (!reader.isStartElement() &&
+                                !reader.isEndElement())
+                            reader.next();
+
+                        if (reader.isEndElement()) {
+                            //two continuous end elements means we are exiting the xml structure
+                            loopDone1 = true;
+                        } else {
+                            if (new javax.xml.namespace.QName(
+                                        "http://compartamos.com/CM/CardManagement/DE-OA-I-104",
+                                        "CardNumbers").equals(reader.getName())) {
+                                nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                        "nil");
+
+                                if ("true".equals(nillableValue) ||
+                                        "1".equals(nillableValue)) {
+                                    list1.add(null);
+                                    reader.next();
+                                } else {
+                                    list1.add(com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers.Factory.parse(
+                                            reader));
+                                }
+                            } else {
+                                loopDone1 = true;
+                            }
+                        }
+                    }
+
+                    // call the converter utility  to convert and set the array
+                    object.setCardNumbers((com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers[]) org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
+                            com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers.class,
+                            list1));
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement()) {
+                    // A start element we are not expecting indicates a trailing invalid property
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
             } catch (javax.xml.stream.XMLStreamException e) {
                 throw new java.lang.Exception(e);
             }

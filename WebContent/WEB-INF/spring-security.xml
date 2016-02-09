@@ -8,7 +8,7 @@
 	<http auto-config="true">
 		<intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/app**" access="ROLE_USER" />
-		<!-- <intercept-url pattern="/catalogos/**" access="ROLE_USER" /> -->
+		
 		
 		<form-login 
 		    login-page="/loginCompartamos"
@@ -29,7 +29,7 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="mkyong" password="12345678" authorities="ROLE_USER" />
+				<user name="compartamos" password="12345678" authorities="ROLE_USER" />
 				<user name="juan.mendoza" password="juan123" authorities="ROLE_ADMIN" />
 			</user-service>
 		</authentication-provider>

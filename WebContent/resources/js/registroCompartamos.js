@@ -2,7 +2,10 @@
 //Fecha 18/01/2016
 //Mara Vazquez
 
+var respuesta;
+
 $(document).ready(function(){
+	
 	
 //Catalogo de paises
 	
@@ -16,7 +19,7 @@ $(document).ready(function(){
 		document.getElementById("paisNacimiento").innerHTML = htmlPaises;
   	});
 	
-
+	
 	
 //Obtenemos que tipo de nacionalidad fue seleccionada	
 	$("#nacionalidad").change(function(){
@@ -61,7 +64,7 @@ $(document).ready(function(){
 	          },
 	        numeroIdentificacion: {
 	          required: true,
-	          identificacion: true
+	          identificacion : true
 	        },
 	        primerNombre: {
 	           required: true,
@@ -108,7 +111,6 @@ $(document).ready(function(){
 	         },
 	         codigoPostal: {
 	             required: true,
-	             minlength: 5,
 				 maxlength: 5,
 				 number: true
 	         },
@@ -189,7 +191,8 @@ $(document).ready(function(){
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s&oacutelo n&uacutemeros"
+	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
+	        	codigoPosComp : "Verificando la longitud"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
@@ -255,6 +258,8 @@ $(document).ready(function(){
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
+                    	respuesta = datar;
+ 
                     }
                 }
             });
@@ -452,8 +457,8 @@ $(document).ready(function(){
 		    });
 		  });	
 	
-});
 
+});
 
 	
 	
@@ -527,16 +532,6 @@ $(document).ready(function(){
 		});
 	
 		
-//Funcion para la impresión
-		
-		$(function() {
-		$("#btImprimir").click(
-			function() {
-				var origenReg = $('#origen').val();	
-				window.location.href = "imprimir";
-		});
-	});
-			
 		
 
 //Valida el formato correcto de la fecha
@@ -547,6 +542,7 @@ $(document).ready(function(){
 			    },
 			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
 		
+
 		//Valida el campo de numero de identificacion
 		var patron;
         $.validator.addMethod("identificacion",
@@ -566,4 +562,25 @@ $(document).ready(function(){
         jQuery.validator.addMethod("lettersonly", function(value, element) {
         	  return this.optional(element) || /^[a-z]+$/i.test(value);
         	}, "Por favor, proporcione solo letras."); 
+
+
+
+//Nos manda al PDF
+		
+		$(function() {
+			$("#btImprimir").click(
+				function() {
+					 $.ajax({
+				            url: 'comprobantepdf.htm',
+				            type: 'POST',
+				            data: JSON.stringify(respuesta),     
+				            processData: false,
+				            contentType: "application/json"
+				        }),
+					 window.open('comprobantepdf.htm?output=pdf','_blank');
+						
+			}
+			);
+		});
+		
 

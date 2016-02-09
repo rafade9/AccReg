@@ -2,7 +2,7 @@
 //Fecha 18/01/2016
 //Mara Vazquez
 
-var respuesta;
+var respuesta ={};
 
 $(document).ready(function(){
 	
@@ -244,6 +244,7 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./registro",
                 success: function(datar){
+                	respuesta = datar;
                     $("#localhost:8888").html(datar);
                     if(datar.codigo == '1' || datar.codigo == '2'){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
@@ -541,7 +542,23 @@ $(document).ready(function(){
 			        return value.match(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
 			    },
 			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
+
 		
+
+//Valida el campo de numero de identificacion
+		
+		var patron;
+		$.validator.addMethod("identificacion",
+			    function(value, element) {
+						if($('input:radio[name=tipoIdentificacion]:checked').val() == 'ZCVELE'){
+							patron = /^[a-zA-Z0-9]{9}$/;
+						}else{
+							patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
+						}
+						
+				return value.match(patron,'');
+			},
+		"Por favor, proporcione el numero de identificaci&oacuten correcto.");			
 
 		//Valida el campo de numero de identificacion
 		var patron;
@@ -567,19 +584,23 @@ $(document).ready(function(){
 
 //Nos manda al PDF
 		
+		
+
 		$(function() {
 			$("#btImprimir").click(
 				function() {
-					 $.ajax({
-				            url: 'comprobantepdf.htm',
-				            type: 'POST',
-				            data: JSON.stringify(respuesta),     
-				            processData: false,
-				            contentType: "application/json"
-				        }),
-					 window.open('comprobantepdf.htm?output=pdf','_blank');
-						
-			}
+					$.ajax({
+			             url: './comprobantepdf',
+			             type: 'GET',
+			             data: { Persona: JSON.stringify(respuesta) },
+			             contentType: 'application/json; charset=utf-8',
+			             dataType: 'json',
+			             success: function () {              
+			             }
+			         });
+					window.open('comprobantepdf.htm?output=pdf&respuesta='+respuesta,'_blank');
+					respuesta.submit();	
+				}
 			);
 		});
 		

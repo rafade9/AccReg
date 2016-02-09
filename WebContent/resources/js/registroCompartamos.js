@@ -2,7 +2,10 @@
 //Fecha 18/01/2016
 //Mara Vazquez
 
+var respuesta;
+
 $(document).ready(function(){
+	
 	
 //Catalogo de paises
 	
@@ -16,7 +19,7 @@ $(document).ready(function(){
 		document.getElementById("paisNacimiento").innerHTML = htmlPaises;
   	});
 	
-
+	
 	
 //Obtenemos que tipo de nacionalidad fue seleccionada	
 	$("#nacionalidad").change(function(){
@@ -51,6 +54,7 @@ $(document).ready(function(){
 	          },
 	        numeroIdentificacion: {
 	          required: true,
+	          identificacion : true
 	        },
 	        primerNombre: {
 	           required: true
@@ -84,7 +88,6 @@ $(document).ready(function(){
 	         },
 	         codigoPostal: {
 	             required: true,
-	             minlength: 5,
 				 maxlength: 5,
 				 number: true
 	         },
@@ -111,13 +114,7 @@ $(document).ready(function(){
 	             number: true
 	         }
 	    },
-	    messages: {
-	    	folio: {
-		        required: "Por favor proporcione el n&uacutemero de folio",
-		        number:"Por favor proporciona s&oacutelo n&uacutemeros",
-		        minlength: "El folio debe ir a 15 digitos"
-		        	
-		      		},	
+	    messages: {	
 		    tipoIdentificacion: {
 		      	required: "Por favor elige el tipo de identificaci&oacuten"
 		      		},
@@ -156,7 +153,8 @@ $(document).ready(function(){
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s&oacutelo n&uacutemeros"
+	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
+	        	codigoPosComp : "Verificando la longitud"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
@@ -219,6 +217,7 @@ $(document).ready(function(){
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	document.getElementById('botonImpr').style.display = 'block';//mostramos area con boton de impresion
                     	$('#mensajeRegistro').html(datar.mensaje);
+                    	respuesta = datar;
  
                     }
                 }
@@ -417,8 +416,8 @@ $(document).ready(function(){
 		    });
 		  });	
 	
-});
 
+});
 
 	
 	
@@ -493,16 +492,6 @@ $(document).ready(function(){
 	});
 	
 		
-//Funcion para la impresión
-		
-		$(function() {
-		$("#btImprimir").click(
-			function() {
-				var origenReg = $('#origen').val();	
-				window.location.href = "imprimir";
-		});
-	});
-			
 		
 
 //Valida el formato correcto de la fecha
@@ -512,3 +501,23 @@ $(document).ready(function(){
 			        return value.match(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
 			    },
 			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
+		
+
+//Nos manda al PDF
+		
+		$(function() {
+			$("#btImprimir").click(
+				function() {
+					 $.ajax({
+				            url: 'comprobantepdf.htm',
+				            type: 'POST',
+				            data: JSON.stringify(respuesta),     
+				            processData: false,
+				            contentType: "application/json"
+				        }),
+					 window.open('comprobantepdf.htm?output=pdf','_blank');
+						
+			}
+			);
+		});
+		

@@ -46,6 +46,9 @@ public class RegistroController {
 		try{
 			logger.info("Entra a metodo registro");
 			Respuesta respuesta = registroService.registrar(persona);
+			
+			request.getSession().setAttribute("respuesta", respuesta);
+			
 			return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		}catch(Exception e){
 			logger.error(e);

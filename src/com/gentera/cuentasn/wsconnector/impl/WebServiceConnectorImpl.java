@@ -335,20 +335,27 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//Se configura autenticación
 			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
-			ba.setUsername(Properties.getProp("UserCRM"));
-			ba.setPassword(Properties.getProp("PasswordCRM"));
+			ba.setUsername(Properties.getProp("UserCardManager"));
+			ba.setPassword(Properties.getProp("PasswordCardManager"));
 			
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED, Boolean.FALSE);
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
 			
+			logger.info("Se prepara para enviar petición al endpoint: " + endPointCardManager);
+			logger.info("Con usuario: " + ba.getUsername());
+			
 			Execute execute0 = new Execute();
+			logger.info("se setea bp");
 			execute0.setBankBP(bp);
+			logger.info("se setea card status");
 			execute0.setCardStatus("6");
+			logger.info("se setea smp");
 			execute0.setExternalUser("SMP");
+			logger.info("se setea smp2");
 			execute0.setCMSUserId("SMP");
-			
+			logger.info("se ejecuta");
 			ExecuteResponse response = stub.execute(execute0);
-			
+			logger.info("responde, se validan numero de tarjetas. Codigo recibido : " + response.getExecuteResult().getRCCode());
 			return response.getExecuteResult().getCardNumbers().getCardNumbers();
 			
 			

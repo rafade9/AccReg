@@ -39,10 +39,11 @@ public class RegistroServiceImpl implements RegistroService {
 					
 					//Se busca el número de tarjeta
 					CardNumbers[] cns = wsConnector.getTarjetas(respuesta.getIdBP());
+					logger.info("Se recuperaron " + cns.length + " tarjetas.");
 					for(CardNumbers cn : cns){
 						if(validaNumeroTarjeta(cn.getCardNumber())){
-							System.out.println("Tarjeta encontrada");
 							respuesta.setNumTarjeta(String.valueOf(cn.getCardNumber()));
+							break;
 						}
 					}
 					
@@ -90,11 +91,18 @@ public class RegistroServiceImpl implements RegistroService {
 
 	@Override
 	public String pruebaWs() {
-		CardNumbers[] cns = wsConnector.getTarjetas("78027");
-		for(CardNumbers cn : cns){
-			if(validaNumeroTarjeta(cn.getCardNumber())){
-				System.out.println("Tarjeta encontrada");
+		try{
+			logger.info("Va a consumir servicio");
+			CardNumbers[] cns = wsConnector.getTarjetas("780125");
+			logger.info("Consume servicio");
+			logger.info("Se encontraron " + cns.length + " tarjetas");
+			for(CardNumbers cn : cns){
+				if(validaNumeroTarjeta(cn.getCardNumber())){
+					System.out.println("Tarjeta encontrada");
+				}
 			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -158,14 +158,19 @@
 	
 
 <!--Mensaje que se enviaran como respuesta del servicio de registro  -->
-	<div id="principalMensaje" style='display:none;' align="center">	
+	<div id="principalMensaje" style='display:none;' align="center">
 		<div id="mensajeRegistro"  class="tituloMango"></div><br><br><br>
 			<input type="hidden" id="origen" name="origen" value="compartamos">
-			<input type="button" value=Salir id="btSalir" />
+			<div id="botonImpr"  class="tituloMango" style='display:none;'>
+				<input type="button" value=Imprimir id="btImprimir"/>
+				<input type="button" value=Salir id="btSalir" />
+			</div>
+			<div id="botonSal"  class="tituloMango" style='display:none;'>
+				<input type="button" value=Salir id="btSalida" />
+			</div>
 	</div>
 <!--Fin de mensaje-->
 
-	
 <!--Mensaje que se enviara para los clientes que no son de Nacionalidad Mexicana -->	
 	<div id="mensajeNac" class="" style='display:none;' class="tituloMango">
 		<p>Por el momento este producto s&oacutelo aplica para ciudadanos Mexicanos</p><br>

@@ -558,21 +558,7 @@ $(document).ready(function(){
 						
 				return value.match(patron,'');
 			},
-		"Por favor, proporcione el numero de identificaci&oacuten correcto.");			
-
-		//Valida el campo de numero de identificacion
-		var patron;
-        $.validator.addMethod("identificacion",
-                   function(value, element) {
-                                   if($('input:radio[name=tipoIdentificacion]:checked').val() == 'FS0002'){
-                                          patron = /^[a-zA-Z0-9]{9}$/;
-                                   }else{
-                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
-                                   }
-                                   
-                      return value.match(patron,'');
-               },
-        "Por favor, proporcione el numero de identificaci&oacuten correcto.");     
+		"Por favor, proporcione el numero de identificaci&oacuten correcto.");
         
         
         //Solo letras

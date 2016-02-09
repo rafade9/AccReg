@@ -182,8 +182,8 @@ $(document).ready(function(){
 	        telefono: {
 	        	required: "Por favor proporcione el n&uacutemero de telefono",
 	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	minlength: "El n?mero de telefono debe ir a 10 digitos",
-	        	maxlength: "El n&uacutemero de telefono debe ir a 10 digitos"
+	        	minlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos",
+	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",

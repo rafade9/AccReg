@@ -53,12 +53,12 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 			System.out.println(respuesta.getMensaje());
 
-			//Tabla con informaciÛn		
+			//Tabla con informaciÔøΩn		
 			PdfPTable tabla = new PdfPTable(1);
 			tabla.setWidthPercentage(100);
 			PdfPTable tablaInfCuenta = new PdfPTable(2);
 
-			//Establecemos las medidas de la tabla interna, que contiene la informaciÛn de la Cuenta
+			//Establecemos las medidas de la tabla interna, que contiene la informaciÔøΩn de la Cuenta
 			float[] medidaCeldas = {3.50f, 7.00f};
 			try {
 				tablaInfCuenta.setWidths(medidaCeldas);
@@ -74,12 +74,12 @@ public class ComprobantePdfView extends AbstractPdfView{
 			nombreB.setExtraParagraphSpace(5);
 			nombreB.setBorder(0);
 
-			PdfPCell bancaM = new PdfPCell(new Phrase("INSTITUCI”N DE BANCA MULTIPLE", letraM));
+			PdfPCell bancaM = new PdfPCell(new Phrase("INSTITUCI√ìN DE BANCA MULTIPLE", letraM));
 			bancaM.setHorizontalAlignment(Element.ALIGN_CENTER);
 			bancaM.setExtraParagraphSpace(5);
 			bancaM.setBorder(0);
 
-			PdfPCell lugarExp = new PdfPCell(new Phrase("Minatitl·n, Veracruz", letraM));
+			PdfPCell lugarExp = new PdfPCell(new Phrase("Minatitl√°n, Veracruz", letraM));
 			lugarExp.setHorizontalAlignment(Element.ALIGN_CENTER);
 			lugarExp.setExtraParagraphSpace(5);
 			lugarExp.setBorder(0);
@@ -120,7 +120,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 			tabla.addCell(vacia);
 
 
-			//Llenamos la tabla con la informaciÛn de la cuenta
+			//Llenamos la tabla con la informaciÔøΩn de la cuenta
 			PdfPCell producto = new PdfPCell(new Phrase("Producto:", letraM));
 			producto.setExtraParagraphSpace(5);
 			producto.setBorder(0);
@@ -165,8 +165,8 @@ public class ComprobantePdfView extends AbstractPdfView{
 //			numTar.setExtraParagraphSpace(5);
 //			numTar.setBorder(0);
 
-			//Folio OperaciÛn
-			PdfPCell folio = new PdfPCell(new Phrase("Folio de OperaciÛn:", letraM));
+			//Folio OperaciÔøΩn
+			PdfPCell folio = new PdfPCell(new Phrase("Folio de Operaci√≥n:", letraM));
 			folio.setExtraParagraphSpace(5);
 			folio.setBorder(0);
 
@@ -191,15 +191,15 @@ public class ComprobantePdfView extends AbstractPdfView{
 			tabla.addCell(tablaInfCuenta);
 
 			//agregamos texto dudas y aclaraciones
-			Paragraph dudas = new Paragraph("SOLICITUDES, DUDAS, ACLARACIONES Y QUEJAS, favor de dirigirse a la Unidad Especializada de AtenciÛn a Usuarios localizada en: Avenida Insurgentes Sur N˙mero 1458, Colonia Actipan, DelegaciÛn Benito Ju·rez, CÛdigo Postal 03020, MÈxico, Distrito Federal TelÈfono: 01-800-226-5432, correo electrÛnico: unidadespecializada@compartamos.com.\n Centro de AtenciÛn TelefÛnica de la ComisiÛn Nacional para la ProtecciÛn y Defensa de los usuarios de Servicios Financieros 01 800 999 8080 p·gina de internet www.condusef.gob.mx o al correo eletrÛnico opinion@condusef.gob.mx. Tus depÛsitos y ahorros est·n protegidos por el IPAB, para mayor informaciÛn consulta la p·gina www.ipab.org.mx", letraC);
+			Paragraph dudas = new Paragraph("SOLICITUDES, DUDAS, ACLARACIONES Y QUEJAS, favor de dirigirse a la Unidad Especializada de Atenci√≥n a Usuarios localizada en: Avenida Insurgentes Sur N√∫mero 1458, Colonia Actipan, Delegaci√≥n Benito Ju√°rez, C√≥digo Postal 03020, M√©xico, Distrito Federal Tel√©fono: 01-800-226-5432, correo electr√≥nico: unidadespecializada@compartamos.com.\n Centro de Atenci√≥n Telef√≥nica de la Comisi√≥n Nacional para la Protecci√≥n y Defensa de los usuarios de Servicios Financieros 01 800 999 8080 p√°gina de internet www.condusef.gob.mx o al correo electr√≥nico opinion@condusef.gob.mx. Tus dep√≥sitos y ahorros est√°n protegidos por el IPAB, para mayor informaci√≥n consulta la p√°gina www.ipab.org.mx", letraC);
 			PdfPCell dudasAcla = new PdfPCell(dudas);
 			dudasAcla.setExtraParagraphSpace(30);
 			dudasAcla.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 
 			tabla.addCell(dudas);
 
-			//agregamos texto de mayor informaciÛn
-			Paragraph informacion = new Paragraph("El contrato est· a tu disposiciÛn en: www.compartamos.com.mx\n para mayor informaciÛn comunÌcate a Compartel: 01 800220 9000", letraM);
+			//agregamos texto de mayor informaciÔøΩn
+			Paragraph informacion = new Paragraph("El contrato est√° a tu disposici√≥n en: www.compartamos.com.mx\n para mayor informaci√≥n comun√≠cate a Compartel: 01 800220 9000", letraM);
 			PdfPCell masInfo = new PdfPCell(informacion);
 			masInfo.setExtraParagraphSpace(5);
 			masInfo.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -275,56 +275,56 @@ public class ComprobantePdfView extends AbstractPdfView{
 			presente.setExtraParagraphSpace(30);
 
 			//agregamos texto principal
-			Paragraph textoP = new Paragraph("Por medio del presente escrito, se informa que usted ha sido introducido en la ìLista de Personas Bloqueadasî, dada a conocer a esta InstituciÛn por la Unidad de Inteligencia Financiera de la SecretarÌa de Hacienda y CrÈdito P˙blico, bajo los par·metros establecidos por dicha SecretarÌa y las causas mencionadas en la 71™ de las Disposiciones de Car·cter General a que se refiere el artÌculo 115 de la Ley de Instituciones de CrÈdito, que a la letra seÒala:", letraM);
+			Paragraph textoP = new Paragraph("Por medio del presente escrito, se informa que usted ha sido introducido en la ‚ÄúLista de Personas Bloqueadas‚Äù, dada a conocer a esta Instituci√≥n por la Unidad de Inteligencia Financiera de la Secretar√≠a de Hacienda y Cr√©dito P√∫blico, bajo los par√°metros establecidos por dicha Secretar√≠a y las causas mencionadas en la 71¬™ de las Disposiciones de Car√°cter General a que se refiere el art√≠culo 115 de la Ley de Instituciones de Cr√©dito, que a la letra se√±ala:", letraM);
 			PdfPCell texto1 = new PdfPCell(textoP);
 			texto1.setExtraParagraphSpace(30);
 			texto1.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			texto1.setBorder(0);
 
 			//agregamos articulo 115
-			Paragraph textoArt = new Paragraph("ì71™.-La SecretarÌa podr· introducir en la Lista de Personas Bloqueadas a las personas, bajo los siguientes par·metros:", letraC);
+			Paragraph textoArt = new Paragraph("‚Äú71¬™.-La Secretar√≠a podr√° introducir en la Lista de Personas Bloqueadas a las personas, bajo los siguientes par√°metros:", letraC);
 			PdfPCell textoArt115 = new PdfPCell(textoArt);
 			textoArt115.setExtraParagraphSpace(20);
 			textoArt115.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArt115.setBorder(0);
 
-			Paragraph textoI = new Paragraph("I.Aquellas que se encuentren dentro de las listas derivadas de las resoluciones 1267 (1999) y sucesivas, y 1373 (2001) y las dem·s que sean emitidas por el Consejo de Seguridad de las Naciones Unidas o las organizaciones  internacionales;", letraC);
+			Paragraph textoI = new Paragraph("I.	Aquellas que se encuentren dentro de las listas derivadas de las resoluciones 1267 (1999) y sucesivas, y 1373 (2001) y las dem√°s que sean emitidas por el Consejo de Seguridad de las Naciones Unidas o las organizaciones  internacionales;", letraC);
 			PdfPCell textoArtI = new PdfPCell(textoI);
 			textoArtI.setExtraParagraphSpace(10);
 			textoArtI.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArtI.setBorder(0);
 
-			Paragraph textoII = new Paragraph("II.	Aquellas que den a conocer autoridades extranjeras, organismos internacionales o agrupaciones intergubernamentales y que sean determinadas por la SecretarÌa en tÈrminos de los instrumentos internacionales celebrados por el Estado Mexicano con dichas autoridades, organismos o agrupaciones, o en tÈrminos de los convenios celebrados por la propia SecretarÌa;", letraC);
+			Paragraph textoII = new Paragraph("II.	Aquellas que den a conocer autoridades extranjeras, organismos internacionales o agrupaciones intergubernamentales y que sean determinadas por la Secretar√≠a en t√©rminos de los instrumentos internacionales celebrados por el Estado Mexicano con dichas autoridades, organismos o agrupaciones, o en t√©rminos de los convenios celebrados por la propia Secretar√≠a;", letraC);
 			PdfPCell textoArtII = new PdfPCell(textoII);
 			textoArtII.setExtraParagraphSpace(10);
 			textoArtII.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArtII.setBorder(0);
 
-			Paragraph textoIII = new Paragraph("III.Aquellas que den a conocer las autoridades nacionales competentes por tener indicios suficientes de que se encuentran relacionadas con los delitos de financiamiento al terrorismo, operaciones con recursos de procedencia ilÌcita o los relacionados con los delitos seÒalados, previstos en el CÛdigo Penal Federal;", letraC);
+			Paragraph textoIII = new Paragraph("III.	Aquellas que den a conocer las autoridades nacionales competentes por tener indicios suficientes de que se encuentran relacionadas con los delitos de financiamiento al terrorismo, operaciones con recursos de procedencia il√≠cita o los relacionados con los delitos se√±alados, previstos en el C√≥digo Penal Federal;", letraC);
 			PdfPCell textoArtIII = new PdfPCell(textoIII);
 			textoArtIII.setExtraParagraphSpace(10);
 			textoArtIII.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArtIII.setBorder(0);
 
-			Paragraph textoIV = new Paragraph("IV.Aquellas que estÈn compurgando sentencia por los delitos de financiamiento al terrorismo u operaciones con recursos de procedencia ilÌcita, previstos en el CÛdigo Penal Federal;", letraC);
+			Paragraph textoIV = new Paragraph("IV.	Aquellas que est√©n compurgando sentencia por los delitos de financiamiento al terrorismo u operaciones con recursos de procedencia il√≠cita, previstos en el C√≥digo Penal Federal;", letraC);
 			PdfPCell textoArtIV = new PdfPCell(textoIV);
 			textoArtIV.setExtraParagraphSpace(10);
 			textoArtIV.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArtIV.setBorder(0);
 
-			Paragraph textoV = new Paragraph("V.Aquellas que las autoridades nacionales competentes determinen que hayan realizado o realicen actividades que formen parte, auxilien, o estÈn relacionadas con los delitos de financiamiento al terrorismo u operaciones con recursos de procedencia ilÌcita, previstos en el CÛdigo Penal Federal, y ", letraC);
+			Paragraph textoV = new Paragraph("V.Aquellas que las autoridades nacionales competentes determinen que hayan realizado o realicen actividades que formen parte, auxilien, o est√©n relacionadas con los delitos de financiamiento al terrorismo u operaciones con recursos de procedencia il√≠cita, previstos en el C√≥digo Penal Federal, y ", letraC);
 			PdfPCell textoArtV = new PdfPCell(textoV);
 			textoArtV.setExtraParagraphSpace(10);
 			textoArtV.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArtV.setBorder(0);
 
-			Paragraph textoVI = new Paragraph("VI.Aquellas que omitan proporcionar informaciÛn o datos, la encubran o impidan conocer el origen, localizaciÛn, destino o propiedad de recursos, derechos o bienes que provengan de delitos de financiamiento al terrorismo u operaciones con recursos de procedencia ilÌcita, previstos en el CÛdigo Penal Federal o los relacionados con Èstos.", letraC);
+			Paragraph textoVI = new Paragraph("VI.	Aquellas que omitan proporcionar informaci√≥n o datos, la encubran o impidan conocer el origen, localizaci√≥n, destino o propiedad de recursos, derechos o bienes que provengan de delitos de financiamiento al terrorismo u operaciones con recursos de procedencia il√≠cita, previstos en el C√≥digo Penal Federal o los relacionados con √©stos.", letraC);
 			PdfPCell textoArtVI = new PdfPCell(textoVI);
 			textoArtVI.setExtraParagraphSpace(30);
 			textoArtVI.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoArtVI.setBorder(0);
 
-			Paragraph textoVII = new Paragraph("Por lo anterior, hemos sido instruidos por la citada Unidad de Inteligencia Financiera, a suspender de forma inmediata cualquier acto, operaciÛn o servicio que se pretenda o se tenga celebrado entre usted y Banco Compartamos, S.A., InstituciÛn de Banca M˙ltiple.", letraM);
+			Paragraph textoVII = new Paragraph("Por lo anterior, hemos sido instruidos por la citada Unidad de Inteligencia Financiera, a suspender de forma inmediata cualquier acto, operaci√≥n o servicio que se pretenda o se tenga celebrado entre usted y Banco Compartamos, S.A., Instituci√≥n de Banca M√∫ltiple.", letraM);
 			PdfPCell textoArtVII = new PdfPCell(textoVII);
 			textoArtVII.setExtraParagraphSpace(120);
 			textoArtVII.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
@@ -366,38 +366,38 @@ public class ComprobantePdfView extends AbstractPdfView{
 			PdfPTable textosSP = new PdfPTable(1);
 
 			//agregamos texto principal a la segunda pagina
-			Paragraph textoSP = new Paragraph("Asimismo, se hace de su conocimiento que puede acudir ante el Titular de la Unidad de Inteligencia Financiera de la SecretarÌa de Hacienda y CrÈdito P˙blico, a hacer valer sus derechos, dentro de un plazo de 10 dÌas h·biles contados a partir de la notificaciÛn del presente escrito, para que manifieste por escrito lo que a su interÈs convenga, aporte elementos de prueba y formule alegatos, esto de conformidad en la 72™ y 73™ de las citadas Disposiciones, que a su letra seÒalan:  ", letraM);
+			Paragraph textoSP = new Paragraph("Asimismo, se hace de su conocimiento que puede acudir ante el Titular de la Unidad de Inteligencia Financiera de la Secretar√≠a de Hacienda y Cr√©dito P√∫blico, a hacer valer sus derechos, dentro de un plazo de 10 d√≠as h√°biles contados a partir de la notificaci√≥n del presente escrito, para que manifieste por escrito lo que a su inter√©s convenga, aporte elementos de prueba y formule alegatos, esto de conformidad en la 72¬™ y 73¬™ de las citadas Disposiciones, que a su letra se√±alan:  ", letraM);
 			PdfPCell texto1SP = new PdfPCell(textoSP);
 			texto1SP.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			texto1SP.setExtraParagraphSpace(30);
 			texto1SP.setBorder(0);
 
-			Paragraph texto72a = new Paragraph("ì72™.-ÖLas Entidades que en tÈrminos de la presente DisposiciÛn hayan suspendido los actos, Operaciones o servicios con sus Clientes o Usuarios, de manera inmediata deber·n hacer de su conocimiento dicha situaciÛn por escrito, en el que se deber· informar a dichos Clientes y Usuarios los fundamentos y la causa o causas de dicha inclusiÛn, asÌ como que dentro de los diez dÌas h·biles siguientes al dÌa de la recepciÛn del citado escrito, podr·n acudir ante la autoridad competente para efectos de la 73™ de las presentes Disposiciones", letraC);
+			Paragraph texto72a = new Paragraph("‚Äú72¬™.-‚Ä¶Las Entidades que en t√©rminos de la presente Disposici√≥n hayan suspendido los actos, Operaciones o servicios con sus Clientes o Usuarios, de manera inmediata deber√°n hacer de su conocimiento dicha situaci√≥n por escrito, en el que se deber√° informar a dichos Clientes y Usuarios los fundamentos y la causa o causas de dicha inclusi√≥n, as√≠ como que dentro de los diez d√≠as h√°biles siguientes al d√≠a de la recepci√≥n del citado escrito, podr√°n acudir ante la autoridad competente para efectos de la 73¬™ de las presentes Disposiciones.", letraC);
 			texto72a.setIndentationLeft(20);
 			PdfPCell textoS72a = new PdfPCell(texto72a);
 			textoS72a.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoS72a.setExtraParagraphSpace(20);
 			textoS72a.setBorder(0);
 
-			Paragraph texto73a = new Paragraph("73™.- Las personas que hayan sido incluidas en la Lista de Personas Bloqueadas podr·n hacer valer sus derechos ante el Titular de la Unidad de Inteligencia Financiera de la SecretarÌa conforme a lo siguiente:", letraC);
+			Paragraph texto73a = new Paragraph("73¬™.- Las personas que hayan sido incluidas en la Lista de Personas Bloqueadas podr√°n hacer valer sus derechos ante el Titular de la Unidad de Inteligencia Financiera de la Secretar√≠a conforme a lo siguiente:", letraC);
 			PdfPCell textoS73a = new PdfPCell(texto73a);
 			textoS73a.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoS73a.setExtraParagraphSpace(20);
 			textoS73a.setBorder(0);
 
-			Paragraph textoSI = new Paragraph("I.Se otorgar· audiencia al interesado para que dentro del plazo de diez dÌas h·biles, contado a partir de que tenga conocimiento de la suspensiÛn a que se refiere la DisposiciÛn 72™ anterior, manifieste por escrito lo que a su interÈs convenga, aporte elementos de prueba y formule alegatos. El Titular de la Unidad de Inteligencia Financiera, a peticiÛn de parte, podr· ampliar por una sola ocasiÛn el plazo a que se refiere esta fracciÛn, hasta por el mismo lapso, para lo cual considerar· las circunstancias particulares del caso.", letraC);
+			Paragraph textoSI = new Paragraph("I.	Se otorgar√° audiencia al interesado para que dentro del plazo de diez d√≠as h√°biles, contado a partir de que tenga conocimiento de la suspensi√≥n a que se refiere la Disposici√≥n 72¬™ anterior, manifieste por escrito lo que a su inter√©s convenga, aporte elementos de prueba y formule alegatos. El Titular de la Unidad de Inteligencia Financiera, a petici√≥n de parte, podr√° ampliar por una sola ocasi√≥n el plazo a que se refiere esta fracci√≥n, hasta por el mismo lapso, para lo cual considerar√° las circunstancias particulares del caso.", letraC);
 			PdfPCell textoCSI = new PdfPCell(textoSI);
 			textoCSI.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoCSI.setExtraParagraphSpace(10);
 			textoCSI.setBorder(0);
 
-			Paragraph textoSII = new Paragraph("II.	El Titular de la Unidad de Inteligencia Financiera, dentro de los diez dÌas h·biles siguientes a que se presente el interesado en tÈrminos de la fracciÛn I anterior, emitir· resoluciÛn por la cual funde y motive su inclusiÛn en la Lista de Personas Bloqueadas y si procede o no su eliminaciÛn de la misma.î",letraC);
+			Paragraph textoSII = new Paragraph("II.	El Titular de la Unidad de Inteligencia Financiera, dentro de los diez d√≠as h√°biles siguientes a que se presente el interesado en t√©rminos de la fracci√≥n I anterior, emitir√° resoluci√≥n por la cual funde y motive su inclusi√≥n en la Lista de Personas Bloqueadas y si procede o no su eliminaci√≥n de la misma.‚Äù",letraC);
 			PdfPCell textoCSII = new PdfPCell(textoSII);
 			textoCSII.setExtraParagraphSpace(150);
 			textoCSII.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 			textoCSII.setBorder(0);
 
-			PdfPCell saludo = new PdfPCell(new Phrase("Sin m·s por el momento, nos ponemos a sus Ûrdenes.", letraM));
+			PdfPCell saludo = new PdfPCell(new Phrase("Sin m√°s por el momento, nos ponemos a sus √≥rdenes.", letraM));
 			saludo.setExtraParagraphSpace(30);
 			saludo.setBorder(0);
 
@@ -405,7 +405,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 			Paragraph atte = new Paragraph("A T E N T A M E N T E", letraM);
 			Phrase nBanco = new Phrase("\nBANCO COMPARTAMOS, S.A.", letraM);
 			Phrase calle = new Phrase("\nInsurgentes Sur No. 1458, Col. Actipan", letraM);
-			Phrase delegacion = new Phrase("\nDelegaciÛn Benito Ju·rez", letraM);
+			Phrase delegacion = new Phrase("\nDelegaci√≥n Benito Ju√°rez", letraM);
 
 			atte.add(nBanco);
 			atte.add(calle);
@@ -417,7 +417,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 			datosB.addElement(atte);
 			datosB.setBorder(0);
 
-			Paragraph cp = new Paragraph("MÈxico, DF, 03230", letraM);
+			Paragraph cp = new Paragraph("M√©xico, DF, 03230", letraM);
 			PdfPCell datosCp = new PdfPCell(cp);
 			datosCp.setBorder(0);
 			datosCp.setExtraParagraphSpace(80);

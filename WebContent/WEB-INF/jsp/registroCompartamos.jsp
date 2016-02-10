@@ -164,7 +164,7 @@
 			<input type="hidden" id="origen" name="origen" value="compartamos">
 			<div id="botonImpr"  class="tituloMango" style='display:none;'>
 				<input type="button" value=Imprimir id="btImprimir"/>
-				<input type="button" value=Salir id="btSalir" />
+				<input type="button" value=Salir id="btSalida" />
 			</div>
 			<div id="botonSal"  class="tituloMango" style='display:none;'>
 			<input type="button" value=Salir id="btCancelar" />

@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
-import com.gentera.cuentasn.util.ListaBloqueoPdf;
 import com.gentera.cuentasn.util.Util;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Chunk;
@@ -35,6 +34,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 	public static Font letraC = FontFactory.getFont("arial",8,Font.NORMAL);
 	public static Font letraM = FontFactory.getFont("arial",11,Font.NORMAL);
 
+	@SuppressWarnings("rawtypes")
 	protected void buildPdfDocument(Map model, Document document,PdfWriter writer, HttpServletRequest request,HttpServletResponse response)throws Exception {
 
 		logger.info("*******Armando Pdf de comprobante*******");
@@ -233,12 +233,12 @@ public class ComprobantePdfView extends AbstractPdfView{
 			document.open();
 
 			//cargamos imagen Compartamos Banco
-			Image letreroB = generaImagen(ListaBloqueoPdf.class.getClassLoader().getResource("resources/imagenes/compartamosBanco.png").getPath());
+			Image letreroB = generaImagen(ComprobantePdfView.class.getClassLoader().getResource("resources/imagenes/compartamosBanco.png").getPath());
 			PdfPCell imagenP = new PdfPCell(letreroB);
 			imagenP.setBorder(0);
 
 			//cargamos logo del banco
-			Image logoB = generaImagen(ListaBloqueoPdf.class.getClassLoader().getResource("resources/imagenes/logoCom.png").getPath());
+			Image logoB = generaImagen(ComprobantePdfView.class.getClassLoader().getResource("resources/imagenes/logoCom.png").getPath());
 			PdfPCell imagenL = new PdfPCell(logoB);
 			imagenL.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			imagenL.setBorder(0);
@@ -344,7 +344,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 
 			//cargamos imagen pie Compartamos
-			Image direccion = generaImagen(ListaBloqueoPdf.class.getClassLoader().getResource("resources/imagenes/direccionBanco.png").getPath());
+			Image direccion = generaImagen(ComprobantePdfView.class.getClassLoader().getResource("resources/imagenes/direccionBanco.png").getPath());
 
 			PdfPCell pieC = new PdfPCell(direccion);
 			pieC.setHorizontalAlignment(Element.ALIGN_RIGHT);

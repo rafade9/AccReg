@@ -23,8 +23,7 @@ public class RegistroServiceImpl implements RegistroService {
 		Respuesta respuesta = new Respuesta();
 		try{
 			//Se realiza la conexion
-//			respuesta = wsConnector.sendData(persona);
-			respuesta.setCodigo(7);
+			respuesta = wsConnector.sendData(persona);
 			if(respuesta!=null && respuesta.getCodigo()!=null){
 				logger.info("La respuesta trae codigo de retorno");
 				System.out.println("---DATOS DE RESPUESTA---");

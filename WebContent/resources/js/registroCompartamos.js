@@ -1,5 +1,5 @@
 //Js para el JSP registroCompartamos
-//Fecha 18/01/2016
+//Fecha 22/01/2016
 //Mara Vazquez
 
 $(document).ready(function(){
@@ -34,7 +34,6 @@ $(document).ready(function(){
 	
 	//Se cambia maxlength de numero de identificacion
 	$("input[name=tipoIdentificacion]").click(function () {
-		document.getElementById("numeroIdentificacion").value = "";
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
 		}else{
@@ -51,7 +50,7 @@ $(document).ready(function(){
 //realiza la validaci?n del formulario	
 	$("#formularioCompartamos").validate({
 		onkeyup: false,
-	    rules: {
+		rules: {
 	    	folio: {
 		       required: true,
 		       number: true
@@ -146,9 +145,9 @@ $(document).ready(function(){
 		      	required: "Por favor elige el tipo de identificaci&oacuten"
 		      		},
 		    numeroIdentificacion: {
-		      	required: "Por favor proporcione el n&uacutemero de identificaci&oacuten",
+		      	required: "Por favor proporcione el n&uacutemero de identificaci&oacuten"
 		      		},
-		    primerNombre: {
+      		primerNombre: {
 		      	required: "Por favor proporcione el Nombre",
 		      	maxlength: "El primer nombre debe ir a 40 d&iacute;gitos"
 		      		},
@@ -183,13 +182,12 @@ $(document).ready(function(){
 	        telefono: {
 	        	required: "Por favor proporcione el n&uacutemero de telefono",
 	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	minlength: "El n&uacutemero de telefono debe ir a 10 digitos",
+	        	minlength: "El n?mero de telefono debe ir a 10 digitos",
 	        	maxlength: "El n&uacutemero de telefono debe ir a 10 digitos"
-	          
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s&oacutelo n&uacutemeros"
+	        	number: "Por favor proporcione s�lo n�meros"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
@@ -203,7 +201,7 @@ $(document).ready(function(){
 	        colonia: {
 	        	required: "Por favor proporciona la colonia"
 	            	},
-	        calle: {
+        	calle: {
 	        	required: "Por favor proporciona la calle",
 	        	maxlength: "El nombre de la calle debe ir a 60 d&iacute;gitos"
 	            	},
@@ -233,7 +231,6 @@ $(document).ready(function(){
                      }
             });
      	    	
-	    	console.log(jsonObj);
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',
@@ -241,21 +238,27 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./registro",
                 success: function(datar){
-                    $("#localhost:8888").html(datar);
-                    if(datar.codigo == '1' || datar.codigo == '2'){
-                    	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
-                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                    	$('#mensajeRegistro').html(datar.mensaje);
-                    	console.log("Bien");
-                    }else if(datar.codigo == '0' || datar.codigo == '4' || datar.codigo == '6' || datar.codigo == '7'){
-                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
-                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                    	$('#mensajeRegistro').html(datar.mensaje);
+                	 $("#localhost:8888").html(datar);
+                     if(datar.codigo == '1' || datar.codigo == '2'){
+                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
+                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                     	$('#mensajeRegistro').html(datar.mensaje);
+                     }else if(datar.codigo == '4' || datar.codigo == '6'){
+                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                     	$('#mensajeRegistro').html(datar.mensaje);
+                     }else if(datar.codigo == '0' || datar.codigo == '7'){
+                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                     	document.getElementById('botonImpr').style.display = 'block';//mostramos el boton de impresion y salir	
+                     	$('#mensajeRegistro').html(datar.mensaje);
+                     }else{
+                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                     	document.getElementById('botonSal').style.display = 'block';
+                     	$('#mensajeRegistro').html(datar.mensaje);
+                     	respuesta = datar;
                     	
-                    }else{
-                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
-                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                    	$('#mensajeRegistro').html(datar.mensaje);
                     }
                 }
             });
@@ -407,7 +410,6 @@ $(document).ready(function(){
 		            var valor=$("#paisNacimiento").val();
 			        var htmlEstados = "";
 					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
-						console.log("aqui");
 							estados = $.map(allData, function(item) {
 								htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
 							});
@@ -420,7 +422,12 @@ $(document).ready(function(){
 		        // Found a match, nothing to do
 		        if ( valid ) {
 		        	var valor=$("#paisNacimiento").val();
-//		            alert(valor);	
+//		           var htmlEstados = "";
+					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+						estados = $.map(allData, function(item) {
+							htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+						});
+				});	
 		          return;
 		        }
 		 
@@ -460,14 +467,11 @@ $(document).ready(function(){
 		$("#codigoPostal").focusout(
 			function() {
 				if (this.value.length >= 4) {
-					contentType: 'application/json',
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
-							console.log(data.result.state);
 							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();
-							console.log(est);
 							$("#estado").val(est);
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
@@ -525,7 +529,17 @@ $(document).ready(function(){
 					
 			});
 		});
-	
+		
+		
+		$(function() {
+			$("#btSalida").click(
+				function() {
+					var origenReg = $('#origen').val();	
+					window.location.href = "logout/"+origenReg;
+					
+			});
+		});
+		
 
 //Valida el formato correcto de la fecha
 		
@@ -534,6 +548,7 @@ $(document).ready(function(){
 			        return value.match(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
 			    },
 			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
+		
 		
 		//Valida el campo de numero de identificacion
 		var patron;
@@ -547,11 +562,24 @@ $(document).ready(function(){
                                    
                       return value.match(patron,'');
                },
-        "Por favor, proporcione el numero de identificaci&oacuten correcto.");     
-        
+        "Por favor, proporcione el numero de identificaci&oacuten correcto.");   
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
         	  return this.optional(element) || /^[a-z]+$/i.test(value);
         	}, "Por favor, proporcione solo letras."); 
 
+        
+//Nos manda al PDF
+		
+		$(function() {
+			$("#btImprimir").click(
+				function() {
+					window.open('comprobantepdf.htm?output=pdf','_blank');
+					
+				}
+			);
+		});
+        
+        
+        

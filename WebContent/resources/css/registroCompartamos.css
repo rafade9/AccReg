@@ -141,7 +141,7 @@ input[type="submit"] {
 }
 
 input[type="button"] {
-	height: 25px; 
+	height: 30px; 
     width: 90px;
 	background:#CA005D;
 	color: white;

@@ -10,6 +10,9 @@ public class Respuesta {
 	private String CLABE;
 	private String cuenta;
 	private String idOportunidad;
+	private String numTarjeta;
+	
+	private Persona persona;
 
 	public Integer getTipo() {
 		return tipo;
@@ -67,4 +70,21 @@ public class Respuesta {
 		this.idOportunidad = idOportunidad;
 	}
 
+	public String getNumTarjeta() {
+		return numTarjeta;
+	}
+
+	public void setNumTarjeta(String numTarjeta) {
+		this.numTarjeta = numTarjeta;
+	}
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+	
 }

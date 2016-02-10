@@ -1,9 +1,5 @@
 package com.gentera.cuentasn.service.impl;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +8,7 @@ import com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.RegistroService;
-import com.gentera.cuentasn.util.ComprobantePdf;
-import com.gentera.cuentasn.util.ListaBloqueoPdf;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
-import com.lowagie.text.DocumentException;
 
 @Service
 public class RegistroServiceImpl implements RegistroService {
@@ -44,6 +37,7 @@ public class RegistroServiceImpl implements RegistroService {
 				if(respuesta.getCodigo()==0){
 					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
 					
+					/*
 					//Se busca el número de tarjeta
 					CardNumbers[] cns = wsConnector.getTarjetas(respuesta.getIdBP());
 					logger.info("Se recuperaron " + cns.length + " tarjetas.");
@@ -53,6 +47,7 @@ public class RegistroServiceImpl implements RegistroService {
 							break;
 						}
 					}
+					*/
 					
 					respuesta.setPersona(persona);
 					

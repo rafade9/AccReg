@@ -307,7 +307,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				if(respuesta.getCodigo()==0){
 					respuesta.setIdBP(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBusinessPartnerIDCreated().toString());
 					respuesta.setCLABE(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getCLABEAccount().toString());
-					respuesta.setCuenta(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBankAccountContractID().toString());
+//					respuesta.setCuenta(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getBankAccountContractID().toString());
+					respuesta.setCuenta(respuesta.getCLABE().substring(6,17));
 					respuesta.setIdOportunidad(response.getMT_Level2AccountCreationResp_sync().getLevel2AccountCreationDataResponse().getOpportunityID().toString());
 				}
 			}

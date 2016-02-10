@@ -2,7 +2,6 @@
 //Fecha 18/01/2016
 //Mara Vazquez
 
-var respuesta ={};
 
 $(document).ready(function(){
 	
@@ -236,7 +235,6 @@ $(document).ready(function(){
                      }
             });
      	    	
-	    	console.log(JSON.stringify(jsonObj));
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',
@@ -250,14 +248,19 @@ $(document).ready(function(){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
-                    }else if(datar.codigo == '0' || datar.codigo == '4' || datar.codigo == '6' || datar.codigo == '7'){
+                    }else if(datar.codigo == '4' || datar.codigo == '6'){
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                     	$('#mensajeRegistro').html(datar.mensaje);
-                    	
+                    }else if(datar.codigo == '0' || datar.codigo == '7'){
+                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	document.getElementById('botonImpr').style.display = 'block';//mostramos el boton de impresion y salir	
+                    	$('#mensajeRegistro').html(datar.mensaje);
                     }else{
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                    	document.getElementById('botonSal').style.display = 'block';
                     	$('#mensajeRegistro').html(datar.mensaje);
                     	respuesta = datar;
  
@@ -422,6 +425,7 @@ $(document).ready(function(){
 		 
 		        // Found a match, nothing to do
 		        if ( valid ) {
+		        	
 		            var valor=$("#paisNacimiento").val();
 			        var htmlEstados = "";
 					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
@@ -532,7 +536,14 @@ $(document).ready(function(){
 			});
 		});
 	
-		
+		$(function() {
+			$("#btSalida").click(
+				function() {
+					var origenReg = $('#origen').val();	
+					window.location.href = "logout/"+origenReg;
+					
+			});
+		});
 		
 
 //Valida el formato correcto de la fecha
@@ -570,22 +581,11 @@ $(document).ready(function(){
 
 //Nos manda al PDF
 		
-		
-
 		$(function() {
 			$("#btImprimir").click(
 				function() {
-					$.ajax({
-			             url: './comprobantepdf',
-			             type: 'GET',
-			             data: { Persona: JSON.stringify(respuesta) },
-			             contentType: 'application/json; charset=utf-8',
-			             dataType: 'json',
-			             success: function () {              
-			             }
-			         });
-					window.open('comprobantepdf.htm?output=pdf&respuesta='+respuesta,'_blank');
-					respuesta.submit();	
+					window.open('comprobantepdf.htm?output=pdf','_blank');
+					
 				}
 			);
 		});

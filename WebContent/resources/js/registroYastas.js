@@ -4,6 +4,20 @@
 
 $(document).ready(function(){
 	
+	//Mensajes de respuesta
+	var mensajesYastas = [];
+	mensajesYastas[0] = "<p class='greenMsgClass'>Cuenta Creada con &Eacute;xito.</p><p class='blackMsgClass'>Realiza la  transacci&oacute;n de APERTURA DE CUENTA ingresando al men&uacute; Compartamos Banco de tu terminal.</p>";
+	mensajesYastas[1] = "<p class='blackMsgClass'>El Usuario no corresponde a la Sede</p>";
+	mensajesYastas[2] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>"
+	mensajesYastas[3] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesYastas[4] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesYastas[5] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesYastas[6] = "<p class='redMsgClass'>Transacci&oacute;n rechazada</p><p class='blackMsgClass'>Intente m&aacute;s tarde. Por favor imprima el ticket en su terminal seleccionando *22.</p>";
+	mensajesYastas[7] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *22.</p>";
+	mensajesYastas[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *11.</p>";
+	mensajesYastas[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	
 //Catalogo de paises
 	
 	var htmlPaises = "";

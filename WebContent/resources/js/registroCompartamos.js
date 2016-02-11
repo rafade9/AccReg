@@ -4,6 +4,20 @@
 
 $(document).ready(function(){
 	
+	//Mensajes de respuesta
+	var mensajesCompartamos = [];
+	mensajesCompartamos[0] = "<p class='greenMsgClass'>Cuenta Creada con &Eacute;xito.</p><p class='blackMsgClass'>Favor de Generar e Imprimir comprobante.</p>";
+	mensajesCompartamos[1] = "<p class='blackMsgClass'>El Usuario no corresponde a la Sede</p>";
+	mensajesCompartamos[2] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>"
+	mensajesCompartamos[3] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesCompartamos[4] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesCompartamos[5] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesCompartamos[6] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Intente m&aacute;s tarde.</p>";
+	mensajesCompartamos[7] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p>";
+	mensajesCompartamos[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Genera e imprime Carta de Personas Bloquedas.</p>";
+	mensajesCompartamos[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesCompartamos[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	
 //Catalogo de paises
 	
 	var htmlPaises = "";

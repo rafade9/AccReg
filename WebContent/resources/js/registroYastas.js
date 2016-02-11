@@ -174,13 +174,13 @@ $(document).ready(function(){
 	              required: "Por favor elige un Lugar"
 	         		},
 	        genero: {
-	        	  required: "Por favor elige un genero"
+	        	  required: "Por favor elige un g&eacute;nero"
 	         		},
 	        sms: {
-	        	  required: "Elige si desean envio SMS"
+	        	  required: "Elige si desean env&iacute;o SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el n&uacutemero de telefono",
+	        	required: "Por favor proporcione el n&uacutemero de tel&eacute;fono",
 	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
 	        	minlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"

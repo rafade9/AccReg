@@ -19,7 +19,6 @@
 	
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
 	    <bean class="com.gentera.cuentasn.controller.ComprobantePdfController" />
-	    <bean class="com.gentera.cuentasn.controller.ListaBloqPdfController" />
 	
 	
 	  <bean class="org.springframework.web.servlet.view.XmlViewResolver">

@@ -231,7 +231,6 @@ $(document).ready(function(){
                      }
             });
      	    	
-	    	console.log(jsonObj);
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',
@@ -465,7 +464,6 @@ $(document).ready(function(){
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
 							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();
-							console.log(est);
 							$("#estado").val(est);
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);

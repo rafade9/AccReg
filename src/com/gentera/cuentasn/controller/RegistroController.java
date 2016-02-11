@@ -1,5 +1,8 @@
 package com.gentera.cuentasn.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,10 +42,13 @@ public class RegistroController {
 	 * @return
 	 */
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
-	public ResponseEntity<Respuesta> registrar(@RequestBody Persona persona) {
+	public ResponseEntity<Respuesta> registrar(HttpServletRequest request, HttpServletResponse response,@RequestBody Persona persona) {
 		try{
 			logger.info("Entra a metodo registro");
 			Respuesta respuesta = registroService.registrar(persona);
+			
+			request.getSession().setAttribute("respuesta", respuesta);
+			
 			return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		}catch(Exception e){
 			logger.error(e);
@@ -85,4 +91,5 @@ public class RegistroController {
 		return new ResponseEntity<Persona>(HttpStatus.OK);
  
 	}
+	
 }

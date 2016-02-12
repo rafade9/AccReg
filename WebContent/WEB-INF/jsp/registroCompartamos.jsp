@@ -60,7 +60,7 @@
 <body>
 <div id="main">
   <div id="top">
-    <div id="logo"><img src="resources/img/logo_banco.png"></a></div>
+    <div id="logo"><img src="resources/img/logo_banco.png"></div>
   </div>
    <div class="cf"></div>
   <div id="portalContent">
@@ -160,7 +160,7 @@
 
 <!--Mensaje que se enviaran como respuesta del servicio de registro  -->
 	<div id="principalMensaje" style='display:none;' align="center">
-		<div id="mensajeRegistro"  class="tituloMango"></div><br><br><br>
+		<div id="mensajeRegistro"></div><br><br><br>
 			<input type="hidden" id="origen" name="origen" value="compartamos">
 			<div id="botonImpr"  class="tituloMango" style='display:none;'>
 				<input type="button" value=Imprimir id="btImprimir"/>
@@ -168,7 +168,7 @@
 			</div>
 			<div id="botonSal"  class="tituloMango" style='display:none;'>
 			<input type="button" value=Salir id="btCancelar" />
-			</div>
+		</div>
 	</div>
 <!--Fin de mensaje-->
 

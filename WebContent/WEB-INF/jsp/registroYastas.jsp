@@ -161,9 +161,11 @@
 
 <!--Mensaje que se enviaran como respuesta del servicio de registro  -->
 	<div id="principalMensaje" style='display:none;' align="center">	
-		<div id="mensajeRegistro"  class="tituloMango"></div><br><br><br>
-			<input type="hidden" id="origen" name="origen" value="yastas">
-			<input type="button" value=Salir id="btSalir" />
+		<div id="mensajeRegistro"></div><br><br><br>
+			<div id="botonSalir"  class="tituloMango" style='display:none;'>
+				<input type="hidden" id="origen" name="origen" value="yastas">
+				<input type="button" value=Salir id="btSalir" />
+		    </div>
 	</div>
 <!--Fin de mensaje-->
 

@@ -25,7 +25,7 @@ public class ComprobantePdfController extends AbstractController{
 
 		Respuesta respuesta = (Respuesta)request.getSession().getAttribute("respuesta");
 
-		if(!respuesta.equals(null)){
+		if(respuesta.getPersona() != null){
 
 			Persona persona = new Persona();
 			persona = respuesta.getPersona();
@@ -34,7 +34,7 @@ public class ComprobantePdfController extends AbstractController{
 
 			return new ModelAndView("PdfRevenueSummary","respuesta",respuesta);
 		}else{
-			return new ModelAndView("RevenueSummary","respuesta",respuesta);
+			return null;
 		}
 	}
 

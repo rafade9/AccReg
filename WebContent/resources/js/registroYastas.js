@@ -1,8 +1,22 @@
-//Js para el JSP registroCompartamos
+//Js para el JSP registroYastas
 //Fecha 22/01/2016
 //Mara Vazquez
 
 $(document).ready(function(){
+	
+	//Mensajes de respuesta
+	var mensajesYastas = [];
+	mensajesYastas[0] = "<p class='greenMsgClass'>Cuenta Creada con &Eacute;xito.</p><p class='blackMsgClass'>Realiza la  transacci&oacute;n de APERTURA DE CUENTA ingresando al men&uacute; Compartamos Banco de tu terminal.</p>";
+	mensajesYastas[1] = "<p class='blackMsgClass'>El Usuario no corresponde a la Sede</p>";
+	mensajesYastas[2] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesYastas[3] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesYastas[4] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesYastas[5] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesYastas[6] = "<p class='redMsgClass'>Transacci&oacute;n rechazada</p><p class='blackMsgClass'>Intente m&aacute;s tarde. Por favor imprima el ticket en su terminal seleccionando *22.</p>";
+	mensajesYastas[7] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *22.</p>";
+	mensajesYastas[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *11.</p>";
+	mensajesYastas[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
 	
 //Catalogo de paises
 	
@@ -239,24 +253,17 @@ $(document).ready(function(){
                 url: "./registro",
                 success: function(datar){
                     $("#localhost:8888").html(datar);
-                    if(datar.codigo == '1' || datar.codigo == '2'){
+                    if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10' ){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                    	$('#mensajeRegistro').html(datar.mensaje);
-                    	console.log("Bien");
-                    }
-                    else if(datar.codigo== '0'){
-                    	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
-                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                    	$('#mensajeRegistro').html(datar.mensaje + "Realiza la  transacci&oacute;n de DEPOSITO INICIAL, ingresando al menu Compartamos Banco de tu terminal ");
-                    	
+                    	document.getElementById('botonSalir').style.display = 'none';
                     }
                     else{
                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                    	$('#mensajeRegistro').html(datar.mensaje);
-                    	
+                    	document.getElementById('botonSalir').style.display = 'block';
                     }
+                    $('#mensajeRegistro').html(mensajesYastas[datar.codigo]);
                 }
             });
 	            return false; 

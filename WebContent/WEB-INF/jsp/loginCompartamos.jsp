@@ -15,7 +15,7 @@
 <body>
 <div id="main">
    <div id="top">
-      <div id="logo"><a href="http://www.compartamos.com.mx/"><img src="resources/img/logo_banco.png"></a></div>
+      <div id="logo"><img src="resources/img/logo_banco.png"></div>
    		<div class="cf"></div>
   			<div id="portalContent" > 
    					<p class="tituloMango"><br><br>

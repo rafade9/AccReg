@@ -4,6 +4,20 @@
 
 $(document).ready(function(){
 	
+	//Mensajes de respuesta
+	var mensajesCompartamos = [];
+	mensajesCompartamos[0] = "<p class='greenMsgClass'>Cuenta Creada con &Eacute;xito.</p><p class='blackMsgClass'>Favor de Generar e Imprimir comprobante.</p>";
+	mensajesCompartamos[1] = "<p class='blackMsgClass'>El Usuario no corresponde a la Sede</p>";
+	mensajesCompartamos[2] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesCompartamos[3] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesCompartamos[4] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesCompartamos[5] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesCompartamos[6] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Intente m&aacute;s tarde.</p>";
+	mensajesCompartamos[7] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p>";
+	mensajesCompartamos[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Genera e imprime Carta de Personas Bloquedas.</p>";
+	mensajesCompartamos[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
+	mensajesCompartamos[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	
 //Catalogo de paises
 	
 	var htmlPaises = "";
@@ -53,7 +67,8 @@ $(document).ready(function(){
 		rules: {
 	    	folio: {
 		       required: true,
-		       number: true
+		       number: true,
+		       minlength: 5
 		      },
 	    	tipoIdentificacion: {
 	        required: true,
@@ -239,27 +254,19 @@ $(document).ready(function(){
                 url: "./registro",
                 success: function(datar){
                 	 $("#localhost:8888").html(datar);
-                     if(datar.codigo == '1' || datar.codigo == '2'){
+                     if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10'){
                      	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                      	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                     	$('#mensajeRegistro').html(datar.mensaje);
-                     }else if(datar.codigo == '4' || datar.codigo == '6'){
-                     	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
-                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
-                     	$('#mensajeRegistro').html(datar.mensaje);
-                     }else if(datar.codigo == '0' || datar.codigo == '7'){
+                     }else if(datar.codigo == '0' || datar.codigo == '8'){
                      	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                      	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                      	document.getElementById('botonImpr').style.display = 'block';//mostramos el boton de impresion y salir	
-                     	$('#mensajeRegistro').html(datar.mensaje);
                      }else{
                      	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                      	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                      	document.getElementById('botonSal').style.display = 'block';
-                     	$('#mensajeRegistro').html(datar.mensaje);
-                     	respuesta = datar;
-                    	
                     }
+                   $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo]);
                 }
             });
 	            return false; 

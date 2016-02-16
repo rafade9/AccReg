@@ -52,4 +52,27 @@
         <property name="captchaService" ref="miCaptchaService" />
     </bean>
  
+ 	<!-- Tarea programada para archivo de Operadores Yastas -->
+ 	
+ 	<bean id="archivoOperadoresTask" class="com.gentera.cuentasn.controller.OperadoresYastasController" />
+ 	
+ 	<bean id="schedulerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+ 		<property name="targetObject" ref="archivoOperadoresTask"></property>
+   		<property name="targetMethod" value="obtenerOperadores"></property>
+   		<property name="concurrent" value="false"></property>
+	</bean>
+ 	
+ 	<bean id="timerCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="schedulerJob"></property>
+        <property name="cronExpression" value="0 0 18 ? * MON-FRI"></property>
+	</bean>
+ 	
+ 	<bean id="GiaScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="timerCronTrigger"></ref>
+            </list>
+        </property>
+	</bean>
+ 	
 </beans>

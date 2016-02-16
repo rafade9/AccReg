@@ -18,7 +18,7 @@
 <body>
 <div id="main">
   <div id="top">
-    <div id="logo"><a href="http://www.yastas.com/"><img src="resources/img/logo.png"></a></div>
+    <div id="logo"><img src="resources/img/logo.png"></div>
   </div>
    <div class="cf"></div>
    <div id="portalContent" >
@@ -35,16 +35,16 @@
 		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username" class="texGris09_13">
 		<div class="clear"> </div>
 		
-	<table>
+		<table>
 			<tr>
 				<td style="border: 1px solid #7F9DB9;"><img alt="Captcha"
 					src="captcha.htm"></td>
 				<td width="31"></td>
 			</tr>
 		</table>
+		<label class="texGris09_13">Ingrese la secuencia:</label>
 		<table border="0" cellpadding="0" cellspacing="4">
 			<tr>
-				<label class="texGris09_13">Ingrese la secuencia:</label>
 				<td valign="top"><input type="text" style="width: 173px;"
 					name="captcha" id="captcha"
 					class="requerido captcha captchaBloquear"></td>

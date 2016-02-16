@@ -40,12 +40,9 @@ public class ComprobantePdfView extends AbstractPdfView{
 		logger.info("*******Armando Pdf de comprobante*******");
 
 		Respuesta respuesta = (Respuesta)model.get("respuesta");
-		//		respuesta.setCodigo(7);
 
 		Persona persona = new Persona();
 		persona = respuesta.getPersona();
-
-		System.out.println(persona.getPrimerNombre());
 
 		document.open();
 
@@ -53,7 +50,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 			System.out.println(respuesta.getMensaje());
 
-			//Tabla con informaci�n		
+			//Tabla con información	
 			PdfPTable tabla = new PdfPTable(1);
 			tabla.setWidthPercentage(100);
 			PdfPTable tablaInfCuenta = new PdfPTable(2);
@@ -156,16 +153,16 @@ public class ComprobantePdfView extends AbstractPdfView{
 			numClabe.setExtraParagraphSpace(5);
 			numClabe.setBorder(0);
 
-			//Tarjeta
-//			PdfPCell tarjeta = new PdfPCell(new Phrase("Tarjeta:", letraM));
-//			tarjeta.setExtraParagraphSpace(5);
-//			tarjeta.setBorder(0);
-//
-//			PdfPCell numTar = new PdfPCell(new Phrase(Util.enmascaraTarj(respuesta.getNumTarjeta()), letraM));
-//			numTar.setExtraParagraphSpace(5);
-//			numTar.setBorder(0);
+			//Folio de la tarjeta
+			PdfPCell folioTar = new PdfPCell(new Phrase("Folio:", letraM));
+			folioTar.setExtraParagraphSpace(5);
+			folioTar.setBorder(0);
 
-			//Folio Operaci�n
+			PdfPCell numFolio = new PdfPCell(new Phrase(persona.getFolio(), letraM));
+			numFolio.setExtraParagraphSpace(5);
+			numFolio.setBorder(0);
+
+			//Folio Operación
 			PdfPCell folio = new PdfPCell(new Phrase("Folio de Operación:", letraM));
 			folio.setExtraParagraphSpace(5);
 			folio.setBorder(0);
@@ -182,8 +179,8 @@ public class ComprobantePdfView extends AbstractPdfView{
 			tablaInfCuenta.addCell(numCuenta);
 			tablaInfCuenta.addCell(clabe);
 			tablaInfCuenta.addCell(numClabe);
-//			tablaInfCuenta.addCell(tarjeta);
-//			tablaInfCuenta.addCell(numTar);
+			tablaInfCuenta.addCell(folioTar);
+			tablaInfCuenta.addCell(numFolio);
 			tablaInfCuenta.addCell(folio);
 			tablaInfCuenta.addCell(numFol);
 
@@ -211,7 +208,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 			document.close();
 
-		}else if(respuesta.getCodigo()==7){
+		}else if(respuesta.getCodigo()==8){
 
 			//Tabla con logos		
 			PdfPTable tablaP = new PdfPTable(2);

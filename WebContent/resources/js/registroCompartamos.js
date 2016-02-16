@@ -122,7 +122,7 @@ $(document).ready(function(){
 	         },
 	         codigoPostal: {
 	             required: true,
-	             minlength: 5,
+	             minlength: 4,
 				 maxlength: 5,
 				 number: true
 	         },
@@ -463,7 +463,90 @@ $(document).ready(function(){
 		      $( "#combobox" ).toggle();
 		    });
 		  });	
-	
+
+
+		  
+//		  solo numeros		  
+		  $("#folio").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+					  // Permite: Ctrl+A
+					  (e.keyCode == 65 && e.ctrlKey === true) ||
+					  // Permite: home, end, left, right
+					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+				  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+			  }
+		  });
+		  
+		  
+		  $("#telefono").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+					  // Permite: Ctrl+A
+					  (e.keyCode == 65 && e.ctrlKey === true) ||
+					  // Permite: home, end, left, right
+					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+				  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+			  }
+		  });
+
+		  
+		  $("#codigoPostal").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+					  // Permite: Ctrl+A
+					  (e.keyCode == 65 && e.ctrlKey === true) ||
+					  // Permite: home, end, left, right
+					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+				  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+			  }
+		  });
+		  
+		  
+		  $("#numExterior").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+					  // Permite: Ctrl+A
+					  (e.keyCode == 65 && e.ctrlKey === true) ||
+					  // Permite: home, end, left, right
+					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+				  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+			  }
+		  });
+		  
+		  
+		  $("#numInterior").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+					  // Permite: Ctrl+A
+					  (e.keyCode == 65 && e.ctrlKey === true) ||
+					  // Permite: home, end, left, right
+					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+				  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+			  }
+		  });
+
+
 });
 
 

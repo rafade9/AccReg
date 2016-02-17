@@ -106,8 +106,10 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//ID BP Empleado ---Viene de CRM
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
-			bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
+//			bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
+			bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
 			identifiers.setBusinessPartnerID(bpEmpleado);
+			logger.info("Id Empleado: E000022012");
 			
 			//ID Comercio --- Propio
 			CommercelD commerce = new CommercelD();
@@ -297,6 +299,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			if(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()!=null){
 				String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode().toString();
+				logger.error("Respuesta de CRM: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
 				respuesta.setCodigo(Integer.valueOf(code));
 			}
 			else{

@@ -230,6 +230,7 @@ $(document).ready(function(){
 	         }
 	    },
 	    submitHandler: function() {	    	
+	    	jQuery("#enviar").attr('disabled',true);
 	    	jsonObj = {}; 
 	    	
             $(".inputText").each(function(){

@@ -230,7 +230,8 @@ $(document).ready(function(){
 	        	 maxlength: "El n&uacutemero interior debe ir a 10 d&iacute;gitos"
 	         }
 	    },
-	    submitHandler: function() {	    	
+	    submitHandler: function() {
+	    	jQuery("#enviar").attr('disabled',true);
 	    	jsonObj = {}; 
 	    	
             $(".inputText").each(function(){

@@ -8,8 +8,7 @@ $("#formularioCompartamos").validate({
 	onkeyup: false,
     rules: {
       username: {
-        required: true,
-        lettersonly: true
+        required: true
       },
       password: {
         required: true,
@@ -18,8 +17,7 @@ $("#formularioCompartamos").validate({
     },
     messages: {
       username: {
-    	  required: "Por favor proporcione su usuario",
-    	  lettersonly: "Por favor s�lo proporcione letras"
+    	  required: "Por favor proporcione su usuario"
       },
 
       password: {

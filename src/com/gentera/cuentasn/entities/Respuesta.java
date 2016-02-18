@@ -1,6 +1,10 @@
 package com.gentera.cuentasn.entities;
 
-public class Respuesta {
+import java.io.Serializable;
+
+public class Respuesta implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer tipo;
 	private Integer codigo;

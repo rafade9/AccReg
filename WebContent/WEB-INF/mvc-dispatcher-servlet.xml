@@ -53,18 +53,16 @@
     </bean>
  
  	<!-- Tarea programada para archivo de Operadores Yastas -->
- 	
- 	<bean id="archivoOperadoresTask" class="com.gentera.cuentasn.controller.OperadoresYastasController" />
- 	
- 	<bean id="schedulerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
- 		<property name="targetObject" ref="archivoOperadoresTask"></property>
-   		<property name="targetMethod" value="obtenerOperadores"></property>
-   		<property name="concurrent" value="false"></property>
+ 	 	
+ 	<bean id="schedulerJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+ 		<property name="jobClass" value="com.gentera.cuentasn.service.impl.OperadoresYastasServiceImpl"></property>
 	</bean>
  	
  	<bean id="timerCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="schedulerJob"></property>
-        <property name="cronExpression" value="0 0 18 ? * MON-FRI"></property>
+<!--         <property name="cronExpression" value="0 45 15 ? * *"></property> -->
+<!-- 		<property name="cronExpression" value="0 * * * * ?"></property> -->
+		<property name="cronExpression" value="0 0/5 * * * ?"></property>
 	</bean>
  	
  	<bean id="GiaScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.gentera.cuentasn.service.impl;
 
 import java.io.BufferedReader;
@@ -16,13 +19,32 @@ import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.google.gson.Gson;
 
+/**
+ * Clase que implementa LeerCatalogos para lectura de archivos que alimentan los catalogos
+ * @author Rafael Delgadillo
+ * @version 1.0
+ */
 @Service
 public class LeerCatalogosImpl implements LeerCatalogos {
 	
+	/**
+	 * Recibe referencia de contextp
+	 */
 	ClassLoader loader = LeerCatalogosImpl.class.getClassLoader();
+	
+	/**
+	 * Clase para manejo de JSON
+	 */
 	private static Gson gson = new Gson();
+	
+	/**
+	 * Clase para manejo de properties
+	 */
 	private static Properties prop = new Properties();
 
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#leerCsvPaises()
+	 */
 	@Override
 	public List<Pais> leerCsvPaises() {
 		String csvPaises = LeerCatalogosImpl.class.getClassLoader().getResource("resources/csvPaises.csv").getPath().replaceAll("%20", " ");
@@ -62,11 +84,17 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 		return paises;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#leerCsvEstados()
+	 */
 	@Override
 	public List<Estado> leerCsvEstados() {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#getEstadosByIdPais(java.lang.String)
+	 */
 	@Override
 	public Estado[] getEstadosByIdPais(String idPais) {
 		try{

@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.gentera.cuentasn.service.impl;
 
 import org.apache.log4j.Logger;
@@ -10,21 +13,37 @@ import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.RegistroService;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
+/**
+ * Clase que implementa RegistroService para realizar el envío de información
+ * hacia el web service client
+ * 
+ * @author Rafael Delgadillo
+ * @version 1.0
+ */
 @Service
 public class RegistroServiceImpl implements RegistroService {
-	
+
+	/**
+	 * Log
+	 */
 	final static Logger logger = Logger.getLogger(RegistroServiceImpl.class);
-	
+
+	/**
+	 * Recibe referencia de cliente
+	 */
 	@Autowired
 	WebServiceConnector wsConnector;
 
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.RegistroService#registrar(com.gentera.cuentasn.entities.Persona)
+	 */
 	@Override
-	public Respuesta registrar(Persona persona) throws Exception{
+	public Respuesta registrar(Persona persona) throws Exception {
 		Respuesta respuesta = new Respuesta();
-		try{
-			//Se realiza la conexion
+		try {
+			// Se realiza la conexion
 			respuesta = wsConnector.sendData(persona);
-			if(respuesta!=null && respuesta.getCodigo()!=null){
+			if (respuesta != null && respuesta.getCodigo() != null) {
 				logger.info("La respuesta trae codigo de retorno");
 				System.out.println("---DATOS DE RESPUESTA---");
 				System.out.println("BP: " + respuesta.getIdBP());
@@ -32,86 +51,88 @@ public class RegistroServiceImpl implements RegistroService {
 				System.out.println("Clabe: " + respuesta.getCLABE());
 				System.out.println("Cuenta: " + respuesta.getCuenta());
 				System.out.println("Codigo de retorno: " + respuesta.getCodigo());
-		
-				if(respuesta.getCodigo()==0){
+
+				if (respuesta.getCodigo() == 0) {
 					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
-					
+
 					/*
-					//Se busca el número de tarjeta
-					CardNumbers[] cns = wsConnector.getTarjetas(respuesta.getIdBP());
-					logger.info("Se recuperaron " + cns.length + " tarjetas.");
-					for(CardNumbers cn : cns){
-						if(validaNumeroTarjeta(cn.getCardNumber())){
-							respuesta.setNumTarjeta(String.valueOf(cn.getCardNumber()));
-							break;
-						}
-					}
-					*/
-					
+					 * //Se busca el número de tarjeta CardNumbers[] cns =
+					 * wsConnector.getTarjetas(respuesta.getIdBP());
+					 * logger.info("Se recuperaron " + cns.length + " tarjetas."
+					 * ); for(CardNumbers cn : cns){
+					 * if(validaNumeroTarjeta(cn.getCardNumber())){
+					 * respuesta.setNumTarjeta(String.valueOf(cn.getCardNumber()
+					 * )); break; } }
+					 */
+
 					respuesta.setPersona(persona);
-					
+
 				}
-//				else if(respuesta.getCodigo()==1 || respuesta.getCodigo()==2){
-//					respuesta.setMensaje("El folio de la Tarjeta es inv&aacute;lido. Capture uno diferente.");
-//				}
-//				else if(respuesta.getCodigo()==7){
-//					respuesta.setMensaje("El solicitante se encuentra en listas de bloqueo. Imprimir Carta de Lista de Personas Bloqueadas (En construcci&oacute;n).");
-//				}
-//				else {
-//					respuesta.setMensaje("Su operaci&oacute;n no se pudo completar. Intente m&aacute;s tarde.");
-//				}
+				// else if(respuesta.getCodigo()==1 ||
+				// respuesta.getCodigo()==2){
+				// respuesta.setMensaje("El folio de la Tarjeta es
+				// inv&aacute;lido. Capture uno diferente.");
+				// }
+				// else if(respuesta.getCodigo()==7){
+				// respuesta.setMensaje("El solicitante se encuentra en listas
+				// de bloqueo. Imprimir Carta de Lista de Personas Bloqueadas
+				// (En construcci&oacute;n).");
+				// }
+				// else {
+				// respuesta.setMensaje("Su operaci&oacute;n no se pudo
+				// completar. Intente m&aacute;s tarde.");
+				// }
 			}
-				
-//			
-//			Random random = new Random();
-//			Integer valor = random.nextInt(3);
-//			
-//			switch(valor){
-//			case 0:
-//				respuesta.setCodigo(0);
-//				respuesta.setMensaje("Proceso satisfactorio");
-//				break;
-//			
-//			case 1:
-//				respuesta.setCodigo(0);
-//				respuesta.setMensaje("El folio de la Tarjeta es invalido");
-//				break;
-//				
-//			case 2:
-//				respuesta.setCodigo(0);
-//				respuesta.setMensaje("El folio de la Tarjeta ya existe");
-//				break;
-//			}
-		}catch(Exception e){
+
+			//
+			// Random random = new Random();
+			// Integer valor = random.nextInt(3);
+			//
+			// switch(valor){
+			// case 0:
+			// respuesta.setCodigo(0);
+			// respuesta.setMensaje("Proceso satisfactorio");
+			// break;
+			//
+			// case 1:
+			// respuesta.setCodigo(0);
+			// respuesta.setMensaje("El folio de la Tarjeta es invalido");
+			// break;
+			//
+			// case 2:
+			// respuesta.setCodigo(0);
+			// respuesta.setMensaje("El folio de la Tarjeta ya existe");
+			// break;
+			// }
+		} catch (Exception e) {
 			logger.error(e.toString());
 			throw new Exception(e);
 		}
-		
+
 		return respuesta;
 	}
 
 	@Override
 	public String pruebaWs() {
-		try{
+		try {
 			logger.info("Va a consumir servicio");
 			CardNumbers[] cns = wsConnector.getTarjetas("780125");
 			logger.info("Consume servicio");
 			logger.info("Se encontraron " + cns.length + " tarjetas");
-			for(CardNumbers cn : cns){
-				if(validaNumeroTarjeta(cn.getCardNumber())){
+			for (CardNumbers cn : cns) {
+				if (validaNumeroTarjeta(cn.getCardNumber())) {
 					System.out.println("Tarjeta encontrada");
 				}
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
-	private boolean validaNumeroTarjeta(Long numero){
+
+	private boolean validaNumeroTarjeta(Long numero) {
 		String numStr = numero.toString().substring(7, 9);
-		if(Integer.valueOf(numStr)>80 && Integer.valueOf(numStr)<99)
+		if (Integer.valueOf(numStr) > 80 && Integer.valueOf(numStr) < 99)
 			return true;
 		else
 			return false;

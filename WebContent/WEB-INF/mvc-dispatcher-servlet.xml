@@ -62,7 +62,8 @@
         <property name="jobDetail" ref="schedulerJob"></property>
 <!--         <property name="cronExpression" value="0 45 15 ? * *"></property> -->
 <!-- 		<property name="cronExpression" value="0 * * * * ?"></property> -->
-		<property name="cronExpression" value="0 0/5 * * * ?"></property>
+<!-- 		<property name="cronExpression" value="0 0/5 * * * ?"></property> -->
+		<property name="cronExpression" value="0 0 3 ? * *"></property>
 	</bean>
  	
  	<bean id="GiaScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

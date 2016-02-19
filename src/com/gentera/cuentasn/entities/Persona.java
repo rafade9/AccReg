@@ -10,7 +10,6 @@ import java.io.Serializable;
  * @author Rafael Delgadillo
  * @version 1.0
  */
-public class Persona {
 
 public class Persona implements Serializable{
 

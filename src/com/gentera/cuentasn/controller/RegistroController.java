@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.gentera.cuentasn.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,33 +21,31 @@ import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.RegistroService;
 
+/**
+ * Clase que expone los servicios rest para pantallas y registro de información de cuentas
+ * @author Rafael Delgadillo
+ * @version 1.0
+ */
 @Controller
 public class RegistroController {
 	
 	final static Logger logger = Logger.getLogger(RegistroController.class);
 	
+	/**
+	 * Referencia de capa de servicio 
+	 */
 	@Autowired
 	RegistroService registroService;
 
-	/**
-	 * Temporal
-	 * @return
-	 */
-	@RequestMapping(value = "/consulta", method = RequestMethod.GET)
-	public ResponseEntity<Persona> getPersona() {
-		Persona persona = new Persona();
-		return new ResponseEntity<Persona>(persona, HttpStatus.OK);
-	}
 
 	/**
 	 * Servicio para registrar los datos de la persona
-	 * @param persona
-	 * @return
+	 * @param persona los datos a registrar
+	 * @return respuesta la informacion a mostrar al usuario
 	 */
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
 	public ResponseEntity<Respuesta> registrar(HttpServletRequest request, HttpServletResponse response,@RequestBody Persona persona) {
 		try{
-			logger.info("Entra a metodo registro");
 			Respuesta respuesta = registroService.registrar(persona);
 			
 			request.getSession().setAttribute("respuesta", respuesta);
@@ -60,7 +61,7 @@ public class RegistroController {
 	}
 
 	/**
-	 * Temporal
+	 * Servicio para mostrar pantalla de registro compartamos
 	 * @param model
 	 * @return
 	 */
@@ -74,21 +75,17 @@ public class RegistroController {
  
 	}
 	
+	/**
+	 * Servicio para mostrar pantalla de registro Yastas
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/registroYastas", method = RequestMethod.GET)
 	public String registroYastas(ModelMap model) {
-		System.out.println("Entra a registro Yastas");
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
 			return "redirect:/loginYastas";
 		}
 		return "registroYastas";
- 
-	}
-	
-	@RequestMapping(value = "/registroPrueba", method = RequestMethod.GET)
-	public ResponseEntity<Persona> registroPrueba() {
-		registroService.pruebaWs();
-		System.out.println("Entra a registro prueba");
-		return new ResponseEntity<Persona>(HttpStatus.OK);
  
 	}
 	

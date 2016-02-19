@@ -202,7 +202,7 @@ $(document).ready(function(){
 	             },
 	        codigoPostal: {
 	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s�lo n�meros"
+	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
@@ -565,12 +565,12 @@ $(document).ready(function(){
                                    if($('input:radio[name=tipoIdentificacion]:checked').val() == 'FS0002'){
                                           patron = /^[a-zA-Z0-9]{9}$/;
                                    }else{
-                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
+                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}[0-3]{1}[0-9]{1}[h-m|H-M]{1}[0-9]{3}$/;
                                    }
                                    
                       return value.match(patron,'');
                },
-        "Por favor, proporcione el numero de identificaci&oacuten correcto.");   
+        "Por favor, proporcione el numero de identificaci&oacuten correcto2.");   
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {

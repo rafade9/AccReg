@@ -30,7 +30,7 @@
 		<authentication-provider>
 			<user-service>
 				<user name="compartamos" password="12345678" authorities="ROLE_USER" />
-				<user name="juan.mendoza" password="juan123" authorities="ROLE_ADMIN" />
+				<user name="eliana" password="87654321" authorities="ROLE_ADMIN" />
 			</user-service>
 		</authentication-provider>
 		<authentication-provider ref="yastasAuthenticationProvider" />

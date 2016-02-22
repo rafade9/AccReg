@@ -556,5 +556,5 @@ $(document).ready(function(){
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
-        	  return this.optional(element) || /^[a-z]+$/i.test(value);
+        	  return this.optional(element) || /^[a-zñÑ]+$/i.test(value);
         	}, "Por favor, proporcione solo letras."); 

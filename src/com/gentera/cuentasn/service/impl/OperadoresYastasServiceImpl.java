@@ -8,7 +8,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.stereotype.Service;
 
-import com.gentera.cuentasn.service.OperadoresYastasService;
 import com.gentera.cuentasn.taks.ArchivoOperadoresTask;
 import com.gentera.cuentasn.util.OperadoresArchivo;
 
@@ -22,7 +21,7 @@ public class OperadoresYastasServiceImpl implements Job{
 		
 		logger.info("Entrando a tarea programa de carga Operadores Yastas");
 		
-		List<String> operadores = ArchivoOperadoresTask.obtenerOperadores();
+		List<String> operadores = ArchivoOperadoresTask.obtenerOperadores("2");
 
 		if(operadores != null){
 			

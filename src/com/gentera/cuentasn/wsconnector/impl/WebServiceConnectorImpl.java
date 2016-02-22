@@ -12,6 +12,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
 import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_BancaMovil_Query_BP_CardStub;
@@ -125,13 +126,23 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			Identifiers identifiers = new Identifiers();
 			// ID Oficina ---Viene de CRM
 			OrganisationalCentreID officeId = new OrganisationalCentreID();
-			officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
+			
+			
+			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
+				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
+			}else{
+				officeId.setOrganisationalCentreID(new Token("1037")); // Poza Rica
+			}
+			
 			identifiers.setServiceOfficeID(officeId);
 
 			// ID BP Empleado ---Viene de CRM
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
-			bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-			// bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
+			}else{
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+			}
 			identifiers.setBusinessPartnerID(bpEmpleado);
 			logger.info("Id Empleado: E000022012");
 

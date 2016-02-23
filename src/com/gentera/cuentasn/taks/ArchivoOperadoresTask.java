@@ -14,6 +14,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.gentera.cuentasn.util.Properties;
+import com.gentera.cuentasn.util.Util;
 
 public class ArchivoOperadoresTask {
 
@@ -87,7 +88,7 @@ public class ArchivoOperadoresTask {
 					}
 
 					fecha+=anio;
-					archivo = "OperadoresYastasN2" + fecha+".txt";
+					archivo = Properties.getProp("nombreArchivo") + fecha+".txt";
 					fichero = new File(Properties.getProp("fileOperadores")+archivo);
 					System.out.println(fichero);
 				}else{
@@ -114,7 +115,9 @@ public class ArchivoOperadoresTask {
 				b = new BufferedReader(f);
 				try {
 					while((cadena = b.readLine())!=null) {
-						operadores.add(cadena);
+						if(Util.isNumeric(cadena)){
+							operadores.add(cadena);
+						}
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

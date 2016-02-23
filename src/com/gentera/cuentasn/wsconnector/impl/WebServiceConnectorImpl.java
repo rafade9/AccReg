@@ -246,7 +246,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			bp.setRegionBirth(regionBirth);
 
 			/**
-			 * Entidad nacimiento
+			 * Pais nacimiento
 			 */
 			CountryCode countryCode = new CountryCode();
 			// countryCode.setCountryCode(new
@@ -302,7 +302,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			addressData.setCountryName(pais);
 			// Estado
 			RegionCode regionCode = new RegionCode();
-			regionCode.setRegionCode(new Token("AGS"));
+			regionCode.setRegionCode(new Token(persona.getEstado()));
 			addressData.setRegionCode(regionCode);
 			// Municipio o Delegacion
 			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion());

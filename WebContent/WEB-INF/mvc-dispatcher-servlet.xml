@@ -20,7 +20,7 @@
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
 	    <bean class="com.gentera.cuentasn.controller.ComprobantePdfController" />
 	
-	
+	<!-- Definicion de PDFs Mara Vazquez Cruz-->
 	  <bean class="org.springframework.web.servlet.view.XmlViewResolver">
 	   <property name="location">
 	       <value>/WEB-INF/spring-pdf-views.xml</value>
@@ -38,6 +38,8 @@
 		</property>
 	</bean>
 	
+	<!-- Termina definicion de PDFs -->
+	
 	<!--Definicion del mapeo de las solicitudes -->
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -52,7 +54,9 @@
         <property name="captchaService" ref="miCaptchaService" />
     </bean>
  
- 	<!-- Tarea programada para archivo de Operadores Yastas -->
+ 
+ 
+	<!-- Tarea programada para archivo de Operadores Yastas Mara Vázquez Cruz-->
  	 	
  	<bean id="schedulerJob" class="org.springframework.scheduling.quartz.JobDetailBean">
  		<property name="jobClass" value="com.gentera.cuentasn.service.impl.OperadoresYastasServiceImpl"></property>
@@ -60,10 +64,10 @@
  	
  	<bean id="timerCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="schedulerJob"></property>
-<!--         <property name="cronExpression" value="0 45 15 ? * *"></property> -->
+        <property name="cronExpression" value="0 10 18 ? * *"></property>
 <!-- 		<property name="cronExpression" value="0 * * * * ?"></property> -->
 <!-- 		<property name="cronExpression" value="0 0/5 * * * ?"></property> -->
-		<property name="cronExpression" value="0 0 3 ? * *"></property>
+<!-- 		<property name="cronExpression" value="0 0 3 ? * *"></property> -->
 	</bean>
  	
  	<bean id="GiaScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -73,5 +77,34 @@
             </list>
         </property>
 	</bean>
+ 
+	 <!-- Termina tarea programada de operadores Yastas -->
+ 
+
+
+	<!-- Tarea programada para Excel Plazas Mara Vázquez Cruz-->
+ 	 	
+ 	<bean id="excelJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+ 		<property name="jobClass" value="com.gentera.cuentasn.service.impl.PlazasInfoServiceImpl"></property>
+	</bean>
  	
-</beans>
+ 	<bean id="excelCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="excelJob"></property>
+        <property name="cronExpression" value="0 10 13 ? * TUE"></property>
+<!-- 		<property name="cronExpression" value="0 * * * * ?"></property> -->
+<!-- 		<property name="cronExpression" value="0 0/5 * * * ?"></property> -->
+<!-- 		<property name="cronExpression" value="0 0 3 ? * *"></property> -->
+	</bean>
+ 	
+ 	<bean id="excelScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="excelCronTrigger"></ref>
+            </list>
+        </property>
+	</bean>
+ 
+ <!-- Termina tarea programada para Excel Plazas -->
+
+ 
+ </beans>

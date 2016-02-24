@@ -79,32 +79,5 @@
 	</bean>
  
 	 <!-- Termina tarea programada de operadores Yastas -->
- 
-
-
-	<!-- Tarea programada para Excel Plazas Mara Vázquez Cruz-->
- 	 	
- 	<bean id="excelJob" class="org.springframework.scheduling.quartz.JobDetailBean">
- 		<property name="jobClass" value="com.gentera.cuentasn.service.impl.PlazasInfoServiceImpl"></property>
-	</bean>
- 	
- 	<bean id="excelCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail" ref="excelJob"></property>
-        <property name="cronExpression" value="0 10 13 ? * TUE"></property>
-<!-- 		<property name="cronExpression" value="0 * * * * ?"></property> -->
-<!-- 		<property name="cronExpression" value="0 0/5 * * * ?"></property> -->
-<!-- 		<property name="cronExpression" value="0 0 3 ? * *"></property> -->
-	</bean>
- 	
- 	<bean id="excelScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="excelCronTrigger"></ref>
-            </list>
-        </property>
-	</bean>
- 
- <!-- Termina tarea programada para Excel Plazas -->
-
- 
+  
  </beans>

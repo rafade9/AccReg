@@ -4,11 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.TimeZone;
 
 import com.gentera.cuentasn.entities.Persona;
-import com.gentera.cuentasn.entities.Sucursal;
 
 public class Util {
 	
@@ -228,7 +226,7 @@ public class Util {
 	}
 	
 /**
- * Metodo para enmascarar el numero de tarjeta	
+ * Metodo para enmascarar	
  * @param numTarjeta
  * @return
  */
@@ -256,24 +254,5 @@ public class Util {
 			return false;
 		}
 	}
-	
-
-/**
- * Metodo que obtiene el numero de plaza dependiendo de la IP
- */
-	
-	public Double buscarIP(String ip){
-		
-		List<Sucursal> sucursales = PlazasArchivo.getPlazas();
-		Double plaza = 0.0;
-		
-		for(Sucursal s:sucursales){
-			if(s.getIp().equals(ip)){
-				plaza = s.getId();
-			}
-		}
-		return plaza;
-	}
-	
 	
 }

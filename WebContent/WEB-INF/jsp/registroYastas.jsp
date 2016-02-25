@@ -8,17 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Yastas</title>
 
-  <script src="resources/js/jquery-1.11.0.js"></script>
-    <script src="resources/js/jquery-ui-1.10.4.custom.js"></script>
+  <script src="resources/js/jquery-1.10.1.js"></script>
+  <script src="resources/js/jquery-ui-1.10.4.custom.js"></script>
   <script src="resources/js/jquery.validate.js"></script>
   <script src="resources/js/messages_es.js"></script>
   <script src="resources/js/registroYastas.js"></script>
   <script src="resources/js/jquery.maskedinput.min.js" type="text/javascript"></script>
   
  
-<link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
-<link href="resources/css/registroYastas.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="resources/css/jquery-ui.css">
+  <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
+  <link href="resources/css/registroYastas.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="resources/css/jquery-ui.css">
+  <link href="resources/img/faviconYastas.ico" rel="icon" type="image/x-icon">
   
  <style>
   .custom-combobox {

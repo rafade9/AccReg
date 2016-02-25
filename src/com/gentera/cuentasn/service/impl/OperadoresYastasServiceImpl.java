@@ -6,12 +6,10 @@ import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.taks.ArchivoOperadoresTask;
 import com.gentera.cuentasn.util.OperadoresArchivo;
 
-@Service
 public class OperadoresYastasServiceImpl implements Job{
 
 	final static Logger logger = Logger.getLogger(OperadoresYastasServiceImpl.class);

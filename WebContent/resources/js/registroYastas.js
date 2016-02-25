@@ -17,18 +17,22 @@ $(document).ready(function(){
 	mensajesYastas[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *11.</p>";
 	mensajesYastas[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesYastas[99] = "<msg class='redMsgClass'>Error de conexi&oacute;n, Favor de contactar a su Administrador</msg>";
 	
 //Catalogo de paises
 	
-	var htmlPaises = "";
-	$.getJSON("/CuentasN2/catalogos/paises", function(allData) {
+	$(function() {
+		$.getJSON("/CuentasN2/catalogos/paises", function(allData) {
 			paises = $.map(allData, function(item) {
-				htmlPaises += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+				$("#paisNacimiento").append(
+						$('<option>', {
+							value : item.clave,
+							text : item.nombre
+						}));
+			
 			});
-	})
-	.done(function() {
-		document.getElementById("paisNacimiento").innerHTML = htmlPaises;
-  	});
+		});
+	});
 	
 
 	
@@ -291,8 +295,7 @@ $(document).ready(function(){
 	});
 	
 	
-	
-//Autocompletar
+	//Autocompletar
 	
 	  (function( $ ) {
 		    $.widget( "custom.combobox", {
@@ -389,16 +392,18 @@ $(document).ready(function(){
 		 
 		        // Selected an item, nothing to do
 		        if ( ui.item ) {
+		        $("#lugarNacimiento").empty();
 				var valor=$("#paisNacimiento").val();
-				var htmlEstados = "";
 				$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
 						estados = $.map(allData, function(item) {
-							htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+							$("#lugarNacimiento").append(
+									$('<option>', {
+										value : item.clave,
+										text : item.nombre
+									}));
+						
 						});
-				})
-				.done(function() {
-					document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
-			  	});
+					});
 				
 				
 		          return;
@@ -411,12 +416,17 @@ $(document).ready(function(){
 		        this.element.children( "option" ).each(function() {
 		          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
 		            this.selected = valid = true;
+		            $("#lugarNacimiento").empty();
 		            var valor=$("#paisNacimiento").val();
-			        var htmlEstados = "";
-					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
-							estados = $.map(allData, function(item) {
-								htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
-							});
+		            $.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+						estados = $.map(allData, function(item) {
+							$("#lugarNacimiento").append(
+									$('<option>', {
+										value : item.clave,
+										text : item.nombre
+									}));
+						
+						});
 					});
 			        
 		            return false;
@@ -425,21 +435,31 @@ $(document).ready(function(){
 		 
 		        // Found a match, nothing to do
 		        if ( valid ) {
+		        	$("#lugarNacimiento").empty();
 		        	var valor=$("#paisNacimiento").val();
-//		            alert(valor);	
+		        	$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+						estados = $.map(allData, function(item) {
+							$("#lugarNacimiento").append(
+									$('<option>', {
+										value : item.clave,
+										text : item.nombre
+									}));
+						
+						});
+					});	
 		          return;
 		        }
 		 
 		        // Remove invalid value
 		        this.input
 		          .val( "" )
-		          .attr( "title", value + " no coincide con ning?n pais" )
+		          .attr( "title", value + " no coincide con ningún pais" )
 		          .tooltip( "open" );
 		        this.element.val( "" );
 		        this._delay(function() {
 		          this.input.tooltip( "close" ).attr( "title", "" );
 		        }, 2500 );
-		        this.input.autocomplete( "instance" ).term = "";
+//		        this.input.autocomplete( "instance" ).term = "";
 		      },
 		 
 		      _destroy: function() {
@@ -455,6 +475,9 @@ $(document).ready(function(){
 		      $( "#combobox" ).toggle();
 		    });
 		  });	
+
+	
+	
 	
 		  
 //		  solo numeros		  
@@ -504,6 +527,23 @@ $(document).ready(function(){
 				  e.preventDefault();
 			  }
 		  });
+		  
+		  
+//validar caracteres extraños
+
+			$('input').bind('input', function() {
+				  var c = this.selectionStart,
+				      r = /[^a-z0-9]/gi,
+				      v = $(this).val();
+				  if(r.test(v)) {
+				    $(this).val(v.replace(r, ''));
+				    c--;
+				  }
+				  this.setSelectionRange(c, c);
+			});		  
+		  
+		  
+		  
 		  
 });
 

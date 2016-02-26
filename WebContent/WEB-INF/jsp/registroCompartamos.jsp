@@ -184,9 +184,10 @@
 	</div>
 <!-- Fin del mensaje que se enviará validando la nacionalidad -->	
 	
-	<div id="footer">	
-
-    </div>
+<!-- Imagen de espera-->	
+<div id="bloquea" style="display:none;">
+	<img style="margin-left: 5%;margin-top: 15%" src="resources/img/load2.gif">
+</div>
   </div>
 </div>
 

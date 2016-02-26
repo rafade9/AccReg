@@ -237,7 +237,8 @@ $(document).ready(function(){
 	         }
 	    },
 	    submitHandler: function() {	    	
-	    	jsonObj = {}; 
+	    	jsonObj = {};
+	    	document.getElementById('bloquea').style.display = 'block';
 	    	
             $(".inputText").each(function(){
                    var keyInput = $(this).attr("name");
@@ -260,6 +261,7 @@ $(document).ready(function(){
                 url: "./registro",
                 success: function(datar){
                 	 $("#localhost:8888").html(datar);
+                	 document.getElementById('bloquea').style.display = 'none';
                      if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10'){
                      	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                      	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
@@ -348,7 +350,6 @@ $(document).ready(function(){
 				 _createShowAllButton: function() {
 		        var input = this.input,
 		          wasOpen = false;
-		 
 		        $( "<a>" )
 		          .attr( "tabIndex", -1 )
 		          .attr( "title", "Muestra todos los paises" )
@@ -465,7 +466,7 @@ $(document).ready(function(){
 		        this._delay(function() {
 		          this.input.tooltip( "close" ).attr( "title", "" );
 		        }, 2500 );
-//		        this.input.autocomplete( "instance" ).term = "";
+		        this.input.autocomplete( "instance" ).term = "";
 		      },
 		 
 		      _destroy: function() {
@@ -595,7 +596,23 @@ $(document).ready(function(){
 		  this.setSelectionRange(c, c);
 	});
 	
+	
+	//validacion de caracteres extraños pais
+	
+	$('paisNacimiento').bind('input', function() {
+		  var c = this.selectionStart,
+		      r = /[^a-z0-9]/gi,
+		      v = $(this).val();
+		  if(r.test(v)) {
+		    $(this).val(v.replace(r, ''));
+		    c--;
+		  }
+		  this.setSelectionRange(c, c);
+	});
+	
+	
 });
+
 
 //Funcion para el logOut
 	

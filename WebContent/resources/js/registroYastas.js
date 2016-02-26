@@ -235,6 +235,7 @@ $(document).ready(function(){
 	    },
 	    submitHandler: function() {	    	
 	    	jsonObj = {}; 
+	    	document.getElementById('bloquea').style.display = 'block';
 	    	
             $(".inputText").each(function(){
                    var keyInput = $(this).attr("name");
@@ -257,6 +258,7 @@ $(document).ready(function(){
                 url: "./registro",
                 success: function(datar){
                     $("#localhost:8888").html(datar);
+                    document.getElementById('bloquea').style.display = 'none';
                     if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10' ){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio

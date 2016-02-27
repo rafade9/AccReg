@@ -19,6 +19,13 @@ $(document).ready(function(){
 	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
 	mensajesYastas[99] = "<msg class='redMsgClass'>Error de conexi&oacute;n, Favor de contactar a su Administrador</msg>";
 	
+//focus al campo de folio
+	$("input:text:visible:first").focus();
+	
+//establecemos el place holder por default
+	$('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
+	
+	
 //Catalogo de paises
 	
 	$(function() {
@@ -54,8 +61,10 @@ $(document).ready(function(){
 	$("input[name=tipoIdentificacion]").click(function () {
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
+			 $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 		}else{
 			document.getElementById("numeroIdentificacion").maxLength = "9";
+			 $('#numeroIdentificacion').attr("placeholder", "Pasaporte").blur();
 		}
 	});
 
@@ -257,7 +266,7 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./registro",
                 success: function(datar){
-                    $("#localhost:8888").html(datar);
+//                    $("#localhost:8888").html(datar);
                     document.getElementById('bloquea').style.display = 'none';
                     if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10' ){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario

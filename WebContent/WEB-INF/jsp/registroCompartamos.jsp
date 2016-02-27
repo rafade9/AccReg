@@ -186,7 +186,7 @@
 	
 <!-- Imagen de espera-->	
 <div id="bloquea" style="display:none;">
-	<img style="margin-left: 5%;margin-top: 15%" src="resources/img/load2.gif">
+	<img style="margin-left: 5%;margin-top: 20%" src="resources/img/load2.gif">
 </div>
   </div>
 </div>

@@ -19,7 +19,14 @@ $(document).ready(function(){
 	mensajesCompartamos[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
 	mensajesCompartamos[99] = "<msg class='redMsgClass'>Error de conexi&oacute;n, Favor de contactar a su Administrador</msg>";
 
+
+//focus al campo de folio
+$("input:text:visible:first").focus();
 	
+
+//establecemos el place holder por default
+$('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
+
 //Catalogo de paises
 	
 	$(function() {
@@ -56,8 +63,10 @@ $(document).ready(function(){
 	$("input[name=tipoIdentificacion]").click(function () {
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
+			 $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 		}else{
 			document.getElementById("numeroIdentificacion").maxLength = "9";
+			 $('#numeroIdentificacion').attr("placeholder", "Pasaporte").blur();
 		}
 	});
 
@@ -201,20 +210,20 @@ $(document).ready(function(){
 	        	  required: "Elige si desean envio SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el n&uacutemero de telefono",
-	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	minlength: "El n?mero de telefono debe ir a 10 digitos",
-	        	maxlength: "El n&uacutemero de telefono debe ir a 10 digitos"
+	        	required: "Por favor proporcione el n&uacute;mero de telefono",
+	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros",
+	        	minlength: "El n&uacute;mero de telefono debe ir a 10 digitos",
+	        	maxlength: "El n&uacute;mero de telefono debe ir a 10 digitos"
 	             },
 	        codigoPostal: {
-	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s�lo n�meros"
+	        	required: "Por favor proporcione el c&oacute;digo Postal",
+	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros"
 	        	},
 	        estado: {
 	        	required: "Por favor elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor proporciona la delegaci&oacuten"
+	        	required: "Por favor proporciona la delegaci&oacute;n"
 	             },
 	        ciudad: {
 	        	required: "Por favor proporciona la ciudad"
@@ -232,7 +241,7 @@ $(document).ready(function(){
 	        	 maxlength: "El n&uacutemero exterior debe ir a 10 d&iacute;gitos"
 	         	},
 	         numInterior: {
-	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros",
+	        	 number: "Por favor proporcione s&oacutelo n&uacute;meros",
 	        	 maxlength: "El n&uacutemero interior debe ir a 10 d&iacute;gitos"
 	         }
 	    },
@@ -260,7 +269,7 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./registro",
                 success: function(datar){
-                	 $("#localhost:8888").html(datar);
+//                	 $('#localhost:8888').html(datar);
                 	 document.getElementById('bloquea').style.display = 'none';
                      if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10'){
                      	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
@@ -539,7 +548,7 @@ $(document).ready(function(){
 	$(function() {
 		$("#codigoPostal").focusout(
 			function() {
-				if (this.value.length >= 4) {
+				if (this.value.length >= 4 && this.value > 1000) {
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
@@ -599,7 +608,7 @@ $(document).ready(function(){
 	
 	//validacion de caracteres extraños pais
 	
-	$('paisNacimiento').bind('input', function() {
+	$('#paisNacimiento').bind('input', function() {
 		  var c = this.selectionStart,
 		      r = /[^a-z0-9]/gi,
 		      v = $(this).val();
@@ -666,7 +675,7 @@ $(document).ready(function(){
                                    
                       return value.match(patron,'');
                },
-        "Por favor, proporcione el numero de identificaci&oacuten correcto.");   
+        "Por favor, proporcione el n&uacute;mero de identificaci&oacute;n correcto.");   
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
@@ -684,6 +693,5 @@ $(document).ready(function(){
 				}
 			);
 		});
-        
-        
-        
+               
+

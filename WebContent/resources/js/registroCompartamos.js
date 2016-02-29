@@ -541,6 +541,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 				  e.preventDefault();
 			  }
 		  });
+		 
 		  
 	
 	
@@ -594,16 +595,23 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 	
 	//validar caracteres extraños
 
-	$('input').bind('input', function() {
-		  var c = this.selectionStart,
-		      r = /[^a-z0-9]/gi,
-		      v = $(this).val();
-		  if(r.test(v)) {
-		    $(this).val(v.replace(r, ''));
-		    c--;
+	$("input").keydown(function (e) {
+		key = e.keyCode || e.which;
+	    tecla = String.fromCharCode(key).toLowerCase();
+	    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+		  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				  // Permite: Ctrl+A
+				  (e.keyCode == 65 && e.ctrlKey === true) ||
+				  // Permite: home, end, left, right
+				  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 )) {
+			  // solo permitir lo que no este dentro de estas condiciones es un return false
+			  return;
 		  }
-		  this.setSelectionRange(c, c);
-	});
+		  // Aseguramos que son numeros
+		  if (letras.indexOf(tecla)==-1 && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+			  e.preventDefault();
+		  }
+	});	
 	
 	
 	//validacion de caracteres extraños pais

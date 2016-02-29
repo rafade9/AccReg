@@ -104,7 +104,7 @@
 					<option value="Otro" class="texGris09_13">Otro</option>
 				</select><br><br>
 		
-				<label class="texGris09_13">Pais Nacimiento * </label>
+				<label class="texGris09_13">Pa&iacute;s Nacimiento * </label>
 				<select class="select inputText texGris09_13" name="paisNacimiento" id="paisNacimiento">
 					<option value="" class="texGris09_13">--Pais--</option>
 				</select><br><br>

@@ -167,81 +167,81 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 	    },
 	    messages: {
 	    	folio: {
-		        required: "Por favor proporcione el n&uacutemero de folio",
-		        number:"Por favor proporciona s&oacutelo n&uacutemeros"
+		        required: "Por favor, proporcione el n&uacute;mero de folio",
+		        number:"Por favor, proporciona s&oacute;lo n&uacute;meros"
 		        	
 		      		},	
 		    tipoIdentificacion: {
-		      	required: "Por favor elige el tipo de identificaci&oacuten"
+		      	required: "Por favor elige el tipo de identificaci&oacute;n"
 		      		},
 		    numeroIdentificacion: {
-		      	required: "Por favor proporcione el n&uacutemero de identificaci&oacuten"
+		      	required: "Por favor, proporcione el n&uacute;mero de identificaci&oacute;n"
 		      		},
       		primerNombre: {
-		      	required: "Por favor proporcione el Nombre",
+		      	required: "Por favor, proporcione el Nombre",
 		      	maxlength: "El primer nombre debe ir a 40 d&iacute;gitos"
 		      		},
 		    segundoNombre: {
 		    	maxlength: "El segundo nombre debe ir a 40 d&iacute;gitos"
 		    		},
 		    paterno: {
-		      		required: "Por favor proporcione el Apellido",
+		      		required: "Por favor, proporcione el Apellido",
 		      		maxlength: "El apellido paterno debe ir a 40 d&iacute;gitos"
 		    		},
 		    materno: {
 		    		maxlength: "El apellido materno debe ir a 40 d&iacute;gitos"
 		    		},
 		    fechaNacimiento: {
-		    		required: "Por favor porporcione la fecha"
+		    		required: "Por favor, proporcione la fecha"
 		    		},
 	        nacionalidad: {
-	            	required: "Por favor elige una Nacionalidad"
+	            	required: "Por favor, elige una Nacionalidad"
 	          		},
 	        paisNacimiento: {
-	              required: "Por favor elige un Pais"
+	              required: "Por favor, elige un Pa&iacute;s"
 	         		},
 	        lugarNacimiento: {
-	              required: "Por favor elige un Lugar"
+	              required: "Por favor, elige un Lugar"
 	         		},
 	        genero: {
-	        	  required: "Por favor elige un genero"
+	        	  required: "Por favor, elige un g&eacute;nero"
 	         		},
 	        sms: {
-	        	  required: "Elige si desean envio SMS"
+	        	  required: "Por favor, elige si desean env&iacute;o de SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el n&uacute;mero de telefono",
-	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros",
-	        	minlength: "El n&uacute;mero de telefono debe ir a 10 digitos",
-	        	maxlength: "El n&uacute;mero de telefono debe ir a 10 digitos"
+	        	required: "Por favor, proporcione el n&uacute;mero de tel&eacute;fono",
+	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
+	        	minlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos",
+	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
-	        	required: "Por favor proporcione el c&oacute;digo Postal",
-	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros"
+	        	required: "Por favor, proporcione el c&oacute;digo Postal",
+	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros"
 	        	},
 	        estado: {
-	        	required: "Por favor elige un estado"
+	        	required: "Por favor, elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor proporciona la delegaci&oacute;n"
+	        	required: "Por favor, proporciona la delegaci&oacute;n"
 	             },
 	        ciudad: {
-	        	required: "Por favor proporciona la ciudad"
+	        	required: "Por favor, proporciona la ciudad"
 	            },
 	        colonia: {
-	        	required: "Por favor proporciona la colonia"
+	        	required: "Por favor, proporciona la colonia"
 	            	},
         	calle: {
-	        	required: "Por favor proporciona la calle",
+	        	required: "Por favor, proporciona la calle",
 	        	maxlength: "El nombre de la calle debe ir a 60 d&iacute;gitos"
 	            	},
 	         numExterior: {
-	        	 required: "Por favor proporciona el numero Exterior",
-	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros",
+	        	 required: "Por favor, proporciona el n&uacute;mero Exterior",
+	        	 number: "Por favor, proporcione s&oacutelo n&uacutemeros",
 	        	 maxlength: "El n&uacutemero exterior debe ir a 10 d&iacute;gitos"
 	         	},
 	         numInterior: {
-	        	 number: "Por favor proporcione s&oacutelo n&uacute;meros",
+	        	 number: "Por favor, proporcione s&oacutelo n&uacute;meros",
 	        	 maxlength: "El n&uacutemero interior debe ir a 10 d&iacute;gitos"
 	         }
 	    },
@@ -469,7 +469,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 		        // Remove invalid value
 		        this.input
 		          .val( "" )
-		          .attr( "title", value + " no coincide con ningún pais" )
+		          .attr( "title", value + " no coincide con ningún país" )
 		          .tooltip( "open" );
 		        this.element.val( "" );
 		        this._delay(function() {
@@ -500,7 +500,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
 					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
 				  // solo permitir lo que no este dentro de estas condiciones es un return false
 				  return;
 			  }
@@ -516,7 +516,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
 					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
 				  // solo permitir lo que no este dentro de estas condiciones es un return false
 				  return;
 			  }
@@ -532,7 +532,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
 					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
 				  // solo permitir lo que no este dentro de estas condiciones es un return false
 				  return;
 			  }
@@ -603,7 +603,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 				  // Permite: Ctrl+A
 				  (e.keyCode == 65 && e.ctrlKey === true) ||
 				  // Permite: home, end, left, right
-				  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 )) {
+				  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
 			  // solo permitir lo que no este dentro de estas condiciones es un return false
 			  return;
 		  }

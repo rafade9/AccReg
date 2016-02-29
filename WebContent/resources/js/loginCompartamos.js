@@ -22,7 +22,7 @@ $("#formularioCompartamos").validate({
 
       password: {
     	  required: "Por favor proporcione su password",
-    	  minlength: "El password debe tener m&iacutenimo 5 caracteres"
+    	  minlength: "El password debe tener m&iacute;nimo 5 caracteres"
       }
     },
     submitHandler: function() {
@@ -31,17 +31,18 @@ $("#formularioCompartamos").validate({
   });
 
 
-	//validacion explorer	 
+//validacion explorer caracteres extraños
 	  
 $("#username").keydown(function (e) {
 	key = e.keyCode || e.which;
+//	alert(key);
     tecla = String.fromCharCode(key).toLowerCase();
     letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
 	  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			  // Permite: Ctrl+A
 			  (e.keyCode == 65  && e.ctrlKey === true) ||
 			  // Permite: home, end, left, right
-			  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 )) {
+			  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189 )) {
 		  // solo permitir lo que no este dentro de estas condiciones es un return false
 		  return;
 	  }

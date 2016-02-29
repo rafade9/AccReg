@@ -90,7 +90,6 @@ public class ArchivoOperadoresTask {
 					fecha+=anio;
 					archivo = Properties.getProp("nombreArchivo") + fecha+".txt";
 					fichero = new File(Properties.getProp("fileOperadores")+archivo);
-					System.out.println(fichero);
 				}else{
 					resultado = true;
 				}

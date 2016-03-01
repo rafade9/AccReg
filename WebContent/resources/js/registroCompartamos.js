@@ -570,7 +570,7 @@ $(document).ready(function(){
                                    
                       return value.match(patron,'');
                },
-        "Por favor, proporcione el numero de identificaci&oacuten correcto2.");   
+        "Por favor, proporcione el numero de identificaci&oacuten correcto.");   
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {

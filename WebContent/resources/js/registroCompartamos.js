@@ -24,8 +24,9 @@ $(document).ready(function(){
 $("input:text:visible:first").focus();
 	
 
-//establecemos el place holder por default
-$('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
+//establecemos el mensaje por default
+$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
+
 
 //Catalogo de paises
 	
@@ -47,7 +48,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 	$(function() {
 	$("#nacionalidad").change(function(){
 		var valor=$("#nacionalidad").val();
-			if(valor=='Otro'){
+			if(valor=='OTRA'){
 //				document.getElementById('mensajeNac').style.display = 'block';
 				$("#mensajeNac").toggle("slow");
 				jQuery("#enviar").attr('disabled',true);
@@ -63,10 +64,10 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 	$("input[name=tipoIdentificacion]").click(function () {
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
-			 $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
 		}else{
 			document.getElementById("numeroIdentificacion").maxLength = "9";
-			 $('#numeroIdentificacion').attr("placeholder", "Pasaporte").blur();
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Pasaporte No.");
 		}
 	});
 
@@ -495,7 +496,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 
 		  
 //solo numeros		  
-		  $("#folio").keydown(function (e) {
+		  $("#folio, #telefono, #codigoPostal").keydown(function (e) {
 			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -510,41 +511,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 			  }
 		  });
 		  
-		  
-		  $("#telefono").keydown(function (e) {
-			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-					  // Permite: Ctrl+A
-					  (e.keyCode == 65 && e.ctrlKey === true) ||
-					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
-				  // solo permitir lo que no este dentro de estas condiciones es un return false
-				  return;
-			  }
-			  // Aseguramos que son numeros
-			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-				  e.preventDefault();
-			  }
-		  });
-
-		  
-		  $("#codigoPostal").keydown(function (e) {
-			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-					  // Permite: Ctrl+A
-					  (e.keyCode == 65 && e.ctrlKey === true) ||
-					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
-				  // solo permitir lo que no este dentro de estas condiciones es un return false
-				  return;
-			  }
-			  // Aseguramos que son numeros
-			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-				  e.preventDefault();
-			  }
-		  });
-		 
-		  
-	
-	
+		  	
 //Funcion para obtener los datos dependiendo del codigo postal	
 	$(function() {
 		$("#codigoPostal").focusout(
@@ -613,6 +580,13 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 		  }
 	});	
 	
+	//convierte en mayusculas
+	
+	
+	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior').keyup(function(){	
+		$(this).val($(this).val().toUpperCase());
+	});
+	
 	
 	//validacion de caracteres extraños pais
 	
@@ -626,7 +600,7 @@ $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
 		  }
 		  this.setSelectionRange(c, c);
 	});
-	
+
 	
 });
 

@@ -22,8 +22,8 @@ $(document).ready(function(){
 //focus al campo de folio
 	$("input:text:visible:first").focus();
 	
-//establecemos el place holder por default
-	$('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
+//establecemos el mensaje por default
+	$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
 	
 	
 //Catalogo de paises
@@ -61,10 +61,10 @@ $(document).ready(function(){
 	$("input[name=tipoIdentificacion]").click(function () {
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
-			 $('#numeroIdentificacion').attr("placeholder", "INE/IFE").blur();
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
 		}else{
 			document.getElementById("numeroIdentificacion").maxLength = "9";
-			 $('#numeroIdentificacion').attr("placeholder", "Pasaporte").blur();
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Pasaporte No.");
 		}
 	});
 
@@ -488,16 +488,13 @@ $(document).ready(function(){
 		  });	
 
 	
-	
-	
-		  
-//		  solo numeros		  
-		  $("#folio").keydown(function (e) {
+//solo numeros		  
+		  $("#folio, #telefono, #codigoPostal").keydown(function (e) {
 			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
 					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39)) {
+					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
 				  // solo permitir lo que no este dentro de estas condiciones es un return false
 				  return;
 			  }
@@ -505,39 +502,11 @@ $(document).ready(function(){
 			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 				  e.preventDefault();
 			  }
-		  });
+		  });	
+	
 		  
-		  
-		  $("#telefono").keydown(function (e) {
-			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-					  // Permite: Ctrl+A
-					  (e.keyCode == 65 && e.ctrlKey === true) ||
-					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39)) {
-				  // solo permitir lo que no este dentro de estas condiciones es un return false
-				  return;
-			  }
-			  // Aseguramos que son numeros
-			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-				  e.preventDefault();
-			  }
-		  });
 
 		  
-		  $("#codigoPostal").keydown(function (e) {
-			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-					  // Permite: Ctrl+A
-					  (e.keyCode == 65 && e.ctrlKey === true) ||
-					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39)) {
-				  // solo permitir lo que no este dentro de estas condiciones es un return false
-				  return;
-			  }
-			  // Aseguramos que son numeros
-			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-				  e.preventDefault();
-			  }
-		  });
 		  
 //valida caracteres extranios		  
 		  $("input").keydown(function (e) {
@@ -558,6 +527,13 @@ $(document).ready(function(){
 				  }
 			});	 
 		  
+
+//convierte en mayusculas
+			
+			
+			$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior').keyup(function(){	
+				$(this).val($(this).val().toUpperCase());
+			});		  
 		  
 		  
 		  

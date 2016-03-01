@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Compartamos Banco</title>
@@ -69,22 +69,22 @@
   <!-- div de formulario de registro --> 
 	
 	<div id="formCompartamos" style='display:block;'>
-		<form id="formularioCompartamos" action="" novalidate align="center">
+		<form id="formularioCompartamos" action="" novalidate>
 		<div id="seccionTarjeta">
 		<!-- Folio de la tarjeta -->
 			<p class="tituloMango">Datos de Tarjeta<br></p><br><br>
-				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText" maxlength="15"><br>
+				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText mayuscula" maxlength="15"><br>
 				<div class="clear"> </div><br><br>
 		</div>
 		<div id="seccionCliente" style='display:block;'>
 	    <!-- Datos del cliente -->
 			<p class="tituloMango">Datos Personales<br></p>
 			<br><br><br><br>
-				<label class="texGris09_13">Tipo de identificaci&oacute;n * </label>
-				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio" checked>IFE/INE</label>
+				<label class="texGris09_13">>Tipo de identificaci&oacute;n * </label>
+				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio " checked>IFE/INE</label>
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="FS0002" class="inputRadio">Pasaporte</label><br>
 				<div class="clear"> </div>
-				<label for="numeroIdentificacion" class="texGris09_13">N&uacute;mero de identificaci&oacute;n * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText" maxlength="18"><br>
+				<label for="numeroIdentificacion" id="msnIdent" class="texGris09_13">N&uacute;mero de identificaci&oacute;n * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText" maxlength="18"><br>
 				<div class="clear"> </div>
 				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
@@ -100,8 +100,8 @@
 				<label class="texGris09_13">Nacionalidad * </label>
 				<select class="select inputText"  id="nacionalidad" name="nacionalidad">
 					<option value="" class="texGris09_13">--Nacionalidad--</option>
-					<option value="Mexicano" class="texGris09_13">Mexicano</option>
-					<option value="Otro" class="texGris09_13">Otro</option>
+					<option value="MEXICANA" class="texGris09_13">MEXICANA</option>
+					<option value="OTRA" class="texGris09_13">OTRA</option>
 				</select><br><br>
 		
 				<label class="texGris09_13">Pa&iacute;s Nacimiento * </label>
@@ -125,7 +125,7 @@
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="1" >Casa</label>
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="3">Negocio</label><br>
 		
-				<label for="telefono" class="texGris09_13">Tel&eacute;fono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
+				<label for="telefono" class="texGris09_13">Tel&eacute;fono de contacto *<br>10 d&iacute;gitos </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
 				
 		<!-- Direccion -->
 			<p class="tituloMango">Direcci&oacute;n</p><br><br>
@@ -192,4 +192,3 @@
 </div>
 
 </body>
-</html>

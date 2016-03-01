@@ -84,7 +84,7 @@
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio" checked>IFE/INE</label>
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="FS0002" class="inputRadio">Pasaporte</label><br>
 				<div class="clear"> </div>
-				<label for="numeroIdentificacion" class="texGris09_13">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText"><br>
+				<label for="numeroIdentificacion" class="texGris09_13" id="msnIdent">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText"><br>
 				<div class="clear"> </div>
 				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
@@ -122,7 +122,7 @@
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="1" >Casa</label>
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="3">Negocio</label><br>
 		
-				<label for="telefono" class="texGris09_13">Teléfono de contacto * </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
+				<label for="telefono" class="texGris09_13">Teléfono de contacto *<br>10 d&iacute;gitos</label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
 				
 		<!-- Direccion -->
 			<p class="tituloMango">Dirección</p><br><br>

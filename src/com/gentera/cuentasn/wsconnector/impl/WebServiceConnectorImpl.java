@@ -128,23 +128,33 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			OrganisationalCentreID officeId = new OrganisationalCentreID();
 			
 			
-			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
-				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
-			}else{
-				officeId.setOrganisationalCentreID(new Token("1037")); // Poza Rica
-			}
 			
 			identifiers.setServiceOfficeID(officeId);
 
 			// ID BP Empleado ---Viene de CRM
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
+			
+			//Código temporal
 			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
 				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-			}else{
+				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
+			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("eliana")){
 				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+				officeId.setOrganisationalCentreID(new Token("4626")); // Minatitlan
+			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("yastas")){
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+				officeId.setOrganisationalCentreID(new Token("4626")); // Poza Rica
+			}else{
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000001000"));
+				officeId.setOrganisationalCentreID(new Token("1037"));
 			}
+			
+//			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
+//			}else{
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+//			}
 			identifiers.setBusinessPartnerID(bpEmpleado);
-			logger.info("Id Empleado: E000022012");
 
 			// ID Comercio --- Propio
 			CommercelD commerce = new CommercelD();

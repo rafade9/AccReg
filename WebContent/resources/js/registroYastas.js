@@ -230,6 +230,7 @@ $(document).ready(function(){
 	         }
 	    },
 	    submitHandler: function() {	    	
+	    	jQuery("#enviar").attr('disabled',true);
 	    	jsonObj = {}; 
 	    	
             $(".inputText").each(function(){
@@ -546,7 +547,7 @@ $(document).ready(function(){
                                    if($('input:radio[name=tipoIdentificacion]:checked').val() == 'FS0002'){
                                           patron = /^[a-zA-Z0-9]{9}$/;
                                    }else{
-                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
+                                	   	  patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}[0-3]{1}[0-9]{1}[h-m|H-M]{1}[0-9]{3}$/;
                                    }
                                    
                       return value.match(patron,'');
@@ -555,5 +556,5 @@ $(document).ready(function(){
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
-        	  return this.optional(element) || /^[a-z]+$/i.test(value);
+        	  return this.optional(element) || /^[a-zñÑ]+$/i.test(value);
         	}, "Por favor, proporcione solo letras."); 

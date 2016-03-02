@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.gentera.cuentasn.controller;
 
 import java.util.List;
@@ -15,19 +18,22 @@ import com.gentera.cuentasn.service.CatalogosService;
 
 /**
  * Clase controller para exponer los catalogos para el formulario de registro
- * @author extuscomunicacion03
- *
+ * @author Rafael Delgadillo
+ * @version 1.0
  */
 @Controller
 @RequestMapping(value="/catalogos")
 public class CatalogosController {
 	
+	/**
+	 * Recibe referencia de servicio
+	 */
 	@Autowired
 	CatalogosService catalogos;
 
 	/**
-	 * Servicio para consultar los paises en el catálogo
-	 * @return
+	 * Servicio para consultar los paises en el catalogo
+	 * @return List de paises
 	 */
 	@RequestMapping(value = "/paises", method = RequestMethod.GET)
 	public @ResponseBody List<Pais> getPaises() {
@@ -35,8 +41,8 @@ public class CatalogosController {
 	}
 	
 	/**
-	 * Servicio para consultar los estados en el catálogo
-	 * @return
+	 * Servicio para consultar los estados en el catalogo
+	 * @return List de estados
 	 */
 	@RequestMapping(value = "/estados", method = RequestMethod.GET)
 	public @ResponseBody List<Estado> getEstados() {
@@ -44,8 +50,9 @@ public class CatalogosController {
 	}
 	
 	/**
-	 * Servicio para consultar los estados en el catálogo por clave de país
-	 * @return
+	 * Servicio para consultar los estados en el catalogo por clave de pais
+	 * @return List de estados
+	 * @param clavePais que sera la clave a consultar
 	 */
 	@RequestMapping(value = "/estadosByClavePais/{clavePais}", method = RequestMethod.GET)
 	public @ResponseBody Estado[] getEstadosByClavePais(@PathVariable String clavePais) {

@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.gentera.cuentasn.controller;
 
 import javax.servlet.ServletException;
@@ -20,9 +23,18 @@ import com.gentera.cuentasn.entities.Usuario;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.multitype.GenericManageableCaptchaService;
 
+/**
+ * Clase Controller que comunica frontend con backend
+ * @author Rafael Delgadillo
+ * @version 1.0
+ * 
+ */
 @Controller
 public class loginController {
 
+	/**
+	 * Clase para manejo de captcha
+	 */
 	@Autowired
 	private GenericManageableCaptchaService miCaptchaService;
 
@@ -45,7 +57,6 @@ public class loginController {
 	 */
 	@RequestMapping(value = "/loginCompartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
-		System.out.println("Entra a welcome Compartamos");
 		return "loginCompartamos";
 
 	}

@@ -25,15 +25,29 @@
 		</session-management>
 		
 	</http>
+	
+	<beans:bean id="ldapContextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<beans:constructor-arg
+			value="ldap://BCDNSDIVEO.compartamos.mx:389/ou=Compartamos,dc=compartamos,dc=mx" />
+		<beans:property name="userDn" value="FCOMPARTAMOS\ezaldivar"></beans:property>
+		<beans:property name="password" value="zalen06#"></beans:property>
+		<beans:property name="baseEnvironmentProperties">
+			<beans:map>
+				<beans:entry key="com.sun.jndi.ldap.connect.timeout"
+					value="20000" />
+			</beans:map>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="customUserContextMapper" class="com.gentera.cuentasn.ldap.CustomUserDetailsMapper"/>
 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="compartamos" password="12345678" authorities="ROLE_USER" />
-				<user name="eliana" password="87654321" authorities="ROLE_ADMIN" />
-				<user name="usrmin" password="123654" authorities="ROLE_ADMIN" />
-			</user-service>
-		</authentication-provider>
+		<ldap-authentication-provider
+			user-search-base="" 
+			user-search-filter="sAMAccountName={0}"
+			user-context-mapper-ref="customUserContextMapper"
+			server-ref="ldapContextSource" />
 		<authentication-provider ref="yastasAuthenticationProvider" />
 	</authentication-manager>
 	

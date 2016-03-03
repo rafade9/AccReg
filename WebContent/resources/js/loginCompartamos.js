@@ -31,26 +31,33 @@ $("#formularioCompartamos").validate({
   });
 
 
-//validacion explorer caracteres extraños
-	  
-$("#username").keydown(function (e) {
+//Numeros y letras
+
+$('#username').keypress(function(e) {
+	
 	key = e.keyCode || e.which;
-//	alert(key);
-    tecla = String.fromCharCode(key).toLowerCase();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-	  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-			  // Permite: Ctrl+A
-			  (e.keyCode == 65  && e.ctrlKey === true) ||
-			  // Permite: home, end, left, right
-			  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189 )) {
-		  // solo permitir lo que no este dentro de estas condiciones es un return false
-		  return;
-	  }
-	  // Aseguramos que son numeros
-	  if (letras.indexOf(tecla)==-1 && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		  e.preventDefault();
-	  }
-});	
-	
-	
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " abcdefghijklmnñopqrstuvwxyz";
+       especiales = "8-9-37-39-46";
+
+       tecla_especial = false;
+       for(var i in especiales){
+            if(key == especiales[i]){
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
+            return false;
+        }
 });
+
+	
+
+$('#username').keypress(function (){
+    this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
+  });
+
+});
+

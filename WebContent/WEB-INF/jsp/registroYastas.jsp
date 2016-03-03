@@ -118,9 +118,9 @@
 				<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label>
 				<label class="texGris09_13"><input type="radio" name="sms" id="smsNo" class="inputRadio" value="false">No</label><br>
 		
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular"  class="inputRadio" value="2" checked>Celular</label>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" class="inputRadio" value="1" >Casa</label>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" class="inputRadio" value="3">Negocio</label><br>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular" value="celular" class="inputRadio" value="2" checked>Celular</label>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" value="casa" class="inputRadio" value="1" >Casa</label>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" value="negocio" class="inputRadio" value="3">Negocio</label><br>
 		
 				<label for="telefono" class="texGris09_13">Teléfono de contacto *<br>10 d&iacute;gitos</label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
 				
@@ -144,6 +144,7 @@
 		
 				<label class="texGris09_13">Colonia * </label>
 				<select class="select inputText" id="colonia" name="colonia">
+					<option value="" class="texGris09_13">--- Selecciona ---</option>
 				</select><br><br>
 		
 				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText" maxlength="60"><br>

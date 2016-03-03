@@ -215,9 +215,9 @@ $(document).ready(function(){
 	        	  required: "Elige si desean env&iacute;o SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el n&uacute;mero de tel&eacute;fono",
+	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
 	        	number: "Por favor proporcione s&oacutelo n&uacute;meros",
-	        	minlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos",
+	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
@@ -498,7 +498,6 @@ $(document).ready(function(){
 	
 //solo numeros		  
 		  $("#folio, #telefono, #codigoPostal").keydown(function (e) {
-			  alert(e.keyCode);
 			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -545,6 +544,11 @@ $(document).ready(function(){
 			            return false;
 			        }
 			});
+
+//Solo letras y elimina espacios
+		$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function (){
+			    this.value = this.value.replace(/[^A-Ñ-Za-ñ-z]/g, '');
+});			
 			
 			
 //Numeros y letras
@@ -569,12 +573,6 @@ $(document).ready(function(){
 			        }
 			});
 
-				
-			
-			$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function (){
-			    this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
-			  });
-		  
 		  
 });
 
@@ -697,5 +695,5 @@ $(document).ready(function(){
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
-        	  return this.optional(element) || /^[a-z]+$/i.test(value);
+        	  return this.optional(element) || /^[a-ñ-z]+$/i.test(value);
         	}, "Por favor, proporciona s&oacute;lo letras."); 

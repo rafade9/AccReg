@@ -221,7 +221,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        telefono: {
 	        	required: "Por favor, proporcione el n&uacute;mero de tel&eacute;fono",
 	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
-	        	minlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos",
+	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
@@ -601,20 +601,28 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	            }
 	        }
 
-	        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+	        if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
 	            return false;
 	        }
 	});
 
+	$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function (){
+    this.value = this.value.replace(/[^A-Ñ-Za-ñ-z]/g, '');
+  });
+	
+	
+	
+	
 	
 //Numeros y letras
 	
 	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
+//		alert(key);
 	       tecla = String.fromCharCode(key).toLowerCase();
 	       letras = " abcdefghijklmnñopqrstuvwxyz";
-	       especiales = "8-9-37-39-46";
+	       especiales = "8-9-37-32-39-46";
 
 	       tecla_especial = false;
 	       for(var i in especiales){
@@ -631,9 +639,9 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 
 		
 	
-	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function (){
-	    this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
-	  });
+//	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function (){
+//	    this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
+//	  });
 	
 });
 

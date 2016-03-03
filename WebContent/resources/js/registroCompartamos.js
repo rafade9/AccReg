@@ -43,6 +43,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		});
 	});
 
+//Option default de estados	
+	$("#lugarNacimiento").append(
+			$('<option>', {
+				value : "",
+				text : "--Seleccionar--"
+			}));	
+	
+	
 	
 //Obtenemos que tipo de nacionalidad fue seleccionada
 	$(function() {
@@ -113,7 +121,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	          },
 	        fechaNacimiento: {
 	           required: true,
-	           dateFormat: true
+	           dateFormat: true,
+	           dateRango:true
 	         },
 	         nacionalidad: {
 	             required: true
@@ -168,15 +177,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	    },
 	    messages: {
 	    	folio: {
-		        required: "Por favor, proporcione el n&uacute;mero de folio",
+		        required: "Por favor, proporciona el n&uacute;mero de folio",
 		        number:"Por favor, proporciona s&oacute;lo n&uacute;meros"
-		        	
 		      		},	
 		    tipoIdentificacion: {
 		      	required: "Por favor elige el tipo de identificaci&oacute;n"
 		      		},
 		    numeroIdentificacion: {
-		      	required: "Por favor, proporcione el n&uacute;mero de identificaci&oacute;n"
+		      	required: "Por favor, proporciona el n&uacute;mero de identificaci&oacute;n"
 		      		},
       		primerNombre: {
 		      	required: "Por favor, proporcione el Nombre",
@@ -193,7 +201,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		    		maxlength: "El apellido materno debe ir a 40 d&iacute;gitos"
 		    		},
 		    fechaNacimiento: {
-		    		required: "Por favor, proporcione la fecha"
+		    		required: "Por favor, proporciona la fecha de nacimiento."
 		    		},
 	        nacionalidad: {
 	            	required: "Por favor, elige una Nacionalidad"
@@ -495,23 +503,31 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 
 
 		  
-//solo numeros		  
+//solo numeros explorer8
+	  
 		  $("#folio, #telefono, #codigoPostal").keydown(function (e) {
-			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+				  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
 					  // Permite: home, end, left, right
-					  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
+					  (e.keyCode >= 35 && e.keyCode <= 39) && e.keyCode !== 190 && e.keyCode !== 186 && e.keyCode !== 187) {
 				  // solo permitir lo que no este dentro de estas condiciones es un return false
-				  return;
-			  }
-			  // Aseguramos que son numeros
-			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-				  e.preventDefault();
-			  }
+					  return;
+				  }
+				  // Aseguramos que son numeros
+				  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+					  e.preventDefault();
+			  	}
 		  });
+	
 		  
+//validacion para grome		  
+		  $('#folio, #telefono, #codigoPostal').keypress(function (){
+	            this.value = this.value.replace(/[^0-9]/g, '');
+	          });
 		  	
+		  
+		  
 //Funcion para obtener los datos dependiendo del codigo postal	
 	$(function() {
 		$("#codigoPostal").focusout(
@@ -560,27 +576,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	});
 	
 	
-	//validar caracteres extraños
-
-	$("input").keydown(function (e) {
-		key = e.keyCode || e.which;
-	    tecla = String.fromCharCode(key).toLowerCase();
-	    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-		  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-				  // Permite: Ctrl+A
-				  (e.keyCode == 65 && e.ctrlKey === true) ||
-				  // Permite: home, end, left, right
-				  (e.keyCode >= 35 && e.keyCode <= 39 && e.keyCode !== 173 && e.keyCode !== 190 && e.keyCode !== 189)) {
-			  // solo permitir lo que no este dentro de estas condiciones es un return false
-			  return;
-		  }
-		  // Aseguramos que son numeros
-		  if (letras.indexOf(tecla)==-1 && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-			  e.preventDefault();
-		  }
-	});	
 	
-	//convierte en mayusculas
+//convierte en mayusculas
 	
 	
 	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior').keyup(function(){	
@@ -588,19 +585,55 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	});
 	
 	
-	//validacion de caracteres extraños pais
-	
-	$('#paisNacimiento').bind('input', function() {
-		  var c = this.selectionStart,
-		      r = /[^a-z0-9]/gi,
-		      v = $(this).val();
-		  if(r.test(v)) {
-		    $(this).val(v.replace(r, ''));
-		    c--;
-		  }
-		  this.setSelectionRange(c, c);
+//Solo letras
+	$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function(e) {
+		
+		key = e.keyCode || e.which;
+	       tecla = String.fromCharCode(key).toLowerCase();
+	       letras = " abcdefghijklmnñopqrstuvwxyz";
+	       especiales = "8-37-39-46";
+
+	       tecla_especial = false;
+	       for(var i in especiales){
+	            if(key == especiales[i]){
+	                tecla_especial = true;
+	                break;
+	            }
+	        }
+
+	        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+	            return false;
+	        }
 	});
 
+	
+//Numeros y letras
+	
+	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function(e) {
+		
+		key = e.keyCode || e.which;
+	       tecla = String.fromCharCode(key).toLowerCase();
+	       letras = " abcdefghijklmnñopqrstuvwxyz";
+	       especiales = "8-9-37-39-46";
+
+	       tecla_especial = false;
+	       for(var i in especiales){
+	            if(key == especiales[i]){
+	                tecla_especial = true;
+	                break;
+	            }
+	        }
+
+	        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
+	            return false;
+	        }
+	});
+
+		
+	
+	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function (){
+	    this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
+	  });
 	
 });
 
@@ -642,10 +675,32 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 			    function(value, element) {
 			        return value.match(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
 			    },
-			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
+			    "Por favor, capture una fecha v&aacute;lida.");
+
+
+//Valida que la fecha de nacimiento sea menor que la actual
+		
+		$.validator.addMethod("dateRango",
+			    function(value, element) {
+					var fechaActual = new Date();
+					var anioActual = fechaActual.getFullYear();
+					var fecha=$("#fechaNacimiento").val();
+					valuesStart = fecha.split("/");
+					var anioNac = valuesStart[2];
+					var dateStart=new Date(valuesStart[2],(valuesStart[1]-1),valuesStart[0]);
+					if(fechaActual<dateStart){
+						$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
+						return false;
+					}if((anioActual-anioNac)>100){
+						$.validator.messages.dateRango = "Por favor, capture una fecha menor a 100 años.";
+						return false;
+					}
+					return true;
+			    });
 		
 		
-		//Valida el campo de numero de identificacion
+		
+//Valida el campo de numero de identificacion
 		var patron;
         $.validator.addMethod("identificacion",
                    function(value, element) {
@@ -657,13 +712,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
                                    
                       return value.match(patron,'');
                },
-        "Por favor, proporcione el n&uacute;mero de identificaci&oacute;n correcto.");   
+        "Por favor, proporciona el n&uacute;mero de identificaci&oacute;n correcto.");   
         
-        //Solo letras
+ //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
-        	  return this.optional(element) || /^[a-z]+$/i.test(value);
-        	}, "Por favor, proporcione solo letras."); 
+        	  return this.optional(element) || /^[a-ñ-z]+$/i.test(value);
+        	}, "Por favor, proporciona s&oacute;lo letras."); 
 
+     
         
 //Nos manda al PDF
 		

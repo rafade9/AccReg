@@ -80,7 +80,7 @@
 	    <!-- Datos del cliente -->
 			<p class="tituloMango">Datos Personales<br></p>
 			<br><br><br><br>
-				<label class="texGris09_13">>Tipo de identificaci&oacute;n * </label>
+				<label class="texGris09_13">Tipo de identificaci&oacute;n * </label>
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio " checked>IFE/INE</label>
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="FS0002" class="inputRadio">Pasaporte</label><br>
 				<div class="clear"> </div>
@@ -99,7 +99,7 @@
 		
 				<label class="texGris09_13">Nacionalidad * </label>
 				<select class="select inputText"  id="nacionalidad" name="nacionalidad">
-					<option value="" class="texGris09_13">--Nacionalidad--</option>
+					<option value="" class="texGris09_13">--Seleccionar--</option>
 					<option value="MEXICANA" class="texGris09_13">MEXICANA</option>
 					<option value="OTRA" class="texGris09_13">OTRA</option>
 				</select><br><br>
@@ -110,7 +110,7 @@
 				</select><br><br>
 		
 				<label class="texGris09_13">Lugar de Nacimiento * </label>
-				<select class="select inputText" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
+				<select class="select inputText texGris09_13" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
 
 				<label class="texGris09_13">G&eacute;nero * </label>
 				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="2" class="inputRadio">Masculino</label>

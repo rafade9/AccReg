@@ -99,16 +99,16 @@
 		
 				<label class="texGris09_13">Nacionalidad * </label>
 				<select class="select inputText"  id="nacionalidad" name="nacionalidad">
-					<option value="" class="texGris09_13">--Nacionalidad--</option>
-					<option value="MX" class="texGris09_13">Mexicano</option>
-					<option value="Otro" class="texGris09_13">Otro</option>
+					<option value="" class="texGris09_13">--Seleccionar--</option>
+					<option value="MEXICANA" class="texGris09_13">MEXICANA</option>
+					<option value="OTRA" class="texGris09_13">OTRA</option>
 				</select><br><br>
 		
 				<label class="texGris09_13">Pa&iacute;s Nacimiento * </label>
 				<select class="select inputText texGris09_13" name="paisNacimiento" id="paisNacimiento" ></select><br><br>
 		
 				<label class="texGris09_13">Lugar de Nacimiento * </label>
-				<select class="select inputText" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
+				<select class="select inputText texGris09_13" name="lugarNacimiento" id="lugarNacimiento"></select><br><br>
 
 				<label class="texGris09_13">Género * </label>
 				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="2" class="inputRadio">Masculino</label>

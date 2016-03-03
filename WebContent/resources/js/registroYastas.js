@@ -221,23 +221,24 @@ $(document).ready(function(){
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
-	        	required: "Por favor, proporcione el c&oacute;digo Postal",
-	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros"
+	        	required: "Por favor, proporciona el C&oacute;digo Postal.",
+	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
+	        	minlength: "Por favor, captura el C&oacute;digo Postal a 5 d&iacute;gitos"
 	        	},
 	        estado: {
 	        	required: "Por favor, elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor, proporciona la delegaci&oacute;n"
+	        	required: "Por favor, proporciona el nombre de Delegaci&oacute;n/Municipio"
 	             },
 	        ciudad: {
 	        	required: "Por favor, proporciona la ciudad"
 	            },
 	        colonia: {
-	        	required: "Por favor, proporciona la colonia"
+	        	required: "Por favor, elige una colonia."
 	            	},
         	calle: {
-	        	required: "Por favor, proporciona la calle",
+	        	required: "Por favor, proporciona el nombre de la calle.",
 	        	maxlength: "El nombre de la calle debe ir a 60 d&iacute;gitos"
 	            	},
 	         numExterior: {
@@ -303,6 +304,7 @@ $(document).ready(function(){
 		if($(this).val() == 'false'){
 			$('input[name=tipoTelefono]').attr("disabled",false);
 		}else{
+			$('input:radio[name="tipoTelefono"][value="celular"]').prop('checked', true);
 			$('input[name=tipoTelefono]').attr("disabled",true);
 		}
     });	
@@ -520,7 +522,7 @@ $(document).ready(function(){
 
 //convierte en mayusculas
 			
-			$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior').keyup(function(){	
+			$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keyup(function(){	
 				$(this).val($(this).val().toUpperCase());
 			});		  
 		  
@@ -553,7 +555,7 @@ $(document).ready(function(){
 			
 //Numeros y letras
 			
-			$('#numeroIdentificacion, #calle, #numExterior, #numInterior ').keypress(function(e) {
+			$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keypress(function(e) {
 				
 				key = e.keyCode || e.which;
 			       tecla = String.fromCharCode(key).toLowerCase();
@@ -583,7 +585,7 @@ $(document).ready(function(){
 	$(function() {
 		$("#codigoPostal").focusout(
 			function() {
-				if (this.value.length >= 4) {
+				if (this.value.length >= 5 && this.value > 1000) {
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
@@ -593,10 +595,6 @@ $(document).ready(function(){
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
 							$("#colonia option[value='#']").remove();
-							$("#colonia").append($('<option>', {
-								value : "##",
-								text : "--- Selecciona ---"
-							}));
 							$.each(data.result.location, function(
 									i, item) {
 								$("#colonia").append(

@@ -43,15 +43,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		});
 	});
 
-//Option default de estados	
+//Opcion default de estados	
 	$("#lugarNacimiento").append(
 			$('<option>', {
 				value : "",
 				text : "--Seleccionar--"
 			}));	
 	
-	
-	
+
 //Obtenemos que tipo de nacionalidad fue seleccionada
 	$(function() {
 	$("#nacionalidad").change(function(){
@@ -147,7 +146,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	         },
 	         codigoPostal: {
 	             required: true,
-	             minlength: 4,
+	             minlength: 5,
 				 maxlength: 5,
 				 number: true
 	         },
@@ -219,14 +218,15 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        	  required: "Por favor, elige si desean env&iacute;o de SMS"
 	             },
 	        telefono: {
-	        	required: "Por favor, proporcione el n&uacute;mero de tel&eacute;fono",
+	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
 	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
 	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
-	        	required: "Por favor, proporcione el c&oacute;digo Postal",
-	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros"
+	        	required: "Por favor, proporciona el C&oacute;digo Postal.",
+	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
+	        	minlength: "Por favor, captura el C&oacute;digo Postal a 5 d&iacute;gitos"
 	        	},
 	        estado: {
 	        	required: "Por favor, elige un estado"
@@ -238,14 +238,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        	required: "Por favor, proporciona la ciudad"
 	            },
 	        colonia: {
-	        	required: "Por favor, proporciona la colonia"
+	        	required: "Por favor, elige una colonia."
 	            	},
         	calle: {
-	        	required: "Por favor, proporciona la calle",
+	        	required: "Por favor, proporciona el nombre de la calle.",
 	        	maxlength: "El nombre de la calle debe ir a 60 d&iacute;gitos"
 	            	},
 	         numExterior: {
-	        	 required: "Por favor, proporciona el n&uacute;mero Exterior",
+	        	 required: "Por favor, proporciona el N&uacute;mero Exterior",
 	        	 number: "Por favor, proporcione s&oacutelo n&uacutemeros",
 	        	 maxlength: "El n&uacutemero exterior debe ir a 10 d&iacute;gitos"
 	         	},
@@ -309,7 +309,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		if($(this).val() == 'false'){
 			$('input[name=tipoTelefono]').attr("disabled",false);
 		}else{
-			$('input[name=tipoTelefono]').attr("disabled",true);
+			 $('input:radio[name="tipoTelefono"][value="celular"]').prop('checked', true);
+			 $('input[name=tipoTelefono]').attr("disabled",true);
 		}
     });	
   	
@@ -532,7 +533,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	$(function() {
 		$("#codigoPostal").focusout(
 			function() {
-				if (this.value.length >= 4 && this.value > 1000) {
+				if (this.value.length >= 5 && this.value > 1000) {
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
@@ -542,10 +543,6 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
 							$("#colonia option[value='#']").remove();
-							$("#colonia").append($('<option>', {
-								value : "",
-								text : "--- Selecciona ---"
-							}));
 							$.each(data.result.location, function(
 									i, item) {
 								$("#colonia").append(
@@ -580,7 +577,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 //convierte en mayusculas
 	
 	
-	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior').keyup(function(){	
+	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad').keyup(function(){	
 		$(this).val($(this).val().toUpperCase());
 	});
 	
@@ -616,7 +613,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	
 //Numeros y letras
 	
-	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function(e) {
+	$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
 //		alert(key);

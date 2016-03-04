@@ -187,14 +187,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		      	required: "Por favor, proporciona el n&uacute;mero de identificaci&oacute;n"
 		      		},
       		primerNombre: {
-		      	required: "Por favor, proporcione el Nombre",
+		      	required: "Por favor, proporciona el primer nombre.",
 		      	maxlength: "El primer nombre debe ir a 40 d&iacute;gitos"
 		      		},
 		    segundoNombre: {
 		    	maxlength: "El segundo nombre debe ir a 40 d&iacute;gitos"
 		    		},
 		    paterno: {
-		      		required: "Por favor, proporcione el Apellido",
+		      		required: "Por favor, proporciona el apellido paterno.",
 		      		maxlength: "El apellido paterno debe ir a 40 d&iacute;gitos"
 		    		},
 		    materno: {
@@ -210,13 +210,13 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	              required: "Por favor, elige un Pa&iacute;s"
 	         		},
 	        lugarNacimiento: {
-	              required: "Por favor, elige un Lugar"
+	              required: "Por favor, elige un lugar de nacimiento."
 	         		},
 	        genero: {
 	        	  required: "Por favor, elige un g&eacute;nero"
 	         		},
 	        sms: {
-	        	  required: "Por favor, elige si desean env&iacute;o de SMS"
+	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
 	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
@@ -233,10 +233,10 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        	required: "Por favor, elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor, proporciona la delegaci&oacute;n"
+	        	required: "Por favor, proporciona el nombre de Delegaci&oacuten/Municipio."
 	             },
 	        ciudad: {
-	        	required: "Por favor, proporciona la ciudad"
+	        	required: "Por favor, proporciona el nombre de la Ciudad."
 	            },
 	        colonia: {
 	        	required: "Por favor, elige una colonia."

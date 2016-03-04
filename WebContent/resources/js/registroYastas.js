@@ -183,7 +183,7 @@ $(document).ready(function(){
 		      	required: "Por favor, proporcione el n&uacute;mero de identificaci&oacute;n"
 		      		},
       		primerNombre: {
-		      	required: "Por favor, proporciona el primer nombre",
+		      	required: "Por favor, proporciona el primer nombre.",
 		      	maxlength: "El primer nombre debe ir a 40 d&iacute;gitos"
 		      		},
 		    segundoNombre: {
@@ -206,13 +206,13 @@ $(document).ready(function(){
 	              required: "Por favor, elige un Pa&iacute;s"
 	         		},
 	        lugarNacimiento: {
-	              required: "Por favor, elige un Lugar"
+	              required: "Por favor, elige un lugar de nacimiento."
 	         		},
 	        genero: {
 	        	  required: "Por favor, elige un g&eacute;nero"
 	         		},
 	        sms: {
-	        	  required: "Elige si desean env&iacute;o SMS"
+	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
 	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
@@ -229,10 +229,10 @@ $(document).ready(function(){
 	        	required: "Por favor, elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor, proporciona el nombre de Delegaci&oacute;n/Municipio"
+	        	required: "Por favor, proporciona el nombre de Delegaci&oacuten/Municipio."
 	             },
 	        ciudad: {
-	        	required: "Por favor, proporciona la ciudad"
+	        	required: "Por favor, proporciona el nombre de la Ciudad."
 	            },
 	        colonia: {
 	        	required: "Por favor, elige una colonia."

@@ -94,7 +94,7 @@
 				<div class="clear"> </div>
 				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="fechaNacimiento" class="texGris09_13">Fecha de nacimiento * </label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText" id="fechaNacimiento" ><br>
+				<label for="fechaNacimiento" class="texGris09_13">Fecha de nacimiento * <br> (DD/MM/AAAA)</label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText" id="fechaNacimiento" ><br>
 				<div class="clear"> </div>
 		
 				<label class="texGris09_13">Nacionalidad * </label>
@@ -106,7 +106,6 @@
 		
 				<label class="texGris09_13">Pa&iacute;s Nacimiento * </label>
 				<select class="select inputText texGris09_13" name="paisNacimiento" id="paisNacimiento">
-					<option value="" class="texGris09_13">--Pais--</option>
 				</select><br><br>
 		
 				<label class="texGris09_13">Lugar de Nacimiento * </label>
@@ -125,7 +124,7 @@
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa" value="casa" class="inputRadio" value="1" >Casa</label>
 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio" value="negocio" class="inputRadio" value="3">Negocio</label><br>
 		
-				<label for="telefono" class="texGris09_13">Tel&eacute;fono de contacto *<br>10 d&iacute;gitos </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
+				<label for="telefono" class="texGris09_13">Tel&eacute;fono de contacto *<br>(10 d&iacute;gitos) </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText" maxlength="10">
 				
 		<!-- Direccion -->
 			<p class="tituloMango">Direcci&oacute;n</p><br><br>
@@ -147,7 +146,7 @@
 		
 				<label class="texGris09_13">Colonia * </label>
 				<select class="select inputText" id="colonia" name="colonia">
-					<option value="" class="texGris09_13">--- Selecciona ---</option>
+					<option value="" class="texGris09_13">--Seleccionar--</option>
 				</select><br><br>
 		
 				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText" maxlength="60"><br>

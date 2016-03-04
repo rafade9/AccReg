@@ -17,7 +17,7 @@ $(document).ready(function(){
 	mensajesCompartamos[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Genera e imprime Carta de Personas Bloquedas.</p>";
 	mensajesCompartamos[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesCompartamos[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
-	mensajesCompartamos[99] = "<msg class='redMsgClass'>Error de conexi&oacute;n, Favor de contactar a su Administrador</msg>";
+	mensajesCompartamos[99] = "<msg class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</msg>";
 
 
 //focus al campo de folio
@@ -294,6 +294,9 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
                      	document.getElementById('botonSal').style.display = 'block';
                     }
                    $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo]);
+                },
+                error: function(data){
+                	
                 }
             });
 	            return false; 

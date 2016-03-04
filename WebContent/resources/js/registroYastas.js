@@ -476,6 +476,7 @@ $(document).ready(function(){
 		          .val( "" )
 		          .attr( "title", value + " no coincide con ningún país" )
 		          .tooltip( "open" );
+		        $("#lugarNacimiento").empty();
 		        this.element.val( "" );
 		        this._delay(function() {
 		          this.input.tooltip( "close" ).attr( "title", "" );
@@ -532,7 +533,7 @@ $(document).ready(function(){
 				key = e.keyCode || e.which;
 			       tecla = String.fromCharCode(key).toLowerCase();
 			       letras = " abcdefghijklmnñopqrstuvwxyz";
-			       especiales = "8-37-39-46";
+			       especiales = ["8","13"];
 
 			       tecla_especial = false;
 			       for(var i in especiales){
@@ -560,7 +561,7 @@ $(document).ready(function(){
 				key = e.keyCode || e.which;
 			       tecla = String.fromCharCode(key).toLowerCase();
 			       letras = " abcdefghijklmnñopqrstuvwxyz";
-			       especiales = "8-9-37-39-46";
+			       especiales = ["8","13","9","32"];
 
 			       tecla_especial = false;
 			       for(var i in especiales){

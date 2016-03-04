@@ -48,8 +48,9 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 			$('<option>', {
 				value : "",
 				text : "--Seleccionar--"
-			}));	
+			}));
 	
+
 
 //Obtenemos que tipo de nacionalidad fue seleccionada
 	$(function() {
@@ -481,7 +482,11 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		          .val( "" )
 		          .attr( "title", value + " no coincide con ningún país" )
 		          .tooltip( "open" );
+		        $("#lugarNacimiento").empty();
 		        this.element.val( "" );
+		        estados = $.map(allData, function(item) {
+				});
+		        
 		        this._delay(function() {
 		          this.input.tooltip( "close" ).attr( "title", "" );
 		        }, 2500 );
@@ -507,6 +512,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 //solo numeros explorer8
 	  
 		  $("#folio, #telefono, #codigoPostal").keydown(function (e) {
+//			  alert(e.keyCode);
 				  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 					  // Permite: Ctrl+A
 					  (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -582,13 +588,13 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	});
 	
 	
-//Solo letras
+	//Solo letras
 	$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();
 	       letras = " abcdefghijklmnñopqrstuvwxyz";
-	       especiales = "8-37-39-46";
+	       especiales = ["8","13"];
 
 	       tecla_especial = false;
 	       for(var i in especiales){
@@ -597,8 +603,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	                break;
 	            }
 	        }
-
-	        if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+	       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
 	            return false;
 	        }
 	});
@@ -619,7 +624,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 //		alert(key);
 	       tecla = String.fromCharCode(key).toLowerCase();
 	       letras = " abcdefghijklmnñopqrstuvwxyz";
-	       especiales = "8-9-37-32-39-46";
+	       especiales = ["8","13","9","32"];
 
 	       tecla_especial = false;
 	       for(var i in especiales){
@@ -634,11 +639,6 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        }
 	});
 
-		
-	
-//	$('#numeroIdentificacion, #calle, #numExterior, #numInterior').keypress(function (){
-//	    this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
-//	  });
 	
 });
 

@@ -6,8 +6,9 @@
 <title>Compartamos</title>  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" title="" href="resources/css/loginCompartamos.css" type="text/css">
+  <link href="resources/img/faviconCompartamos.ico" rel="icon" type="image/x-icon">
   
-  <script src="resources/js/jquery-1.11.0.js"></script>
+  <script src="resources/js/jquery-1.10.1.js"></script>
   <script src="resources/js/jquery.validate.js"></script>
   <script src="resources/js/loginCompartamos.js"></script>
   <script src="resources/js/messages_es.js"></script>

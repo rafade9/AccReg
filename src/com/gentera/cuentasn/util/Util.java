@@ -225,7 +225,11 @@ public class Util {
 
 	}
 	
-	
+/**
+ * Metodo para enmascarar	
+ * @param numTarjeta
+ * @return
+ */
 	public static String enmascaraTarj(String numTarjeta){
 		String tarjeta = "";
 		if(numTarjeta.length()>5){
@@ -237,5 +241,18 @@ public class Util {
 		return tarjeta;
 	}
 
+/**
+ * Metodo que valida si una cadena contiene solo numeros
+ * @param cadena
+ * @return
+ */
+	public static boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
+	}
 	
 }

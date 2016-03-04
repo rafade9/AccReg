@@ -17,25 +17,43 @@ $(document).ready(function(){
 	mensajesYastas[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *11.</p>";
 	mensajesYastas[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
+	mensajesYastas[99] = "<msg class='redMsgClass'>Error de conexi&oacute;n, Favor de contactar a su Administrador</msg>";
+	
+//focus al campo de folio
+	$("input:text:visible:first").focus();
+	
+//establecemos el mensaje por default
+	$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
+	
 	
 //Catalogo de paises
 	
-	var htmlPaises = "";
-	$.getJSON("/CuentasN2/catalogos/paises", function(allData) {
+	$(function() {
+		$.getJSON("/CuentasN2/catalogos/paises", function(allData) {
 			paises = $.map(allData, function(item) {
-				htmlPaises += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+				$("#paisNacimiento").append(
+						$('<option>', {
+							value : item.clave,
+							text : item.nombre
+						}));
+			
 			});
-	})
-	.done(function() {
-		document.getElementById("paisNacimiento").innerHTML = htmlPaises;
-  	});
+		});
+	});
 	
 
+//Option default de estados	
+	$("#lugarNacimiento").append(
+			$('<option>', {
+				value : "",
+				text : "--Seleccionar--"
+			}));		
+	
 	
 //Obtenemos que tipo de nacionalidad fue seleccionada	
 	$("#nacionalidad").change(function(){
 		var valor=$("#nacionalidad").val();
-			if(valor=='Otro'){
+			if(valor=='OTRA'){
 //				document.getElementById('mensajeNac').style.display = 'block';
 				$("#mensajeNac").toggle("slow");
 				jQuery("#enviar").attr('disabled',true);
@@ -50,8 +68,10 @@ $(document).ready(function(){
 	$("input[name=tipoIdentificacion]").click(function () {
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
 		}else{
 			document.getElementById("numeroIdentificacion").maxLength = "9";
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Pasaporte No.");
 		}
 	});
 
@@ -96,7 +116,8 @@ $(document).ready(function(){
 	          },
 	        fechaNacimiento: {
 	           required: true,
-	           dateFormat: true
+	           dateFormat: true,
+	           dateRango: true
 	         },
 	         nacionalidad: {
 	             required: true
@@ -151,87 +172,88 @@ $(document).ready(function(){
 	    },
 	    messages: {
 	    	folio: {
-		        required: "Por favor proporcione el n&uacutemero de folio",
-		        number:"Por favor proporciona s&oacutelo n&uacutemeros"
+		        required: "Por favor, proporciona el n&uacute;mero de folio",
+		        number:"Por favor, proporciona s&oacute;lo n&uacute;meros"
 		        	
 		      		},	
 		    tipoIdentificacion: {
-		      	required: "Por favor elige el tipo de identificaci&oacuten"
+		      	required: "Por favor, elige el tipo de identificaci&oacute;n"
 		      		},
 		    numeroIdentificacion: {
-		      	required: "Por favor proporcione el n&uacutemero de identificaci&oacuten"
+		      	required: "Por favor, proporcione el n&uacute;mero de identificaci&oacute;n"
 		      		},
       		primerNombre: {
-		      	required: "Por favor proporcione el Nombre",
+		      	required: "Por favor, proporciona el primer nombre.",
 		      	maxlength: "El primer nombre debe ir a 40 d&iacute;gitos"
 		      		},
 		    segundoNombre: {
 		    	maxlength: "El segundo nombre debe ir a 40 d&iacute;gitos"
 		    		},
 		    paterno: {
-		      		required: "Por favor proporcione el Apellido",
+		      		required: "Por favor, proporciona el apellido paterno",
 		      		maxlength: "El apellido paterno debe ir a 40 d&iacute;gitos"
 		    		},
 		    materno: {
 		    		maxlength: "El apellido materno debe ir a 40 d&iacute;gitos"
 		    		},
 		    fechaNacimiento: {
-		    		required: "Por favor porporcione la fecha"
+		    		required: "Por favor, proporcione la fecha de nacimiento."
 		    		},
 	        nacionalidad: {
-	            	required: "Por favor elige una Nacionalidad"
+	            	required: "Por favor, elige una Nacionalidad"
 	          		},
 	        paisNacimiento: {
-	              required: "Por favor elige un Pais"
+	              required: "Por favor, elige un Pa&iacute;s"
 	         		},
 	        lugarNacimiento: {
-	              required: "Por favor elige un Lugar"
+	              required: "Por favor, elige un lugar de nacimiento."
 	         		},
 	        genero: {
-	        	  required: "Por favor elige un g&eacute;nero"
+	        	  required: "Por favor, elige un g&eacute;nero"
 	         		},
 	        sms: {
-	        	  required: "Elige si desean env&iacute;o SMS"
+	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
-	        	required: "Por favor proporcione el n&uacutemero de tel&eacute;fono",
-	        	number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	minlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos",
+	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
+	        	number: "Por favor proporcione s&oacutelo n&uacute;meros",
+	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
 	             },
 	        codigoPostal: {
-	        	required: "Por favor proporcione el c&oacutedigo Postal",
-	        	number: "Por favor proporcione s&oacute;lo n&uacute;meros"
+	        	required: "Por favor, proporciona el C&oacute;digo Postal.",
+	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
+	        	minlength: "Por favor, captura el C&oacute;digo Postal a 5 d&iacute;gitos"
 	        	},
 	        estado: {
-	        	required: "Por favor elige un estado"
+	        	required: "Por favor, elige un estado"
 	             },
 	        delegacion: {
-	        	required: "Por favor proporciona la delegaci&oacuten"
+	        	required: "Por favor, proporciona el nombre de Delegaci&oacuten/Municipio."
 	             },
 	        ciudad: {
-	        	required: "Por favor proporciona la ciudad"
+	        	required: "Por favor, proporciona el nombre de la Ciudad."
 	            },
 	        colonia: {
-	        	required: "Por favor proporciona la colonia"
+	        	required: "Por favor, elige una colonia."
 	            	},
         	calle: {
-	        	required: "Por favor proporciona la calle",
+	        	required: "Por favor, proporciona el nombre de la calle.",
 	        	maxlength: "El nombre de la calle debe ir a 60 d&iacute;gitos"
 	            	},
 	         numExterior: {
-	        	 required: "Por favor proporciona el numero Exterior",
-	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	 maxlength: "El n&uacutemero exterior debe ir a 10 d&iacute;gitos"
+	        	 required: "Por favor, proporciona el n&uacute;mero Exterior",
+	        	 number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
+	        	 maxlength: "El n&uacute;mero exterior debe ir a 10 d&iacute;gitos"
 	         	},
 	         numInterior: {
-	        	 number: "Por favor proporcione s&oacutelo n&uacutemeros",
-	        	 maxlength: "El n&uacutemero interior debe ir a 10 d&iacute;gitos"
+	        	 number: "Por favor proporcione s&oacute;lo n&uacutemeros",
+	        	 maxlength: "El n&uacute;mero interior debe ir a 10 d&iacute;gitos"
 	         }
 	    },
 	    submitHandler: function() {	    	
-	    	jQuery("#enviar").attr('disabled',true);
 	    	jsonObj = {}; 
+	    	document.getElementById('bloquea').style.display = 'block';
 	    	
             $(".inputText").each(function(){
                    var keyInput = $(this).attr("name");
@@ -253,7 +275,8 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./registro",
                 success: function(datar){
-                    $("#localhost:8888").html(datar);
+//                    $("#localhost:8888").html(datar);
+                    document.getElementById('bloquea').style.display = 'none';
                     if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10' ){
                     	document.getElementById('seccionCliente').style.display = 'none';//ocultamos el formulario
                     	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
@@ -281,6 +304,7 @@ $(document).ready(function(){
 		if($(this).val() == 'false'){
 			$('input[name=tipoTelefono]').attr("disabled",false);
 		}else{
+			$('input:radio[name="tipoTelefono"][value="celular"]').prop('checked', true);
 			$('input[name=tipoTelefono]').attr("disabled",true);
 		}
     });	
@@ -292,8 +316,7 @@ $(document).ready(function(){
 	});
 	
 	
-	
-//Autocompletar
+	//Autocompletar
 	
 	  (function( $ ) {
 		    $.widget( "custom.combobox", {
@@ -390,16 +413,18 @@ $(document).ready(function(){
 		 
 		        // Selected an item, nothing to do
 		        if ( ui.item ) {
+		        $("#lugarNacimiento").empty();
 				var valor=$("#paisNacimiento").val();
-				var htmlEstados = "";
 				$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
 						estados = $.map(allData, function(item) {
-							htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
+							$("#lugarNacimiento").append(
+									$('<option>', {
+										value : item.clave,
+										text : item.nombre
+									}));
+						
 						});
-				})
-				.done(function() {
-					document.getElementById("lugarNacimiento").innerHTML = htmlEstados;
-			  	});
+					});
 				
 				
 		          return;
@@ -412,12 +437,17 @@ $(document).ready(function(){
 		        this.element.children( "option" ).each(function() {
 		          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
 		            this.selected = valid = true;
+		            $("#lugarNacimiento").empty();
 		            var valor=$("#paisNacimiento").val();
-			        var htmlEstados = "";
-					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
-							estados = $.map(allData, function(item) {
-								htmlEstados += "<option value=" + item.clave + ">" + item.nombre + "</option>";
-							});
+		            $.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+						estados = $.map(allData, function(item) {
+							$("#lugarNacimiento").append(
+									$('<option>', {
+										value : item.clave,
+										text : item.nombre
+									}));
+						
+						});
 					});
 			        
 		            return false;
@@ -426,21 +456,32 @@ $(document).ready(function(){
 		 
 		        // Found a match, nothing to do
 		        if ( valid ) {
+		        	$("#lugarNacimiento").empty();
 		        	var valor=$("#paisNacimiento").val();
-//		            alert(valor);	
+		        	$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+						estados = $.map(allData, function(item) {
+							$("#lugarNacimiento").append(
+									$('<option>', {
+										value : item.clave,
+										text : item.nombre
+									}));
+						
+						});
+					});	
 		          return;
 		        }
 		 
 		        // Remove invalid value
 		        this.input
 		          .val( "" )
-		          .attr( "title", value + " no coincide con ning?n pais" )
+		          .attr( "title", value + " no coincide con ningún país" )
 		          .tooltip( "open" );
+		        $("#lugarNacimiento").empty();
 		        this.element.val( "" );
 		        this._delay(function() {
 		          this.input.tooltip( "close" ).attr( "title", "" );
 		        }, 2500 );
-		        this.input.autocomplete( "instance" ).term = "";
+//		        this.input.autocomplete( "instance" ).term = "";
 		      },
 		 
 		      _destroy: function() {
@@ -456,7 +497,86 @@ $(document).ready(function(){
 		      $( "#combobox" ).toggle();
 		    });
 		  });	
+
 	
+//solo numeros		  
+		  $("#folio, #telefono, #codigoPostal").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+					  // Permite: Ctrl+A
+					  (e.keyCode == 65 && e.ctrlKey === true) ||
+					  // Permite: home, end, left, right
+					  (e.keyCode >= 35 && e.keyCode <= 39) && e.keyCode !== 190) {
+				  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+			  }
+		  });	
+	
+//validacion para grome		  
+		  $('#folio, #telefono, #codigoPostal').keydown(function (){
+	            this.value = this.value.replace(/[^0-9]/g, '');
+	          });		  
+
+
+//convierte en mayusculas
+			
+			$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keyup(function(){	
+				$(this).val($(this).val().toUpperCase());
+			});		  
+		  
+//Solo letras
+			$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function(e) {
+				
+				key = e.keyCode || e.which;
+			       tecla = String.fromCharCode(key).toLowerCase();
+			       letras = " abcdefghijklmnñopqrstuvwxyz";
+			       especiales = ["8","13"];
+
+			       tecla_especial = false;
+			       for(var i in especiales){
+			            if(key == especiales[i]){
+			                tecla_especial = true;
+			                break;
+			            }
+			        }
+
+			        if(letras.indexOf(tecla)==-1 && !tecla_especial){
+			            return false;
+			        }
+			});
+
+//Solo letras y elimina espacios
+		$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function (){
+			    this.value = this.value.replace(/[^A-Ñ-Za-ñ-z]/g, '');
+});			
+			
+			
+//Numeros y letras
+			
+			$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keypress(function(e) {
+				
+				key = e.keyCode || e.which;
+			       tecla = String.fromCharCode(key).toLowerCase();
+			       letras = " abcdefghijklmnñopqrstuvwxyz";
+			       especiales = ["8","13","9","32"];
+
+			       tecla_especial = false;
+			       for(var i in especiales){
+			            if(key == especiales[i]){
+			                tecla_especial = true;
+			                break;
+			            }
+			        }
+
+			        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
+			            return false;
+			        }
+			});
+
+		  
 });
 
 
@@ -466,7 +586,7 @@ $(document).ready(function(){
 	$(function() {
 		$("#codigoPostal").focusout(
 			function() {
-				if (this.value.length >= 4) {
+				if (this.value.length >= 5 && this.value > 1000) {
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
 						$("#colonia").prop('disabled', false);
@@ -476,10 +596,6 @@ $(document).ready(function(){
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
 							$("#colonia option[value='#']").remove();
-							$("#colonia").append($('<option>', {
-								value : "##",
-								text : "--- Selecciona ---"
-							}));
 							$.each(data.result.location, function(
 									i, item) {
 								$("#colonia").append(
@@ -537,7 +653,29 @@ $(document).ready(function(){
 			    function(value, element) {
 			        return value.match(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/);
 			    },
-			    "Por favor proporcione el siguiente formato dd/mm/yyyy.");
+			    "Por favor, capture una fecha v&aacute;lida.");
+
+		
+//Valida que la fecha de nacimiento sea menor que la actual
+		
+		$.validator.addMethod("dateRango",
+			    function(value, element) {
+					var fechaActual = new Date();
+					var anioActual = fechaActual.getFullYear();
+					var fecha=$("#fechaNacimiento").val();
+					valuesStart = fecha.split("/");
+					var anioNac = valuesStart[2];
+					var dateStart=new Date(valuesStart[2],(valuesStart[1]-1),valuesStart[0]);
+					if(fechaActual<dateStart){
+						$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
+						return false;
+					}if((anioActual-anioNac)>100){
+						$.validator.messages.dateRango = "Por favor, capture una fecha menor a 100 años.";
+						return false;
+					}
+					return true;
+			    });
+		
 		
 		
 		//Valida el campo de numero de identificacion
@@ -547,14 +685,14 @@ $(document).ready(function(){
                                    if($('input:radio[name=tipoIdentificacion]:checked').val() == 'FS0002'){
                                           patron = /^[a-zA-Z0-9]{9}$/;
                                    }else{
-                                	   	  patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}[0-3]{1}[0-9]{1}[h-m|H-M]{1}[0-9]{3}$/;
+                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
                                    }
                                    
                       return value.match(patron,'');
                },
-        "Por favor, proporcione el numero de identificaci&oacuten correcto.");   
+        "Por favor, proporciona el n&uacute;mero de identificaci&oacute;n correcto.");   
         
         //Solo letras
         jQuery.validator.addMethod("lettersonly", function(value, element) {
-        	  return this.optional(element) || /^[a-zñÑ]+$/i.test(value);
-        	}, "Por favor, proporcione solo letras."); 
+        	  return this.optional(element) || /^[a-ñ-z]+$/i.test(value);
+        	}, "Por favor, proporciona s&oacute;lo letras."); 

@@ -144,7 +144,7 @@
 		
 				<label class="texGris09_13">Colonia * </label>
 				<select class="select inputText" id="colonia" name="colonia">
-					<option value="" class="texGris09_13">--- Selecciona ---</option>
+					<option value="" class="texGris09_13">--Seleccionar--</option>
 				</select><br><br>
 		
 				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText" maxlength="60"><br>

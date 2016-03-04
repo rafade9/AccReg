@@ -3,12 +3,17 @@
  */
 package com.gentera.cuentasn.entities;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 /**
  * Entidad
  * @author Rafael Delgadillo
  * @version 1.0
  */
-public class Usuario {
+public class Usuario implements UserDetails{
 
 	private Integer idUsuario;
 	private String username;
@@ -16,6 +21,9 @@ public class Usuario {
 	private String folioTarjeta;
 	private String origen;
 	private String captcha;
+	
+	private String numEmpleado;
+	private boolean enabled;
 
 	/**
 	 * Getter IdUsuario
@@ -111,6 +119,71 @@ public class Usuario {
 	 */
 	public void setCaptcha(String captcha) {
 		this.captcha = captcha;
+	}
+	
+	/**
+	 * Getter numEmpleado
+	 * @return numEmpleado
+	 */
+	public String getNumEmpleado() {
+		return numEmpleado;
+	}
+
+	/**
+	 * Setter numEmpleado
+	 * @param numEmpleado the numEmpleado to set
+	 */
+	public void setNumEmpleado(String numEmpleado) {
+		this.numEmpleado = numEmpleado;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#getAuthorities()
+	 */
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired()
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isAccountNonLocked()
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isCredentialsNonExpired()
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	public void setEnabled(boolean enabled){
+		this.enabled = enabled;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetails#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return this.enabled;
 	}
 
 }

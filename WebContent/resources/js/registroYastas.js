@@ -288,7 +288,16 @@ $(document).ready(function(){
                     	document.getElementById('botonSalir').style.display = 'block';
                     }
                     $('#mensajeRegistro').html(mensajesYastas[datar.codigo]);
-                }
+                },
+                error: function(data){
+                   	document.getElementById('bloquea').style.display = 'none';
+                	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                 	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                 	document.getElementById('botonSal').style.display = 'block';
+                	$('#mensajeRegistro').html(mensajesCompartamos[99]);
+     
+            }
+            
             });
 	            return false; 
 	    

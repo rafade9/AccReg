@@ -140,7 +140,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	             required: true
 	         },
 	         telefono: {
-	             required: true,
+//	             required: true,
 	             number: true,
 	             minlength: 10,
 	             maxlength: 10
@@ -219,7 +219,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
-	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
+//	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
 	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
 	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
@@ -296,7 +296,11 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
                    $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo]);
                 },
                 error: function(data){
-                	
+                	document.getElementById('bloquea').style.display = 'none';
+                	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                 	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                 	document.getElementById('botonSal').style.display = 'block';
+                	$('#mensajeRegistro').html(mensajesCompartamos[99]);
                 }
             });
 	            return false; 

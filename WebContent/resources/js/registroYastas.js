@@ -17,7 +17,7 @@ $(document).ready(function(){
 	mensajesYastas[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *11.</p>";
 	mensajesYastas[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
-	mensajesYastas[99] = "<msg class='redMsgClass'>Error de conexi&oacute;n, Favor de contactar a su Administrador</msg>";
+	mensajesYastas[99] = "<msg class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</msg>";
 	
 //focus al campo de folio
 	$("input:text:visible:first").focus();
@@ -135,7 +135,7 @@ $(document).ready(function(){
 	             required: true
 	         },
 	         telefono: {
-	             required: true,
+//	             required: true,
 	             number: true,
 	             minlength: 10,
 	             maxlength: 10
@@ -215,7 +215,7 @@ $(document).ready(function(){
 	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
-	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
+//	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
 	        	number: "Por favor proporcione s&oacutelo n&uacute;meros",
 	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
@@ -288,7 +288,16 @@ $(document).ready(function(){
                     	document.getElementById('botonSalir').style.display = 'block';
                     }
                     $('#mensajeRegistro').html(mensajesYastas[datar.codigo]);
-                }
+                },
+                error: function(data){
+                   	document.getElementById('bloquea').style.display = 'none';
+                	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
+                 	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
+                 	document.getElementById('botonSalir').style.display = 'block';
+                	$('#mensajeRegistro').html(mensajesYastas[99]);
+     
+            }
+            
             });
 	            return false; 
 	    

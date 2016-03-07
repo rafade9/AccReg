@@ -32,7 +32,7 @@ public class CustomUserDetailsMapper implements UserDetailsContextMapper {
 		Usuario user = new Usuario();
 		System.out.println(ctx.getStringAttribute("employeeID"));
 		user.setNumEmpleado(ctx.getStringAttribute("employeeID"));
-		
+		user.setOrigen("compartamos");
 		System.out.println(ctx.getStringAttribute("userAccountControl"));
 		
 		if(!ctx.getStringAttribute("userAccountControl").equals("512")){

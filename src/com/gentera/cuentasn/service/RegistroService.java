@@ -18,7 +18,7 @@ public interface RegistroService {
 	 * @param persona
 	 * @return Respuesta del servicio web procesada para el front
 	 */
-	public Respuesta registrar(Persona persona) throws Exception;
+	public Respuesta registrar(Persona persona, String ip) throws Exception;
 	
 	public String pruebaWs();
 }

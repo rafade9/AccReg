@@ -46,15 +46,13 @@ public class RegistroController {
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
 	public ResponseEntity<Respuesta> registrar(HttpServletRequest request, HttpServletResponse response,@RequestBody Persona persona) {
 		try{
-			Respuesta respuesta = registroService.registrar(persona);
+			Respuesta respuesta = registroService.registrar(persona, request.getRemoteAddr());
 			
 			request.getSession().setAttribute("respuesta", respuesta);
-			
 			return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		}catch(Exception e){
-			logger.error(e);
-			e.printStackTrace();
 			Respuesta respuesta = new Respuesta();
+			respuesta.setCodigo(99);
 			respuesta.setMensaje(e.getMessage());
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
 		}

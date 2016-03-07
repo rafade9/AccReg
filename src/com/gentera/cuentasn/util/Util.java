@@ -1,9 +1,11 @@
 package com.gentera.cuentasn.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.TimeZone;
 
 import com.gentera.cuentasn.entities.Persona;
@@ -253,6 +255,38 @@ public class Util {
 		} catch (NumberFormatException nfe){
 			return false;
 		}
+	}
+	
+	public static String formatNumEmpleado(String numEmpleado){
+		StringBuffer numEmpleadoFormateado = new StringBuffer();
+		numEmpleadoFormateado.append("E");
+		
+		int totalLenght = 9;
+		int longNumEmpleado = numEmpleado.length();
+		int zeros = totalLenght-longNumEmpleado;
+		
+		for(int i = 0; i < zeros; i++){
+			numEmpleadoFormateado.append("0");
+		}
+		
+		numEmpleadoFormateado.append(numEmpleado);
+		
+		return numEmpleadoFormateado.toString();
+	}
+	
+	public static String generaClaveError(){
+		StringBuffer clave = new StringBuffer();
+		clave.append("Err-");
+		
+		Date hoy = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat("yyMMddmmss");
+		clave.append(ft.format(hoy));
+		
+		Random r = new Random();
+		
+		clave.append(r.nextInt(9));
+		
+		return clave.toString();
 	}
 	
 }

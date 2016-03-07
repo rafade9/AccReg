@@ -17,9 +17,10 @@ public interface WebServiceConnector {
 	/**
 	 * Consumo de Web Service CRM para registrar persona
 	 * @param persona
+	 * @Param ip
 	 * @return
 	 */
-	public Respuesta sendData(Persona persona);
+	public Respuesta sendData(Persona persona, String ip) throws Exception;
 
 	/**
 	 * Consumo de Web Service Card Manager para consultar tarjetas

@@ -46,7 +46,9 @@ import com.compartamos.common.gdt.ZBankCardContractID;
 import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.util.Properties;
+import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
 import mx.com.gentera.crm.level2accountmanage.int_0133.BusinessPartnerCreateLevel2AccountData;
@@ -85,7 +87,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#sendData(com.gentera.cuentasn.entities.Persona)
 	 */
 	@Override
-	public Respuesta sendData(Persona persona) {
+	public Respuesta sendData(Persona persona, String ip) throws Exception{
 		Respuesta respuesta = new Respuesta();
 		try {
 			// Se genera el stub con el endpoint al cual apunta
@@ -134,26 +136,54 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			// ID BP Empleado ---Viene de CRM
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
 			
-			//Código temporal
-			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
-			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("eliana")){
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-				officeId.setOrganisationalCentreID(new Token("4626")); // Minatitlan
-			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("yastas")){
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-				officeId.setOrganisationalCentreID(new Token("4626")); // Poza Rica
-			}else{
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000001000"));
-				officeId.setOrganisationalCentreID(new Token("1037"));
+			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			logger.info("Se verifica origen");
+			String origen = user.getOrigen();
+			
+			if(origen.equals("compartamos")){
+				logger.info("Se recupera el numero de nomina");
+				System.out.println("Se recupera el numero de nomina");
+			
+				String numEmpleado = user.getNumEmpleado();
+			
+				if(numEmpleado==null){
+					throw new Exception("El empleado no cuenta con número de nómina");
+				}
+				//Se formatea el numero de empleado y se añade al bp
+				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
+				
+				String numPlaza = Properties.getSucursalByIp(ip);
+				
+				if(numPlaza==null){
+					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
+				}
+				
+				logger.info("Sucursal No. " + numPlaza);
+				officeId.setOrganisationalCentreID(new Token(numPlaza));
 			}
+			
+			//Código temporal
+//			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
+//				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
+//			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("eliana")){
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+//				officeId.setOrganisationalCentreID(new Token("4626")); // Minatitlan
+//			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("yastas")){
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+//				officeId.setOrganisationalCentreID(new Token("4626")); // Poza Rica
+//			}else{
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000001000"));
+//				officeId.setOrganisationalCentreID(new Token("1037"));
+//			}
 			
 //			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
 //				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
 //			}else{
 //				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
 //			}
+			
+			
 			identifiers.setBusinessPartnerID(bpEmpleado);
 
 			// ID Comercio --- Propio

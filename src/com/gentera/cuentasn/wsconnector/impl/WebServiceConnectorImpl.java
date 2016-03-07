@@ -162,6 +162,11 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				officeId.setOrganisationalCentreID(new Token(numPlaza));
 			}
 			
+			else{
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+				officeId.setOrganisationalCentreID(new Token("4626"));
+			}
+			
 			//Código temporal
 //			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
 //				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));

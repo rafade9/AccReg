@@ -17,7 +17,7 @@ $(document).ready(function(){
 	mensajesYastas[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Por favor imprima el ticket en su terminal seleccionando *11.</p>";
 	mensajesYastas[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesYastas[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
-	mensajesYastas[99] = "<msg class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</msg>";
+	mensajesYastas[99] = "<p class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</p>";
 	
 //focus al campo de folio
 	$("input:text:visible:first").focus();

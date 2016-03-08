@@ -11,6 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.util.OperadoresArchivo;
 
 @Component
@@ -31,7 +32,11 @@ public class YastasAuthenticationProvider implements AuthenticationProvider {
 					if(operadores.contains(name)){
 						List<GrantedAuthority> grantedAuths = new ArrayList<>();
 						logger.info("Ingreso del Operador: " + name);
-						return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+//						return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+						Usuario user = new Usuario();
+						user.setUsername(name);
+						user.setOrigen("yastas");
+						return new UsernamePasswordAuthenticationToken(user, name);
 					}else{
 						return null;
 					}

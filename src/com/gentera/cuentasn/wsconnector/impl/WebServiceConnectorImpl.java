@@ -167,28 +167,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				officeId.setOrganisationalCentreID(new Token("4626"));
 			}
 			
-			//Código temporal
-//			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-//				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
-//			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("eliana")){
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-//				officeId.setOrganisationalCentreID(new Token("4626")); // Minatitlan
-//			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("yastas")){
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-//				officeId.setOrganisationalCentreID(new Token("4626")); // Poza Rica
-//			}else{
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000001000"));
-//				officeId.setOrganisationalCentreID(new Token("1037"));
-//			}
 			
-//			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-//			}else{
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-//			}
-			
-			
+			identifiers.setServiceOfficeID(officeId);
 			identifiers.setBusinessPartnerID(bpEmpleado);
 
 			// ID Comercio --- Propio
@@ -312,15 +292,11 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			AcctOriginationBusinessPartnerPhone phoneData = new AcctOriginationBusinessPartnerPhone();
 			// Tipo de telefono
 			PhoneTypeID phoneType = new PhoneTypeID();
-			if (persona.isSms()) {
-				phoneType.setPhoneTypeID(new Token("6")); // Si cliente acepta
-															// sms, se pone por
-															// decreto el 6
-															// (celular para
-															// sms)
-			} else {
+//			if (persona.isSms()) {
+//				phoneType.setPhoneTypeID(new Token("6")); 
+//			} else {
 				phoneType.setPhoneTypeID(new Token(persona.getTipoTelefono()));
-			}
+//			}
 
 			phoneData.setPhoneTypeID(phoneType);
 			PhoneNumberV1 phoneNumber = new PhoneNumberV1();

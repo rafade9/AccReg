@@ -310,7 +310,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	
 	
 //desabilita los radio buttons para saber que tipo de telefono proporcionan
-	$('input[name=tipoTelefono]').attr("disabled",true);
+	//$('input[name=tipoTelefono]').attr("disabled",true);
 	
 //Obtenemos si el cliente desea envi? de SMS
 	$("input[name=sms]").click(function () {

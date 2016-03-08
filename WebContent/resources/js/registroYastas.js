@@ -267,7 +267,7 @@ $(document).ready(function(){
                       jsonObj[keyInput] = $(this).val();
                      }
             });
-     	    	
+     	    	console.log(JSON.stringify(jsonObj));
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',
@@ -306,7 +306,7 @@ $(document).ready(function(){
 	
 	
 //desabilita los radio buttons para saber que tipo de telefono proporcionan
-	$('input[name=tipoTelefono]').attr("disabled",true);
+	//$('input[name=tipoTelefono]').attr("disabled",true);
 	
 //Obtenemos si el cliente desea envi? de SMS
 	$("input[name=sms]").click(function () {

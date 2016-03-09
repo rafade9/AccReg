@@ -719,7 +719,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
                                    if($('input:radio[name=tipoIdentificacion]:checked').val() == 'FS0002'){
                                           patron = /^[a-zA-Z0-9]{9}$/;
                                    }else{
-                                          patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[1-9]{1}[0-3]{1}[1-9][h-m|H-M]{1}[0-9]{3}$/;
+                                	   patron = /^[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}[0-3]{1}[0-9]{1}[h-m|H-M]{1}[0-9]{3}$/;
                                    }
                                    
                       return value.match(patron,'');

@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.compartamos.cuentasn.view;
 
 import java.io.IOException;
@@ -12,6 +15,8 @@ import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
 import com.gentera.cuentasn.util.Util;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Chunk;
@@ -27,6 +32,12 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+/**
+ * Clase encargada de armar los archivos pdf´s de comprobante y listas bloqueadas
+ * 
+ * @author Mara Vazquez Cruz
+ * @version 1.0
+ */
 public class ComprobantePdfView extends AbstractPdfView{
 
 	final static Logger logger = Logger.getLogger(ComprobantePdfView.class);
@@ -37,8 +48,6 @@ public class ComprobantePdfView extends AbstractPdfView{
 	@SuppressWarnings("rawtypes")
 	protected void buildPdfDocument(Map model, Document document,PdfWriter writer, HttpServletRequest request,HttpServletResponse response)throws Exception {
 
-		logger.info("*******Armando Pdf de comprobante*******");
-
 		Respuesta respuesta = (Respuesta)model.get("respuesta");
 
 		Persona persona = new Persona();
@@ -46,9 +55,9 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 		document.open();
 
-		if(respuesta.getCodigo()==0){
-
-			System.out.println(respuesta.getMensaje());
+		if(respuesta.getCodigo()==0){//generamos comprobante
+			
+			logger.info("*******Armando Pdf de comprobante para la cuenta: "+ respuesta.getCuenta() +" *******");
 
 			//Tabla con información	
 			PdfPTable tabla = new PdfPTable(1);
@@ -87,7 +96,11 @@ public class ComprobantePdfView extends AbstractPdfView{
 			fecha.setExtraParagraphSpace(5);
 			fecha.setBorder(0);
 
-			PdfPCell sede = new PdfPCell(new Phrase("Sede: 2079, Acayucan", letraM));//??
+			LeerCatalogosImpl leerCatalogos = new LeerCatalogosImpl();
+			Sucursal sucursal = new Sucursal();
+			sucursal = leerCatalogos.getSucursalPlaza("10.1.146.0");
+			
+			PdfPCell sede = new PdfPCell(new Phrase("Sede: "+sucursal.getId() +", "+sucursal.getPlaza(), letraM));
 			sede.setHorizontalAlignment(Element.ALIGN_CENTER);
 			sede.setExtraParagraphSpace(5);
 			sede.setBorder(0);
@@ -208,7 +221,9 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 			document.close();
 
-		}else if(respuesta.getCodigo()==8){
+		}else if(respuesta.getCodigo()==8){//generamos pdf de listas bloqueadas
+			
+			logger.info("*******Armando Pdf de listas bloqueadas*******");
 
 			//Tabla con logos		
 			PdfPTable tablaP = new PdfPTable(2);
@@ -441,6 +456,14 @@ public class ComprobantePdfView extends AbstractPdfView{
 		}
 	}
 
+	/**
+	 * Método para realizar la carga de imagenes en los pdf´s
+	 * @param ruta
+	 * @return
+	 * @throws BadElementException
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static Image generaImagen(String ruta) throws BadElementException, MalformedURLException, IOException{
 		Image foto = null;
 		foto = Image.getInstance(ruta);

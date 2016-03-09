@@ -135,7 +135,7 @@ $(document).ready(function(){
 	             required: true
 	         },
 	         telefono: {
-//	             required: true,
+	             required: true,
 	             number: true,
 	             minlength: 10,
 	             maxlength: 10
@@ -215,7 +215,7 @@ $(document).ready(function(){
 	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
-//	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
+	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
 	        	number: "Por favor proporcione s&oacutelo n&uacute;meros",
 	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
@@ -267,7 +267,6 @@ $(document).ready(function(){
                       jsonObj[keyInput] = $(this).val();
                      }
             });
-     	    	console.log(JSON.stringify(jsonObj));
             $.ajax({
                 method: 'POST',
                 contentType: 'application/json',

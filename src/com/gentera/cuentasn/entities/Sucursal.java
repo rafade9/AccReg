@@ -2,18 +2,17 @@ package com.gentera.cuentasn.entities;
 
 public class Sucursal {
 	
-	private Double id;
+	private String id;
 	private String tipo;
 	private String plaza;
 	private String estado;
 	private String ip;
-	private String nombreA;
 	
-
-	public Double getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(Double id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTipo() {
@@ -40,12 +39,10 @@ public class Sucursal {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public String getNombreA() {
-		return nombreA;
-	}
-	public void setNombreA(String nombreA) {
-		this.nombreA = nombreA;
-	}
-	
+	@Override
+	public String toString() {
+		return "Sucursal [id=" + id + ", tipo=" + tipo + ", plaza=" + plaza
+				+ ", estado=" + estado + ", ip=" + ip + "]";
+	}	
 
 }

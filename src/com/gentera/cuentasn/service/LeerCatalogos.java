@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
+import com.gentera.cuentasn.entities.Sucursal;
 
 /**
  * Interfaz
@@ -33,5 +34,12 @@ public interface LeerCatalogos {
 	 * @return Lista de estados pertenecientes a la clave
 	 */
 	public Estado[] getEstadosByIdPais(String idPais);
+	
+	/**
+	 * Lee el archivo properties de las surcursales
+	 * @param ip la ip de la sucursal
+	 * @return Objeto sucursal
+	 */
+	public Sucursal getSucursalPlaza(String ip);
 
 }

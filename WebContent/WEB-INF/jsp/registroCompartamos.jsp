@@ -147,15 +147,16 @@
 				<label class="texGris09_13">Colonia * </label>
 				<select class="select inputText" id="colonia" name="colonia">
 					<option value="" class="texGris09_13">--Seleccionar--</option>
-				</select><br><br>
-		
+				</select>
+				<br><br>
+		    
 				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText" maxlength="60"><br>
 				<label class="texGris09_13">N&uacute;mero Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText" maxlength="10"><br>
 				<label class="texGris09_13">N&uacute;mero Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText" maxlength="10"><br><br>
-			</div>	
+			</div>
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">
-				<input type="button" value=Salir id="btSalir" />
+				<input type="button" value=Salir id="btCancelar" />
 			</div>	
 		</form>
 	</div>

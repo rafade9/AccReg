@@ -17,7 +17,7 @@ $(document).ready(function(){
 	mensajesCompartamos[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Genera e imprime Carta de Personas Bloquedas.</p>";
 	mensajesCompartamos[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesCompartamos[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
-	mensajesCompartamos[99] = "<msg class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</msg>";
+	mensajesCompartamos[99] = "<p class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</p>";
 
 
 //focus al campo de folio
@@ -25,7 +25,7 @@ $("input:text:visible:first").focus();
 	
 
 //establecemos el mensaje por default
-$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
+$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de elector");
 
 
 //Catalogo de paises
@@ -68,11 +68,13 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 		});
 	});
 	
+	
+	
 	//Se cambia maxlength de numero de identificacion
 	$("input[name=tipoIdentificacion]").click(function () {
 		if($(this).val() == 'ZCVELE'){
 			document.getElementById("numeroIdentificacion").maxLength = "18";
-			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral");
+			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de elector");
 		}else{
 			document.getElementById("numeroIdentificacion").maxLength = "9";
 			$('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Pasaporte No.");
@@ -140,7 +142,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	             required: true
 	         },
 	         telefono: {
-//	             required: true,
+	             required: true,
 	             number: true,
 	             minlength: 10,
 	             maxlength: 10
@@ -219,7 +221,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        	  required: "Por favor, elige si desean env&iacute;o de SMS."
 	             },
 	        telefono: {
-//	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
+	        	required: "Por favor, proporciona el N&uacute;mero de Tel&eacute;fono.",
 	        	number: "Por favor, proporcione s&oacute;lo n&uacute;meros",
 	        	minlength: "Por favor, captura el N&uacute;mero de Tel&eacute;fono a 10 d&iacute;gitos.",
 	        	maxlength: "El n&uacute;mero de tel&eacute;fono debe ir a 10 d&iacute;gitos"
@@ -239,7 +241,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        	required: "Por favor, proporciona el nombre de la Ciudad."
 	            },
 	        colonia: {
-	        	required: "Por favor, elige una colonia."
+	        	required: "Por favor, proporciona la colonia."
 	            	},
         	calle: {
 	        	required: "Por favor, proporciona el nombre de la calle.",
@@ -573,10 +575,30 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 							$("#estado").val("");
 							$("#delegacion").val("");
 							$("#ciudad").val("");
-							
-							$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear" type="text" maxlength="30"/>');
+							$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13" type="text" maxlength="30"/>');
 							$("#colonia option").remove();
 							$("#colonia").val("");
+							$('#colonia').keyup(function(){	
+								$(this).val($(this).val().toUpperCase());
+							});		
+							$('#colonia').keypress(function(e) {
+								
+								key = e.keyCode || e.which;
+							       tecla = String.fromCharCode(key).toLowerCase();
+							       letras = " abcdefghijklmnñopqrstuvwxyz";
+							       especiales = ["8","13"];
+
+							       tecla_especial = false;
+							       for(var i in especiales){
+							            if(key == especiales[i]){
+							                tecla_especial = true;
+							                break;
+							            }
+							        }
+							       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+							            return false;
+							        }
+							});
 							
 							$("#divMapa").css("display", "none");
 						}
@@ -587,16 +609,47 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	
 	
 	
+	$("#colonia").change(function(){
+		if($('#colonia').val() == "###"){
+			$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13" type="text" maxlength="30"/>');
+			$("#colonia option").remove();
+			$("#colonia").val("");
+			$('#colonia').keyup(function(){	
+				$(this).val($(this).val().toUpperCase());
+			});
+			$('#colonia').keypress(function(e) {
+				key = e.keyCode || e.which;
+			       tecla = String.fromCharCode(key).toLowerCase();
+			       letras = " abcdefghijklmnñopqrstuvwxyz";
+			       especiales = ["8","13"];
+
+			       tecla_especial = false;
+			       for(var i in especiales){
+			            if(key == especiales[i]){
+			                tecla_especial = true;
+			                break;
+			            }
+			        }
+			       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+			            return false;
+			        }
+			});
+			$("#colonia").focus();		
+		}
+	});
+	
+
+	
 //convierte en mayusculas
 	
 	
-	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad').keyup(function(){	
+	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad, #colonia').keyup(function(){	
 		$(this).val($(this).val().toUpperCase());
 	});
 	
 	
 	//Solo letras
-	$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function(e) {
+	$('#primerNombre,#segundoNombre, #paterno, #materno, #colonia').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();
@@ -615,7 +668,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 	        }
 	});
 
-	$('#primerNombre,#segundoNombre, #paterno, #materno').keypress(function (){
+	$('#primerNombre,#segundoNombre, #paterno, #materno, #colonia').keypress(function (){
     this.value = this.value.replace(/[^A-Ñ-Za-ñ-z]/g, '');
   });
 	
@@ -696,19 +749,33 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave Electoral
 			    function(value, element) {
 					var fechaActual = new Date();
 					var anioActual = fechaActual.getFullYear();
+					var mesActual = fechaActual.getMonth();
+					var diaActual = fechaActual.getDate();
 					var fecha=$("#fechaNacimiento").val();
 					valuesStart = fecha.split("/");
 					var anioNac = valuesStart[2];
+					var mesNac = valuesStart[1]-1;
+					var diaNac = valuesStart[0];
 					var dateStart=new Date(valuesStart[2],(valuesStart[1]-1),valuesStart[0]);
 					if(fechaActual<dateStart){
 						$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
 						return false;
-					}if((anioActual-anioNac)>100){
-						$.validator.messages.dateRango = "Por favor, capture una fecha menor a 100 años.";
-						return false;
+					}else if((anioActual-anioNac)<18){
+						if(mesActual>mesNac){
+							if(diaActual<diaNac)
+								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+								return false;		
+								}
+								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+								return false;
+					}else if(anioActual-anioNac>100){
+						$.validator.messages.dateRango = "Por favor, proporcione una fecha mayor a 100 años.";
+						return false;		
+
 					}
 					return true;
 			    });
+
 		
 		
 		

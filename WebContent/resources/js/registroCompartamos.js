@@ -105,20 +105,16 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	        },
 	        primerNombre: {
 	           required: true,
-	           lettersonly: true,
 	           maxlength: 40
 	        },
 	        segundoNombre: {
-	           lettersonly: true,
 	           maxlength: 40
 	        },
 	        paterno: {
 	            required: true,
-		        lettersonly: true,
 		        maxlength: 40
 	          },
 	        materno: {
-		        lettersonly: true,
 		        maxlength: 40
 	          },
 	        fechaNacimiento: {
@@ -654,7 +650,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();
 	       letras = " abcdefghijklmnñopqrstuvwxyz";
-	       especiales = ["8","13"];
+	       especiales = ["8","13","32"];
 
 	       tecla_especial = false;
 	       for(var i in especiales){
@@ -663,14 +659,10 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	                break;
 	            }
 	        }
-	       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+	       if(letras.indexOf(tecla)==-1 && !tecla_especial){
 	            return false;
 	        }
 	});
-
-	$('#primerNombre,#segundoNombre, #paterno, #materno, #colonia').keypress(function (){
-    this.value = this.value.replace(/[^A-Ñ-Za-ñ-z]/g, '');
-  });
 	
 	
 	
@@ -681,7 +673,6 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
-//		alert(key);
 	       tecla = String.fromCharCode(key).toLowerCase();
 	       letras = " abcdefghijklmnñopqrstuvwxyz";
 	       especiales = ["8","13","9","32"];
@@ -748,9 +739,6 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		$.validator.addMethod("dateRango",
 			    function(value, element) {
 					var fechaActual = new Date();
-					var anioActual = fechaActual.getFullYear();
-					var mesActual = fechaActual.getMonth();
-					var diaActual = fechaActual.getDate();
 					var fecha=$("#fechaNacimiento").val();
 					valuesStart = fecha.split("/");
 					var anioNac = valuesStart[2];
@@ -760,18 +748,20 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 					if(fechaActual<dateStart){
 						$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
 						return false;
-					}else if((anioActual-anioNac)<18){
-						if(mesActual>mesNac){
-							if(diaActual<diaNac)
+					}else{
+						if((fechaActual.getFullYear()-anioNac)<18){
+							$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+							return false;		
+						}else if((fechaActual.getFullYear()-anioNac)==18 && ((fechaActual.getMonth())-mesNac)<0){
 								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
-								return false;		
-								}
-								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
-								return false;
-					}else if(anioActual-anioNac>100){
-						$.validator.messages.dateRango = "Por favor, proporcione una fecha mayor a 100 años.";
-						return false;		
-
+								return false;							
+						}else if((fechaActual.getMonth()-mesNac)==0 && fechaActual.getDate()-diaNac <0){
+							$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+							return false;
+						}else if((fechaActual.getFullYear()-anioNac)>100){
+							$.validator.messages.dateRango = "Por favor, el solicitante no debe ser mayor a 100 años.";
+							return false;
+						}
 					}
 					return true;
 			    });

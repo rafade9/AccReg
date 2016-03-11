@@ -104,20 +104,16 @@ $(document).ready(function(){
 		        },
 		        primerNombre: {
 		           required: true,
-		           lettersonly: true,
 		           maxlength: 40
 		        },
 		        segundoNombre: {
-		           lettersonly: true,
 		           maxlength: 40
 		        },
 		        paterno: {
 		            required: true,
-			        lettersonly: true,
 			        maxlength: 40
 		          },
 		        materno: {
-			        lettersonly: true,
 			        maxlength: 40
 		          },
 		        fechaNacimiento: {
@@ -653,7 +649,7 @@ $(document).ready(function(){
 			key = e.keyCode || e.which;
 		       tecla = String.fromCharCode(key).toLowerCase();
 		       letras = " abcdefghijklmnñopqrstuvwxyz";
-		       especiales = ["8","13"];
+		       especiales = ["8","13","32"];
 
 		       tecla_especial = false;
 		       for(var i in especiales){
@@ -666,12 +662,6 @@ $(document).ready(function(){
 		            return false;
 		        }
 		});
-
-		$('#primerNombre,#segundoNombre, #paterno, #materno, #colonia').keypress(function (){
-	    this.value = this.value.replace(/[^A-Ñ-Za-ñ-z]/g, '');
-	  });
-		
-		
 		
 		
 		
@@ -742,14 +732,11 @@ $(document).ready(function(){
 				    "Por favor, capture una fecha v&aacute;lida.");
 
 
-	//Valida que la fecha de nacimiento sea menor que la actual
+			//Valida que la fecha de nacimiento sea menor que la actual
 			
 			$.validator.addMethod("dateRango",
 				    function(value, element) {
 						var fechaActual = new Date();
-						var anioActual = fechaActual.getFullYear();
-						var mesActual = fechaActual.getMonth();
-						var diaActual = fechaActual.getDate();
 						var fecha=$("#fechaNacimiento").val();
 						valuesStart = fecha.split("/");
 						var anioNac = valuesStart[2];
@@ -759,18 +746,20 @@ $(document).ready(function(){
 						if(fechaActual<dateStart){
 							$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
 							return false;
-						}else if((anioActual-anioNac)<18){
-							if(mesActual>mesNac){
-								if(diaActual<diaNac)
+						}else{
+							if((fechaActual.getFullYear()-anioNac)<18){
+								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+								return false;		
+							}else if((fechaActual.getFullYear()-anioNac)==18 && ((fechaActual.getMonth())-mesNac)<0){
 									$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
-									return false;		
-									}
-									$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
-									return false;
-						}else if(anioActual-anioNac>100){
-							$.validator.messages.dateRango = "Por favor, proporcione una fecha mayor a 100 años.";
-							return false;		
-
+									return false;							
+							}else if((fechaActual.getMonth()-mesNac)==0 && fechaActual.getDate()-diaNac <0){
+								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+								return false;
+							}else if((fechaActual.getFullYear()-anioNac)>100){
+								$.validator.messages.dateRango = "Por favor, el solicitante no debe ser mayor a 100 años.";
+								return false;
+							}
 						}
 						return true;
 				    });

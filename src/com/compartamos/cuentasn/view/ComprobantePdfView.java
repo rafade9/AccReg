@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.gentera.cuentasn.entities.Persona;
@@ -85,7 +86,11 @@ public class ComprobantePdfView extends AbstractPdfView{
 			bancaM.setExtraParagraphSpace(5);
 			bancaM.setBorder(0);
 
-			PdfPCell lugarExp = new PdfPCell(new Phrase("Minatitlán, Veracruz", letraM));
+			LeerCatalogosImpl leerCatalogos = new LeerCatalogosImpl();
+			Sucursal sucursal = new Sucursal();
+			sucursal = leerCatalogos.getSucursalPlaza(request.getRemoteAddr());
+			
+			PdfPCell lugarExp = new PdfPCell(new Phrase(sucursal.getEstado(), letraM));
 			lugarExp.setHorizontalAlignment(Element.ALIGN_CENTER);
 			lugarExp.setExtraParagraphSpace(5);
 			lugarExp.setBorder(0);
@@ -96,16 +101,12 @@ public class ComprobantePdfView extends AbstractPdfView{
 			fecha.setExtraParagraphSpace(5);
 			fecha.setBorder(0);
 
-			LeerCatalogosImpl leerCatalogos = new LeerCatalogosImpl();
-			Sucursal sucursal = new Sucursal();
-			sucursal = leerCatalogos.getSucursalPlaza("10.1.146.0");
-			
 			PdfPCell sede = new PdfPCell(new Phrase("Sede: "+sucursal.getId() +", "+sucursal.getPlaza(), letraM));
 			sede.setHorizontalAlignment(Element.ALIGN_CENTER);
 			sede.setExtraParagraphSpace(5);
 			sede.setBorder(0);
 
-			PdfPCell operador = new PdfPCell(new Phrase("Operador: hramirez", letraM));//??
+			PdfPCell operador = new PdfPCell(new Phrase("Operador: "+SecurityContextHolder.getContext().getAuthentication().getPrincipal(), letraM));//??
 			operador.setHorizontalAlignment(Element.ALIGN_CENTER);
 			operador.setExtraParagraphSpace(20);
 			operador.setBorder(0);

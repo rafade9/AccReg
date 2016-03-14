@@ -1,3 +1,6 @@
+/**
+ * Copyright Gentera S.A.B. de C.V. Febrero 2016
+ */
 package com.gentera.cuentasn.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,11 @@ import org.springframework.web.servlet.mvc.AbstractController;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 
+/**
+ * Clase controller para el manejo de la impresión de pdf´s
+ * @author extuscomunicacion02
+ * @version 1.0
+ */
 public class ComprobantePdfController extends AbstractController{
 
 	final static Logger logger = Logger.getLogger(ComprobantePdfController.class);
@@ -34,6 +42,7 @@ public class ComprobantePdfController extends AbstractController{
 
 			return new ModelAndView("PdfRevenueSummary","respuesta",respuesta);
 		}else{
+			logger.error("No se esta obteniendo el objeto de respuesta para armar pdf´s");
 			return null;
 		}
 	}

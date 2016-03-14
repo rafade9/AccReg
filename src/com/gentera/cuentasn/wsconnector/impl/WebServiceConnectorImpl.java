@@ -47,6 +47,7 @@ import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
 import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
@@ -152,7 +153,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				//Se formatea el numero de empleado y se añade al bp
 				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
 				
-				String numPlaza = Properties.getSucursalByIp(ip);
+//				String numPlaza = Properties.getSucursalByIp("10.1.146.0");
+				LeerCatalogosImpl leercatalogo = new LeerCatalogosImpl();
+				
+//				String numPlaza = leercatalogo.getSucursalPlaza("10.1.146.0").getId();//no subir a branch principal
+				String numPlaza = leercatalogo.getSucursalPlaza(ip).getId();
+
 				
 				if(numPlaza==null){
 					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
@@ -289,23 +295,21 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			/**
 			 * Telefono
 			 */
-			AcctOriginationBusinessPartnerPhone phoneData = new AcctOriginationBusinessPartnerPhone();
-			// Tipo de telefono
-			PhoneTypeID phoneType = new PhoneTypeID();
-//			if (persona.isSms()) {
-//				phoneType.setPhoneTypeID(new Token("6")); 
-//			} else {
+			if(!persona.getTelefono().equals("")){
+				AcctOriginationBusinessPartnerPhone phoneData = new AcctOriginationBusinessPartnerPhone();
+				// Tipo de telefono
+				PhoneTypeID phoneType = new PhoneTypeID();
+				
 				phoneType.setPhoneTypeID(new Token(persona.getTipoTelefono()));
-//			}
+				phoneData.setPhoneTypeID(phoneType);
+				PhoneNumberV1 phoneNumber = new PhoneNumberV1();
+				PhoneNumberSubscriberID number = new PhoneNumberSubscriberID();
+				number.setPhoneNumberSubscriberID(new Token(persona.getTelefono()));
 
-			phoneData.setPhoneTypeID(phoneType);
-			PhoneNumberV1 phoneNumber = new PhoneNumberV1();
-			PhoneNumberSubscriberID number = new PhoneNumberSubscriberID();
-			number.setPhoneNumberSubscriberID(new Token(persona.getTelefono()));
-			phoneNumber.setSubscriberID(number);
-			phoneData.setPhoneNumber(phoneNumber);
-			bp.setPhoneData(phoneData);
-
+				phoneNumber.setSubscriberID(number);
+				phoneData.setPhoneNumber(phoneNumber);
+				bp.setPhoneData(phoneData);
+			}
 			/**
 			 * DIRECCION
 			 */
@@ -383,15 +387,19 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 
 		} catch (AxisFault e) {
 			logger.error("Error AxisFault " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			logger.error("Error Remote " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		} catch (ExchangeFaultData e) {
 			logger.error("Error Exchange Data " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		} catch (ParseException e) {
 			logger.error("Error General " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		}
 		return respuesta;

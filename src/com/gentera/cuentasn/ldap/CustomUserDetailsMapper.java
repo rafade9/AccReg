@@ -27,14 +27,10 @@ public class CustomUserDetailsMapper implements UserDetailsContextMapper {
 	 */
 	@Override
 	public UserDetails mapUserFromContext(DirContextOperations ctx, String username, Collection<? extends GrantedAuthority> authority) {
-		// TODO Auto-generated method stub
-		System.out.println("Hasta aquí vas bien");
 		Usuario user = new Usuario();
-		System.out.println(ctx.getStringAttribute("employeeID"));
 		user.setUsername(ctx.getStringAttribute("sAMAccountName"));
 		user.setNumEmpleado(ctx.getStringAttribute("employeeID"));
 		user.setOrigen("compartamos");
-		System.out.println(ctx.getStringAttribute("userAccountControl"));
 		
 		if(!ctx.getStringAttribute("userAccountControl").equals("512")){
 			throw new CredentialsExpiredException("Usuario bloqueado.");

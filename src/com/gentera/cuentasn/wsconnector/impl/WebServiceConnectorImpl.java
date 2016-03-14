@@ -138,28 +138,22 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
 			
 			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			logger.info("Se verifica origen");
 			String origen = user.getOrigen();
 			
 			if(origen.equals("compartamos")){
-				logger.info("Se recupera el numero de nomina");
-				System.out.println("Se recupera el numero de nomina");
 			
 				String numEmpleado = user.getNumEmpleado();
 			
 				if(numEmpleado==null){
-					throw new Exception("El empleado no cuenta con número de nómina");
+					throw new Exception("El empleado no cuenta con número de nómina.");
 				}
 				//Se formatea el numero de empleado y se añade al bp
+				logger.info("Empleado: " + Util.formatNumEmpleado(numEmpleado));
 				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
 				
-//				String numPlaza = Properties.getSucursalByIp("10.1.146.0");
 				LeerCatalogosImpl leercatalogo = new LeerCatalogosImpl();
-				
-//				String numPlaza = leercatalogo.getSucursalPlaza("10.1.146.0").getId();//no subir a branch principal
 				String numPlaza = leercatalogo.getSucursalPlaza(ip).getId();
 
-				
 				if(numPlaza==null){
 					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
 				}
@@ -172,7 +166,6 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
 				officeId.setOrganisationalCentreID(new Token("4626"));
 			}
-			
 			
 			identifiers.setServiceOfficeID(officeId);
 			identifiers.setBusinessPartnerID(bpEmpleado);
@@ -359,7 +352,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			dtSync.setMessageHeader(messageHeader);
 			dtSync.setLevel2AccountCreationData(data);
 			mtSync.setMT_Level2AccountCreationReq_sync(dtSync);
-			logger.info("Se prepara para enviar petición al endpoint: " + endPoint);
+			logger.info("Endpoint: " + endPoint);
+			logger.info("Usuario: " + Properties.getProp("UserCRM"));
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
 
 			if (response.getMT_Level2AccountCreationResp_sync().getLog().getItem() != null) {

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.RegistroService;
 
 /**
@@ -65,11 +66,16 @@ public class RegistroController {
 	 */
 	@RequestMapping(value = "/registroCompartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
-		logger.info("Entra a registro Compartamos");
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
 			return "redirect:/loginCompartamos";
 		}
-		return "registroCompartamos";
+		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(usuario.getOrigen().equals("compartamos"))
+			return "registroCompartamos";
+		else if(usuario.getOrigen().equals("yastas"))
+			return "redirect:/registroYastas";
+		else
+			return "redirect:/paginaError";
  
 	}
 	
@@ -83,7 +89,13 @@ public class RegistroController {
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
 			return "redirect:/loginYastas";
 		}
-		return "registroYastas";
+		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(usuario.getOrigen().equals("yastas"))
+			return "registroYastas";
+		else if(usuario.getOrigen().equals("compartamos"))
+			return "redirect:/registroCompartamos";
+		else
+			return "redirect:/paginaError";
  
 	}
 	

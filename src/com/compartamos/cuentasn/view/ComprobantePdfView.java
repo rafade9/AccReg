@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.document.AbstractPdfView;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
 import com.gentera.cuentasn.util.Util;
 import com.lowagie.text.BadElementException;
@@ -90,7 +91,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 			Sucursal sucursal = new Sucursal();
 			sucursal = leerCatalogos.getSucursalPlaza(request.getRemoteAddr());
 			
-			PdfPCell lugarExp = new PdfPCell(new Phrase(sucursal.getEstado(), letraM));
+			PdfPCell lugarExp = new PdfPCell(new Phrase(sucursal.getPlaza() + ", " + sucursal.getEstado(), letraM));
 			lugarExp.setHorizontalAlignment(Element.ALIGN_CENTER);
 			lugarExp.setExtraParagraphSpace(5);
 			lugarExp.setBorder(0);
@@ -106,7 +107,8 @@ public class ComprobantePdfView extends AbstractPdfView{
 			sede.setExtraParagraphSpace(5);
 			sede.setBorder(0);
 
-			PdfPCell operador = new PdfPCell(new Phrase("Operador: "+SecurityContextHolder.getContext().getAuthentication().getPrincipal(), letraM));//??
+			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			PdfPCell operador = new PdfPCell(new Phrase("Operador: " + user.getUsername(), letraM));//??
 			operador.setHorizontalAlignment(Element.ALIGN_CENTER);
 			operador.setExtraParagraphSpace(20);
 			operador.setBorder(0);

@@ -31,6 +31,7 @@ public class CustomUserDetailsMapper implements UserDetailsContextMapper {
 		System.out.println("Hasta aquí vas bien");
 		Usuario user = new Usuario();
 		System.out.println(ctx.getStringAttribute("employeeID"));
+		user.setUsername(ctx.getStringAttribute("sAMAccountName"));
 		user.setNumEmpleado(ctx.getStringAttribute("employeeID"));
 		user.setOrigen("compartamos");
 		System.out.println(ctx.getStringAttribute("userAccountControl"));

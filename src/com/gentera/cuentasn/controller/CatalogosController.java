@@ -56,7 +56,6 @@ public class CatalogosController {
 	 */
 	@RequestMapping(value = "/estadosByClavePais/{clavePais}", method = RequestMethod.GET)
 	public @ResponseBody Estado[] getEstadosByClavePais(@PathVariable String clavePais) {
-		System.out.println(clavePais);
 		return catalogos.getEstadosByClavePais(clavePais);
 	}
 }

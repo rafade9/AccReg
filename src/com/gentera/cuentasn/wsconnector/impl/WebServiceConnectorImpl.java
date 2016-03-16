@@ -15,10 +15,6 @@ import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_BancaMovil_Query_BP_CardStub;
-import com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers;
-import com.compartamos.cm.cardmanagement.de_oa_i_104.Execute;
-import com.compartamos.cm.cardmanagement.de_oa_i_104.ExecuteResponse;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerName;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerPhone;
 import com.compartamos.common.gdt.AddressTypeID;
@@ -163,8 +159,10 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 			
 			else{
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-				officeId.setOrganisationalCentreID(new Token("4626"));
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+//				officeId.setOrganisationalCentreID(new Token("4626"));
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000044208"));
+				officeId.setOrganisationalCentreID(new Token("1037"));
 			}
 			
 			identifiers.setServiceOfficeID(officeId);
@@ -402,46 +400,6 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#getTarjetas(java.lang.String)
 	 */
-	@Override
-	public CardNumbers[] getTarjetas(String bp) {
-		try {
-			CMS_BancaMovil_Query_BP_CardStub stub = new CMS_BancaMovil_Query_BP_CardStub(endPointCardManager);
-
-			// Se configura autenticación
-			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
-			ba.setUsername(Properties.getProp("UserCardManager"));
-			ba.setPassword(Properties.getProp("PasswordCardManager"));
-
-			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
-					Boolean.FALSE);
-			stub._getServiceClient().getOptions()
-					.setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
-
-			logger.info("Se prepara para enviar petición al endpoint: " + endPointCardManager);
-			logger.info("Con usuario: " + ba.getUsername());
-
-			Execute execute0 = new Execute();
-			logger.info("se setea bp");
-			execute0.setBankBP(bp);
-			logger.info("se setea card status");
-			execute0.setCardStatus("6");
-			logger.info("se setea smp");
-			execute0.setExternalUser("SMP");
-			logger.info("se setea smp2");
-			execute0.setCMSUserId("SMP");
-			logger.info("se ejecuta");
-			ExecuteResponse response = stub.execute(execute0);
-			logger.info("responde, se validan numero de tarjetas. Codigo recibido : "
-					+ response.getExecuteResult().getRCCode());
-			return response.getExecuteResult().getCardNumbers().getCardNumbers();
-
-		} catch (AxisFault e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	public CardNumbers[] getTarjetas(String bp) {}
 
 }

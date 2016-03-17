@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.google.gson.Gson;
 
@@ -101,6 +102,18 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 			prop.load(LeerCatalogosImpl.class.getClassLoader().getResourceAsStream("resources/Estados.properties"));
 			Estado estado[] = gson.fromJson(prop.getProperty(idPais.toUpperCase()), Estado[].class);
 			return estado;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	public Usuario getInfoPlazaByOperador(String idOperador){
+		try{
+			prop.load(new FileInputStream("/opt/apache-tomcat-7.0.39/temp/OperadoresYastasN2.properties"));
+			Usuario usuario = gson.fromJson(prop.getProperty(idOperador), Usuario.class);
+			return usuario;
 		}catch(Exception e){
 			e.printStackTrace();
 		}

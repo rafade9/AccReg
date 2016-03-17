@@ -47,6 +47,8 @@ import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.LeerCatalogos;
+import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
 import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
@@ -163,8 +165,16 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 			
 			else{
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-				officeId.setOrganisationalCentreID(new Token("4626"));
+				LeerCatalogos leerCatalogo = new LeerCatalogosImpl();
+				
+				Usuario usuario = leerCatalogo.getInfoPlazaByOperador("812572");
+				
+				System.out.println("Id partner" + usuario.getEmpleado());
+				System.out.println("Oficina" + usuario.getNumOficina());
+				
+				bpEmpleado.setBusinessPartnerInternalID(new Token(usuario.getEmpleado()));
+				officeId.setOrganisationalCentreID(new Token(usuario.getNumOficina()));
+				
 			}
 			
 			

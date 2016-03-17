@@ -26,7 +26,7 @@ public class Usuario implements UserDetails{
 	private boolean enabled;
 
 	
-	private String numPlaza;
+	private String numOficina;
 	private String empleado;
 	/**
 	 * Getter IdUsuario
@@ -140,20 +140,21 @@ public class Usuario implements UserDetails{
 		this.numEmpleado = numEmpleado;
 	}
 
+
 	/**
-	 * Getter numPlaza
-	 * @return numPlaza
+	 * 
+	 * @return
 	 */
-	public String getNumPlaza() {
-		return numPlaza;
+	public String getNumOficina() {
+		return numOficina;
 	}
 
 	/**
-	 * Setter numPlaza
-	 * @param numPlaza
+	 * 
+	 * @param numOficina
 	 */
-	public void setNumPlaza(String numPlaza) {
-		this.numPlaza = numPlaza;
+	public void setNumOficina(String numOficina) {
+		this.numOficina = numOficina;
 	}
 
 	/**

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
+import com.gentera.cuentasn.entities.Usuario;
 
 /**
  * Interfaz
@@ -33,5 +34,7 @@ public interface LeerCatalogos {
 	 * @return Lista de estados pertenecientes a la clave
 	 */
 	public Estado[] getEstadosByIdPais(String idPais);
+	
+	public Usuario getInfoPlazaByOperador(String idOperador);
 
 }

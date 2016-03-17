@@ -35,6 +35,12 @@ public interface LeerCatalogos {
 	 */
 	public Estado[] getEstadosByIdPais(String idPais);
 	
+	/**
+	 * Leer archivo properties con la informacion de la Plaza
+	 * @param idOperador
+	 * @param ruta
+	 * @return Objeto Usuario con la informacion de la Plaza
+	 */
 	public Usuario getInfoPlazaByOperador(String idOperador, String ruta);
 
 }

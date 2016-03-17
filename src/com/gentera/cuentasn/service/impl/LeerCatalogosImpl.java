@@ -109,7 +109,11 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 		return null;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#getInfoPlazaByOperador(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public Usuario getInfoPlazaByOperador(String idOperador, String ruta){
 		try{
 			prop.load(new FileInputStream(ruta));

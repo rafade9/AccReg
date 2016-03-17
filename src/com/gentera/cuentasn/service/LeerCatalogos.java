@@ -35,6 +35,6 @@ public interface LeerCatalogos {
 	 */
 	public Estado[] getEstadosByIdPais(String idPais);
 	
-	public Usuario getInfoPlazaByOperador(String idOperador);
+	public Usuario getInfoPlazaByOperador(String idOperador, String ruta);
 
 }

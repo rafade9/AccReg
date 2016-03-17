@@ -20,6 +20,7 @@ import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.google.gson.Gson;
 
+
 /**
  * Clase que implementa LeerCatalogos para lectura de archivos que alimentan los catalogos
  * @author Rafael Delgadillo
@@ -109,9 +110,9 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 	}
 
 	
-	public Usuario getInfoPlazaByOperador(String idOperador){
+	public Usuario getInfoPlazaByOperador(String idOperador, String ruta){
 		try{
-			prop.load(new FileInputStream("/opt/apache-tomcat-7.0.39/temp/OperadoresYastasN2.properties"));
+			prop.load(new FileInputStream(ruta));
 			Usuario usuario = gson.fromJson(prop.getProperty(idOperador), Usuario.class);
 			return usuario;
 		}catch(Exception e){

@@ -10,11 +10,6 @@ $("#formularioYastas").validate({
      username: {
         required: true
       },
-      folioTarjeta:{
-    	required: true,
-    	number: true,
-    	minlength: 15
-      },
       captcha:{
       	required: true
         }
@@ -22,11 +17,6 @@ $("#formularioYastas").validate({
     messages: {
       username: {
     	  required: "Por favor proporcione su ID de Operador"
-      },
-      folioTarjeta: {
-    	  required: "Por favor proporcione el folio",
-    	  number: "Por favor solo proporciona n&uacute;meros",
-    	  minlength: "El folio debe tener m&iacute;nimo 15 caracteres"
       },
       captcha:{
         	required: "Por favor proporone la secuencia"
@@ -76,4 +66,10 @@ $("#username").keydown(function (e) {
 });
 
 
+//captcha
+$("#refresh").click(function(e){
+	var d = new Date();
+	$('#imagenCaptcha').attr('src','captcha.htm?'+d.getTime());   
+	return false;
+	});
 });

@@ -734,6 +734,7 @@ $(document).ready(function(){
 
 //Valida que la fecha de nacimiento sea menor que la actual
 			
+			
 			$.validator.addMethod("dateRango",
 				    function(value, element) {
 						var fechaActual = new Date();

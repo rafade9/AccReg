@@ -736,6 +736,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 
 //Valida que la fecha de nacimiento sea menor que la actual
 		
+		
 		$.validator.addMethod("dateRango",
 			    function(value, element) {
 					var fechaActual = new Date();

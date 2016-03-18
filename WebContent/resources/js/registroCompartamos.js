@@ -765,7 +765,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 							}
 						  }
 						}
-					}
+					} 
 					return true;
 			    });
 

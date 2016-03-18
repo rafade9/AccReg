@@ -753,10 +753,11 @@ $(document).ready(function(){
 								return false;		
 							}else{
 								if((fechaActual.getFullYear()-anioNac)==18){
-									if(fechaActual.getMonth()-mesNac <0 && fechaActual.getDate()-diaNac <0){
+									if(fechaActual.getMonth()-mesNac <0){
 										$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
 										return false;							
-									}else if((fechaActual.getMonth()-mesNac)==0 && fechaActual.getDate()-diaNac <0){
+									}else 
+										if(fechaActual.getMonth()-mesNac ==0 && fechaActual.getDate()-diaNac <0){
 										$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
 									return false;
 								}
@@ -765,7 +766,6 @@ $(document).ready(function(){
 						}
 						return true;
 				    });
-
 			
 			
 			

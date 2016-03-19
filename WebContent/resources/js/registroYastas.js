@@ -613,10 +613,11 @@ $(document).ready(function(){
 					$(this).val($(this).val().toUpperCase());
 				});
 				$('#colonia').keypress(function(e) {
+					
 					key = e.keyCode || e.which;
 				       tecla = String.fromCharCode(key).toLowerCase();
 				       letras = " abcdefghijklmnñopqrstuvwxyz";
-				       especiales = ["8","13"];
+				       especiales = ["8","13","9","32"];
 
 				       tecla_especial = false;
 				       for(var i in especiales){
@@ -625,7 +626,8 @@ $(document).ready(function(){
 				                break;
 				            }
 				        }
-				       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+
+				        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
 				            return false;
 				        }
 				});
@@ -644,7 +646,7 @@ $(document).ready(function(){
 		
 		
 		//Solo letras
-		$('#primerNombre,#segundoNombre, #paterno, #materno, #colonia').keypress(function(e) {
+		$('#primerNombre,#segundoNombre, #paterno, #materno, #delegacion').keypress(function(e) {
 			
 			key = e.keyCode || e.which;
 		       tecla = String.fromCharCode(key).toLowerCase();
@@ -667,7 +669,7 @@ $(document).ready(function(){
 		
 	//Numeros y letras
 		
-		$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keypress(function(e) {
+		$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #ciudad').keypress(function(e) {
 			
 			key = e.keyCode || e.which;
 //			alert(key);

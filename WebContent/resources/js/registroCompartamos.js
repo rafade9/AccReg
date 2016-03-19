@@ -571,7 +571,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 							$("#estado").val("");
 							$("#delegacion").val("");
 							$("#ciudad").val("");
-							$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13" type="text" maxlength="30"/>');
+							$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText  texGris09_13" type="text" maxlength="30"/>');
 							$("#colonia option").remove();
 							$("#colonia").val("");
 							$('#colonia').keyup(function(){	
@@ -614,10 +614,11 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 				$(this).val($(this).val().toUpperCase());
 			});
 			$('#colonia').keypress(function(e) {
+				
 				key = e.keyCode || e.which;
 			       tecla = String.fromCharCode(key).toLowerCase();
 			       letras = " abcdefghijklmnñopqrstuvwxyz";
-			       especiales = ["8","13"];
+			       especiales = ["8","13","9","32"];
 
 			       tecla_especial = false;
 			       for(var i in especiales){
@@ -626,7 +627,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 			                break;
 			            }
 			        }
-			       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+
+			        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
 			            return false;
 			        }
 			});
@@ -645,7 +647,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	
 	
 	//Solo letras
-	$('#primerNombre,#segundoNombre, #paterno, #materno, #colonia').keypress(function(e) {
+	$('#primerNombre,#segundoNombre, #paterno, #materno,#delegacion, #ciudad').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();
@@ -670,7 +672,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	
 //Numeros y letras
 	
-	$('#numeroIdentificacion, #calle, #numExterior, #numInterior, #delegacion, #ciudad').keypress(function(e) {
+	$('#numeroIdentificacion, #calle, #numExterior,#colonia, #numInterior,#ciudad').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();

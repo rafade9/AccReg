@@ -5,9 +5,10 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="true">
+	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/app**" access="ROLE_USER" />
+		<intercept-url pattern="/registro**" access="isAuthenticated()" />
 		
 		
 		<form-login 
@@ -30,8 +31,8 @@
 		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
 		<beans:constructor-arg
 			value="ldap://BCDNSDIVEO.compartamos.mx:389/ou=Compartamos,dc=compartamos,dc=mx" />
-		<beans:property name="userDn" value="FCOMPARTAMOS\ezaldivar"></beans:property>
-		<beans:property name="password" value="zalen06#"></beans:property>
+		<beans:property name="userDn" value="FCOMPARTAMOS\ecalvet"></beans:property>
+		<beans:property name="password" value="Ecal12341"></beans:property>
 		<beans:property name="baseEnvironmentProperties">
 			<beans:map>
 				<beans:entry key="com.sun.jndi.ldap.connect.timeout"

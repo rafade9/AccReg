@@ -647,7 +647,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	
 	
 	//Solo letras
-	$('#primerNombre,#segundoNombre, #paterno, #materno,#delegacion, #ciudad').keypress(function(e) {
+	$('#primerNombre,#segundoNombre, #paterno, #materno,#delegacion').keypress(function(e) {
 		
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();

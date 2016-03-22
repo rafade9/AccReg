@@ -750,11 +750,14 @@ $(document).ready(function(){
 							$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
 							return false;
 						}else{
-							if((fechaActual.getFullYear()-anioNac)<18){
+						    if((fechaActual.getFullYear()-anioNac)>=100){
+								$.validator.messages.dateRango = "Por favor, el solicitante debe ser menos a 100 años.";
+								return false;
+							}
+							else if((fechaActual.getFullYear()-anioNac)<18){
 								$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
 								return false;		
-							}else{
-								if((fechaActual.getFullYear()-anioNac)==18){
+							}else if((fechaActual.getFullYear()-anioNac)==18){
 									if(fechaActual.getMonth()-mesNac <0){
 										$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
 										return false;							
@@ -763,11 +766,12 @@ $(document).ready(function(){
 										$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
 									return false;
 								}
-							  }
 							}
-						}
-						return true; 
+							
+						} 
+						return true;
 				    });
+
 			
 			
 			

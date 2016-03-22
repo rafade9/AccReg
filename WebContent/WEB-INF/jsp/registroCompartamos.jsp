@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-Frame-Options" content="deny">
 <title>Compartamos Banco</title>
 
   <script src="resources/js/jquery-1.10.1.js"></script>
@@ -156,7 +157,7 @@
 			</div>
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">
-				<input type="button" value=Salir id="btCancelar" />
+				<input type="button" value=Salir id="btSalir" />
 			</div>	
 		</form>
 	</div>

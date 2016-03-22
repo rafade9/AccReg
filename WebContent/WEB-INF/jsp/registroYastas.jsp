@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="X-Frame-Options" content="deny">
 <title>Yastas</title>
 
   <script src="resources/js/jquery-1.10.1.js"></script>

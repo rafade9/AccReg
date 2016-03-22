@@ -756,7 +756,11 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 							$.validator.messages.dateRango = "Por favor, el solicitante debe ser menor a 99 años.";
 							return false;
 						}else if((fechaActual.getFullYear()-anioNac)==99){
-							if((fechaActual.getMonth()-mesNac>=0)){
+							if((fechaActual.getMonth()-mesNac>0)){
+								$.validator.messages.dateRango = "Por favor, el solicitante debe ser menor a 99 años.";
+								return false;
+							}
+							if((fechaActual.getMonth()-mesNac==0 && fechaActual.getDate()-diaNac >=0)){
 								$.validator.messages.dateRango = "Por favor, el solicitante debe ser menor a 99 años.";
 								return false;
 							}

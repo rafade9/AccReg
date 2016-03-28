@@ -14,6 +14,9 @@
   <script src="resources/js/messages_es.js"></script>
   <script type="text/javascript" charset="UTF-8" src="resources/js/registroCompartamos.js"></script>
   <script src="resources/js/jquery.maskedinput.min.js" type="text/javascript"></script>
+  <script src="resources/js/jquery.alphanumeric.js" type="text/javascript"></script>
+  <script src="resources/js/jquery.alphanumeric.js" type="text/javascript"></script>
+  <script src="resources/js/jquery.alphanumeric.js" type="text/javascript"></script>
     
  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
@@ -74,7 +77,7 @@
 		<div id="seccionTarjeta">
 		<!-- Folio de la tarjeta -->
 			<p class="tituloMango">Datos de Tarjeta<br></p><br><br>
-				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText mayuscula" maxlength="15"><br>
+				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText mayusculas" maxlength="15"><br>
 				<div class="clear"> </div><br><br>
 		</div>
 		<div id="seccionCliente" style='display:block;'>
@@ -85,15 +88,15 @@
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="ine" value="ZCVELE" class="inputRadio " checked>IFE/INE</label>
 				<label class="texGris09_13"><input type="radio" name="tipoIdentificacion" id="pasaporte" value="FS0002" class="inputRadio">Pasaporte</label><br>
 				<div class="clear"> </div>
-				<label for="numeroIdentificacion" id="msnIdent" class="texGris09_13">N&uacute;mero de identificaci&oacute;n * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText" maxlength="18"><br>
+				<label for="numeroIdentificacion" id="msnIdent" class="texGris09_13">N&uacute;mero de identificaci&oacute;n * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="mayusculas texGris09_13 inputText" maxlength="18"><br>
 				<div class="clear"> </div>
-				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText" maxlength="40"><br>
+				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText mayusculas" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText" maxlength="40"><br>
+				<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText mayusculas" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText" maxlength="40"><br>
+				<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="mayusculas texGris09_13 inputText" maxlength="40"><br>
 				<div class="clear"> </div>
-				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText" maxlength="40"><br>
+				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText mayusculas" maxlength="40"><br>
 				<div class="clear"> </div>
 				<label for="fechaNacimiento" class="texGris09_13">Fecha de nacimiento * <br> (DD/MM/AAAA)</label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText" id="fechaNacimiento" ><br>
 				<div class="clear"> </div>
@@ -138,11 +141,11 @@
 				</select><br><br>
 		
 				<label class="texGris09_13">Delegaci&oacute;n/Municipio * </label> 
-				<input type="text" id="delegacion" name="delegacion" class="texGris09_13 inputText">
+				<input type="text" id="delegacion" name="delegacion" class="texGris09_13 inputText mayusculas">
 				<br><br>
 		
 				<label class="texGris09_13">Ciudad * </label>
-				<input type="text" id="ciudad" name="ciudad" class="texGris09_13 inputText">
+				<input type="text" id="ciudad" name="ciudad" class="texGris09_13 inputText mayusculas">
 				<br><br>
 		
 				<label class="texGris09_13">Colonia * </label>
@@ -151,9 +154,9 @@
 				</select>
 				<br><br>
 		    
-				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText" maxlength="60"><br>
-				<label class="texGris09_13">N&uacute;mero Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText" maxlength="10"><br>
-				<label class="texGris09_13">N&uacute;mero Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText" maxlength="10"><br><br>
+				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText mayusculas" maxlength="60"><br>
+				<label class="texGris09_13">N&uacute;mero Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText mayusculas" maxlength="10"><br>
+				<label class="texGris09_13">N&uacute;mero Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText mayusculas" maxlength="10"><br><br>
 			</div>
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">

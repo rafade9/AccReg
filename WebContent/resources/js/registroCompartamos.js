@@ -531,13 +531,6 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 					  e.preventDefault();
 			  	}
 		  });
-	
-		  
-//validacion para grome		  
-		  $('#folio, #telefono, #codigoPostal').keypress(function (){
-	            this.value = this.value.replace(/[^0-9]/g, '');
-	          });
-		  	
 		  
 		  
 //Funcion para obtener los datos dependiendo del codigo postal	
@@ -571,18 +564,18 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 							$("#estado").val("");
 							$("#delegacion").val("");
 							$("#ciudad").val("");
-							$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText  texGris09_13" type="text" maxlength="30"/>');
+							$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText  texGris09_13 mayusculas" type="text" maxlength="30"/>');
 							$("#colonia option").remove();
 							$("#colonia").val("");
-							$('#colonia').keyup(function(){	
-								$(this).val($(this).val().toUpperCase());
-							});		
+//							$('#colonia').keyup(function(){	
+//								$(this).val($(this).val().toUpperCase());
+//							});		
 							$('#colonia').keypress(function(e) {
 								
 								key = e.keyCode || e.which;
 							       tecla = String.fromCharCode(key).toLowerCase();
 							       letras = " abcdefghijklmnñopqrstuvwxyz";
-							       especiales = ["8","13"];
+							       especiales = ["8","13","9","32"];
 
 							       tecla_especial = false;
 							       for(var i in especiales){
@@ -591,7 +584,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 							                break;
 							            }
 							        }
-							       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+
+							        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
 							            return false;
 							        }
 							});
@@ -607,12 +601,12 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 	
 	$("#colonia").change(function(){
 		if($('#colonia').val() == "###"){
-			$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13" type="text" maxlength="30"/>');
+			$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText  texGris09_13 mayusculas" type="text" maxlength="30"/>');
 			$("#colonia option").remove();
 			$("#colonia").val("");
-			$('#colonia').keyup(function(){	
-				$(this).val($(this).val().toUpperCase());
-			});
+//			$('#colonia').keyup(function(){	
+//				$(this).val($(this).val().toUpperCase());
+//			});
 			$('#colonia').keypress(function(e) {
 				
 				key = e.keyCode || e.which;
@@ -641,19 +635,19 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 //convierte en mayusculas
 	
 	
-	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad, #colonia').keyup(function(){	
-		$(this).val($(this).val().toUpperCase());
-	});
+//	$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad, #colonia').keypress(function(){	
+//		$(this).val($(this).val().toUpperCase());
+//	});
 	
 	
 	//Solo letras
 	$('#primerNombre,#segundoNombre, #paterno, #materno,#delegacion').keypress(function(e) {
-		
 		key = e.keyCode || e.which;
 	       tecla = String.fromCharCode(key).toLowerCase();
 	       letras = " abcdefghijklmnñopqrstuvwxyz";
 	       especiales = ["8","13","32"];
-
+	       
+	       
 	       tecla_especial = false;
 	       for(var i in especiales){
 	            if(key == especiales[i]){
@@ -799,11 +793,6 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
                },
         "Por favor, proporciona el n&uacute;mero de identificaci&oacute;n correcto.");   
         
- //Solo letras
-        jQuery.validator.addMethod("lettersonly", function(value, element) {
-        	  return this.optional(element) || /^[a-ñ-z]+$/i.test(value);
-        	}, "Por favor, proporciona s&oacute;lo letras."); 
-
      
         
 //Nos manda al PDF
@@ -817,4 +806,3 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 			);
 		});
                
-

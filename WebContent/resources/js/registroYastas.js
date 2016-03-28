@@ -532,12 +532,6 @@ $(document).ready(function(){
 			  });
 		
 			  
-	//validacion para grome		  
-			  $('#folio, #telefono, #codigoPostal').keypress(function (){
-		            this.value = this.value.replace(/[^0-9]/g, '');
-		          });
-			  	
-			  
 			  
 	//Funcion para obtener los datos dependiendo del codigo postal	
 		$(function() {
@@ -570,18 +564,18 @@ $(document).ready(function(){
 								$("#estado").val("");
 								$("#delegacion").val("");
 								$("#ciudad").val("");
-								$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13" type="text" maxlength="30"/>');
+								$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13 mayusculas" type="text" maxlength="30"/>');
 								$("#colonia option").remove();
 								$("#colonia").val("");
-								$('#colonia').keyup(function(){	
-									$(this).val($(this).val().toUpperCase());
-								});		
+//								$('#colonia').keyup(function(){	
+//									$(this).val($(this).val().toUpperCase());
+//								});		
 								$('#colonia').keypress(function(e) {
 									
 									key = e.keyCode || e.which;
 								       tecla = String.fromCharCode(key).toLowerCase();
 								       letras = " abcdefghijklmnñopqrstuvwxyz";
-								       especiales = ["8","13"];
+								       especiales = ["8","13","9","32"];
 
 								       tecla_especial = false;
 								       for(var i in especiales){
@@ -590,7 +584,8 @@ $(document).ready(function(){
 								                break;
 								            }
 								        }
-								       if(letras.indexOf(tecla)==-1 && !tecla_especial && e.keyCode !== 32){
+
+								        if(letras.indexOf(tecla)==-1 && !tecla_especial && (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)){
 								            return false;
 								        }
 								});
@@ -606,12 +601,12 @@ $(document).ready(function(){
 		
 		$("#colonia").change(function(){
 			if($('#colonia').val() == "###"){
-				$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido alfanumerico alfanumericoBloquear texGris09_13" type="text" maxlength="30"/>');
+				$("#colonia").replaceWith('<input id="colonia" name="colonia" class="inputText requerido  texGris09_13 mayusculas" type="text" maxlength="30"/>');
 				$("#colonia option").remove();
 				$("#colonia").val("");
-				$('#colonia').keyup(function(){	
-					$(this).val($(this).val().toUpperCase());
-				});
+//				$('#colonia').keyup(function(){	
+//					$(this).val($(this).val().toUpperCase());
+//				});
 				$('#colonia').keypress(function(e) {
 					
 					key = e.keyCode || e.which;
@@ -637,12 +632,12 @@ $(document).ready(function(){
 		
 
 		
-	//convierte en mayusculas
-		
-		
-		$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad, #colonia').keyup(function(){	
-			$(this).val($(this).val().toUpperCase());
-		});
+//	//convierte en mayusculas
+//		
+//		
+//		$('#numeroIdentificacion, #primerNombre, #segundoNombre, #paterno, #materno, #calle, #numExterior, #numInterior,#delegacion, #ciudad, #colonia').keyup(function(){	
+//			$(this).val($(this).val().toUpperCase());
+//		});
 		
 		
 		//Solo letras

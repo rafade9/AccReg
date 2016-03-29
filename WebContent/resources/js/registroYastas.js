@@ -546,6 +546,7 @@ $(document).ready(function(){
 								$("#estado").val(est);
 								$("#delegacion").val(data.result.province);
 								$("#ciudad").val(data.result.city);
+								$('#colonia').empty();
 								$("#colonia option[value='#']").remove();
 								$.each(data.result.location, function(
 										i, item) {

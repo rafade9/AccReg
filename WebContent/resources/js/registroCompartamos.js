@@ -539,13 +539,14 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 			function() {
 				if (this.value.length >= 5 && this.value > 1000) {
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
-					$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
+					$.getJSON("resources/codPostal.json", function(data) {//desarrollo
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
 							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();
 							$("#estado").val(est);
 							$("#delegacion").val(data.result.province);
 							$("#ciudad").val(data.result.city);
+							$('#colonia').empty();
 							$("#colonia option[value='#']").remove();
 							$.each(data.result.location, function(
 									i, item) {
@@ -630,7 +631,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		}
 	});
 	
-
+	
 	
 //convierte en mayusculas
 	

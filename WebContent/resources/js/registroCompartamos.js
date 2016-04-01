@@ -4,6 +4,17 @@
 
 $(document).ready(function(){
 	
+	varTimer = setTimeout(logoutFtn, 300000);
+	  
+	function logoutFtn(){
+		window.location.href = "logout/compartamos";
+	}
+	
+	function restartTimer(){
+		clearTimeout(varTimer);
+		varTimer = setTimeout(logoutFtn, 300000);
+	}
+	
 	//Mensajes de respuesta
 	var mensajesCompartamos = [];
 	mensajesCompartamos[0] = "<p class='greenMsgClass'>Cuenta Creada con &Eacute;xito.</p><p class='blackMsgClass'>Favor de Generar e Imprimir comprobante.</p>";
@@ -427,6 +438,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		        $("#lugarNacimiento").empty();
 				var valor=$("#paisNacimiento").val();
 				$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+					//Timer
+					restartTimer();
 						estados = $.map(allData, function(item) {
 							$("#lugarNacimiento").append(
 									$('<option>', {
@@ -451,6 +464,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		            $("#lugarNacimiento").empty();
 		            var valor=$("#paisNacimiento").val();
 		            $.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+		            	//Timer
+						restartTimer();
 						estados = $.map(allData, function(item) {
 							$("#lugarNacimiento").append(
 									$('<option>', {
@@ -470,6 +485,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		        	$("#lugarNacimiento").empty();
 		        	var valor=$("#paisNacimiento").val();
 		        	$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+		        		//Timer
+						restartTimer();
 						estados = $.map(allData, function(item) {
 							$("#lugarNacimiento").append(
 									$('<option>', {
@@ -540,6 +557,10 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 				if (this.value.length >= 5 && this.value > 1000) {
 //              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 					$.getJSON("resources/codPostal.json", function(data) {//desarrollo
+						
+						//Timer
+						restartTimer();
+						
 						$("#colonia").prop('disabled', false);
 						if (data.status === "Ok") {
 							var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();

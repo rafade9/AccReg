@@ -21,7 +21,7 @@
 		<!-- enable csrf protection -->
 		
 		<session-management>
-			<concurrency-control error-if-maximum-exceeded="false" expired-url="/login.htm?errorMax=true"
+			<concurrency-control error-if-maximum-exceeded="false" expired-url="/login?errorMax=true"
 				max-sessions="1" />
 		</session-management>
 		

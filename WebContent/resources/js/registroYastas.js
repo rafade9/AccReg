@@ -4,6 +4,17 @@
 
 $(document).ready(function(){
 	
+	varTimer = setTimeout(logoutFtn, 300000);
+	  
+	function logoutFtn(){
+		window.location.href = "logout/yastas";
+	}
+	
+	function restartTimer(){
+		clearTimeout(varTimer);
+		varTimer = setTimeout(logoutFtn, 300000);
+	}
+	
 	//Mensajes de respuesta
 	var mensajesYastas = [];
 	mensajesYastas[0] = "<p class='greenMsgClass'>Cuenta Creada con &Eacute;xito.</p><p class='blackMsgClass'>Realiza la  transacci&oacute;n de APERTURA DE CUENTA ingresando al men&uacute; Compartamos Banco de tu terminal.</p>";
@@ -426,6 +437,8 @@ $(document).ready(function(){
 			        $("#lugarNacimiento").empty();
 					var valor=$("#paisNacimiento").val();
 					$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+						//Timer
+						restartTimer();
 							estados = $.map(allData, function(item) {
 								$("#lugarNacimiento").append(
 										$('<option>', {
@@ -450,6 +463,8 @@ $(document).ready(function(){
 			            $("#lugarNacimiento").empty();
 			            var valor=$("#paisNacimiento").val();
 			            $.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+			            	//Timer
+							restartTimer();
 							estados = $.map(allData, function(item) {
 								$("#lugarNacimiento").append(
 										$('<option>', {
@@ -469,6 +484,8 @@ $(document).ready(function(){
 			        	$("#lugarNacimiento").empty();
 			        	var valor=$("#paisNacimiento").val();
 			        	$.getJSON("/CuentasN2/catalogos/estadosByClavePais/"+valor, function(allData) {
+			        		//Timer
+							restartTimer();
 							estados = $.map(allData, function(item) {
 								$("#lugarNacimiento").append(
 										$('<option>', {
@@ -540,6 +557,8 @@ $(document).ready(function(){
 					if (this.value.length >= 5 && this.value > 1000) {
 //	              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
 						$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
+							//Timer
+							restartTimer();
 							$("#colonia").prop('disabled', false);
 							if (data.status === "Ok") {
 								var est = $('#estado option').filter(function () { return $(this).html() == data.result.state; }).val();

@@ -67,7 +67,7 @@ select{
 }
 
 	body {
-    background-color: #ce4676;
+    background-color: #CA005D;
 }
 	form label.error, form input.submit {
 		margin-left: 253px;
@@ -81,25 +81,10 @@ select{
 #mensajeNac{
 	background-color: #ffffff;
 	left:35%;
-	top:110%;
+	top:750px;
    	z-index:20;
    	position:absolute;
    	border: 3px solid #ce4676;
-   	text-align:center;
-   	color: #f38a00;
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 20px;
-    font-style: italic;
-
-}
-
-#mensajeNac{
-	background-color: #ffffff;
-	left:35%;
-	top:110%;
-   	z-index:20;
-   	position:absolute;
-   	border: 2px solid #ce4676;
    	text-align:center;
    	color: #f38a00;
     font-family: Arial,Helvetica,sans-serif;
@@ -132,7 +117,7 @@ select{
 }
 
 
-input[type="submit"] {
+ input[type="submit"] {
     background: #ca005d none repeat scroll 0 0;
     color: white;
     font-size: 16px;
@@ -146,8 +131,7 @@ input[type="button"] {
 	background:#CA005D;
 	color: white;
 	font-size: 16px;
-  }
-   
+  } 
   
 /* Estilo para el select de autocompletado de Paises */
 

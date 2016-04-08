@@ -70,10 +70,11 @@ $(document).ready(function(){
 //					document.getElementById('mensajeNac').style.display = 'block';
 					$("#mensajeNac").toggle("slow");
 					jQuery("#enviar").attr('disabled',true);
+					$(".bloqueado").attr('disabled',true);
 				}else{
 					document.getElementById('mensajeNac').style.display = 'none';
 					jQuery("#enviar").attr('disabled',false);
-					
+					$(".bloqueado").attr('disabled',false);
 				}
 			});
 		});
@@ -287,6 +288,8 @@ $(document).ready(function(){
 	                //dataType: 'json',
 	                url: "./registro",
 	                success: function(datar){
+	                	//Timer
+						restartTimer();
 //	                    $("#localhost:8888").html(datar);
 	                    document.getElementById('bloquea').style.display = 'none';
 	                    if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10' ){
@@ -302,6 +305,8 @@ $(document).ready(function(){
 	                    $('#mensajeRegistro').html(mensajesYastas[datar.codigo]);
 	                },
 	                error: function(data){
+	                	//Timer
+						restartTimer();
 	                   	document.getElementById('bloquea').style.display = 'none';
 	                	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
 	                 	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio

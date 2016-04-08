@@ -71,10 +71,11 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 //				document.getElementById('mensajeNac').style.display = 'block';
 				$("#mensajeNac").toggle("slow");
 				jQuery("#enviar").attr('disabled',true);
+				$(".bloqueado").attr('disabled',true);
 			}else{
 				document.getElementById('mensajeNac').style.display = 'none';
 				jQuery("#enviar").attr('disabled',false);
-				
+				$(".bloqueado").attr('disabled',false);
 			}
 		});
 	});
@@ -288,6 +289,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
                 //dataType: 'json',
                 url: "./registro",
                 success: function(datar){
+                	//Timer
+					restartTimer();
 //                	 $('#localhost:8888').html(datar);
                 	 document.getElementById('bloquea').style.display = 'none';
                      if(datar.codigo == '2' || datar.codigo == '3' || datar.codigo == '10'){
@@ -305,6 +308,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
                    $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo]);
                 },
                 error: function(data){
+                	//Timer
+					restartTimer();
                 	document.getElementById('bloquea').style.display = 'none';
                 	document.getElementById('formCompartamos').style.display = 'none';//ocultamos el formulario
                  	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
@@ -360,7 +365,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		          .appendTo( this.wrapper )
 		          .val( value )
 		          .attr( "title", "" )
-		          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+		          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left texGris09_13 bloqueado" )
 		          .autocomplete({
 		            delay: 0,
 		            minLength: 0,
@@ -398,7 +403,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 		            text: false
 		          })
 		          .removeClass( "ui-corner-all" )
-		          .addClass( "custom-combobox-toggle ui-corner-right" )
+		          .addClass( "custom-combobox-toggle ui-corner-right bloqueado" )
 		          .mousedown(function() {
 		            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
 		          })

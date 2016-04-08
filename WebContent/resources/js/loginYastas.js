@@ -67,9 +67,9 @@ $("#username").keydown(function (e) {
 
 
 //captcha
-$("#refresh").click(function(e){
-	var d = new Date();
-	$('#imagenCaptcha').attr('src','captcha.htm?'+d.getTime());   
-	return false;
-	});
+//$("#refresh").click(function(e){
+//	var d = new Date();
+//	$('#imagenCaptcha').attr('src','captcha.htm?'+d.getTime());   
+//	return false;
+//	});
 });

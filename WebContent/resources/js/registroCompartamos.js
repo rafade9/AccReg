@@ -28,7 +28,7 @@ $(document).ready(function(){
 	mensajesCompartamos[8] = "<p class='redMsgClass'>Transacci&oacute;n rechazada.</p><p class='blackMsgClass'>Genera e imprime Carta de Personas Bloquedas.</p>";
 	mensajesCompartamos[9] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 	mensajesCompartamos[10] = "<msg class='redMsgClass'>Folio Inv&aacute;lido, </msg><msg class='blackMsgClass'>ingrese uno nuevo</msg>";
-	mensajesCompartamos[99] = "<p class='redMsgClass'>Error en la operaci&oacute;n. Favor de contactar a al Administrador</p>";
+	mensajesCompartamos[99] = "<msg class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</msg>";
 
 
 //focus al campo de folio

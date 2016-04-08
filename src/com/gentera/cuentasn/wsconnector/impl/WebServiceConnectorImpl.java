@@ -162,10 +162,17 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 			
 			else{
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-//				officeId.setOrganisationalCentreID(new Token("4626"));
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000044208"));
-				officeId.setOrganisationalCentreID(new Token("1037"));
+				
+				LeerCatalogos leerCatalogo = new LeerCatalogosImpl();
+				
+				Usuario usuario = leerCatalogo.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+				
+				System.out.println("Id partner" + usuario.getEmpleado());
+				System.out.println("Oficina" + usuario.getNumOficina());
+				
+				bpEmpleado.setBusinessPartnerInternalID(new Token(usuario.getEmpleado()));
+				officeId.setOrganisationalCentreID(new Token(usuario.getNumOficina()));
+
 			}
 			
 			identifiers.setServiceOfficeID(officeId);

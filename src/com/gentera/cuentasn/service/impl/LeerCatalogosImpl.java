@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.google.gson.Gson;
 
@@ -121,6 +122,22 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#getInfoPlazaByOperador(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Usuario getInfoPlazaByOperador(String idOperador, String ruta){
+		try{
+			prop.load(new FileInputStream(ruta));
+			Usuario usuario = gson.fromJson(prop.getProperty(idOperador), Usuario.class);
+			return usuario;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -8,6 +8,7 @@ import java.util.List;
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.entities.Usuario;
 
 /**
  * Interfaz
@@ -41,5 +42,13 @@ public interface LeerCatalogos {
 	 * @return Objeto sucursal
 	 */
 	public Sucursal getSucursalPlaza(String ip);
+
+	/**
+	 * Leer archivo properties con la informacion de la Plaza
+	 * @param idOperador
+	 * @param ruta
+	 * @return Objeto Usuario con la informacion de la Plaza
+	 */
+	public Usuario getInfoPlazaByOperador(String idOperador, String ruta);
 
 }

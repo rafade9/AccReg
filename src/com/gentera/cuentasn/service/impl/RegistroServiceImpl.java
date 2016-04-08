@@ -65,9 +65,9 @@ public class RegistroServiceImpl implements RegistroService {
 					 * )); break; } }
 					 */
 
-					respuesta.setPersona(persona);
-
 				}
+				
+				respuesta.setPersona(persona);
 			}
 
 		} catch (Exception e) {

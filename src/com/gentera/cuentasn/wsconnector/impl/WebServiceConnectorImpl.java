@@ -94,6 +94,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
 			ba.setUsername(Properties.getProp("UserCRM"));
 			ba.setPassword(Properties.getProp("PasswordCRM"));
+			
+			//Timeout
+			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(300000);;
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
@@ -199,22 +202,22 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			LANGUAGEINDEPENDENT_MEDIUM_Name colonia = new LANGUAGEINDEPENDENT_MEDIUM_Name();
 
 			// Primer nombre
-			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre());
+			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre().toUpperCase());
 			nameData.setGivenName(givenName);
 
 			// Segundo nombre
 			if (persona.getSegundoNombre() != null && !persona.getSegundoNombre().equals("")) {
-				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre());
+				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre().toUpperCase());
 				nameData.setMiddleName(middleName);
 			}
 
 			// Primer apellido
-			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno());
+			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno().toUpperCase());
 			nameData.setFamilyName(familyName);
 
 			// Segundo apellido
 			if (persona.getMaterno() != null && !persona.getMaterno().equals("")) {
-				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno());
+				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno().toUpperCase());
 				nameData.setAditionalFamilyName(aditionalFamilyName);
 			}
 
@@ -242,7 +245,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			BusinessPartnerDocumentIdentifier documentIdentifier = new BusinessPartnerDocumentIdentifier();
 			// Tipo de identificacion
 			PartyIdentifierTypeCode codeIdentifier = new PartyIdentifierTypeCode();
-			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion()));
+			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion().toUpperCase()));
 			documentIdentifier.setCode(codeIdentifier);
 			// Numero de identificacion
 			ItemID idIdentifier = new ItemID();
@@ -321,26 +324,26 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			regionCode.setRegionCode(new Token(persona.getEstado()));
 			addressData.setRegionCode(regionCode);
 			// Municipio o Delegacion
-			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion());
+			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase());
 			addressData.setDistrictName(municipio);
 			// Ciudad
-			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad());
+			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase());
 			addressData.setCityName(ciudad);
 			// Colonia
-			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia());
+			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase());
 			addressData.setAdditionalCityName(colonia);
 			// Calle
 			StreetName streetName = new StreetName();
-			streetName.setStreetName(persona.getCalle());
+			streetName.setStreetName(persona.getCalle().toUpperCase());
 			addressData.setStreetName(streetName);
 			// No Ext
 			HouseID numExt = new HouseID();
-			numExt.setHouseID(new Token(persona.getNumExterior()));
+			numExt.setHouseID(new Token(persona.getNumExterior().toUpperCase()));
 			addressData.setHouseID(numExt);
 			// No Int
 			if (persona.getNumInterior() != null && !persona.getNumInterior().equals("")) {
 				HouseID numInt = new HouseID();
-				numInt.setHouseID(new Token(persona.getNumInterior()));
+				numInt.setHouseID(new Token(persona.getNumInterior().toUpperCase()));
 				addressData.setAdditionalHouseID(numInt);
 			}
 			bp.setAddressData(addressData);

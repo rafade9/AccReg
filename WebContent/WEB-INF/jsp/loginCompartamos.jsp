@@ -2,12 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8; IE=8">
+<meta http-equiv="X-Frame-Options" content="deny">
 <title>Compartamos</title>  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" title="" href="resources/css/loginCompartamos.css" type="text/css">
+  <link href="resources/img/faviconCompartamos.ico" rel="icon" type="image/x-icon">
   
-  <script src="resources/js/jquery-1.11.0.js"></script>
+  <script src="resources/js/jquery-1.10.1.js"></script>
   <script src="resources/js/jquery.validate.js"></script>
   <script src="resources/js/loginCompartamos.js"></script>
   <script src="resources/js/messages_es.js"></script>

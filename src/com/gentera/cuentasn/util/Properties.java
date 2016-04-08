@@ -34,6 +34,11 @@ public class Properties {
 	 * Clase Strin para manejar nombre de archivo de propiedades
 	 */
 	static String filename = "resources/Config.properties";
+	
+	/**
+	 * Clase String para manejar plazas
+	 */
+	static String filenameSucursales = "resources/sucursales.properties";
 
 	/**
 	 * Metodo estático para consultar el valor de una propiedad
@@ -55,6 +60,37 @@ public class Properties {
 
 			if (property == null || property.equals("")) {
 				logger.error("No existe la propiedad " + key);
+				return null;
+			}
+
+			return property;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return property;
+	}
+	
+	/**
+	 * Metodo estático para consultar el valor de una propiedad
+	 * @param key la llave a consultar
+	 * @return valor correspondiente a la llave
+	 */
+	public static String getSucursalByIp(String ip) {
+		String property = "";
+		try {
+			input = Properties.class.getClassLoader().getResourceAsStream(filenameSucursales);
+			if (input == null) {
+				logger.error("No se encuentra el archivo de sucursales");
+				return null;
+			}
+
+			prop.load(input);
+
+			property = prop.getProperty(ip);
+
+			if (property == null || property.equals("")) {
+				logger.error("No existe la propiedad " + ip);
 				return null;
 			}
 

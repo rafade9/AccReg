@@ -5,6 +5,7 @@ package com.gentera.cuentasn.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,8 @@ import com.gentera.cuentasn.service.CatalogosService;
 @Controller
 @RequestMapping(value="/catalogos")
 public class CatalogosController {
+	
+	final static Logger logger = Logger.getLogger(CatalogosController.class);
 	
 	/**
 	 * Recibe referencia de servicio
@@ -56,7 +59,15 @@ public class CatalogosController {
 	 */
 	@RequestMapping(value = "/estadosByClavePais/{clavePais}", method = RequestMethod.GET)
 	public @ResponseBody Estado[] getEstadosByClavePais(@PathVariable String clavePais) {
-		System.out.println(clavePais);
 		return catalogos.getEstadosByClavePais(clavePais);
+	}
+	
+	/**
+	 * Servicio para probar el log (Temporal)
+	 */
+	@RequestMapping(value = "/log", method = RequestMethod.GET)
+	public @ResponseBody String log(){
+		logger.info("PRUEBA DE ESCRITURA EN LOG");
+		return "hecho";
 	}
 }

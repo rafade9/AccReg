@@ -127,6 +127,10 @@ public class loginController {
 			if(e.getMessage().startsWith("Bad credentials")){
 				model.addObject("error", "Usuario o password incorrecto");
 			}
+			else if(e.getMessage().startsWith("Cannot perform login for")){
+				logoutCompartamos(req, null, usuario.getOrigen());
+				model.addObject("error", "No se ha podido conectar, por favor intente nuevamente.");
+			}
 			else{
 				model.addObject("error", "No se ha podido conectar");
 				e.printStackTrace();

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.RegistroService;
 
 /**
@@ -46,15 +47,13 @@ public class RegistroController {
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
 	public ResponseEntity<Respuesta> registrar(HttpServletRequest request, HttpServletResponse response,@RequestBody Persona persona) {
 		try{
-			Respuesta respuesta = registroService.registrar(persona);
+			Respuesta respuesta = registroService.registrar(persona, request.getRemoteAddr());
 			
 			request.getSession().setAttribute("respuesta", respuesta);
-			
 			return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		}catch(Exception e){
-			logger.error(e);
-			e.printStackTrace();
 			Respuesta respuesta = new Respuesta();
+			respuesta.setCodigo(99);
 			respuesta.setMensaje(e.getMessage());
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -67,11 +66,16 @@ public class RegistroController {
 	 */
 	@RequestMapping(value = "/registroCompartamos", method = RequestMethod.GET)
 	public String printLoginCompartamos(ModelMap model) {
-		logger.info("Entra a registro Compartamos");
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
 			return "redirect:/loginCompartamos";
 		}
-		return "registroCompartamos";
+		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(usuario.getOrigen().equals("compartamos"))
+			return "registroCompartamos";
+		else if(usuario.getOrigen().equals("yastas"))
+			return "redirect:/registroYastas";
+		else
+			return "redirect:/paginaError";
  
 	}
 	
@@ -85,7 +89,13 @@ public class RegistroController {
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
 			return "redirect:/loginYastas";
 		}
-		return "registroYastas";
+		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(usuario.getOrigen().equals("yastas"))
+			return "registroYastas";
+		else if(usuario.getOrigen().equals("compartamos"))
+			return "redirect:/registroCompartamos";
+		else
+			return "redirect:/paginaError";
  
 	}
 	

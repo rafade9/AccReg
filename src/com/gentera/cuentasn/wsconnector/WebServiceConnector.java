@@ -3,7 +3,6 @@
  */
 package com.gentera.cuentasn.wsconnector;
 
-import com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 
@@ -17,14 +16,15 @@ public interface WebServiceConnector {
 	/**
 	 * Consumo de Web Service CRM para registrar persona
 	 * @param persona
+	 * @Param ip
 	 * @return
 	 */
-	public Respuesta sendData(Persona persona);
+	public Respuesta sendData(Persona persona, String ip) throws Exception;
 
 	/**
 	 * Consumo de Web Service Card Manager para consultar tarjetas
 	 * @param bp
 	 * @return
 	 */
-	public CardNumbers[] getTarjetas(String bp);
+//	public CardNumbers[] getTarjetas(String bp);
 }

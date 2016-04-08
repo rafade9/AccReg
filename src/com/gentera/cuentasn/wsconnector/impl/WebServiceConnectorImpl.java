@@ -15,10 +15,6 @@ import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_BancaMovil_Query_BP_CardStub;
-import com.compartamos.cm.cardmanagement.de_oa_i_104.CardNumbers;
-import com.compartamos.cm.cardmanagement.de_oa_i_104.Execute;
-import com.compartamos.cm.cardmanagement.de_oa_i_104.ExecuteResponse;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerName;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerPhone;
 import com.compartamos.common.gdt.AddressTypeID;
@@ -46,7 +42,10 @@ import com.compartamos.common.gdt.ZBankCardContractID;
 import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
 import com.gentera.cuentasn.util.Properties;
+import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
 import mx.com.gentera.crm.level2accountmanage.int_0133.BusinessPartnerCreateLevel2AccountData;
@@ -85,7 +84,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#sendData(com.gentera.cuentasn.entities.Persona)
 	 */
 	@Override
-	public Respuesta sendData(Persona persona) {
+	public Respuesta sendData(Persona persona, String ip) throws Exception{
 		Respuesta respuesta = new Respuesta();
 		try {
 			// Se genera el stub con el endpoint al cual apunta
@@ -95,6 +94,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
 			ba.setUsername(Properties.getProp("UserCRM"));
 			ba.setPassword(Properties.getProp("PasswordCRM"));
+			
+			//Timeout
+			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(300000);;
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
@@ -134,26 +136,39 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			// ID BP Empleado ---Viene de CRM
 			BusinessPartnerInternalID bpEmpleado = new BusinessPartnerInternalID();
 			
-			//Código temporal
-			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-				officeId.setOrganisationalCentreID(new Token("156")); // Poza Rica
-			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("eliana")){
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-				officeId.setOrganisationalCentreID(new Token("4626")); // Minatitlan
-			}else if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("yastas")){
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-				officeId.setOrganisationalCentreID(new Token("4626")); // Poza Rica
-			}else{
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000001000"));
+			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String origen = user.getOrigen();
+			
+			if(origen.equals("compartamos")){
+			
+				String numEmpleado = user.getNumEmpleado();
+			
+				if(numEmpleado==null){
+					throw new Exception("El empleado no cuenta con número de nómina.");
+				}
+				//Se formatea el numero de empleado y se añade al bp
+				logger.info("Empleado: " + Util.formatNumEmpleado(numEmpleado));
+				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
+				
+				LeerCatalogosImpl leercatalogo = new LeerCatalogosImpl();
+				String numPlaza = leercatalogo.getSucursalPlaza(ip).getId();
+
+				if(numPlaza==null){
+					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
+				}
+				
+				logger.info("Sucursal No. " + numPlaza);
+				officeId.setOrganisationalCentreID(new Token(numPlaza));
+			}
+			
+			else{
+//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
+//				officeId.setOrganisationalCentreID(new Token("4626"));
+				bpEmpleado.setBusinessPartnerInternalID(new Token("E000044208"));
 				officeId.setOrganisationalCentreID(new Token("1037"));
 			}
 			
-//			if(SecurityContextHolder.getContext().getAuthentication().getName().toString().equals("compartamos")){
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000000028"));
-//			}else{
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-//			}
+			identifiers.setServiceOfficeID(officeId);
 			identifiers.setBusinessPartnerID(bpEmpleado);
 
 			// ID Comercio --- Propio
@@ -187,22 +202,22 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			LANGUAGEINDEPENDENT_MEDIUM_Name colonia = new LANGUAGEINDEPENDENT_MEDIUM_Name();
 
 			// Primer nombre
-			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre());
+			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre().toUpperCase());
 			nameData.setGivenName(givenName);
 
 			// Segundo nombre
 			if (persona.getSegundoNombre() != null && !persona.getSegundoNombre().equals("")) {
-				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre());
+				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre().toUpperCase());
 				nameData.setMiddleName(middleName);
 			}
 
 			// Primer apellido
-			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno());
+			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno().toUpperCase());
 			nameData.setFamilyName(familyName);
 
 			// Segundo apellido
 			if (persona.getMaterno() != null && !persona.getMaterno().equals("")) {
-				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno());
+				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno().toUpperCase());
 				nameData.setAditionalFamilyName(aditionalFamilyName);
 			}
 
@@ -230,7 +245,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			BusinessPartnerDocumentIdentifier documentIdentifier = new BusinessPartnerDocumentIdentifier();
 			// Tipo de identificacion
 			PartyIdentifierTypeCode codeIdentifier = new PartyIdentifierTypeCode();
-			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion()));
+			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion().toUpperCase()));
 			documentIdentifier.setCode(codeIdentifier);
 			// Numero de identificacion
 			ItemID idIdentifier = new ItemID();
@@ -274,27 +289,21 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			/**
 			 * Telefono
 			 */
-			AcctOriginationBusinessPartnerPhone phoneData = new AcctOriginationBusinessPartnerPhone();
-			// Tipo de telefono
-			PhoneTypeID phoneType = new PhoneTypeID();
-			if (persona.isSms()) {
-				phoneType.setPhoneTypeID(new Token("6")); // Si cliente acepta
-															// sms, se pone por
-															// decreto el 6
-															// (celular para
-															// sms)
-			} else {
+			if(!persona.getTelefono().equals("")){
+				AcctOriginationBusinessPartnerPhone phoneData = new AcctOriginationBusinessPartnerPhone();
+				// Tipo de telefono
+				PhoneTypeID phoneType = new PhoneTypeID();
+				
 				phoneType.setPhoneTypeID(new Token(persona.getTipoTelefono()));
+				phoneData.setPhoneTypeID(phoneType);
+				PhoneNumberV1 phoneNumber = new PhoneNumberV1();
+				PhoneNumberSubscriberID number = new PhoneNumberSubscriberID();
+				number.setPhoneNumberSubscriberID(new Token(persona.getTelefono()));
+
+				phoneNumber.setSubscriberID(number);
+				phoneData.setPhoneNumber(phoneNumber);
+				bp.setPhoneData(phoneData);
 			}
-
-			phoneData.setPhoneTypeID(phoneType);
-			PhoneNumberV1 phoneNumber = new PhoneNumberV1();
-			PhoneNumberSubscriberID number = new PhoneNumberSubscriberID();
-			number.setPhoneNumberSubscriberID(new Token(persona.getTelefono()));
-			phoneNumber.setSubscriberID(number);
-			phoneData.setPhoneNumber(phoneNumber);
-			bp.setPhoneData(phoneData);
-
 			/**
 			 * DIRECCION
 			 */
@@ -315,26 +324,26 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			regionCode.setRegionCode(new Token(persona.getEstado()));
 			addressData.setRegionCode(regionCode);
 			// Municipio o Delegacion
-			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion());
+			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase());
 			addressData.setDistrictName(municipio);
 			// Ciudad
-			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad());
+			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase());
 			addressData.setCityName(ciudad);
 			// Colonia
-			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia());
+			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase());
 			addressData.setAdditionalCityName(colonia);
 			// Calle
 			StreetName streetName = new StreetName();
-			streetName.setStreetName(persona.getCalle());
+			streetName.setStreetName(persona.getCalle().toUpperCase());
 			addressData.setStreetName(streetName);
 			// No Ext
 			HouseID numExt = new HouseID();
-			numExt.setHouseID(new Token(persona.getNumExterior()));
+			numExt.setHouseID(new Token(persona.getNumExterior().toUpperCase()));
 			addressData.setHouseID(numExt);
 			// No Int
 			if (persona.getNumInterior() != null && !persona.getNumInterior().equals("")) {
 				HouseID numInt = new HouseID();
-				numInt.setHouseID(new Token(persona.getNumInterior()));
+				numInt.setHouseID(new Token(persona.getNumInterior().toUpperCase()));
 				addressData.setAdditionalHouseID(numInt);
 			}
 			bp.setAddressData(addressData);
@@ -344,7 +353,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			dtSync.setMessageHeader(messageHeader);
 			dtSync.setLevel2AccountCreationData(data);
 			mtSync.setMT_Level2AccountCreationReq_sync(dtSync);
-			logger.info("Se prepara para enviar petición al endpoint: " + endPoint);
+			logger.info("Endpoint: " + endPoint);
+			logger.info("Usuario: " + Properties.getProp("UserCRM"));
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
 
 			if (response.getMT_Level2AccountCreationResp_sync().getLog().getItem() != null) {
@@ -372,15 +382,19 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 
 		} catch (AxisFault e) {
 			logger.error("Error AxisFault " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			logger.error("Error Remote " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		} catch (ExchangeFaultData e) {
 			logger.error("Error Exchange Data " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		} catch (ParseException e) {
 			logger.error("Error General " + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 		}
 		return respuesta;
@@ -389,46 +403,6 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#getTarjetas(java.lang.String)
 	 */
-	@Override
-	public CardNumbers[] getTarjetas(String bp) {
-		try {
-			CMS_BancaMovil_Query_BP_CardStub stub = new CMS_BancaMovil_Query_BP_CardStub(endPointCardManager);
-
-			// Se configura autenticación
-			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
-			ba.setUsername(Properties.getProp("UserCardManager"));
-			ba.setPassword(Properties.getProp("PasswordCardManager"));
-
-			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
-					Boolean.FALSE);
-			stub._getServiceClient().getOptions()
-					.setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
-
-			logger.info("Se prepara para enviar petición al endpoint: " + endPointCardManager);
-			logger.info("Con usuario: " + ba.getUsername());
-
-			Execute execute0 = new Execute();
-			logger.info("se setea bp");
-			execute0.setBankBP(bp);
-			logger.info("se setea card status");
-			execute0.setCardStatus("6");
-			logger.info("se setea smp");
-			execute0.setExternalUser("SMP");
-			logger.info("se setea smp2");
-			execute0.setCMSUserId("SMP");
-			logger.info("se ejecuta");
-			ExecuteResponse response = stub.execute(execute0);
-			logger.info("responde, se validan numero de tarjetas. Codigo recibido : "
-					+ response.getExecuteResult().getRCCode());
-			return response.getExecuteResult().getCardNumbers().getCardNumbers();
-
-		} catch (AxisFault e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	public CardNumbers[] getTarjetas(String bp) {}
 
 }

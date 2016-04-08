@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
+import com.gentera.cuentasn.entities.Sucursal;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.google.gson.Gson;
 
@@ -104,6 +105,22 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	
+	/*
+	 * 
+	 */
+	public Sucursal getSucursalPlaza(String ip) {
+		try{
+			prop.load(LeerCatalogosImpl.class.getClassLoader().getResourceAsStream("resources/sucursales.properties"));
+			Sucursal sucursal = gson.fromJson(prop.getProperty(ip.toUpperCase()), Sucursal.class);
+			return sucursal;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 

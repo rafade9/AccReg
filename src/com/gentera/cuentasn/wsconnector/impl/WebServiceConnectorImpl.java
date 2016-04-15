@@ -12,6 +12,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
 import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.entities.Usuario;
-import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
+import com.gentera.cuentasn.service.LeerCatalogos;
 import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
@@ -79,6 +80,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * Variable que almacena el Endpoint de Card Manager
 	 */
 	final static String endPointCardManager = Properties.getProp("EndPointCardManager");
+	
+	@Autowired
+	LeerCatalogos leerCatalogos;
 
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#sendData(com.gentera.cuentasn.entities.Persona)
@@ -96,7 +100,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			ba.setPassword(Properties.getProp("PasswordCRM"));
 			
 			//Timeout
-			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(300000);;
+			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));;
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
@@ -150,8 +154,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				logger.info("Empleado: " + Util.formatNumEmpleado(numEmpleado));
 				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
 				
-				LeerCatalogosImpl leercatalogo = new LeerCatalogosImpl();
-				String numPlaza = leercatalogo.getSucursalPlaza(ip).getId();
+				String numPlaza = leerCatalogos.getSucursalPlaza(ip).getId();
 
 				if(numPlaza==null){
 					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
@@ -163,14 +166,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			else{
 				
-				LeerCatalogos leerCatalogo = new LeerCatalogosImpl();
+				Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
 				
-				Usuario usuario = leerCatalogo.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
-				
-				System.out.println("Id partner" + usuario.getEmpleado());
-				System.out.println("Oficina" + usuario.getNumOficina());
-				
-				bpEmpleado.setBusinessPartnerInternalID(new Token(usuario.getEmpleado()));
+				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(usuario.getEmpleado())));
 				officeId.setOrganisationalCentreID(new Token(usuario.getNumOficina()));
 
 			}

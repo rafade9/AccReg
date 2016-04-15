@@ -42,15 +42,9 @@ public class RegistroServiceImpl implements RegistroService {
 		Respuesta respuesta = new Respuesta();
 		try {
 			// Se realiza la conexion
-			respuesta = wsConnector.sendData(persona, ip);
+			respuesta = wsConnector.sendData(persona, Util.convierteIpTerminaCero(ip));
 			if (respuesta != null && respuesta.getCodigo() != null) {
 				logger.info("La respuesta trae codigo de retorno " + respuesta.getCodigo());
-				System.out.println("---DATOS DE RESPUESTA---");
-				System.out.println("BP: " + respuesta.getIdBP());
-				System.out.println("Oportunidad: " + respuesta.getIdOportunidad());
-				System.out.println("Clabe: " + respuesta.getCLABE());
-				System.out.println("Cuenta: " + respuesta.getCuenta());
-				System.out.println("Codigo de retorno: " + respuesta.getCodigo());
 
 				if (respuesta.getCodigo() == 0) {
 					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");

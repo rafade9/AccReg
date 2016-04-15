@@ -289,4 +289,10 @@ public class Util {
 		return clave.toString();
 	}
 	
+	public static String convierteIpTerminaCero(String ip){
+		String ipCero = ip.substring(0, ip.lastIndexOf("."));
+		ipCero += ".0";
+		return ipCero;
+	}
+	
 }

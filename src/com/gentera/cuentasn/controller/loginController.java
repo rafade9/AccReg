@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.LeerCatalogos;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.multitype.GenericManageableCaptchaService;
 
@@ -37,6 +38,12 @@ public class loginController {
 	 */
 	@Autowired
 	private GenericManageableCaptchaService miCaptchaService;
+	
+	/**
+	 * Clase para manejo de catalogos
+	 */
+	@Autowired
+	private LeerCatalogos leerCatalogos;
 
 	/**
 	 * Muestra el login de Yastas
@@ -80,6 +87,13 @@ public class loginController {
 			//Origen compartamos
 			if(usuario.getOrigen()!=null && usuario.getOrigen().toLowerCase().equals("compartamos")){
 				model = new ModelAndView("redirect:/registroCompartamos");
+
+				//Verifica ip
+				if(!leerCatalogos.isIpPermitida(req.getRemoteHost())){
+					model = new ModelAndView("loginCompartamos");
+					model.addObject("error", "Acceso no autorizado");
+					return model;
+				}
 				//Realiza el login con las credenciales dadas por el usuario mediante el authentication manager
 				req.login(usuario.getUsername(), usuario.getPassword());
 			}

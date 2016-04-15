@@ -9,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.gentera.cuentasn.util.Properties;
@@ -52,8 +50,6 @@ public class ArchivoOperadoresTask {
 		String archivo = "OperadoresYastasN2.properties";
 
 		File fichero = new File(Properties.getProp("fileOperadores")+archivo);
-
-		System.out.println(fichero);
 
 		if(tipoLectura.equals("1")){
 			while(!resultado){

@@ -74,8 +74,8 @@ public class loginController {
 	 * @param usuario
 	 * @return
 	 */
-	@RequestMapping(value = "/loginProcessCompartamos", method = RequestMethod.POST)
-	public ModelAndView loginProcessCompartamos(HttpServletRequest req, Usuario usuario) {
+	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+	public ModelAndView loginProcess(HttpServletRequest req, Usuario usuario) {
 		ModelAndView model;
 		try {
 			
@@ -83,7 +83,7 @@ public class loginController {
 			/**
 			 * Verifica el origen
 			 */
-			
+			System.out.println("Ip: " + req.getRemoteHost());
 			//Origen compartamos
 			if(usuario.getOrigen()!=null && usuario.getOrigen().toLowerCase().equals("compartamos")){
 				model = new ModelAndView("redirect:/registroCompartamos");
@@ -99,7 +99,7 @@ public class loginController {
 			}
 			//Origen Yastas
 			else if(usuario.getOrigen()!= null && usuario.getOrigen().toLowerCase().equals("yastas")){
-				model = new ModelAndView("redirect:/registroYastas");
+				model = new ModelAndView("registroYastas");
 				
 				/**
 				 * Valida captcha
@@ -165,7 +165,7 @@ public class loginController {
 			if(origen.toUpperCase().equals("COMPARTAMOS")){
 				return "redirect:/loginCompartamos";
 			}else if(origen.toUpperCase().equals("YASTAS")){
-				return "redirect:/loginYastas";
+				return "redirect:https://www.yastas.com/CuentasN2/loginYastas";
 			}else{
 				return "redirect:/paginaError";
 			}

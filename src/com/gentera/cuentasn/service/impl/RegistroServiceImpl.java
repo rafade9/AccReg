@@ -65,6 +65,7 @@ public class RegistroServiceImpl implements RegistroService {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			String codigo = Util.generaClaveError();
 			logger.error(codigo + "---" + e.getMessage());
 			throw new Exception(codigo);

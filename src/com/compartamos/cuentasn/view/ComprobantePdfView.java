@@ -89,7 +89,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 			LeerCatalogosImpl leerCatalogos = new LeerCatalogosImpl();
 			Sucursal sucursal = new Sucursal();
-			sucursal = leerCatalogos.getSucursalPlaza(request.getRemoteAddr());
+			sucursal = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero(request.getRemoteAddr()));
 			
 			PdfPCell lugarExp = new PdfPCell(new Phrase(sucursal.getPlaza() + ", " + sucursal.getEstado(), letraM));
 			lugarExp.setHorizontalAlignment(Element.ALIGN_CENTER);

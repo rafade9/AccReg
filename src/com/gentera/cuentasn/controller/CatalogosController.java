@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.service.CatalogosService;
+import com.gentera.cuentasn.taks.ArchivoOperadoresTask;
+import com.gentera.cuentasn.util.OperadoresArchivo;
 
 /**
  * Clase controller para exponer los catalogos para el formulario de registro
@@ -69,5 +71,25 @@ public class CatalogosController {
 	public @ResponseBody String log(){
 		logger.info("PRUEBA DE ESCRITURA EN LOG");
 		return "hecho";
+	}
+	
+	/**
+	 * Servicio para regenerar el array de operadores (Temporal)
+	 */
+	@RequestMapping(value = "/regOperadores", method = RequestMethod.GET)
+	public @ResponseBody String regOperadores(){
+		try{
+			List<String> operadores = ArchivoOperadoresTask.obtenerOperadores("2");
+			if(operadores.size()!=0){
+				OperadoresArchivo.setNumOperadores(operadores);
+				return "Hecho!";
+			}
+			else{
+				return "Sin operadores";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return "Falla";
+		}
 	}
 }

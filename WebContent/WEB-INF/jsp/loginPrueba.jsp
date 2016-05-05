@@ -11,7 +11,7 @@
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
-	<form action="./loginProcessCompartamos" method="post">
+	<form action="./loginProcess" method="post">
 		Usuario<input type="text" id="username" name="username">
 		Password<input type="password" id="password" name="password">
 		<input type="submit" value="Enviar">

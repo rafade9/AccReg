@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8; IE=8">
-<meta http-equiv="X-Frame-Options" content="deny">
+<meta http-equiv="X-Frame-Options" content="sameorigin">
 
-<script src="resources/js/jquery-1.10.1.js"></script>
-<script src="resources/js/jquery.validate.js"></script>
-<script src="resources/js/messages_es.js"></script>
-<script src="resources/js/loginYastas.js"></script>
+<script src="./resources/js/jquery-1.10.1.js"></script>
+<script src="./resources/js/jquery.validate.js"></script>
+<script src="./resources/js/messages_es.js"></script>
+<script src="./resources/js/loginYastas.js"></script>
 
 <link rel="stylesheet" type="text/css" href="resources/css/YastasGen.css"/>
 <link rel="stylesheet" type="text/css" href="resources/css/loginYastas.css"/>
@@ -33,9 +33,9 @@
 					</c:if>
 	<div id="formYastas">
 
-	<form id="formularioYastas" action="./loginProcessCompartamos" method="post">
+	<form id="formularioYastas" action="./loginProcess" method="post">
 		
-		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username" class="texGris09_13">
+		<label class="texGris09_13">Ingrese el ID del operador:</label> <input type="text" id="username" name="username" class="texGris09_13" maxlength="6">
 		<div class="clear"> </div>
 		
 		<table>
@@ -48,8 +48,8 @@
 			<tr>
 				<td valign="top"><input type="text" style="width: 173px;"
 					name="captcha" id="captcha"
-					class="requerido captcha captchaBloquear"></td>
-				<td valign="middle"><button id="refresh" border="0"><img src="resources/img/imgRefresh.jpg" width="23" heigth="23" title="refrest"></button></td>
+					class="requerido captcha captchaBloquear" maxlength="6"></td>
+				<td valign="middle"><button id="refresh" border="0" onclick="history.go(0)"><img src="resources/img/imgRefresh.jpg" width="23" heigth="23" title="refrest"></button></td>
 				<td width="29"></td>
 			</tr>
 		</table>

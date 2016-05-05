@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8; IE=8">
-<meta http-equiv="X-Frame-Options" content="deny">
+<meta http-equiv="X-Frame-Options" content="sameorigin">
 <title>Compartamos</title>  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" title="" href="resources/css/loginCompartamos.css" type="text/css">
@@ -28,7 +28,7 @@
 						<div class="error" id="mensajeError">${error}</div>
 					</c:if>
 					<br>
-					<form id="formularioCompartamos" action="./loginProcessCompartamos" method="post" novalidate align="center" commandName="Persona">
+					<form id="formularioCompartamos" action="./loginProcess" method="post" novalidate align="center" commandName="Persona">
 
 	     				<label for="username"  class="texGris09_13" >Usuario  *</label> <input type="text" id="username" name="username"  class="texGris09_13" >
 	     				<div class="clear"> </div>

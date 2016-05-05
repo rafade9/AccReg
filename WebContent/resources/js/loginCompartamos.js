@@ -12,7 +12,7 @@ $("#formularioCompartamos").validate({
       },
       password: {
         required: true,
-        minlength: 5
+        minlength: 8
       }
     },
     messages: {
@@ -22,7 +22,7 @@ $("#formularioCompartamos").validate({
 
       password: {
     	  required: "Por favor proporcione su password",
-    	  minlength: "El password debe tener m&iacute;nimo 5 caracteres"
+    	  minlength: "El password debe tener m&iacute;nimo 8 caracteres"
       }
     },
     submitHandler: function() {

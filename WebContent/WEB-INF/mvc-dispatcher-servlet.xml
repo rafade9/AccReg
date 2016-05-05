@@ -64,10 +64,7 @@
  	
  	<bean id="timerCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="schedulerJob"></property>
-        <property name="cronExpression" value="0 10 18 ? * *"></property>
-<!-- 		<property name="cronExpression" value="0 * * * * ?"></property> -->
-<!-- 		<property name="cronExpression" value="0 0/5 * * * ?"></property> -->
-<!-- 		<property name="cronExpression" value="0 0 3 ? * *"></property> -->
+        <property name="cronExpression" value="0 0 3 ? * *"></property>
 	</bean>
  	
  	<bean id="GiaScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

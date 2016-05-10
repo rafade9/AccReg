@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Yastas</title>
   <script src="resources/js/jquery-1.10.1.js"></script>
   <script type="text/javascript" charset="UTF-8" src="resources/js/menuYastas.js"></script>
  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link href="resources/css/menuYastas.css" rel="stylesheet" type="text/css">
+  <link href="resources/img/faviconYastas.ico" rel="icon" type="image/x-icon">
 
 </head>
 
@@ -25,6 +26,7 @@
 		<input id="originacion" type="button" value="Originación" class="botonMenu">
 		<input id="reposicion" type="button" value="Reposición" class="botonMenu">
 		<br><br>
+		<input type="hidden" id="origen" name="origen" value="yastas">
 		<input type="submit" id="salir" name="salir" value="Salir" class="botonSalir">
 	</div>
 	</center>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Yastas</title>
 
   <script src="resources/js/jquery-1.10.1.js"></script>
    <script src="resources/js/jquery.validate.js"></script>
@@ -14,6 +14,7 @@
  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link href="resources/css/reposicionYastas.css" rel="stylesheet" type="text/css">
+  <link href="resources/img/faviconYastas.ico" rel="icon" type="image/x-icon">
 
 </head>
 <body>
@@ -54,21 +55,23 @@
 					<label id= "errorcontainer-folio"></label><br>
 				</div>
 				<div id="seccionBotones">
+					<input type="hidden" id="origen" name="origen" value="yastas">
 					<input type="submit" id="enviar" name="enviar" value="Enviar">
 					<input type="button" id="salir" name="salir" value="Salir">
 				</div>
+				<div id="seccionOk" style='display:none;'>
+					<center>
+					<p class='greenMsgClass'>Reposición exitosa.</p><br><br>
+				</center>
+			</div>
+			<div id="seccionSalir" style='display:none;'>
+				<center>
+					<input type="button" id="cancelar" name="cancelar" value="Salir">
+				</center>
+		</div>
 		</form>
 	</div>
-	<div id="seccionOk" style='display:none;'>
-		<center>
-			<p class='greenMsgClass'>Reposición exitosa.</p><br><br>
-		</center>
-	</div>
-	<div id="seccionSalir" style='display:none;'>
-			<center>
-				<input type="button" id=cancelar" name="cancelar" value="Salir">
-			</center>
-		</div>
+
   </div>
 </div>
 </body>

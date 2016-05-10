@@ -4,6 +4,17 @@
 
 $(document).ready(function(){
 	
+	varTimer = setTimeout(logoutFtn, 300000);
+	  
+	function logoutFtn(){
+		window.location.href = "logout/yastas";
+	}
+	
+	function restartTimer(){
+		clearTimeout(varTimer);
+		varTimer = setTimeout(logoutFtn, 300000);
+	}
+	
 	
 	jQuery.validator.setDefaults({
         errorPlacement: function(error, element) {
@@ -218,7 +229,17 @@ $(document).ready(function(){
 //botones Salir
 
 $(function() {
-	$("#salir, cancelar").click(
+	$("#salir").click(
+		function() {
+			var origenReg = $('#origen').val();	
+			window.location.href = "logout/"+origenReg;
+			
+	});
+});
+
+
+$(function() {
+	$("#cancelar").click(
 		function() {
 			var origenReg = $('#origen').val();	
 			window.location.href = "logout/"+origenReg;

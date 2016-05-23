@@ -142,22 +142,24 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String origen = user.getOrigen();
+			String numPlaza = "";
+			String numEmpleado = "";
 			
 			if(origen.equals("compartamos")){
 			
-				String numEmpleado = user.getNumEmpleado();
+				numEmpleado = user.getNumEmpleado();
 			
 				if(numEmpleado==null){
-					throw new Exception("El empleado no cuenta con número de nómina.");
+					throw new Exception("El usuario " + user.getUsername() + " no cuenta con numero de nomina.");
 				}
 				//Se formatea el numero de empleado y se añade al bp
-				logger.info("Empleado: " + Util.formatNumEmpleado(numEmpleado));
-				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
+				numEmpleado = Util.formatNumEmpleado(numEmpleado);
+				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
 				
-				String numPlaza = leerCatalogos.getSucursalPlaza(ip).getId();
+				numPlaza = leerCatalogos.getSucursalPlaza(ip).getId();
 
 				if(numPlaza==null){
-					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
+					throw new Exception("No se ha identificado la sucursal. No existe la ip("+ ip +") de origen.");
 				}
 				
 				logger.info("Sucursal No. " + numPlaza);
@@ -168,8 +170,11 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				
 				Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
 				
-				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(usuario.getEmpleado())));
-				officeId.setOrganisationalCentreID(new Token(usuario.getNumOficina()));
+				numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
+				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
+				
+				numPlaza = usuario.getNumOficina();
+				officeId.setOrganisationalCentreID(new Token(numPlaza));
 
 			}
 			
@@ -358,17 +363,30 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			dtSync.setMessageHeader(messageHeader);
 			dtSync.setLevel2AccountCreationData(data);
 			mtSync.setMT_Level2AccountCreationReq_sync(dtSync);
-			logger.info("Endpoint: " + endPoint);
-			logger.info("Usuario: " + Properties.getProp("UserCRM"));
+			
+			logger.info("Se envia peticion a CRM con los sig datos:"
+					+ " ---->Origen: " + origen
+					+ " ---->Sucursal: " + numPlaza
+					+ " ---->Empleado: " + numEmpleado
+					+ " ---->Usuario app: " + user.getUsername()
+					+ " ---->Folio: " + persona.getFolio()
+					+ " ---->Usuario CRM: " + Properties.getProp("UserCRM")
+					+ " ---->Endpoint CRM: " + endPoint);
+			
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
 
 			if (response.getMT_Level2AccountCreationResp_sync().getLog().getItem() != null) {
 				String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
 						.toString();
 				logger.error("Respuesta de CRM: "
-						+ response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+						+ " ---->Folio: " + persona.getFolio()
+						+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
+						+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
 				respuesta.setCodigo(Integer.valueOf(code));
 			} else {
+				logger.info("Respuesta exitosa de CRM: "
+						+ " ---->Folio: " + persona.getFolio()
+						+ " ---->Codigo: 0");
 				respuesta.setCodigo(0); // Cambia?
 			}
 

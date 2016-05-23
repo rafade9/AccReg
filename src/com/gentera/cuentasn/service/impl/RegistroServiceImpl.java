@@ -44,7 +44,6 @@ public class RegistroServiceImpl implements RegistroService {
 			// Se realiza la conexion
 			respuesta = wsConnector.sendData(persona, Util.convierteIpTerminaCero(ip));
 			if (respuesta != null && respuesta.getCodigo() != null) {
-				logger.info("La respuesta trae codigo de retorno " + respuesta.getCodigo());
 
 				if (respuesta.getCodigo() == 0) {
 					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");

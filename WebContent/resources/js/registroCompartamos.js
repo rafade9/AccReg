@@ -281,6 +281,8 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
                       jsonObj[keyInput] = $(this).val();
                      }
             });
+            
+            jsonObj.colonia = jsonObj.colonia.substring(0,40);
      	    	
             $.ajax({
                 method: 'POST',
@@ -561,7 +563,7 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
 			function() {
 				if (this.value.length >= 5 && this.value > 1000) {
               	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
-					//$.getJSON("resources/codPostal.json", function(data) {//desarrollo
+//					$.getJSON("resources/codPostal.json", function(data) {//desarrollo
 						
 						//Timer
 						restartTimer();

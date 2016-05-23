@@ -281,6 +281,8 @@ $(document).ready(function(){
 	                     }
 	            });
 	     	    	
+	            jsonObj.colonia = jsonObj.colonia.substring(0,40);
+	            
 	            $.ajax({
 	                method: 'POST',
 	                contentType: 'application/json',

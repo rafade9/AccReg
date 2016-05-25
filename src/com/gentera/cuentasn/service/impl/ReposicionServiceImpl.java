@@ -22,8 +22,7 @@ public class ReposicionServiceImpl implements ReposicionService{
 		Respuesta respuesta = new Respuesta();
 		try{
 //			respuesta = wsConnector.sendData(persona, Util.convierteIpTerminaCero(ip));
-			
-			respuesta.setCodigo(6);
+			respuesta = wsConnector.sendDataReposition(persona);
 			
 		}catch(Exception e){
 			e.printStackTrace();

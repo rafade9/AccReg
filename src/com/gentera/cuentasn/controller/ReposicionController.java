@@ -43,10 +43,27 @@ public class ReposicionController {
 			
 			Respuesta respuesta = reposicionService.reposicion(persona, request.getRemoteAddr());
 			
-			request.getSession().setAttribute("respuesta", respuesta);
+//			request.getSession().setAttribute("respuesta", respuesta);
 			
 			return new ResponseEntity<Respuesta>(respuesta , HttpStatus.OK);
 			
+		}catch(Exception e){
+			Respuesta respuesta = new Respuesta();
+			respuesta.setCodigo(99);
+			respuesta.setMensaje(e.getMessage());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value ="/pruebaRepo", method = RequestMethod.GET)
+	public ResponseEntity<Respuesta> pruebaRepo(HttpServletRequest request, HttpServletResponse response){
+		try{
+			Persona persona = new Persona();
+			persona.setFolio("123");
+			persona.setReferencia("789");
+			persona.setFechaNacimiento("12/12/1990");
+			Respuesta respuesta = reposicionService.reposicion(persona, request.getRemoteAddr());
+			return new ResponseEntity<Respuesta>(respuesta, HttpStatus.OK);
 		}catch(Exception e){
 			Respuesta respuesta = new Respuesta();
 			respuesta.setCodigo(99);

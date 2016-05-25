@@ -27,4 +27,11 @@ public interface WebServiceConnector {
 	 * @return
 	 */
 //	public CardNumbers[] getTarjetas(String bp);
+	
+	/**
+	 * Consumo de Web Service Card Manager para reposicion de TDD
+	 * @return
+	 * @throws Exception
+	 */
+	public Respuesta sendDataReposition(Persona persona) throws Exception;
 }

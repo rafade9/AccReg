@@ -560,8 +560,8 @@ $(document).ready(function(){
 			$("#codigoPostal").focusout(
 				function() {
 					if (this.value.length >= 5 && this.value > 1000) {
-	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
-//						$.getJSON("/FormularioProspectacion/resources/codPostal.json", function(data) {//desarrollo	
+//	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
+						$.getJSON("/FormularioProspectacion/resources/codPostal.json", function(data) {//desarrollo	
 							//Timer
 							restartTimer();
 							$("#colonia").prop('disabled', false);

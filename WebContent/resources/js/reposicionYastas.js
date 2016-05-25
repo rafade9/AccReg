@@ -71,6 +71,7 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./generaReposicion",
                 success: function(data){
+                	console.log(data);
                 	if(data.codigo == 1){//caso exitoso
                 		$('#seccionOk').css('display','block');
                 		$('#seccionFecha').css('display','none');

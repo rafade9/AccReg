@@ -64,9 +64,14 @@ public class RegistroServiceImpl implements RegistroService {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 			String codigo = Util.generaClaveError();
 			logger.error(codigo + "---" + e.getMessage());
+//			StringWriter sw = new StringWriter();
+//			e.printStackTrace(new PrintWriter(sw));
+			e.printStackTrace();
+//			System.out.println("ERROR MOSTRADO: \n" + sw.toString());
+//			Mail.sendMail();
 			throw new Exception(codigo);
 		}
 

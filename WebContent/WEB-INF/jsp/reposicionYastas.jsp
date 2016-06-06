@@ -31,18 +31,13 @@
 				</center>
  			</div>
  	
-			<div id="seccionError" style='display:none;'>
-				<center>						
-					<p class='redMsgClass'>Error.</p><br><br>
-
-				</center>
-	</div><br><br>
+			<div id="seccionError" style='display:none;' align="center"></div><br><br>
 		<form id="formulario" action="" novalidate>
 				<div id="seccionReferencia" style='display:block;'>
-					<label class="texGris09_13">Referencia * </label><input type="text" id="referencia" name="referencia" class="mayusculas texGris09_13 inputText" maxlength="18">
+					<label class="texGris09_13">Referencia * </label><input type="text" id="referencia" name="referencia" class=" texGris09_13 inputText" maxlength="18">
 					<label id= "errorcontainer-referencia"></label><br>
 					<div class="clear"> </div>
-					<label class="texGris09_13">Confirmación *<br> Referencia </label><input type="text" id="referenciaConf" name="referenciaConf" class="texGris09_13 inputText mayusculas" maxlength="40">
+					<label class="texGris09_13">Confirmación *<br> Referencia </label><input type="text" id="referenciaConf" name="referenciaConf" class="texGris09_13 inputText " maxlength="18">
 					<label id= "errorcontainer-referenciaConf"></label><br>
 					<div class="clear"> </div>
 				</div>
@@ -59,9 +54,8 @@
 					<input type="submit" id="enviar" name="enviar" value="Enviar">
 					<input type="button" id="salir" name="salir" value="Salir">
 				</div>
-				<div id="seccionOk" style='display:none;'>
+				<div id="seccionOk" style='display:none;' align="center">
 					<center>
-					<p class='greenMsgClass'>Reposición exitosa.</p><br><br>
 				</center>
 			</div>
 			<div id="seccionSalir" style='display:none;'>

@@ -15,7 +15,20 @@ $(document).ready(function(){
 		varTimer = setTimeout(logoutFtn, 300000);
 	}
 	
+	//Mensajes de respuesta
+	var mensajesRepo = [];
+	mensajesRepo[1] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>ahora realiza el cobro de la comisi&oacute;n en t&uacute; TPV.</p><br>";
+	mensajesRepo[2] = "<p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia</p>";
+	mensajesRepo[3] = "<p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
+	mensajesRepo[4] = "<p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
+	mensajesRepo[5] = "<p class='blackMsgClass'>Referencia Bloqueada, </p><p class='blackMsgClass'>indica al cliente que la referencia fue bloqueada por exceder el No. de intentos, debe comunicarse a call center para generar una nueva.</p>";
+	mensajesRepo[6] = "<p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
+	mensajesRepo[7] = "<p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p><p class='blackMsgClass'> Intente nuevamente</p>";
+	mensajesRepo[8] = "<p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p>";
+	mensajesRepo[99] = "<p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</p>";
+
 	
+		
 	jQuery.validator.setDefaults({
         errorPlacement: function(error, element) {
         error.appendTo('#errorcontainer-' + element.attr('id'));
@@ -31,11 +44,14 @@ $(document).ready(function(){
 		       minlength: 5
 		      },
 	    	referencia: {
-	    		required: true
+	    		required: true,
+	    		minlength: 18,
+	    		validaReferencia:true
 	          },
 	        referenciaConf: {
 	          required: true,
-	          validaReferencia: true
+	          minlength: 18,
+	          confirmaReferencia: true
 	        },
 	        fechaNacimiento: {
 	           required: true,
@@ -45,17 +61,17 @@ $(document).ready(function(){
 	    },
 	    messages: {
 	    	folio: {
-		        required: "Por favor, proporciona el n&uacute;mero de folio",
-		        number:"Por favor, proporciona s&oacute;lo n&uacute;meros"
+		        required: "Proporcione el n&uacute;mero de folio",
+		        number:"Proporciona s&oacute;lo n&uacute;meros"
 		      		},	
 		    referencia: {
-		      	required: "Por favor,proporcione la referencia ."
+		      	required: "Proporcione la referencia ."
 		      		},
 		    referenciaConf: {
-		      	required: "Por favor,confirme la referencia ."
+		      	required: "Confirme la referencia ."
 		      		},
 		    fechaNacimiento: {
-		    		required: "Por favor, proporciona la fecha de nacimiento."
+		    		required: "Proporcione la fecha de nacimiento."
 		     }
 	    },
 	    submitHandler: function() {
@@ -80,45 +96,58 @@ $(document).ready(function(){
                 		$('#seccionReferencia').css('display','none');
                 		$('#seccionBotones').css('display','none');
                 		$('#seccionSalir').css('display','block');
+                		
+                		$('#seccionOk').html(mensajesRepo[data.codigo]);
                 	}
-                	if(data.codigo == 2){//Referencia inexistente
+                	else if(data.codigo == 2){//Referencia inexistente
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionReferencia').css('display','block');
                 		$('#seccionBotones').css('display','block');
+                		
+                		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	if(data.codigo == 3){//Referencia no vigente
+                	else if(data.codigo == 3){//Referencia no vigente
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionReferencia').css('display','none');
                 		$('#seccionBotones').css('display','none');
                 		$('#seccionSalir').css('display','block');
+                		
+                		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	if(data.codigo == 4){//Fecha incorrecta
+                	else if(data.codigo == 4){//Fecha incorrecta
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','block');
                 		$('#seccionReferencia').css('display','none');
                 		$('#seccionBotones').css('display','block');
+                		
+                		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	if(data.codigo == 5){//Referencia bloqueada 3 intentos
+                	else if(data.codigo == 5){//Referencia bloqueada 3 intentos
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionReferencia').css('display','none');
                 		$('#seccionBotones').css('display','none');
                 		$('#seccionSalir').css('display','block');
+                		
+                		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	if(data.codigo == 6){//Folio no existe, folio ya fue asignado
+                	else if(data.codigo == 6){//Folio no existe, folio ya fue asignado
                 		$('#seccionFolio').css('display','block');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionReferencia').css('display','none');
+                		
+                		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	if(data.codigo == 7){//mensaje generico
+                	else{//mensaje generico
                 		$('#seccionError').css('display','block');
+                		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
                 },
                 error: function(data){
@@ -131,7 +160,7 @@ $(document).ready(function(){
 	
 //solo numeros
 	  
-	  $("#folio").keydown(function (e) {
+	  $("#folio, #referencia, #referenciaConf").keydown(function (e) {
 			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				  // Permite: Ctrl+A
 				  (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -176,31 +205,31 @@ $(document).ready(function(){
 					var diaNac = valuesStart[0];
 					var dateStart=new Date(valuesStart[2],(valuesStart[1]-1),valuesStart[0]);
 					if(fechaActual<dateStart){
-						$.validator.messages.dateRango = "Por favor, capture una fecha v&aacute;lida.";
+						$.validator.messages.dateRango = "Capture una fecha v&aacute;lida.";
 						return false;
 					}else{
 					    if((fechaActual.getFullYear()-anioNac)>99){
-							$.validator.messages.dateRango = "Por favor, el solicitante debe ser menor a 99 años.";
+							$.validator.messages.dateRango = "El solicitante debe ser menor a 99 años.";
 							return false;
 						}else if((fechaActual.getFullYear()-anioNac)==99){
 							if((fechaActual.getMonth()-mesNac>0)){
-								$.validator.messages.dateRango = "Por favor, el solicitante debe ser menor a 99 años.";
+								$.validator.messages.dateRango = "El solicitante debe ser menor a 99 años.";
 								return false;
 							}
 							if((fechaActual.getMonth()-mesNac==0 && fechaActual.getDate()-diaNac >=0)){
-								$.validator.messages.dateRango = "Por favor, el solicitante debe ser menor a 99 años.";
+								$.validator.messages.dateRango = "El solicitante debe ser menor a 99 años.";
 								return false;
 							}
 						}else if((fechaActual.getFullYear()-anioNac)<18){
-							$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+							$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 años.";
 							return false;		
 						}else if((fechaActual.getFullYear()-anioNac)==18){
 								if(fechaActual.getMonth()-mesNac <0){
-									$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+									$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 años.";
 									return false;							
 								}else 
 									if(fechaActual.getMonth()-mesNac ==0 && fechaActual.getDate()-diaNac <0){
-									$.validator.messages.dateRango = "Por favor, el solicitante debe ser mayor a 18 años.";
+									$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 años.";
 								return false;
 							}
 						}
@@ -213,17 +242,83 @@ $(document).ready(function(){
 		
 //validacion de referencia
 		
-		$.validator.addMethod("validaReferencia",
+		$.validator.addMethod("confirmaReferencia",
 				function(value, element) {
 				var referencia=$("#referencia").val();
 				var referenciaConf=$("#referenciaConf").val();
 				
-					if(referencia != referenciaConf){
-						$.validator.messages.validaReferencia = "Confirmaci&oacute;n de Referencia incorrecta...";
+					if(referencia != referenciaConf && referencia != ""){
+						$.validator.messages.confirmaReferencia = "Las referencias no coinciden.";
 						return false;
 					}
 				return true;
 		});
+		
+//validacion estructura de referencia
+		
+		$.validator.addMethod("validaReferencia",
+				function(value, element) {
+					var referencia=$("#referencia").val();
+					var validacion = referencia.substring(4,14);
+ 
+						if(parseInt(validacion.substring(0,2)) > 0 || parseInt(validacion.substring(0,2)) < 12){
+							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
+								if(parseInt(validacion.substring(2,4)) <= 30){
+									if(parseInt(validacion.substring(4,6)) <= 60 ){
+										if(parseInt(validacion.substring(6,8)) > 60 ){
+											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+											return false;
+										}
+									}else{
+										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+										return false;
+									}
+								}else{
+									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+									return false;
+								}
+							}else if(parseInt(validacion.substring(0,2)) == 2){//febrero
+								if(parseInt(validacion.substring(2,4)) <= 28){//dia
+									if(parseInt(validacion.substring(4,6)) <=24 ){//hora
+										if(parseInt(validacion.substring(6,8)) > 60 ){//minutos
+											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+											return false;
+										}
+									}else{
+										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+										return false;
+									}
+								}else{
+									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+									return false;
+								}
+									
+							}else{
+								if(parseInt(validacion.substring(2,4)) <= 31){//dia
+									if(parseInt(validacion.substring(4,6)) <=24 ){//hora
+										if(parseInt(validacion.substring(6,8)) > 60 ){//minutos
+											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+											return false;
+										}
+									}else{
+										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+										return false;
+									}
+								}else{
+									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+									return false;
+								}
+							}
+							
+						}else{
+							$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+							return false;
+						}
+
+					return true;
+				});
+		
+		
 });
 
 

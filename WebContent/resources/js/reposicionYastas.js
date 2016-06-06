@@ -18,14 +18,14 @@ $(document).ready(function(){
 	//Mensajes de respuesta
 	var mensajesRepo = [];
 	mensajesRepo[1] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>ahora realiza el cobro de la comisi&oacute;n en t&uacute; TPV.</p><br>";
-	mensajesRepo[2] = "<p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia</p>";
-	mensajesRepo[3] = "<p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
-	mensajesRepo[4] = "<p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
-	mensajesRepo[5] = "<p class='blackMsgClass'>Referencia Bloqueada, </p><p class='blackMsgClass'>indica al cliente que la referencia fue bloqueada por exceder el No. de intentos, debe comunicarse a call center para generar una nueva.</p>";
-	mensajesRepo[6] = "<p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
-	mensajesRepo[7] = "<p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p><p class='blackMsgClass'> Intente nuevamente</p>";
-	mensajesRepo[8] = "<p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p>";
-	mensajesRepo[99] = "<p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</p>";
+	mensajesRepo[2] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia</p>";
+	mensajesRepo[3] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
+	mensajesRepo[4] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
+	mensajesRepo[5] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia Bloqueada, </p><p class='blackMsgClass'>indica al cliente que la referencia fue bloqueada por exceder el No. de intentos, debe comunicarse a call center para generar una nueva.</p>";
+	mensajesRepo[6] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
+	mensajesRepo[7] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p><p class='blackMsgClass'> Intente nuevamente</p>";
+	mensajesRepo[8] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p>";
+	mensajesRepo[99] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</p>";
 
 	
 		

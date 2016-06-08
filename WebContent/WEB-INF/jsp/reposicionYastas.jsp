@@ -57,8 +57,12 @@
 				<div id="seccionOk" style='display:none;' align="center">
 					<center>
 				</center>
-			</div>
-			<div id="seccionSalir" style='display:none;'>
+				</div>
+				<div id="butonDetalle" style='display:none;'>
+					<input type="button" id="btnDetalle" name="btnDetalle" value="Detalle">
+				</div>
+				<div id="detalle" style='display:none;' align="center"></div>
+				<div id="seccionSalir" style='display:none;'>
 				<center>
 					<input type="button" id="cancelar" name="cancelar" value="Salir">
 				</center>

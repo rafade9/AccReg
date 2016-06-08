@@ -43,6 +43,7 @@ import com.compartamos.common.gdt.ZBankCardContractID;
 import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Sucursal;
 import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.gentera.cuentasn.util.Properties;
@@ -91,6 +92,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	public Respuesta sendData(Persona persona, String ip) throws Exception{
 		Respuesta respuesta = new Respuesta();
 		try {
+		
 			// Se genera el stub con el endpoint al cual apunta
 			SI_LEVEL2ACCOUNTMANAGESYStub stub = new SI_LEVEL2ACCOUNTMANAGESYStub(endPoint);
 
@@ -156,10 +158,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				numEmpleado = Util.formatNumEmpleado(numEmpleado);
 				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
 				
-				numPlaza = leerCatalogos.getSucursalPlaza(ip).getId();
-
-				if(numPlaza==null){
+				Sucursal plaza = leerCatalogos.getSucursalPlaza(ip);
+				
+				if(plaza==null){
 					throw new Exception("No se ha identificado la sucursal. No existe la ip("+ ip +") de origen.");
+				}else{
+					numPlaza = plaza.getId();
 				}
 				
 				logger.info("Sucursal No. " + numPlaza);
@@ -406,19 +410,23 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 		} catch (AxisFault e) {
 			logger.error("Error AxisFault " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		} catch (RemoteException e) {
 			logger.error("Error Remote " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		} catch (ExchangeFaultData e) {
 			logger.error("Error Exchange Data " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		} catch (ParseException e) {
 			logger.error("Error General " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		}
 		return respuesta;
 	}

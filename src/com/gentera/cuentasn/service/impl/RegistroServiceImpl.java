@@ -3,6 +3,9 @@
  */
 package com.gentera.cuentasn.service.impl;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.RegistroService;
+import com.gentera.cuentasn.util.MailService;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
@@ -33,6 +37,9 @@ public class RegistroServiceImpl implements RegistroService {
 	 */
 	@Autowired
 	WebServiceConnector wsConnector;
+	
+	@Autowired
+	MailService mailService;
 
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.service.RegistroService#registrar(com.gentera.cuentasn.entities.Persona)
@@ -67,11 +74,11 @@ public class RegistroServiceImpl implements RegistroService {
 			
 			String codigo = Util.generaClaveError();
 			logger.error(codigo + "---" + e.getMessage());
-//			StringWriter sw = new StringWriter();
-//			e.printStackTrace(new PrintWriter(sw));
-			e.printStackTrace();
-//			System.out.println("ERROR MOSTRADO: \n" + sw.toString());
-//			Mail.sendMail();
+			StringWriter sw = new StringWriter();
+			e.printStackTrace(new PrintWriter(sw));
+//			e.printStackTrace();
+			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n" + sw.toString();
+			mailService.sendMail(codigo,msj);
 			throw new Exception(codigo);
 		}
 

@@ -5,6 +5,9 @@
 
 $(document).ready(function(){
 	
+//focus al campo de folio
+$("input:text:visible:first").focus();
+	
 $("#formularioYastas").validate({
     rules: {
      username: {

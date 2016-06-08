@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="X-Frame-Options" content="deny">
+<meta http-equiv="X-Frame-Options" content="sameorigin">
 <title>Yastas</title>
 
   <script src="resources/js/jquery-1.10.1.js"></script>
@@ -87,13 +87,13 @@
 				<div class="clear"> </div>
 				<label for="numeroIdentificacion" class="texGris09_13" id="msnIdent">Número de identificación * </label><input type="text" id="numeroIdentificacion" name="numeroIdentificacion" class="texGris09_13 inputText mayusculas bloqueado"><br>
 				<div class="clear"> </div>
-				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40"><br>
+				<label for="primerNombre" class="texGris09_13">Primer nombre * </label><input type="text" id="primerNombre" name="primerNombre" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40" onpaste="return false"><br>
 				<div class="clear"> </div>
-				<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40"><br>
+				<label for="segundoNombre" class="texGris09_13">Segundo nombre </label><input type="text" id="segundoNombre" name="segundoNombre" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40" onpaste="return false"><br>
 				<div class="clear"> </div>
-				<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40" ><br>
+				<label for="paterno" class="texGris09_13">Apellido Paterno * </label><input type="text" id="paterno" name="paterno" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40" onpaste="return false"><br>
 				<div class="clear"> </div>
-				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40"><br>
+				<label for="materno" class="texGris09_13">Apellido Materno </label><input type="text" id="materno" name="materno" class="texGris09_13 inputText mayusculas bloqueado" maxlength="40" onpaste="return false"><br>
 				<div class="clear"> </div>
 				<label for="fechaNacimiento" class="texGris09_13">Fecha de nacimiento * <br> (DD/MM/AAAA)</label><input type="text" name="fechaNacimiento" size="11" class="texGris09_13 inputText bloqueado" id="fechaNacimiento" ><br>
 				<div class="clear"> </div>
@@ -136,11 +136,11 @@
 				</select><br><br>
 		
 				<label class="texGris09_13">Delegación/Municipio * </label> 
-				<input type="text" id="delegacion" name="delegacion" class="texGris09_13 inputText mayusculas bloqueado">
+				<input type="text" id="delegacion" name="delegacion" class="texGris09_13 inputText mayusculas bloqueado" onpaste="return false">
 				<br><br>
 		
 				<label class="texGris09_13">Ciudad * </label>
-				<input type="text" id="ciudad" name="ciudad" class="texGris09_13 inputText mayusculas bloqueado">
+				<input type="text" id="ciudad" name="ciudad" class="texGris09_13 inputText mayusculas bloqueado" onpaste="return false">
 				<br><br>
 		
 				<label class="texGris09_13">Colonia * </label>
@@ -148,9 +148,9 @@
 					<option value="" class="texGris09_13">--Seleccionar--</option>
 				</select><br><br>
 		
-				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText mayusculas bloqueado" maxlength="60"><br>
-				<label class="texGris09_13">Número Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText mayusculas bloqueado" maxlength="10"><br>
-				<label class="texGris09_13">Número Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText mayusculas bloqueado" maxlength="10"><br><br>
+				<label class="texGris09_13">Calle * </label> <input type="text" id="calle" name="calle" class="texGris09_13 inputText mayusculas bloqueado" maxlength="60" onpaste="return false"><br>
+				<label class="texGris09_13">Número Exterior * </label> <input type="text" id="numExterior" name="numExterior" class="texGris09_13 inputText mayusculas bloqueado" maxlength="10" onpaste="return false"><br>
+				<label class="texGris09_13">Número Interior </label><input type="text" id="numInterior" name="numInterior" class="texGris09_13 inputText mayusculas bloqueado" maxlength="10" onpaste="return false"><br><br>
 			</div>	
 			<div id="seccionEnviar" style='display:block;'>	
 				<input type="submit" id="enviar" name="enviar" value="Enviar">
@@ -166,7 +166,7 @@
 		<div id="mensajeRegistro"></div><br><br><br>
 			<div id="botonSalir"  class="tituloMango" style='display:none;'>
 				<input type="hidden" id="origen" name="origen" value="yastas">
-				<input type="button" onclick="history.go(0)" value="Nueva">
+				<input type="button" onclick="location.href='./registroYastas'" value="Nueva">
 				<input type="button" value=Salir id="btSalir" />
 		    </div>
 	</div>

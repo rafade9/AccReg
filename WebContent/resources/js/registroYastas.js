@@ -108,7 +108,7 @@ $(document).ready(function(){
 			       minlength: 5
 			      },
 		    	tipoIdentificacion: {
-		        required: true,
+		        required: true
 		          },
 		        numeroIdentificacion: {
 		          required: true,
@@ -281,6 +281,8 @@ $(document).ready(function(){
 	                     }
 	            });
 	     	    	
+	            jsonObj.colonia = jsonObj.colonia.substring(0,40);
+	            
 	            $.ajax({
 	                method: 'POST',
 	                contentType: 'application/json',
@@ -560,8 +562,8 @@ $(document).ready(function(){
 			$("#codigoPostal").focusout(
 				function() {
 					if (this.value.length >= 5 && this.value > 1000) {
-//	              	$.getJSON("getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
-						$.getJSON("resources/codPostal.json", function(data) {//desarrollo	
+	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
+//						$.getJSON("/FormularioProspectacion/resources/codPostal.json", function(data) {//desarrollo	
 							//Timer
 							restartTimer();
 							$("#colonia").prop('disabled', false);

@@ -12,6 +12,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
 import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +43,9 @@ import com.compartamos.common.gdt.ZBankCardContractID;
 import com.compartamos.common.structures.AcctOriginationBusinessPartnerAddress;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Sucursal;
 import com.gentera.cuentasn.entities.Usuario;
-import com.gentera.cuentasn.service.impl.LeerCatalogosImpl;
+import com.gentera.cuentasn.service.LeerCatalogos;
 import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
@@ -79,6 +81,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * Variable que almacena el Endpoint de Card Manager
 	 */
 	final static String endPointCardManager = Properties.getProp("EndPointCardManager");
+	
+	@Autowired
+	LeerCatalogos leerCatalogos;
 
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#sendData(com.gentera.cuentasn.entities.Persona)
@@ -87,6 +92,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	public Respuesta sendData(Persona persona, String ip) throws Exception{
 		Respuesta respuesta = new Respuesta();
 		try {
+		
 			// Se genera el stub con el endpoint al cual apunta
 			SI_LEVEL2ACCOUNTMANAGESYStub stub = new SI_LEVEL2ACCOUNTMANAGESYStub(endPoint);
 
@@ -96,7 +102,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			ba.setPassword(Properties.getProp("PasswordCRM"));
 			
 			//Timeout
-			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(300000);;
+			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));;
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
@@ -138,23 +144,26 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			String origen = user.getOrigen();
+			String numPlaza = "";
+			String numEmpleado = "";
 			
 			if(origen.equals("compartamos")){
 			
-				String numEmpleado = user.getNumEmpleado();
+				numEmpleado = user.getNumEmpleado();
 			
 				if(numEmpleado==null){
-					throw new Exception("El empleado no cuenta con número de nómina.");
+					throw new Exception("El usuario " + user.getUsername() + " no cuenta con numero de nomina.");
 				}
 				//Se formatea el numero de empleado y se añade al bp
-				logger.info("Empleado: " + Util.formatNumEmpleado(numEmpleado));
-				bpEmpleado.setBusinessPartnerInternalID(new Token(Util.formatNumEmpleado(numEmpleado)));
+				numEmpleado = Util.formatNumEmpleado(numEmpleado);
+				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
 				
-				LeerCatalogosImpl leercatalogo = new LeerCatalogosImpl();
-				String numPlaza = leercatalogo.getSucursalPlaza(ip).getId();
-
-				if(numPlaza==null){
-					throw new Exception("No se ha identificado la sucursal. No existe la ip de origen.");
+				Sucursal plaza = leerCatalogos.getSucursalPlaza(ip);
+				
+				if(plaza==null){
+					throw new Exception("No se ha identificado la sucursal. No existe la ip("+ ip +") de origen.");
+				}else{
+					numPlaza = plaza.getId();
 				}
 				
 				logger.info("Sucursal No. " + numPlaza);
@@ -162,10 +171,15 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 			
 			else{
-//				bpEmpleado.setBusinessPartnerInternalID(new Token("E000022012"));
-//				officeId.setOrganisationalCentreID(new Token("4626"));
-				bpEmpleado.setBusinessPartnerInternalID(new Token("E000044208"));
-				officeId.setOrganisationalCentreID(new Token("1037"));
+				
+				Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+				
+				numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
+				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
+				
+				numPlaza = usuario.getNumOficina();
+				officeId.setOrganisationalCentreID(new Token(numPlaza));
+
 			}
 			
 			identifiers.setServiceOfficeID(officeId);
@@ -202,22 +216,22 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			LANGUAGEINDEPENDENT_MEDIUM_Name colonia = new LANGUAGEINDEPENDENT_MEDIUM_Name();
 
 			// Primer nombre
-			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre().toUpperCase());
+			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre().toUpperCase().trim());
 			nameData.setGivenName(givenName);
 
 			// Segundo nombre
 			if (persona.getSegundoNombre() != null && !persona.getSegundoNombre().equals("")) {
-				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre().toUpperCase());
+				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre().toUpperCase().trim());
 				nameData.setMiddleName(middleName);
 			}
 
 			// Primer apellido
-			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno().toUpperCase());
+			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno().toUpperCase().trim());
 			nameData.setFamilyName(familyName);
 
 			// Segundo apellido
 			if (persona.getMaterno() != null && !persona.getMaterno().equals("")) {
-				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno().toUpperCase());
+				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno().toUpperCase().trim());
 				nameData.setAditionalFamilyName(aditionalFamilyName);
 			}
 
@@ -245,7 +259,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			BusinessPartnerDocumentIdentifier documentIdentifier = new BusinessPartnerDocumentIdentifier();
 			// Tipo de identificacion
 			PartyIdentifierTypeCode codeIdentifier = new PartyIdentifierTypeCode();
-			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion().toUpperCase()));
+			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion().toUpperCase().trim()));
 			documentIdentifier.setCode(codeIdentifier);
 			// Numero de identificacion
 			ItemID idIdentifier = new ItemID();
@@ -324,13 +338,13 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			regionCode.setRegionCode(new Token(persona.getEstado()));
 			addressData.setRegionCode(regionCode);
 			// Municipio o Delegacion
-			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase());
+			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase().trim());
 			addressData.setDistrictName(municipio);
 			// Ciudad
-			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase());
+			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase().trim());
 			addressData.setCityName(ciudad);
 			// Colonia
-			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase());
+			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase().trim());
 			addressData.setAdditionalCityName(colonia);
 			// Calle
 			StreetName streetName = new StreetName();
@@ -338,12 +352,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			addressData.setStreetName(streetName);
 			// No Ext
 			HouseID numExt = new HouseID();
-			numExt.setHouseID(new Token(persona.getNumExterior().toUpperCase()));
+			numExt.setHouseID(new Token(persona.getNumExterior().toUpperCase().trim()));
 			addressData.setHouseID(numExt);
 			// No Int
 			if (persona.getNumInterior() != null && !persona.getNumInterior().equals("")) {
 				HouseID numInt = new HouseID();
-				numInt.setHouseID(new Token(persona.getNumInterior().toUpperCase()));
+				numInt.setHouseID(new Token(persona.getNumInterior().toUpperCase().trim()));
 				addressData.setAdditionalHouseID(numInt);
 			}
 			bp.setAddressData(addressData);
@@ -353,17 +367,30 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			dtSync.setMessageHeader(messageHeader);
 			dtSync.setLevel2AccountCreationData(data);
 			mtSync.setMT_Level2AccountCreationReq_sync(dtSync);
-			logger.info("Endpoint: " + endPoint);
-			logger.info("Usuario: " + Properties.getProp("UserCRM"));
+			
+			logger.info("Se envia peticion a CRM con los sig datos:"
+					+ " ---->Origen: " + origen
+					+ " ---->Sucursal: " + numPlaza
+					+ " ---->Empleado: " + numEmpleado
+					+ " ---->Usuario app: " + user.getUsername()
+					+ " ---->Folio: " + persona.getFolio()
+					+ " ---->Usuario CRM: " + Properties.getProp("UserCRM")
+					+ " ---->Endpoint CRM: " + endPoint);
+			
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
 
 			if (response.getMT_Level2AccountCreationResp_sync().getLog().getItem() != null) {
 				String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
 						.toString();
 				logger.error("Respuesta de CRM: "
-						+ response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+						+ " ---->Folio: " + persona.getFolio()
+						+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
+						+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
 				respuesta.setCodigo(Integer.valueOf(code));
 			} else {
+				logger.info("Respuesta exitosa de CRM: "
+						+ " ---->Folio: " + persona.getFolio()
+						+ " ---->Codigo: 0");
 				respuesta.setCodigo(0); // Cambia?
 			}
 
@@ -383,19 +410,23 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 		} catch (AxisFault e) {
 			logger.error("Error AxisFault " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		} catch (RemoteException e) {
 			logger.error("Error Remote " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		} catch (ExchangeFaultData e) {
 			logger.error("Error Exchange Data " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		} catch (ParseException e) {
 			logger.error("Error General " + e);
 			respuesta.setCodigo(99);
-			e.printStackTrace();
+//			e.printStackTrace();
+			throw new Exception(e);
 		}
 		return respuesta;
 	}

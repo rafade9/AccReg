@@ -25,6 +25,9 @@ public class Usuario implements UserDetails{
 	private String numEmpleado;
 	private boolean enabled;
 
+	
+	private String numOficina;
+	private String empleado;
 	/**
 	 * Getter IdUsuario
 	 * @return idUsuario
@@ -135,6 +138,39 @@ public class Usuario implements UserDetails{
 	 */
 	public void setNumEmpleado(String numEmpleado) {
 		this.numEmpleado = numEmpleado;
+	}
+
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNumOficina() {
+		return numOficina;
+	}
+
+	/**
+	 * 
+	 * @param numOficina
+	 */
+	public void setNumOficina(String numOficina) {
+		this.numOficina = numOficina;
+	}
+
+	/**
+	 * Getter empleado
+	 * @return empleado
+	 */
+	public String getEmpleado() {
+		return empleado;
+	}
+
+	/**
+	 * Setter empleado
+	 * @param empleado
+	 */
+	public void setEmpleado(String empleado) {
+		this.empleado = empleado;
 	}
 
 	/* (non-Javadoc)

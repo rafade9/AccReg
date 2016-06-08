@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.gentera.cuentasn.entities.Estado;
 import com.gentera.cuentasn.entities.Pais;
 import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.google.gson.Gson;
 
@@ -42,6 +44,11 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 	 * Clase para manejo de properties
 	 */
 	private static Properties prop = new Properties();
+	
+	/**Clase contenedora de ips
+	 * 
+	 */
+	ArrayList<String> ips = getIpsFromProperties();
 
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.service.LeerCatalogos#leerCsvPaises()
@@ -122,6 +129,44 @@ public class LeerCatalogosImpl implements LeerCatalogos {
 		}
 
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#getInfoPlazaByOperador(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Usuario getInfoPlazaByOperador(String idOperador, String ruta){
+		try{
+			prop.load(new FileInputStream(ruta));
+			Usuario usuario = gson.fromJson(prop.getProperty(idOperador), Usuario.class);
+			return usuario;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.service.LeerCatalogos#isIpPermitida(java.lang.String)
+	 */
+	@Override
+	public boolean isIpPermitida(String ip) {
+		String terminacionIp = ip.substring(ip.lastIndexOf(".") + 1, ip.length());
+		if(ips.contains(terminacionIp)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	private ArrayList<String> getIpsFromProperties(){
+		
+		String propIps = com.gentera.cuentasn.util.Properties.getProp("IPSAUT");
+		ArrayList<String> ips = new ArrayList<String>(Arrays.asList(propIps.split(",")));
+		
+		return ips;
 	}
 
 }

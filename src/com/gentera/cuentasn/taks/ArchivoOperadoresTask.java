@@ -9,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.gentera.cuentasn.util.Properties;
@@ -27,68 +25,68 @@ public class ArchivoOperadoresTask {
 		BufferedReader b = null;
 		boolean resultado = false;
 
-		Calendar calendario = new GregorianCalendar();
+//		Calendar calendario = new GregorianCalendar();
+//
+//		Integer dia = calendario.get(Calendar.DAY_OF_MONTH);
+//		Integer mes = calendario.get(Calendar.MONTH)+1;
+//		Integer anio = calendario.get(Calendar.YEAR);
+//		String fecha = "";
+//
+//		if(dia<=9){
+//			fecha = "0" + dia;
+//		}else{
+//			fecha += dia; 
+//		}
+//
+//		if(mes<=9){
+//			fecha+="0"+ mes;
+//		}else{
+//			fecha+=mes;
+//		}
+//
+//		fecha += anio;
 
-		Integer dia = calendario.get(Calendar.DAY_OF_MONTH);
-		Integer mes = calendario.get(Calendar.MONTH)+1;
-		Integer anio = calendario.get(Calendar.YEAR);
-		String fecha = "";
-
-		if(dia<=9){
-			fecha = "0" + dia;
-		}else{
-			fecha += dia; 
-		}
-
-		if(mes<=9){
-			fecha+="0"+ mes;
-		}else{
-			fecha+=mes;
-		}
-
-		fecha += anio;
-
-		String archivo = "OperadoresYastasN2" + fecha+".txt";
+//		String archivo = "OperadoresYastasN2" + fecha+".properties";
+		String archivo = "OperadoresYastasN2.properties";
 
 		File fichero = new File(Properties.getProp("fileOperadores")+archivo);
-
-		System.out.println(fichero);
 
 		if(tipoLectura.equals("1")){
 			while(!resultado){
 				if(!fichero.exists()){
-					fecha = "";
-					dia-=1;
-					if(dia<=9 && dia >0){
-						fecha = "0" + dia;
-					}else if(dia==0){
-						mes -=1;
-						if(mes == 2){
-							dia = 29;
-							fecha = dia.toString();
-						}else if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
-							dia = 30;
-							fecha = dia.toString();
-						}else{
-						dia = 31;
-						fecha = dia.toString();
-						}
-					}else{
-						fecha += dia; 
-					}
-					if(mes<=9 && mes >0){
-						fecha+="0"+ mes;
-					}else if(mes == 0){
-						anio-=1;
-						mes = 12;
-						fecha+=mes;
-					}
-					else{
-						fecha+=mes;
-					}
-
-					fecha+=anio;
-					archivo = Properties.getProp("nombreArchivo") + fecha+".txt";
+//					fecha = "";
+//					dia-=1;
+//					if(dia<=9 && dia >0){
+//						fecha = "0" + dia;
+//					}else if(dia==0){
+//						mes -=1;
+//						if(mes == 2){
+//							dia = 29;
+//							fecha = dia.toString();
+//						}else if(mes == 4 || mes == 6 || mes == 9 || mes == 11){
+//							dia = 30;
+//							fecha = dia.toString();
+//						}else{
+//						dia = 31;
+//						fecha = dia.toString();
+//						}
+//					}else{
+//						fecha += dia; 
+//					}
+//					if(mes<=9 && mes >0){
+//						fecha+="0"+ mes;
+//					}else if(mes == 0){
+//						anio-=1;
+//						mes = 12;
+//						fecha+=mes;
+//					}
+//					else{
+//						fecha+=mes;
+//					}
+//
+//					fecha+=anio;
+//					archivo = Properties.getProp("nombreArchivo") + fecha+".properties";
+					archivo = Properties.getProp("nombreArchivo")+".properties";
 					fichero = new File(Properties.getProp("fileOperadores")+archivo);
 				}else{
 					resultado = true;
@@ -114,8 +112,9 @@ public class ArchivoOperadoresTask {
 				b = new BufferedReader(f);
 				try {
 					while((cadena = b.readLine())!=null) {
-						if(Util.isNumeric(cadena)){
-							operadores.add(cadena);
+						String numOperador[] = cadena.split("=");
+						if(Util.isNumeric(numOperador[0])){
+							operadores.add(numOperador[0]);
 						}
 					}
 				} catch (IOException e) {

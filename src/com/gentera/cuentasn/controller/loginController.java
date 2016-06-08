@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.LeerCatalogos;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.multitype.GenericManageableCaptchaService;
 
@@ -37,6 +38,12 @@ public class loginController {
 	 */
 	@Autowired
 	private GenericManageableCaptchaService miCaptchaService;
+	
+	/**
+	 * Clase para manejo de catalogos
+	 */
+	@Autowired
+	private LeerCatalogos leerCatalogos;
 
 	/**
 	 * Muestra el login de Yastas
@@ -67,8 +74,8 @@ public class loginController {
 	 * @param usuario
 	 * @return
 	 */
-	@RequestMapping(value = "/loginProcessCompartamos", method = RequestMethod.POST)
-	public ModelAndView loginProcessCompartamos(HttpServletRequest req, Usuario usuario) {
+	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+	public ModelAndView loginProcess(HttpServletRequest req, Usuario usuario) {
 		ModelAndView model;
 		try {
 			
@@ -76,16 +83,23 @@ public class loginController {
 			/**
 			 * Verifica el origen
 			 */
-			
+			System.out.println("Ip: " + req.getRemoteHost());
 			//Origen compartamos
 			if(usuario.getOrigen()!=null && usuario.getOrigen().toLowerCase().equals("compartamos")){
 				model = new ModelAndView("redirect:/registroCompartamos");
+
+				//Verifica ip
+				if(!leerCatalogos.isIpPermitida(req.getRemoteHost())){
+					model = new ModelAndView("loginCompartamos");
+					model.addObject("error", "Acceso no autorizado");
+					return model;
+				}
 				//Realiza el login con las credenciales dadas por el usuario mediante el authentication manager
 				req.login(usuario.getUsername(), usuario.getPassword());
 			}
 			//Origen Yastas
 			else if(usuario.getOrigen()!= null && usuario.getOrigen().toLowerCase().equals("yastas")){
-				model = new ModelAndView("redirect:/registroYastas");
+				model = new ModelAndView("registroYastas");
 				
 				/**
 				 * Valida captcha
@@ -151,7 +165,7 @@ public class loginController {
 			if(origen.toUpperCase().equals("COMPARTAMOS")){
 				return "redirect:/loginCompartamos";
 			}else if(origen.toUpperCase().equals("YASTAS")){
-				return "redirect:/loginYastas";
+				return "redirect:https://www.yastas.com/CuentasN2/loginYastas";
 			}else{
 				return "redirect:/paginaError";
 			}

@@ -39,6 +39,7 @@ public class Persona implements Serializable{
 	private String numExterior;
 	private String numInterior;
 	private String folio;
+	private String referencia;
 
 	/**
 	 * Getter TipoIdentificacion
@@ -408,4 +409,40 @@ public class Persona implements Serializable{
 		this.folio = folio;
 	}
 
+	/**
+	 * Getter Referencia
+	 * @return
+	 */
+	public String getReferencia() {
+		return referencia;
+	}
+
+	/**
+	 * Setter Referencia
+	 * @param referencia
+	 */
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [tipoIdentificacion=" + tipoIdentificacion
+				+ ", numeroIdentificacion=" + numeroIdentificacion
+				+ ", primerNombre=" + primerNombre + ", segundoNombre="
+				+ segundoNombre + ", paterno=" + paterno + ", materno="
+				+ materno + ", fechaNacimiento=" + fechaNacimiento
+				+ ", nacionalidad=" + nacionalidad + ", paisNacimiento="
+				+ paisNacimiento + ", lugarNacimiento=" + lugarNacimiento
+				+ ", genero=" + genero + ", sms=" + sms + ", tipoTelefono="
+				+ tipoTelefono + ", telefono=" + telefono + ", codigoPostal="
+				+ codigoPostal + ", estado=" + estado + ", delegacion="
+				+ delegacion + ", ciudad=" + ciudad + ", colonia=" + colonia
+				+ ", calle=" + calle + ", numExterior=" + numExterior
+				+ ", numInterior=" + numInterior + ", folio=" + folio
+				+ ", referencia=" + referencia + "]";
+	}
+
+	
+	
 }

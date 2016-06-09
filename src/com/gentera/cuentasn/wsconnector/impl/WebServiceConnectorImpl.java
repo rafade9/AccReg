@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub.Execute;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub.ExecuteResponse;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerName;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerPhone;
 import com.compartamos.common.gdt.AddressTypeID;
@@ -81,6 +84,11 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * Variable que almacena el Endpoint de Card Manager
 	 */
 	final static String endPointCardManager = Properties.getProp("EndPointCardManager");
+	
+	/**
+	 * Variable que almacena el Endpoint de Card Manager para Reposicion
+	 */
+	final static String endPointCardManagerReposition = Properties.getProp("EndPointCardManagerReposicion");
 	
 	@Autowired
 	LeerCatalogos leerCatalogos;
@@ -427,6 +435,48 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			respuesta.setCodigo(99);
 //			e.printStackTrace();
 			throw new Exception(e);
+		}
+		return respuesta;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#sendDataReposition()
+	 */
+	@Override
+	public Respuesta sendDataReposition(Persona persona) throws Exception {
+		Respuesta respuesta = new Respuesta();
+		
+		try{
+			// Se genera el stub con el endpoint al cual apunta
+			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub(endPointCardManagerReposition);
+			
+			//Se genera instancia de Execute para data
+			Execute data = new Execute();
+			
+			//Se incluye folio
+			data.setCardID(persona.getFolio());
+			
+			//Se incluye fecha de nacimiento
+			data.setBankCardCardHolderParty(persona.getFechaNacimiento());
+			
+			//Se incluye referencia
+			data.setBankAccountID(persona.getReferencia());
+			
+			ExecuteResponse response = stub.execute(data);
+			System.out.println(response.getExecuteResult().getRCCode() + " - " + response.getExecuteResult().getRCDescription());
+			
+			if(response!=null && response.getExecuteResult()!=null){
+				respuesta.setCodigo((int)response.getExecuteResult().getRCCode());
+				respuesta.setMensaje(response.getExecuteResult().getRCDescription());
+			}
+		}catch (AxisFault e) {
+			logger.error("Error AxisFault " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			logger.error("Error Remote " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
 		}
 		return respuesta;
 	}

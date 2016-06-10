@@ -104,6 +104,19 @@ input[type="button"] {
     text-decoration: none;
 }
 
+.blackMsgClassMedium {
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+
+
 .texGris09_13 {
     color: #9a8b7d;
     font-family: Arial,Helvetica,sans-serif;

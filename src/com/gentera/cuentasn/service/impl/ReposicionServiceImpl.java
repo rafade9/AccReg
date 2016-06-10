@@ -26,6 +26,8 @@ public class ReposicionServiceImpl implements ReposicionService{
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			respuesta.setMensaje(e.getMessage());
+			respuesta.setCodigo(99);
 		}
 		
 		return respuesta;

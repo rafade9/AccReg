@@ -473,10 +473,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			logger.error("Error AxisFault " + e);
 			respuesta.setCodigo(99);
 			e.printStackTrace();
+			throw new Exception(e);
 		} catch (RemoteException e) {
 			logger.error("Error Remote " + e);
 			respuesta.setCodigo(99);
 			e.printStackTrace();
+			throw new Exception(e);
 		}
 		return respuesta;
 	}

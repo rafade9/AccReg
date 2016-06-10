@@ -44,6 +44,7 @@ public class ReposicionController {
 			Respuesta respuesta = reposicionService.reposicion(persona, request.getRemoteAddr());
 			
 //			request.getSession().setAttribute("respuesta", respuesta);
+			System.out.println("Mensaje: " + respuesta.getMensaje());
 			
 			return new ResponseEntity<Respuesta>(respuesta , HttpStatus.OK);
 			

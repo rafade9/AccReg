@@ -75,6 +75,7 @@ $(document).ready(function(){
 		     }
 	    },
 	    submitHandler: function() {
+	    	$('input[type=submit]').attr('disabled', 'disabled');    
 	    	Persona = {};
 	    	Persona['folio'] =  $("#folio").val();
 	    	Persona['referencia'] =  $("#referencia").val();

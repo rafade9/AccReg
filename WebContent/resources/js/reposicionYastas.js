@@ -75,6 +75,7 @@ $(document).ready(function(){
 		     }
 	    },
 	    submitHandler: function() {
+	    	$('input[type=submit]').attr('disabled', 'disabled');    
 	    	Persona = {};
 	    	Persona['folio'] =  $("#folio").val();
 	    	Persona['referencia'] =  $("#referencia").val();
@@ -263,11 +264,11 @@ $(document).ready(function(){
 					var referencia=$("#referencia").val();
 					var validacion = referencia.substring(4,14);
  
-						if(parseInt(validacion.substring(0,2)) > 0 || parseInt(validacion.substring(0,2)) < 12){
+						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) < 12){
 							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
 								if(parseInt(validacion.substring(2,4)) <= 30){
-									if(parseInt(validacion.substring(4,6)) <= 60 ){
-										if(parseInt(validacion.substring(6,8)) > 60 ){
+									if(parseInt(validacion.substring(4,6)) <= 23 ){
+										if(parseInt(validacion.substring(6,8)) > 59 ){
 											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
 											return false;
 										}
@@ -281,8 +282,8 @@ $(document).ready(function(){
 								}
 							}else if(parseInt(validacion.substring(0,2)) == 2){//febrero
 								if(parseInt(validacion.substring(2,4)) <= 28){//dia
-									if(parseInt(validacion.substring(4,6)) <=24 ){//hora
-										if(parseInt(validacion.substring(6,8)) > 60 ){//minutos
+									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
+										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
 											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
 											return false;
 										}
@@ -297,8 +298,8 @@ $(document).ready(function(){
 									
 							}else{
 								if(parseInt(validacion.substring(2,4)) <= 31){//dia
-									if(parseInt(validacion.substring(4,6)) <=24 ){//hora
-										if(parseInt(validacion.substring(6,8)) > 60 ){//minutos
+									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
+										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
 											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
 											return false;
 										}

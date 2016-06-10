@@ -7,7 +7,7 @@
 <title>Yastas</title>
 
   <script src="resources/js/jquery-1.10.1.js"></script>
-   <script src="resources/js/jquery.validate.js"></script>
+  <script src="resources/js/jquery.validate.js"></script>
   <script src="resources/js/messages_es.js"></script>
   <script type="text/javascript" charset="UTF-8" src="resources/js/reposicionYastas.js"></script>
   <script src="resources/js/jquery.maskedinput.min.js" type="text/javascript"></script>    
@@ -61,7 +61,7 @@
 				<div id="butonDetalle" style='display:none;'>
 					<input type="button" id="btnDetalle" name="btnDetalle" value="Detalle">
 				</div>
-				<div id="detalle" style='display:none;' align="center"></div>
+				<div id="detalle" style='display:none;' align="center" class='blackMsgClassMedium'></div>
 				<div id="seccionSalir" style='display:none;'>
 				<center>
 					<input type="button" id="cancelar" name="cancelar" value="Salir">

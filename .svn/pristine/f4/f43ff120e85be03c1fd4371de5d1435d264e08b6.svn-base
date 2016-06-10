@@ -1,0 +1,117 @@
+@CHARSET "ISO-8859-1";
+
+.select
+  {
+	border: 2px solid #DBE1EB;
+	border-radius: 4px;
+	width:270px;
+  	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #9a8b7d;
+	text-decoration: none;
+	text-align:left;
+}
+ .select:hover
+  {
+  border-color: #CE4676;
+  }
+.text:hover{
+   border-color: #FF6347;	
+}
+
+tr.spaceUnder > td
+{
+  padding-bottom: 1em;
+}
+
+input
+{
+   width: 220px; 
+   height: 20px; 
+   padding: 5px 20px 0px 20px; 
+   margin: 0 0 20px 0;
+   border-radius: 5px; 
+   -moz-border-radius: 5px; 
+   -webkit-border-radius: 5px;
+   -moz-box-shadow: 0px 0px 0px #f2f2f2;
+   -webkit-box-shadow: 0px 1px 0px #f2f2f2;
+   font-family: Arial; 
+   font-size: 16px;
+}
+
+input:focus, textarea:focus {
+   background: white;
+   }
+   
+   
+label { display: inline-block; width: 160px; text-align: right; }
+
+input[type="radio"] {
+    width: 40px;
+  }
+  
+select{
+	border-radius: 5px
+	-moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 0px #f2f2f2;
+    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
+	height: 30px;
+	width: 265px;
+}
+
+	form label.error, form input.submit {
+		margin-left: 253px;
+	}
+
+	label.error {
+    color: #d60404;
+	}
+
+	#mensajeError{
+		color: #d60404;
+		text-align: center;
+	}
+
+	form {
+  	width: 80%;
+  	margin: 0 auto;
+  	text-align: center;
+}
+
+table {margin:auto;}
+
+.tituloMango {
+    color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.texGris09_13 {
+    color: #9a8b7d;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}
+
+input[type="submit"] {
+    background: #64247c none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 30px;
+    width: 90px;
+}

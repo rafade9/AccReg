@@ -264,7 +264,7 @@ $(document).ready(function(){
 					var referencia=$("#referencia").val();
 					var validacion = referencia.substring(4,14);
  
-						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) < 12){
+						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) <= 12){
 							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
 								if(parseInt(validacion.substring(2,4)) <= 30){
 									if(parseInt(validacion.substring(4,6)) <= 23 ){

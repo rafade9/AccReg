@@ -271,7 +271,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * Folio de tarjeta
 			 */
 			ZBankCardContractID cardIdentification = new ZBankCardContractID();
-			cardIdentification.setZBankCardContractIDContent(new Token(persona.getFolio()));
+			cardIdentification.setZBankCardContractIDContent(new Token(Util.withoutZeros(persona.getFolio())));
 			bp.setCardIdentification(cardIdentification);
 
 			/**

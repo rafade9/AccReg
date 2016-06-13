@@ -89,11 +89,11 @@ public class loginController {
 				model = new ModelAndView("redirect:/registroCompartamos");
 
 				//Verifica ip
-				if(!leerCatalogos.isIpPermitida(req.getRemoteHost())){
-					model = new ModelAndView("loginCompartamos");
-					model.addObject("error", "Acceso no autorizado");
-					return model;
-				}
+//				if(!leerCatalogos.isIpPermitida(req.getRemoteHost())){
+//					model = new ModelAndView("loginCompartamos");
+//					model.addObject("error", "Acceso no autorizado");
+//					return model;
+//				}
 				//Realiza el login con las credenciales dadas por el usuario mediante el authentication manager
 				req.login(usuario.getUsername(), usuario.getPassword());
 			}

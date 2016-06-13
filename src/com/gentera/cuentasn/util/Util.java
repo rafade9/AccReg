@@ -295,4 +295,18 @@ public class Util {
 		return ipCero;
 	}
 	
+	public static String withoutZeros(String value){
+		StringBuffer sb = new StringBuffer();
+		Integer indice = 0;
+		for(int i = 0; i < value.length(); i++){
+			if(!value.substring(i, i+1).equals("0")){
+				indice = i;
+				break;
+			}
+		}
+		sb.append(value.substring(indice));
+		
+		return sb.toString();
+	}
+	
 }

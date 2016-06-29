@@ -69,7 +69,9 @@ public class RegistroController {
 		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")){
 			return "redirect:/loginCompartamos";
 		}
-		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Usuario usuario = new Usuario();
+		usuario.setOrigen("compartamos");
 		if(usuario.getOrigen().equals("compartamos"))
 			return "registroCompartamos";
 		else if(usuario.getOrigen().equals("yastas"))

@@ -89,7 +89,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 
 			LeerCatalogosImpl leerCatalogos = new LeerCatalogosImpl();
 			Sucursal sucursal = new Sucursal();
-			sucursal = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero(request.getRemoteAddr()));
+			sucursal = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero("172.20.191.1"));
 			
 			PdfPCell lugarExp = new PdfPCell(new Phrase(sucursal.getPlaza() + ", " + sucursal.getEstado(), letraM));
 			lugarExp.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -107,8 +107,8 @@ public class ComprobantePdfView extends AbstractPdfView{
 			sede.setExtraParagraphSpace(5);
 			sede.setBorder(0);
 
-			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			PdfPCell operador = new PdfPCell(new Phrase("Operador: " + user.getUsername(), letraM));//??
+//			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			PdfPCell operador = new PdfPCell(new Phrase("Operador: capacitacion", letraM));//??
 			operador.setHorizontalAlignment(Element.ALIGN_CENTER);
 			operador.setExtraParagraphSpace(20);
 			operador.setBorder(0);

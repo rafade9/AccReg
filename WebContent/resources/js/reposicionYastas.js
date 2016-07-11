@@ -75,7 +75,6 @@ $(document).ready(function(){
 		     }
 	    },
 	    submitHandler: function() {
-	    	$('input[type=submit]').attr('disabled', 'disabled');    
 	    	Persona = {};
 	    	Persona['folio'] =  $("#folio").val();
 	    	Persona['referencia'] =  $("#referencia").val();
@@ -88,7 +87,7 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./generaReposicion",
                 success: function(data){
-                	console.log(data);
+                	restartTimer();
                 	if(data.codigo == 1){//caso exitoso
                 		$('#seccionOk').css('display','block');
                 		$('#seccionFecha').css('display','none');
@@ -154,7 +153,7 @@ $(document).ready(function(){
                 	}
                 },
                 error: function(data){
-                	
+                	restartTimer();
                 }
             });
 	            return false;  

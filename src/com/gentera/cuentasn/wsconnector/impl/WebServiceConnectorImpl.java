@@ -279,7 +279,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * Folio de tarjeta
 			 */
 			ZBankCardContractID cardIdentification = new ZBankCardContractID();
-			cardIdentification.setZBankCardContractIDContent(new Token(persona.getFolio()));
+			cardIdentification.setZBankCardContractIDContent(new Token(Util.withoutZeros(persona.getFolio())));
 			bp.setCardIdentification(cardIdentification);
 
 			/**
@@ -395,6 +395,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 						+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
 						+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
 				respuesta.setCodigo(Integer.valueOf(code));
+				respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
 			} else {
 				logger.info("Respuesta exitosa de CRM: "
 						+ " ---->Folio: " + persona.getFolio()

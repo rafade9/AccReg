@@ -67,6 +67,13 @@ public class RegistroServiceImpl implements RegistroService {
 
 				}
 				
+				else{
+					String msj = "Se ha detectado un error: \n \n CRM ha devuelto Code " + respuesta.getCodigo() 
+							+ "\n \n Mensaje: " + respuesta.getMensaje();
+					String codigo = Util.generaClaveError();
+					mailService.sendMail(codigo, msj);
+				}
+				
 				respuesta.setPersona(persona);
 			}
 
@@ -77,7 +84,7 @@ public class RegistroServiceImpl implements RegistroService {
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
 //			e.printStackTrace();
-			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n" + sw.toString();
+			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n Trama: \n \n" + sw.toString();
 			mailService.sendMail(codigo,msj);
 			throw new Exception(codigo);
 		}

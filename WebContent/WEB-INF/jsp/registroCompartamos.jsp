@@ -77,7 +77,7 @@
 		<div id="seccionTarjeta">
 		<!-- Folio de la tarjeta -->
 			<p class="tituloMango">Datos de Tarjeta<br></p><br><br>
-				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText mayusculas bloqueado" maxlength="15"><br>
+				<label for="folio" class="texGris09_13">Folio * </label><input type="text" id="folio" name="folio" class="texGris09_13 inputText mayusculas bloqueado" maxlength="17"><br>
 				<div class="clear"> </div><br><br>
 		</div>
 		<div id="seccionCliente" style='display:block;'>

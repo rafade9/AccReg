@@ -30,17 +30,24 @@ public class MailService {
 	}
 
 	public void sendMail(String subject, String msj) {
-		
-		SimpleMailMessage message = new SimpleMailMessage();
-		
-		message.setFrom("webmaster@compartamos.com");
-		message.setTo(Properties.getProp("mailIssues"));
-		message.setSubject(subject);
-		message.setText(msj);
-		mailSender.send(message);
-		
-		logger.info("Se ha enviado un email a " + Properties.getProp("mailIssues") + " con subject " + subject);
-		
+		try{
+			SimpleMailMessage message = new SimpleMailMessage();
+			
+			String correoProp = Properties.getProp("mailIssues");
+			
+			String[] correos = correoProp.split("; ");
+			
+			message.setFrom("webmaster@compartamos.com");
+			message.setTo(correos);
+			message.setSubject(subject);
+			message.setText(msj);
+			mailSender.send(message);
+			
+			logger.info("Se ha enviado un email a " + Properties.getProp("mailIssues") + " con subject " + subject);
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error("No se ha podido enviar mail");
+		}
 //		System.out.println("Entra a enviar mail");
 //		Properties props = new Properties();
 //		props.put("mail.smtp.host", "bcdelta003.compartamos.mx");

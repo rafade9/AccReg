@@ -17,14 +17,15 @@ $(document).ready(function(){
 	
 	//Mensajes de respuesta
 	var mensajesRepo = [];
-	mensajesRepo[1] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora realiza el cobro de la comisi&oacute;n en tu TPV.</p><br>";
-	mensajesRepo[2] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia</p>";
-	mensajesRepo[3] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
-	mensajesRepo[4] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
-	mensajesRepo[5] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia Bloqueada, </p><p class='blackMsgClass'>indica al cliente que la referencia fue bloqueada por exceder el No. de intentos, debe comunicarse a call center para generar una nueva.</p>";
-	mensajesRepo[6] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
-	mensajesRepo[7] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p><p class='blackMsgClass'> Intente nuevamente</p>";
-	mensajesRepo[8] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p>";
+	mensajesRepo[0] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora realiza el cobro de la comisi&oacute;n en tu TPV.</p><br>";
+	mensajesRepo[102] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia</p>";
+	mensajesRepo[103] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
+	mensajesRepo[120] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
+	mensajesRepo[104] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
+	mensajesRepo[105] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia Bloqueada, </p><p class='blackMsgClass'>indica al cliente que la referencia fue bloqueada por exceder el No. de intentos, debe comunicarse a call center para generar una nueva.</p>";
+	mensajesRepo[3] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
+	mensajesRepo[10] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
+	mensajesRepo[1] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar.</p>";
 	mensajesRepo[99] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Su operaci&oacute;n no se pudo completar. Intente nuevamente.</p>";
 
 	
@@ -87,8 +88,9 @@ $(document).ready(function(){
                 //dataType: 'json',
                 url: "./generaReposicion",
                 success: function(data){
+                	console.log("Error", data.codigo);
                 	restartTimer();
-                	if(data.codigo == 1){//caso exitoso
+                	if(data.codigo == 0){//caso exitoso
                 		$('#seccionOk').css('display','block');
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionFolio').css('display','none');
@@ -96,10 +98,11 @@ $(document).ready(function(){
                 		$('#seccionReferencia').css('display','none');
                 		$('#seccionBotones').css('display','none');
                 		$('#seccionSalir').css('display','block');
-                		
+                		$('#seccionError').css('display','none');
                 		$('#seccionOk').html(mensajesRepo[data.codigo]);
                 	}
-                	else if(data.codigo == 2){//Referencia inexistente
+                	else if(data.codigo == 102){//Referencia inexistente
+                		console.log("Entra aqui")
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
@@ -108,7 +111,7 @@ $(document).ready(function(){
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	else if(data.codigo == 3){//Referencia no vigente
+                	else if(data.codigo == 103 || data.codigo == 120){//Referencia no vigente
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
@@ -118,7 +121,7 @@ $(document).ready(function(){
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	else if(data.codigo == 4){//Fecha incorrecta
+                	else if(data.codigo == 104){//Fecha incorrecta
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','block');
@@ -127,7 +130,7 @@ $(document).ready(function(){
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	else if(data.codigo == 5){//Referencia bloqueada 3 intentos
+                	else if(data.codigo == 105){//Referencia bloqueada 3 intentos
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','none');
@@ -137,7 +140,7 @@ $(document).ready(function(){
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
-                	else if(data.codigo == 6){//Folio no existe, folio ya fue asignado
+                	else if(data.codigo == 3 || data.codigo == 10){//Folio no existe, folio ya fue asignado
                 		$('#seccionFolio').css('display','block');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','none');
@@ -148,7 +151,7 @@ $(document).ready(function(){
                 	else{//mensaje generico
                 		$('#seccionError').css('display','block');
                 		$('#butonDetalle').css('display','block');
-                		$('#seccionError').html(mensajesRepo[data.codigo]);
+                		$('#seccionError').html(mensajesRepo[99]);
                 		$('#detalle').append(data.mensaje);
                 	}
                 },

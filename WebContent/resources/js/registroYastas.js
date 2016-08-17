@@ -304,7 +304,16 @@ $(document).ready(function(){
 	                    	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
 	                    	document.getElementById('botonSalir').style.display = 'block';
 	                    }
-	                    $('#mensajeRegistro').html(mensajesYastas[datar.codigo]);
+	                    if(datar.codigo == '0'){
+	                 	   if(datar.codigoServicios == '0')
+	                 		   $('#mensajeRegistro').html(mensajesYastas[datar.codigo] + "<br> <p class='greenDigitalMsgClass'>" + datar.mensaje + "</p>");
+	                 	   else if(datar.codigoServicios == '1')
+	                 		   $('#mensajeRegistro').html(mensajesYastas[datar.codigo] + "<br> <p class='yellowDigitalMsgClass'>" + datar.mensaje + "</p>");
+	                 	   else
+	                 		   $('#mensajeRegistro').html(mensajesYastas[datar.codigo] + "<br> <p class='redDigitalMsgClass'>" + datar.mensaje + "</p>");
+	                    }else{
+	                 	   $('#mensajeRegistro').html(mensajesYastas[datar.codigo]);
+	                    }
 	                },
 	                error: function(data){
 	                	//Timer
@@ -562,8 +571,8 @@ $(document).ready(function(){
 			$("#codigoPostal").focusout(
 				function() {
 					if (this.value.length >= 5 && this.value > 1000) {
-//	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
-						$.getJSON("/FormularioProspectacion/resources/codPostal.json", function(data) {//desarrollo	
+	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
+						//$.getJSON("resources/codPostal.json", function(data) {//desarrollo
 							//Timer
 							restartTimer();
 							$("#colonia").prop('disabled', false);

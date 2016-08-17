@@ -39,7 +39,7 @@ public class ReposicionController {
 	@RequestMapping(value = "/generaReposicion", method = RequestMethod.POST)
 	public ResponseEntity<Respuesta> generaReposicion(HttpServletRequest request, HttpServletResponse response,@RequestBody Persona persona) {
 		try{
-			logger.info("Datos Reposicion: " + persona.toString());
+//			logger.info("Datos Reposicion: " + persona.toString());
 			
 			Respuesta respuesta = reposicionService.reposicion(persona, request.getRemoteAddr());
 			

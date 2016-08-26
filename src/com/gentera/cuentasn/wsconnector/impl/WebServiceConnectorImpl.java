@@ -216,22 +216,22 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			LANGUAGEINDEPENDENT_MEDIUM_Name colonia = new LANGUAGEINDEPENDENT_MEDIUM_Name();
 
 			// Primer nombre
-			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre().toUpperCase().trim());
+			givenName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPrimerNombre().toUpperCase().trim().replaceAll(" +", " "));
 			nameData.setGivenName(givenName);
 
 			// Segundo nombre
 			if (persona.getSegundoNombre() != null && !persona.getSegundoNombre().equals("")) {
-				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre().toUpperCase().trim());
+				middleName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getSegundoNombre().toUpperCase().trim().replaceAll(" +", " "));
 				nameData.setMiddleName(middleName);
 			}
 
 			// Primer apellido
-			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno().toUpperCase().trim());
+			familyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getPaterno().toUpperCase().trim().replaceAll(" +", " "));
 			nameData.setFamilyName(familyName);
 
 			// Segundo apellido
 			if (persona.getMaterno() != null && !persona.getMaterno().equals("")) {
-				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno().toUpperCase().trim());
+				aditionalFamilyName.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getMaterno().toUpperCase().trim().replaceAll(" +", " "));
 				nameData.setAditionalFamilyName(aditionalFamilyName);
 			}
 
@@ -259,7 +259,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			BusinessPartnerDocumentIdentifier documentIdentifier = new BusinessPartnerDocumentIdentifier();
 			// Tipo de identificacion
 			PartyIdentifierTypeCode codeIdentifier = new PartyIdentifierTypeCode();
-			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion().toUpperCase().trim()));
+			codeIdentifier.setPartyIdentifierTypeCodeContent(new Token(persona.getTipoIdentificacion().toUpperCase().trim().replaceAll(" +", " ")));
 			documentIdentifier.setCode(codeIdentifier);
 			// Numero de identificacion
 			ItemID idIdentifier = new ItemID();
@@ -338,13 +338,13 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			regionCode.setRegionCode(new Token(persona.getEstado()));
 			addressData.setRegionCode(regionCode);
 			// Municipio o Delegacion
-			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase().trim());
+			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setDistrictName(municipio);
 			// Ciudad
-			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase().trim());
+			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setCityName(ciudad);
 			// Colonia
-			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase().trim());
+			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setAdditionalCityName(colonia);
 			// Calle
 			StreetName streetName = new StreetName();
@@ -352,12 +352,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			addressData.setStreetName(streetName);
 			// No Ext
 			HouseID numExt = new HouseID();
-			numExt.setHouseID(new Token(persona.getNumExterior().toUpperCase().trim()));
+			numExt.setHouseID(new Token(persona.getNumExterior().toUpperCase().trim().replaceAll(" +", " ")));
 			addressData.setHouseID(numExt);
 			// No Int
 			if (persona.getNumInterior() != null && !persona.getNumInterior().equals("")) {
 				HouseID numInt = new HouseID();
-				numInt.setHouseID(new Token(persona.getNumInterior().toUpperCase().trim()));
+				numInt.setHouseID(new Token(persona.getNumInterior().toUpperCase().trim().replaceAll(" +", " ")));
 				addressData.setAdditionalHouseID(numInt);
 			}
 			bp.setAddressData(addressData);

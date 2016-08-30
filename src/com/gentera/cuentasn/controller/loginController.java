@@ -165,7 +165,7 @@ public class loginController {
 			if(origen.toUpperCase().equals("COMPARTAMOS")){
 				return "redirect:/loginCompartamos";
 			}else if(origen.toUpperCase().equals("YASTAS")){
-				return "redirect:https://www.yastas.com/CuentasN2/loginYastas";
+				return "redirect:https://www.compartamos.com/CuentasN2/loginYastas";
 			}else{
 				return "redirect:/paginaError";
 			}

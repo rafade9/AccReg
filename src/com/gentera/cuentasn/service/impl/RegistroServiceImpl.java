@@ -8,12 +8,17 @@ import java.io.StringWriter;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.LeerCatalogos;
 import com.gentera.cuentasn.service.RegistroService;
 import com.gentera.cuentasn.util.MailService;
+import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
@@ -40,6 +45,9 @@ public class RegistroServiceImpl implements RegistroService {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	LeerCatalogos leerCatalogos;
 
 	/* (non-Javadoc)
 	 * @see com.gentera.cuentasn.service.RegistroService#registrar(com.gentera.cuentasn.entities.Persona)
@@ -68,8 +76,32 @@ public class RegistroServiceImpl implements RegistroService {
 				}
 				
 				else{
+					Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+					String numPlazaOs = "";
+					String nombrePlazaOs = "";
+					if(user.getOrigen().equals("compartamos")){
+						Sucursal plaza = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero(ip));
+						
+						if(plaza==null){
+							numPlazaOs = "Plaza desconocida";
+						}else{
+							numPlazaOs = plaza.getId();
+							nombrePlazaOs = plaza.getPlaza();
+						}
+					}else{
+						Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+						numPlazaOs = usuario.getNumOficina();
+					}
+					
 					String msj = "Se ha detectado un error: \n \n CRM ha devuelto Code " + respuesta.getCodigo() 
-							+ "\n \n Mensaje: " + respuesta.getMensaje();
+							+ "\n \n Mensaje: " + respuesta.getMensaje()
+							+ "\n \n ---------DATOS DE ORIGINACION----------- \n \n"
+							+ "\n Usuario: " + user.getUsername()
+							+ "\n Folio: " + persona.getFolio()
+							+ "\n Origen: " + user.getOrigen()
+							+ "\n IP: " + ip
+							+ "\n No. Plaza/OS: " + numPlazaOs
+							+ "\n Nombre Plaza: " + nombrePlazaOs;
 					String codigo = Util.generaClaveError();
 					mailService.sendMail(codigo, msj);
 				}

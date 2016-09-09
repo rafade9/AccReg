@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
+import org.apache.axis2.transport.http.HTTPConstants;
 import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +103,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			ba.setPassword(Properties.getProp("PasswordCRM"));
 			
 			//Timeout
-			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));;
+			stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
+			stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
+			//stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));;
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);

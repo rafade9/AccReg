@@ -1,0 +1,297 @@
+@CHARSET "ISO-8859-1";
+
+	form {
+  	width: 80%;
+  	margin: 0 auto;
+  	text-align: center;
+}
+
+#portalContent {
+	padding: 30px;
+	background-color: #FFFFFF;
+}
+
+ .select
+  {
+  border: 2px solid #DBE1EB;
+  border-radius: 4px;
+  width:270px;
+}
+ .select:hover
+  {
+  border-color: #64247c;
+  }
+.text:hover{
+   border-color: #FF6347;	
+}
+
+tr.spaceUnder > td
+{
+  padding-bottom: 1em;
+}
+
+input
+{
+   width: 220px; 
+   height: 20px; 
+   padding: 5px 20px 0px 20px; 
+   margin: 0 0 20px 0;
+   border-radius: 5px; 
+   -moz-border-radius: 5px; 
+   -webkit-border-radius: 5px;
+   -moz-box-shadow: 0px 0px 0px #f2f2f2;
+   -webkit-box-shadow: 0px 1px 0px #f2f2f2;
+   font-family: Arial; 
+   font-size: 16px;
+}
+
+input:focus, textarea:focus {
+   background: white;
+   }
+   
+   
+label { display: inline-block; width: 160px; text-align: right; }
+
+input[type="radio"] {
+    width: 40px;
+  }
+  
+select{
+	border-radius: 5px
+	-moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 0px #f2f2f2;
+    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
+	height: 30px;
+	width: 265px;
+}
+
+	body {
+    background-color: #64247c;
+}
+	form label.error, form input.submit {
+		margin-left: 253px;
+}
+	
+	label.error {
+    color: #d60404;
+}
+
+
+#mensajeNac{
+	background-color: #ffffff;
+	left:35%;
+	top:110%;
+   	z-index:20;
+   	position:absolute;
+   	border: 3px solid #ce4676;
+   	text-align:center;
+   	color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    font-style: italic;
+
+}
+
+#mensajeNac{
+	background-color: #ffffff;
+	left:35%;
+	top:110%;
+   	z-index:20;
+   	position:absolute;
+   	border: 2px solid #64247c;
+   	text-align:center;
+   	color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    font-style: italic;
+
+}
+
+.texGris09_13 {
+    color: #9a8b7d;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.tituloMango {
+    color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+
+input[type="submit"] {
+    background: #64247c none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 30px;
+    width: 90px;
+}
+
+input[type="button"] {
+    background: #64247c none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 30px;
+    width: 90px;
+}
+   
+  
+/* Estilo para el select de autocompletado de Paises */
+
+  .custom-combobox {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+  }
+  .custom-combobox-input {
+    margin: 0;
+    padding: 3px 15px;
+  }
+  .ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+
+
+/* Component containers
+----------------------------------*/
+.ui-widget {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 0.9em;
+}
+.ui-widget .ui-widget {
+	 font-size: 15px;
+}
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+	font-family: Verdana,Arial,sans-serif;
+	 font-size: 13px;
+}
+.ui-widget-content {
+	border: 1px solid #aaaaaa;
+	background: #ffffff  50% 50% repeat-x;
+	color: #ffffff;
+}
+.ui-widget-content a {
+	color: #222222;
+}
+.ui-widget-header {
+	border: 1px solid #aaaaaa;
+	background: #ffffff  50% 50% repeat-x;
+	color: #ffffff;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}
+.ui-widget-header a {
+	color: #222222;
+}
+
+.ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.ui-state-default {
+    background: #ffffff repeat-x scroll 50% 50%;
+    border: 1px solid #d3d3d3;
+    color: #555555;
+    font-weight: normal;
+}
+
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text {
+    padding: 0.4em;
+    text-indent: -1e+7px;
+}
+
+#mensajeError {
+    color: #d60404;
+    text-align: center;
+}
+
+.redMsgClass {
+    color: #FF0000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.blackMsgClass {
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 28px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.greenMsgClass {
+    color: #009900;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+#bloquea {
+
+width: 100%;
+height: 100%;
+overflow: hidden; 
+top: 0px;
+left: 0px;
+z-index: 1000000;
+text-align: center;
+position:fixed; 
+background-color: #FFFFFF;
+opacity:0.6;
+filter:alpha(opacity=70);
+}
+
+
+.mayusculas{
+	text-transform:uppercase;
+}

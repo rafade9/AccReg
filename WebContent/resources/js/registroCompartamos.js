@@ -307,7 +307,18 @@ $('#msnIdent').html("N&uacute;mero de identificaci&oacute;n *<br>Clave de electo
                      	document.getElementById('principalMensaje').style.display = 'block';//mostramos el mensaje recibido desde el servicio
                      	document.getElementById('botonSal').style.display = 'block';
                     }
-                   $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo]);
+                   
+                   if(datar.codigo == '0'){
+                	   if(datar.codigoServicios == '0')
+                		   $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo] + "<br> <p class='greenDigitalMsgClass'>" + datar.mensaje + "</p>");
+                	   else if(datar.codigoServicios == '1')
+                		   $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo] + "<br> <p class='yellowDigitalMsgClass'>" + datar.mensaje + "</p>");
+                	   else
+                		   $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo] + "<br> <p class='redDigitalMsgClass'>" + datar.mensaje + "</p>");
+                   }else{
+                	   $('#mensajeRegistro').html(mensajesCompartamos[datar.codigo]);
+                   }
+                   console.log(datar);
                 },
                 error: function(data){
                 	//Timer

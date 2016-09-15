@@ -119,16 +119,18 @@
 				<label class="texGris09_13"><input type="radio" name="genero" checked id ="generoM" value="2" class="inputRadio bloqueado">Masculino</label>
 				<label class="texGris09_13"><input type="radio" id="generoF" name="genero" value="1" class="inputRadio bloqueado">Femenino</label><br>
 		
-<!-- 				<label class="texGris09_13">¿Desea notificaciones SMS? * </label> -->
-<!-- 				<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label> -->
-<!-- 				<label class="texGris09_13"><input type="radio" name="sms" id="smsNo" class="inputRadio" value="false">No</label><br><br> -->
-<!-- 				<div class="clear"> </div> -->
+ 				<label class="texGris09_13">¿Desea notificaciones SMS? * </label> 
+ 				<label class="texGris09_13"><input type="radio" name="sms" id="smsSi"  class="inputRadio" value="true">Si</label> 
+ 				<label class="texGris09_13"><input type="radio" name="sms" id="smsNo" class="inputRadio" value="false">No</label><br><br> 
+ 				<div class="clear"> </div> 
+ 				
+ 				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular"  class="inputRadio bloqueado" value="2" checked>Celular</label>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa"  class="inputRadio bloqueado" value="1" >Casa</label>
+				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio"  class="inputRadio bloqueado" value="3">Negocio</label><br>
 		
 		<label for="telefono" class="texGris09_13">Tel&eacute;fono de contacto *<br>(10 d&iacute;gitos) </label><input type="text" id="telefono" name="telefono" class="texGris09_13 inputText bloqueado" maxlength="10">
 		<br>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="celular"  class="inputRadio bloqueado" value="2" checked>Celular</label>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="casa"  class="inputRadio bloqueado" value="1" >Casa</label>
-				<label class="texGris09_13"><input type="radio" name="tipoTelefono" id="negocio"  class="inputRadio bloqueado" value="3">Negocio</label><br>
+				
 		
 				
 				

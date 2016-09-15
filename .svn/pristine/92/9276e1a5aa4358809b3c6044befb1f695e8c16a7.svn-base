@@ -1,0 +1,463 @@
+/**Estilos del contenido**/
+
+.linkGris {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #85776f;
+	text-decoration: none;
+}
+
+.linkGris a:hover {color: #CA005D;}
+
+.linkMagenta {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #CA005D;
+	text-decoration: none;
+}
+
+.linkMagenta a:hover {color: #646464;}
+
+.linkMango {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #f38a00;
+	text-decoration: none;
+}
+.linkOcre {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #d47600;
+	text-decoration: none;
+}
+.linkVino {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	color: #97004B;
+	text-decoration: none;
+}
+.linkVerde {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	color: #8DC63F;
+	text-decoration: none;
+}
+.linkMorado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	color: #652D89;
+	text-decoration: none;
+}
+.linkNaranja {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	color: #F58025;
+	text-decoration: none;
+}
+.linkAmarillo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	color: #FF2D00;
+	text-decoration: none;
+}
+.texGeneral {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #000;
+	text-decoration: none;
+}
+
+/*Subtitulos*/
+
+.subtituloGris {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #85776f;
+	text-decoration: none;
+}
+.subtituloMango {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #f38a00;
+	text-decoration: none;
+}
+.subtituloOcre {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #d77600;
+	text-decoration: none;
+}
+.subtituloMagenta {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #CA005D;
+	text-decoration: none;
+}
+.subtituloVino {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #97004B;
+	text-decoration: none;
+}
+.subtituloBlanco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.subtituloVerde {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #8DC63F;
+	text-decoration: none;
+}
+.subtituloMorado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #652D89;
+	text-decoration: none;
+}
+.subtituloNaranja {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #F58025;
+	text-decoration: none;
+}
+.subtituloAmarillo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	line-height: 24px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #FFD300;
+	text-decoration: none;
+}
+
+/*-titulos--*/
+
+.tituloGris {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #85776f;
+	text-decoration: none;
+}
+.tituloBlanco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.tituloMango {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: italic;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #f38a00;
+	text-decoration: none;
+}
+.tituloOcre {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #d77600;
+	text-decoration: none;
+}
+.tituloMagenta {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #CA005D;
+	text-decoration: none;
+}
+.tituloVino {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #97004B;
+	text-decoration: none;
+}
+.tituloVerde {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #8DC63F;
+	text-decoration: none;
+}
+.tituloMorado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #652D89;
+	text-decoration: none;
+}
+.tituloNaranja {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #F58025;
+	text-decoration: none;
+}
+.tituloAmarillo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #FFD300;
+	text-decoration: none;
+}
+/*Textos*/
+
+.texMorado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #652D89;
+	text-decoration: none;
+}
+.texNaranja {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #F58025;
+	text-decoration: none;
+}
+.texAmarillo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #FFD300;
+	text-decoration: none;
+}
+.texMango {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #f38a00;
+	text-decoration: none;
+}
+.texBlanco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.texOcre {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #d47600;
+	text-decoration: none;
+}
+.texMagenta {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #CA005D;
+	text-decoration: none;
+}
+.texVino {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: normal;
+	font-variant: normal;
+	color: #97004B;
+	text-decoration: none;
+}
+.texNegro13 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #000;
+	text-decoration: none;
+}
+.texGris09_13 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #9a8b7d;
+	text-decoration: none;
+	text-align:left;
+}
+.texGris03_13 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: 15px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #c1b7af;
+	text-decoration: none;
+}
+
+.texNegro14 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #000;
+	text-decoration: none;
+}
+.texGris09_14 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #9a8b7d;
+	text-decoration: none;
+}
+.texGris03_14 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 16px;
+	font-weight: lighter;
+	font-variant: normal;
+	color: #c1b7af;
+	text-decoration: none;
+}
+.texMango17 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	font-style: italic;
+	line-height: 15px;
+	font-weight: bold;
+	font-variant: normal;
+	color: #f38a00;
+	text-decoration: none;
+}

@@ -16,6 +16,7 @@ public class Respuesta implements Serializable{
 
 	private Integer tipo;
 	private Integer codigo;
+	private Integer codigoServicios;
 	private String mensaje;
 
 	private String idBP;
@@ -56,6 +57,22 @@ public class Respuesta implements Serializable{
 	 */
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	
+	/**
+	 * Getter
+	 * @return CodigoServicios
+	 */
+	public Integer getCodigoServicios() {
+		return codigoServicios;
+	}
+
+	/**
+	 * Setter CodigoServicios
+	 * @param codigoServicios the codigoServicios to set
+	 */
+	public void setCodigoServicios(Integer codigoServicios) {
+		this.codigoServicios = codigoServicios;
 	}
 
 	/**

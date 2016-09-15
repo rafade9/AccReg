@@ -1,0 +1,130 @@
+@CHARSET "ISO-8859-1";
+
+	form {
+  	width: 80%;
+  	margin: 0 auto;
+  	text-align: center;
+}
+
+#portalContent {
+	padding: 30px;
+	background-color: #FFFFFF;
+}
+
+ .select
+  {
+  border: 2px solid #DBE1EB;
+  border-radius: 4px;
+  width:270px;
+}
+ .select:hover
+  {
+  border-color: #64247c;
+  }
+.text:hover{
+   border-color: #FF6347;	
+}
+
+tr.spaceUnder > td
+{
+  padding-bottom: 1em;
+}   
+   
+
+	body {
+    background-color: #64247c;
+}
+	form label.error, form input.submit {
+		margin-left: 23px;
+}
+	
+	label.error {
+    color: #d60404;
+}
+
+.tituloMango {
+    color: #f38a00;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+	text-align: center;
+}
+
+
+input[type="submit"] {
+    background: #64247c none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 30px;
+    width: 90px;
+}
+
+input[type="button"] {
+    background: #64247c none repeat scroll 0 0;
+    color: white;
+    font-size: 16px;
+    height: 30px;
+    width: 90px;
+}
+
+.redMsgClass {
+    color: #FF0000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.blackMsgClass {
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 28px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.greenMsgClass {
+    color: #009900;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 35px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.blackMsgClassMedium {
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+
+
+.texGris09_13 {
+    color: #9a8b7d;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: lighter;
+    line-height: 15px;
+    text-align: left;
+    text-decoration: none;
+}

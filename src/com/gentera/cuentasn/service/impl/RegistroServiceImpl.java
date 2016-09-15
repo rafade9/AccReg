@@ -61,7 +61,7 @@ public class RegistroServiceImpl implements RegistroService {
 			if (respuesta != null && respuesta.getCodigo() != null) {
 
 				if (respuesta.getCodigo() == 0) {
-					respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
+					//respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
 
 					/*
 					 * //Se busca el número de tarjeta CardNumbers[] cns =
@@ -115,7 +115,7 @@ public class RegistroServiceImpl implements RegistroService {
 			logger.error(codigo + "---" + e.getMessage());
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
-//			e.printStackTrace();
+			e.printStackTrace();
 			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n Trama: \n \n" + sw.toString();
 			mailService.sendMail(codigo,msj);
 			throw new Exception(codigo);

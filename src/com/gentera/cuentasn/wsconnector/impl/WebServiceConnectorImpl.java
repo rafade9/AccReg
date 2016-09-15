@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub.Execute;
+import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub.ExecuteResponse;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerName;
 import com.compartamos.common.gdt.AcctOriginationBusinessPartnerPhone;
 import com.compartamos.common.gdt.AddressTypeID;
@@ -83,6 +86,11 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 */
 	final static String endPointCardManager = Properties.getProp("EndPointCardManager");
 	
+	/**
+	 * Variable que almacena el Endpoint de Card Manager para Reposicion
+	 */
+	final static String endPointCardManagerReposition = Properties.getProp("EndPointCardManagerReposicion");
+	
 	@Autowired
 	LeerCatalogos leerCatalogos;
 
@@ -105,7 +113,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			//Timeout
 			stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
 			stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
-			//stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));;
+			//stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
@@ -169,7 +177,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 					numPlaza = plaza.getId();
 				}
 				
-				logger.info("Sucursal No. " + numPlaza);
+				logger.info("ORIGINACION. Sucursal No. " + numPlaza);
 				officeId.setOrganisationalCentreID(new Token(numPlaza));
 			}
 			
@@ -311,7 +319,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				// Tipo de telefono
 				PhoneTypeID phoneType = new PhoneTypeID();
 				
-				phoneType.setPhoneTypeID(new Token(persona.getTipoTelefono()));
+				if(persona.isSms()){
+					phoneType.setPhoneTypeID(new Token("6"));
+				}else{
+					phoneType.setPhoneTypeID(new Token(persona.getTipoTelefono()));
+				}
+				
 				phoneData.setPhoneTypeID(phoneType);
 				PhoneNumberV1 phoneNumber = new PhoneNumberV1();
 				PhoneNumberSubscriberID number = new PhoneNumberSubscriberID();
@@ -371,7 +384,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			dtSync.setLevel2AccountCreationData(data);
 			mtSync.setMT_Level2AccountCreationReq_sync(dtSync);
 			
-			logger.info("Se envia peticion a CRM con los sig datos:"
+			logger.info("ORIGINACION. Se envia peticion a CRM con los sig datos:"
 					+ " ---->Origen: " + origen
 					+ " ---->Sucursal: " + numPlaza
 					+ " ---->Empleado: " + numEmpleado
@@ -382,21 +395,62 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			MT_Level2AccountCreationResp_sync response = stub.createLevel2Account(mtSync);
 
-			if (response.getMT_Level2AccountCreationResp_sync().getLog().getItem() != null) {
-				String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
-						.toString();
-				logger.error("Respuesta de CRM: "
-						+ " ---->Folio: " + persona.getFolio()
-						+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
-						+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
-				respuesta.setCodigo(Integer.valueOf(code));
-				respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
-			} else {
-				logger.info("Respuesta exitosa de CRM: "
-						+ " ---->Folio: " + persona.getFolio()
-						+ " ---->Codigo: 0");
-				respuesta.setCodigo(0); // Cambia?
+//			if (response.getMT_Level2AccountCreationResp_sync().getLog().getItem() != null) {
+//				String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
+//						.toString();
+//				logger.error("Respuesta de CRM: "
+//						+ " ---->Folio: " + persona.getFolio()
+//						+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
+//						+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+//				respuesta.setCodigo(Integer.valueOf(code));
+//				respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+//			} else {
+//				logger.info("Respuesta exitosa de CRM: "
+//						+ " ---->Folio: " + persona.getFolio()
+//						+ " ---->Codigo: 0");
+//				respuesta.setCodigo(0); // Cambia?
+//			}
+			
+			//Se valida que venga el objeto log
+			if(response.getMT_Level2AccountCreationResp_sync().getLog() != null){
+				//Se valida que venga el objeto BusinessDocumentProcessingResultCode
+				if(response.getMT_Level2AccountCreationResp_sync().getLog().getBusinessDocumentProcessingResultCode()!=null){
+					String resultCode = response.getMT_Level2AccountCreationResp_sync().getLog().getBusinessDocumentProcessingResultCode().toString();
+					//Se valida la respuesta obtenida
+					if(resultCode.equals("3")){
+						respuesta.setCodigo(0);
+						respuesta.setCodigoServicios(Integer.valueOf(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getSeverityCode().toString()));
+						respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+						
+						logger.info("ORIGINACION. Respuesta exitosa de CRM: "
+								+ " ---->Folio: " + persona.getFolio()
+								+ " ---->Codigo: 0"
+								+ " ---->Servicios digitales: " + respuesta.getMensaje());
+					}else if(resultCode.equals("5")){
+						//Se valida que venga un objeto Item
+						if(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()!=null){
+							int longitud = response.getMT_Level2AccountCreationResp_sync().getLog().getItem().length;
+							String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[longitud-1].getCategoryCode().toString();
+							respuesta.setCodigo(Integer.valueOf(code));
+							respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+							
+							logger.error("ORIGINACION. Respuesta de CRM: "
+									+ " ---->Folio: " + persona.getFolio()
+									+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
+									+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+						}else{
+							throw new Exception("La respuesta de CRM no contiene Item");
+						}
+					}else{
+						throw new Exception("Error no mapeado de CRM");
+					}
+				}else{
+					throw new Exception("No existe objeto BusinessDocumentProcessingResultCode en respuesta de CRM.");
+				}
+			}else{
+				throw new Exception("Trama de respuesta de CRM incompleta.");
 			}
+			
 
 			if (respuesta.getCodigo() != null) {
 				if (respuesta.getCodigo() == 0) {
@@ -412,24 +466,107 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 
 		} catch (AxisFault e) {
-			logger.error("Error AxisFault " + e);
+			logger.error("ORIGINACION. Error AxisFault " + e);
 			respuesta.setCodigo(99);
 //			e.printStackTrace();
 			throw new Exception(e);
 		} catch (RemoteException e) {
-			logger.error("Error Remote " + e);
+			logger.error("ORIGINACION. Error Remote " + e);
 			respuesta.setCodigo(99);
 //			e.printStackTrace();
 			throw new Exception(e);
 		} catch (ExchangeFaultData e) {
-			logger.error("Error Exchange Data " + e);
+			logger.error("ORIGINACION. Error Exchange Data " + e);
 			respuesta.setCodigo(99);
 //			e.printStackTrace();
 			throw new Exception(e);
 		} catch (ParseException e) {
-			logger.error("Error General " + e);
+			logger.error("ORIGINACION. Error Parse " + e);
 			respuesta.setCodigo(99);
 //			e.printStackTrace();
+			throw new Exception(e);
+		} catch (Exception e) {
+			logger.error("ORIGINACION. Error General" + e);
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+		return respuesta;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#sendDataReposition()
+	 */
+	@Override
+	public Respuesta sendDataReposition(Persona persona) throws Exception {
+		Respuesta respuesta = new Respuesta();
+		
+		try{
+			
+			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+			String numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
+			
+			// Se genera el stub con el endpoint al cual apunta
+			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub(endPointCardManagerReposition);
+			
+			// Se configura autenticación
+			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
+			ba.setUsername(Properties.getProp("UserCardManagerReposition"));
+			ba.setPassword(Properties.getProp("PasswordCardManagerReposition"));
+			
+			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
+					Boolean.FALSE);
+			stub._getServiceClient().getOptions()
+					.setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
+			
+			//Se genera instancia de Execute para data
+			Execute data = new Execute();
+			
+			//Se incluye folio
+			data.setCardID(persona.getFolio());
+			
+			//Se incluye fecha de nacimiento
+			data.setBankCardCardHolderParty(persona.getFechaNacimiento());
+			
+			//Se incluye referencia
+			data.setBankAccountID(persona.getReferencia());
+			
+			//Otros datos requeridos
+			data.setCMSUserId(Properties.getProp("CMSUserIdReposition"));
+			data.setExternalUser("IDOperador-"+user.getUsername()+", EmpResponsable-"+numEmpleado);
+			
+			logger.info("REPOSICION. Se envia peticion a CMS con los sig datos:"
+					+ " ---->Usuario CMS: " + Properties.getProp("UserCardManagerReposition")
+					+ " ---->Usuario Interno: " + Properties.getProp("CMSUserIdReposition")
+					+ " ---->Referencia " + persona.getReferencia()
+					+ " ---->Folio" + persona.getFolio()
+					+ " ---->Endpoint CRM: " + endPointCardManagerReposition);
+			
+			ExecuteResponse response = stub.execute(data);
+			logger.info("REPOSICION. Respuesta de CMS: "
+					+ "---->Referencia: " + persona.getReferencia()
+					+ "---->Folio: " + persona.getFolio()
+					+ "---->Codigo: " + response.getExecuteResult().getRCCode()
+					+ "---->Descripcion: " + response.getExecuteResult().getRCDescription());
+			System.out.println(response.getExecuteResult().getRCCode() + " - " + response.getExecuteResult().getRCDescription());
+			
+			if(response!=null && response.getExecuteResult()!=null){
+				respuesta.setCodigo((int)response.getExecuteResult().getRCCode());
+				respuesta.setMensaje(response.getExecuteResult().getRCDescription());
+			}
+		}catch (AxisFault e) {
+			logger.error("REPOSICION. Error AxisFault " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
+			throw new Exception(e);
+		} catch (RemoteException e) {
+			logger.error("REPOSICION. Error Remote " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
+			throw new Exception(e);
+		} catch(Exception e){
+			logger.error("REPOSICION. Error general" + e);
+			e.printStackTrace();
 			throw new Exception(e);
 		}
 		return respuesta;

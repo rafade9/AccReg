@@ -166,6 +166,7 @@ public class loginController {
 				return "redirect:/loginCompartamos";
 			}else if(origen.toUpperCase().equals("YASTAS")){
 				return "redirect:https://www.compartamos.com/CuentasN2/loginYastas";
+//				return "redirect:/loginYastas";
 			}else{
 				return "redirect:/paginaError";
 			}

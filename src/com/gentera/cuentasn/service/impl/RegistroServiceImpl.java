@@ -103,7 +103,7 @@ public class RegistroServiceImpl implements RegistroService {
 							+ "\n No. Plaza/OS: " + numPlazaOs
 							+ "\n Nombre Plaza: " + nombrePlazaOs;
 					String codigo = Util.generaClaveError();
-//					mailService.sendMail(codigo, msj);
+					mailService.sendMail(codigo, msj);
 				}
 				
 				respuesta.setPersona(persona);
@@ -115,9 +115,9 @@ public class RegistroServiceImpl implements RegistroService {
 			logger.error(codigo + "---" + e.getMessage());
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
-//			e.printStackTrace();
+			e.printStackTrace();
 			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n Trama: \n \n" + sw.toString();
-//			mailService.sendMail(codigo,msj);
+			mailService.sendMail(codigo,msj);
 			throw new Exception(codigo);
 		}
 

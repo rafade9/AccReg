@@ -113,7 +113,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			//Timeout
 			stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
 			stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
-			//stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));;
+			//stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(Integer.valueOf(Properties.getProp("timeoutCRM")));
 
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
@@ -501,6 +501,11 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 		Respuesta respuesta = new Respuesta();
 		
 		try{
+			
+			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+			String numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
+			
 			// Se genera el stub con el endpoint al cual apunta
 			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub(endPointCardManagerReposition);
 			
@@ -528,7 +533,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//Otros datos requeridos
 			data.setCMSUserId(Properties.getProp("CMSUserIdReposition"));
-			data.setExternalUser(Properties.getProp("ExternalUserReposition"));
+			data.setExternalUser("IDOperador-"+user.getUsername()+", EmpResponsable-"+numEmpleado);
 			
 			logger.info("REPOSICION. Se envia peticion a CMS con los sig datos:"
 					+ " ---->Usuario CMS: " + Properties.getProp("UserCardManagerReposition")

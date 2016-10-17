@@ -58,7 +58,28 @@ public class RegistroServiceImpl implements RegistroService {
 		try {
 			// Se realiza la conexion
 			respuesta = wsConnector.sendData(persona, Util.convierteIpTerminaCero(ip));
+			String msj = "";
+			String codigo = "";
 			if (respuesta != null && respuesta.getCodigo() != null) {
+				
+				
+				//Recuperar 
+				Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				String numPlazaOs = "";
+				String nombrePlazaOs = "";
+				if(user.getOrigen().equals("compartamos")){
+					Sucursal plaza = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero(ip));
+					
+					if(plaza==null){
+						numPlazaOs = "Plaza desconocida";
+					}else{
+						numPlazaOs = plaza.getId();
+						nombrePlazaOs = plaza.getPlaza();
+					}
+				}else{
+					Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+					numPlazaOs = usuario.getNumOficina();
+				}
 
 				if (respuesta.getCodigo() == 0) {
 					//respuesta.setMensaje("Cuenta Creada con &Eacute;xito");
@@ -72,28 +93,23 @@ public class RegistroServiceImpl implements RegistroService {
 					 * respuesta.setNumTarjeta(String.valueOf(cn.getCardNumber()
 					 * )); break; } }
 					 */
+					msj = "Se ha generado una cuenta exitosa. \n \n"
+							+ "\n Usuario: " + user.getUsername()
+							+ "\n Folio: " + persona.getFolio()
+							+ "\n Origen: " + user.getOrigen()
+							+ "\n IP: " + ip
+							+ "\n No. Plaza/OS: " + numPlazaOs
+							+ "\n Nombre Plaza: " + nombrePlazaOs;
+					codigo = "ORIGINACION EXITOSA";
+					
+					mailService.sendMail(codigo, msj, false);
 
 				}
 				
 				else{
-					Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-					String numPlazaOs = "";
-					String nombrePlazaOs = "";
-					if(user.getOrigen().equals("compartamos")){
-						Sucursal plaza = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero(ip));
-						
-						if(plaza==null){
-							numPlazaOs = "Plaza desconocida";
-						}else{
-							numPlazaOs = plaza.getId();
-							nombrePlazaOs = plaza.getPlaza();
-						}
-					}else{
-						Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
-						numPlazaOs = usuario.getNumOficina();
-					}
 					
-					String msj = "Se ha detectado un error: \n \n CRM ha devuelto Code " + respuesta.getCodigo() 
+					
+					msj = "Se ha detectado un error: \n \n CRM ha devuelto Code " + respuesta.getCodigo() 
 							+ "\n \n Mensaje: " + respuesta.getMensaje()
 							+ "\n \n ---------DATOS DE ORIGINACION----------- \n \n"
 							+ "\n Usuario: " + user.getUsername()
@@ -102,10 +118,11 @@ public class RegistroServiceImpl implements RegistroService {
 							+ "\n IP: " + ip
 							+ "\n No. Plaza/OS: " + numPlazaOs
 							+ "\n Nombre Plaza: " + nombrePlazaOs;
-					String codigo = Util.generaClaveError();
-					mailService.sendMail(codigo, msj);
+					codigo = Util.generaClaveError();
+					
+					mailService.sendMail(codigo, msj, true);
+					
 				}
-				
 				respuesta.setPersona(persona);
 			}
 
@@ -117,7 +134,7 @@ public class RegistroServiceImpl implements RegistroService {
 			e.printStackTrace(new PrintWriter(sw));
 			e.printStackTrace();
 			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n Trama: \n \n" + sw.toString();
-			mailService.sendMail(codigo,msj);
+			mailService.sendMail(codigo,msj,false);
 			throw new Exception(codigo);
 		}
 

@@ -29,7 +29,7 @@ public class MailService {
 		this.mailSender = mailSender;
 	}
 
-	public void sendMail(String subject, String msj) {
+	public void sendMail(String subject, String msj, boolean todos) {
 		try{
 			SimpleMailMessage message = new SimpleMailMessage();
 			

@@ -432,12 +432,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 							int longitud = response.getMT_Level2AccountCreationResp_sync().getLog().getItem().length;
 							String code = response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[longitud-1].getCategoryCode().toString();
 							respuesta.setCodigo(Integer.valueOf(code));
-							respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+							respuesta.setMensaje(response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[longitud-1].getNote().toString());
 							
 							logger.error("ORIGINACION. Respuesta de CRM: "
 									+ " ---->Folio: " + persona.getFolio()
-									+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getCategoryCode()
-									+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[0].getNote().toString());
+									+ " ---->Codigo: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[longitud-1].getCategoryCode()
+									+ " ---->Nota: " + response.getMT_Level2AccountCreationResp_sync().getLog().getItem()[longitud-1].getNote().toString());
 						}else{
 							throw new Exception("La respuesta de CRM no contiene Item");
 						}

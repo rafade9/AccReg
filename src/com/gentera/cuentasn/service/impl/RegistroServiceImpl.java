@@ -134,7 +134,7 @@ public class RegistroServiceImpl implements RegistroService {
 			e.printStackTrace(new PrintWriter(sw));
 			e.printStackTrace();
 			String msj = "Se ha detectado un error: \n \n "+ e.getMessage() +"\n \n Trama: \n \n" + sw.toString();
-			mailService.sendMail(codigo,msj,false);
+			mailService.sendMail(codigo,msj,true);
 			throw new Exception(codigo);
 		}
 

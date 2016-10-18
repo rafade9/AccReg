@@ -33,7 +33,12 @@ public class MailService {
 		try{
 			SimpleMailMessage message = new SimpleMailMessage();
 			
-			String correoProp = Properties.getProp("mailIssues");
+			String correoProp;
+			
+			if(todos)
+				correoProp = Properties.getProp("mailIssuesAll");
+			else
+				correoProp = Properties.getProp("mailIssues");
 			
 			String[] correos = correoProp.split("; ");
 			

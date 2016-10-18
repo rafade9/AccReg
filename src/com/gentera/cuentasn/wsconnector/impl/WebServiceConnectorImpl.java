@@ -354,17 +354,26 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			regionCode.setRegionCode(new Token(persona.getEstado()));
 			addressData.setRegionCode(regionCode);
 			// Municipio o Delegacion
-			municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase().trim().replaceAll(" +", " "));
+			if(persona.getDelegacion().length()>40)
+				municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase().trim().replaceAll(" +", " ").substring(0, 40));
+			else
+				municipio.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getDelegacion().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setDistrictName(municipio);
 			// Ciudad
-			ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase().trim().replaceAll(" +", " "));
+			if(persona.getCiudad().length()>40)
+				ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase().trim().replaceAll(" +", " ").substring(0, 40));
+			else
+				ciudad.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getCiudad().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setCityName(ciudad);
 			// Colonia
-			colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase().trim().replaceAll(" +", " "));
+			if(persona.getColonia().length()>40)
+				colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase().trim().replaceAll(" +", " ").substring(0, 40));
+			else
+				colonia.setLANGUAGEINDEPENDENT_MEDIUM_Name(persona.getColonia().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setAdditionalCityName(colonia);
 			// Calle
 			StreetName streetName = new StreetName();
-			streetName.setStreetName(persona.getCalle().toUpperCase());
+			streetName.setStreetName(persona.getCalle().toUpperCase().trim().replaceAll(" +", " "));
 			addressData.setStreetName(streetName);
 			// No Ext
 			HouseID numExt = new HouseID();

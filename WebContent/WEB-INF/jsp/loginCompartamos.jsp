@@ -5,7 +5,7 @@
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8; IE=8">
 <meta http-equiv="X-Frame-Options" content="sameorigin">
-<title>Compartamos</title>  
+<title>Compartamos </title>  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" title="" href="resources/css/loginCompartamos.css" type="text/css">
   <link href="resources/img/faviconCompartamos.ico" rel="icon" type="image/x-icon">

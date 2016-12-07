@@ -22,7 +22,23 @@ public class ReposicionServiceImpl implements ReposicionService{
 		Respuesta respuesta = new Respuesta();
 		try{
 //			respuesta = wsConnector.sendData(persona, Util.convierteIpTerminaCero(ip));
-			respuesta = wsConnector.sendDataReposition(persona);
+			Integer proceso = 1;
+			if(proceso == 1){ //Reposicion
+			
+				respuesta = wsConnector.sendDataReposition(persona);
+			}
+			else{
+				String guid = "414e414c363230343932303731323136";
+				
+				//1. Validar referencia
+				Respuesta respuestaValidacion = wsConnector.validateReference(persona, guid);
+				
+				//2. Asignar plastico (si es correcto paso 1)
+				Respuesta respuestaAsignacion = wsConnector.assignCard(persona);
+				
+				//3. Commit a referencia (si es correcto paso 2)
+				Respuesta respuestaCommit = wsConnector.increaseReference(persona);
+			}
 			
 		}catch(Exception e){
 			e.printStackTrace();

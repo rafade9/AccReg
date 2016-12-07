@@ -607,15 +607,10 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	public Respuesta validateReference(Persona persona, String guid) throws Exception {
 		Respuesta respuesta = new Respuesta();
 		
-		//Se recupera ambiente configurado
-		String ambiente = Properties.getProp("Ambiente");
-		
 		/**
 		 * Endpoint
 		 */
 		String endPointRms = Properties.getProp("EndPointRMS");
-		
-		guid = "414e414c363230343932303731323136";
 		
 		ReferenceManagerStub stub = new ReferenceManagerStub(endPointRms);
 		

@@ -30,8 +30,34 @@ public interface WebServiceConnector {
 	
 	/**
 	 * Consumo de Web Service Card Manager para reposicion de TDD
+	 * @param persona
 	 * @return
 	 * @throws Exception
 	 */
 	public Respuesta sendDataReposition(Persona persona) throws Exception;
+	
+	/**
+	 * Consumo de Web Service RMS para validacion de referencia
+	 * @param persona
+	 * @param guid
+	 * @return
+	 * @throws Exception
+	 */
+	public Respuesta validateReference(Persona persona, String guid) throws Exception;
+	
+	/**
+	 * Consumo de Web Service RMS para incrementar los intentos de uso de una referencia
+	 * @param persona
+	 * @return
+	 * @throws Exception
+	 */
+	public Respuesta increaseReference(Persona persona) throws Exception;
+	
+	/**
+	 * Consumo de Web Service Card Manager para asignacion de TDD
+	 * @param persona
+	 * @return
+	 * @throws Exception
+	 */
+	public Respuesta assignCard(Persona persona) throws Exception;
 }

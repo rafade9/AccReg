@@ -1,0 +1,986 @@
+/**
+ * ReferenceData.java
+ *
+ * This file was auto-generated from WSDL
+ * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
+ */
+package org.datacontract.schemas._2004._07.wcfreferencemanager;
+
+
+/**
+ *  ReferenceData bean class
+ */
+@SuppressWarnings({"unchecked",
+    "unused"
+})
+public class ReferenceData implements org.apache.axis2.databinding.ADBBean {
+    /* This type was generated from the piece of schema that had
+       name = ReferenceData
+       Namespace URI = http://schemas.datacontract.org/2004/07/WCFReferenceManager
+       Namespace Prefix = ns1
+     */
+
+    /**
+     * field for Reference
+     */
+    protected java.lang.String localReference;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceTracker = false;
+
+    /**
+     * field for ReferenceAttributesData
+     */
+    protected org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData localReferenceAttributesData;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceAttributesDataTracker = false;
+
+    /**
+     * field for ReferenceCancelationDate
+     */
+    protected java.util.Calendar localReferenceCancelationDate;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceCancelationDateTracker = false;
+
+    /**
+     * field for ReferenceCreationDate
+     */
+    protected java.util.Calendar localReferenceCreationDate;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceCreationDateTracker = false;
+
+    /**
+     * field for ReferenceExpirationDate
+     */
+    protected java.util.Calendar localReferenceExpirationDate;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceExpirationDateTracker = false;
+
+    /**
+     * field for ReferenceMovimientos
+     */
+    protected org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceMovimientosData localReferenceMovimientos;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceMovimientosTracker = false;
+
+    /**
+     * field for ReferenceStatus
+     */
+    protected java.lang.String localReferenceStatus;
+
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localReferenceStatusTracker = false;
+
+    public boolean isReferenceSpecified() {
+        return localReferenceTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return java.lang.String
+     */
+    public java.lang.String getReference() {
+        return localReference;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param Reference
+     */
+    public void setReference(java.lang.String param) {
+        localReferenceTracker = true;
+
+        this.localReference = param;
+    }
+
+    public boolean isReferenceAttributesDataSpecified() {
+        return localReferenceAttributesDataTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData
+     */
+    public org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData getReferenceAttributesData() {
+        return localReferenceAttributesData;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param ReferenceAttributesData
+     */
+    public void setReferenceAttributesData(
+        org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData param) {
+        localReferenceAttributesDataTracker = true;
+
+        this.localReferenceAttributesData = param;
+    }
+
+    public boolean isReferenceCancelationDateSpecified() {
+        return localReferenceCancelationDateTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return java.util.Calendar
+     */
+    public java.util.Calendar getReferenceCancelationDate() {
+        return localReferenceCancelationDate;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param ReferenceCancelationDate
+     */
+    public void setReferenceCancelationDate(java.util.Calendar param) {
+        localReferenceCancelationDateTracker = param != null;
+
+        this.localReferenceCancelationDate = param;
+    }
+
+    public boolean isReferenceCreationDateSpecified() {
+        return localReferenceCreationDateTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return java.util.Calendar
+     */
+    public java.util.Calendar getReferenceCreationDate() {
+        return localReferenceCreationDate;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param ReferenceCreationDate
+     */
+    public void setReferenceCreationDate(java.util.Calendar param) {
+        localReferenceCreationDateTracker = param != null;
+
+        this.localReferenceCreationDate = param;
+    }
+
+    public boolean isReferenceExpirationDateSpecified() {
+        return localReferenceExpirationDateTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return java.util.Calendar
+     */
+    public java.util.Calendar getReferenceExpirationDate() {
+        return localReferenceExpirationDate;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param ReferenceExpirationDate
+     */
+    public void setReferenceExpirationDate(java.util.Calendar param) {
+        localReferenceExpirationDateTracker = param != null;
+
+        this.localReferenceExpirationDate = param;
+    }
+
+    public boolean isReferenceMovimientosSpecified() {
+        return localReferenceMovimientosTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceMovimientosData
+     */
+    public org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceMovimientosData getReferenceMovimientos() {
+        return localReferenceMovimientos;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param ReferenceMovimientos
+     */
+    public void setReferenceMovimientos(
+        org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceMovimientosData param) {
+        localReferenceMovimientosTracker = true;
+
+        this.localReferenceMovimientos = param;
+    }
+
+    public boolean isReferenceStatusSpecified() {
+        return localReferenceStatusTracker;
+    }
+
+    /**
+     * Auto generated getter method
+     * @return java.lang.String
+     */
+    public java.lang.String getReferenceStatus() {
+        return localReferenceStatus;
+    }
+
+    /**
+     * Auto generated setter method
+     * @param param ReferenceStatus
+     */
+    public void setReferenceStatus(java.lang.String param) {
+        localReferenceStatusTracker = true;
+
+        this.localReferenceStatus = param;
+    }
+
+    /**
+     *
+     * @param parentQName
+     * @param factory
+     * @return org.apache.axiom.om.OMElement
+     */
+    public org.apache.axiom.om.OMElement getOMElement(
+        final javax.xml.namespace.QName parentQName,
+        final org.apache.axiom.om.OMFactory factory)
+        throws org.apache.axis2.databinding.ADBException {
+        org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                parentQName);
+
+        return factory.createOMElement(dataSource, parentQName);
+    }
+
+    public void serialize(final javax.xml.namespace.QName parentQName,
+        javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException,
+            org.apache.axis2.databinding.ADBException {
+        serialize(parentQName, xmlWriter, false);
+    }
+
+    public void serialize(final javax.xml.namespace.QName parentQName,
+        javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+        throws javax.xml.stream.XMLStreamException,
+            org.apache.axis2.databinding.ADBException {
+        java.lang.String prefix = null;
+        java.lang.String namespace = null;
+
+        prefix = parentQName.getPrefix();
+        namespace = parentQName.getNamespaceURI();
+        writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+            xmlWriter);
+
+        if (serializeType) {
+            java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager");
+
+            if ((namespacePrefix != null) &&
+                    (namespacePrefix.trim().length() > 0)) {
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "type",
+                    namespacePrefix + ":ReferenceData", xmlWriter);
+            } else {
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "type",
+                    "ReferenceData", xmlWriter);
+            }
+        }
+
+        if (localReferenceTracker) {
+            namespace = "http://schemas.datacontract.org/2004/07/WCFReferenceManager";
+            writeStartElement(null, namespace, "Reference", xmlWriter);
+
+            if (localReference == null) {
+                // write the nil attribute
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "nil", "1",
+                    xmlWriter);
+            } else {
+                xmlWriter.writeCharacters(localReference);
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        if (localReferenceAttributesDataTracker) {
+            if (localReferenceAttributesData == null) {
+                writeStartElement(null,
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceAttributesData", xmlWriter);
+
+                // write the nil attribute
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "nil", "1",
+                    xmlWriter);
+                xmlWriter.writeEndElement();
+            } else {
+                localReferenceAttributesData.serialize(new javax.xml.namespace.QName(
+                        "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                        "ReferenceAttributesData"), xmlWriter);
+            }
+        }
+
+        if (localReferenceCancelationDateTracker) {
+            namespace = "http://schemas.datacontract.org/2004/07/WCFReferenceManager";
+            writeStartElement(null, namespace, "ReferenceCancelationDate",
+                xmlWriter);
+
+            if (localReferenceCancelationDate == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ReferenceCancelationDate cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localReferenceCancelationDate));
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        if (localReferenceCreationDateTracker) {
+            namespace = "http://schemas.datacontract.org/2004/07/WCFReferenceManager";
+            writeStartElement(null, namespace, "ReferenceCreationDate",
+                xmlWriter);
+
+            if (localReferenceCreationDate == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ReferenceCreationDate cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localReferenceCreationDate));
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        if (localReferenceExpirationDateTracker) {
+            namespace = "http://schemas.datacontract.org/2004/07/WCFReferenceManager";
+            writeStartElement(null, namespace, "ReferenceExpirationDate",
+                xmlWriter);
+
+            if (localReferenceExpirationDate == null) {
+                // write the nil attribute
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ReferenceExpirationDate cannot be null!!");
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localReferenceExpirationDate));
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        if (localReferenceMovimientosTracker) {
+            if (localReferenceMovimientos == null) {
+                writeStartElement(null,
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceMovimientos", xmlWriter);
+
+                // write the nil attribute
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "nil", "1",
+                    xmlWriter);
+                xmlWriter.writeEndElement();
+            } else {
+                localReferenceMovimientos.serialize(new javax.xml.namespace.QName(
+                        "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                        "ReferenceMovimientos"), xmlWriter);
+            }
+        }
+
+        if (localReferenceStatusTracker) {
+            namespace = "http://schemas.datacontract.org/2004/07/WCFReferenceManager";
+            writeStartElement(null, namespace, "ReferenceStatus", xmlWriter);
+
+            if (localReferenceStatus == null) {
+                // write the nil attribute
+                writeAttribute("xsi",
+                    "http://www.w3.org/2001/XMLSchema-instance", "nil", "1",
+                    xmlWriter);
+            } else {
+                xmlWriter.writeCharacters(localReferenceStatus);
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        xmlWriter.writeEndElement();
+    }
+
+    private static java.lang.String generatePrefix(java.lang.String namespace) {
+        if (namespace.equals(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager")) {
+            return "ns1";
+        }
+
+        return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+    }
+
+    /**
+     * Utility method to write an element start tag.
+     */
+    private void writeStartElement(java.lang.String prefix,
+        java.lang.String namespace, java.lang.String localPart,
+        javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException {
+        java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+        if (writerPrefix != null) {
+            xmlWriter.writeStartElement(namespace, localPart);
+        } else {
+            if (namespace.length() == 0) {
+                prefix = "";
+            } else if (prefix == null) {
+                prefix = generatePrefix(namespace);
+            }
+
+            xmlWriter.writeStartElement(prefix, localPart, namespace);
+            xmlWriter.writeNamespace(prefix, namespace);
+            xmlWriter.setPrefix(prefix, namespace);
+        }
+    }
+
+    /**
+     * Util method to write an attribute with the ns prefix
+     */
+    private void writeAttribute(java.lang.String prefix,
+        java.lang.String namespace, java.lang.String attName,
+        java.lang.String attValue, javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException {
+        if (xmlWriter.getPrefix(namespace) == null) {
+            xmlWriter.writeNamespace(prefix, namespace);
+            xmlWriter.setPrefix(prefix, namespace);
+        }
+
+        xmlWriter.writeAttribute(namespace, attName, attValue);
+    }
+
+    /**
+     * Util method to write an attribute without the ns prefix
+     */
+    private void writeAttribute(java.lang.String namespace,
+        java.lang.String attName, java.lang.String attValue,
+        javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException {
+        if (namespace.equals("")) {
+            xmlWriter.writeAttribute(attName, attValue);
+        } else {
+            registerPrefix(xmlWriter, namespace);
+            xmlWriter.writeAttribute(namespace, attName, attValue);
+        }
+    }
+
+    /**
+     * Util method to write an attribute without the ns prefix
+     */
+    private void writeQNameAttribute(java.lang.String namespace,
+        java.lang.String attName, javax.xml.namespace.QName qname,
+        javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException {
+        java.lang.String attributeNamespace = qname.getNamespaceURI();
+        java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+        if (attributePrefix == null) {
+            attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+        }
+
+        java.lang.String attributeValue;
+
+        if (attributePrefix.trim().length() > 0) {
+            attributeValue = attributePrefix + ":" + qname.getLocalPart();
+        } else {
+            attributeValue = qname.getLocalPart();
+        }
+
+        if (namespace.equals("")) {
+            xmlWriter.writeAttribute(attName, attributeValue);
+        } else {
+            registerPrefix(xmlWriter, namespace);
+            xmlWriter.writeAttribute(namespace, attName, attributeValue);
+        }
+    }
+
+    /**
+     *  method to handle Qnames
+     */
+    private void writeQName(javax.xml.namespace.QName qname,
+        javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException {
+        java.lang.String namespaceURI = qname.getNamespaceURI();
+
+        if (namespaceURI != null) {
+            java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespaceURI);
+                xmlWriter.writeNamespace(prefix, namespaceURI);
+                xmlWriter.setPrefix(prefix, namespaceURI);
+            }
+
+            if (prefix.trim().length() > 0) {
+                xmlWriter.writeCharacters(prefix + ":" +
+                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            } else {
+                // i.e this is the default namespace
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        } else {
+            xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    qname));
+        }
+    }
+
+    private void writeQNames(javax.xml.namespace.QName[] qnames,
+        javax.xml.stream.XMLStreamWriter xmlWriter)
+        throws javax.xml.stream.XMLStreamException {
+        if (qnames != null) {
+            // we have to store this data until last moment since it is not possible to write any
+            // namespace data after writing the charactor data
+            java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+            java.lang.String namespaceURI = null;
+            java.lang.String prefix = null;
+
+            for (int i = 0; i < qnames.length; i++) {
+                if (i > 0) {
+                    stringToWrite.append(" ");
+                }
+
+                namespaceURI = qnames[i].getNamespaceURI();
+
+                if (namespaceURI != null) {
+                    prefix = xmlWriter.getPrefix(namespaceURI);
+
+                    if ((prefix == null) || (prefix.length() == 0)) {
+                        prefix = generatePrefix(namespaceURI);
+                        xmlWriter.writeNamespace(prefix, namespaceURI);
+                        xmlWriter.setPrefix(prefix, namespaceURI);
+                    }
+
+                    if (prefix.trim().length() > 0) {
+                        stringToWrite.append(prefix).append(":")
+                                     .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                } else {
+                    stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qnames[i]));
+                }
+            }
+
+            xmlWriter.writeCharacters(stringToWrite.toString());
+        }
+    }
+
+    /**
+     * Register a namespace prefix
+     */
+    private java.lang.String registerPrefix(
+        javax.xml.stream.XMLStreamWriter xmlWriter, java.lang.String namespace)
+        throws javax.xml.stream.XMLStreamException {
+        java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+        if (prefix == null) {
+            prefix = generatePrefix(namespace);
+
+            javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+            while (true) {
+                java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                if ((uri == null) || (uri.length() == 0)) {
+                    break;
+                }
+
+                prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+            }
+
+            xmlWriter.writeNamespace(prefix, namespace);
+            xmlWriter.setPrefix(prefix, namespace);
+        }
+
+        return prefix;
+    }
+
+    /**
+     * databinding method to get an XML representation of this object
+     *
+     */
+    public javax.xml.stream.XMLStreamReader getPullParser(
+        javax.xml.namespace.QName qName)
+        throws org.apache.axis2.databinding.ADBException {
+        java.util.ArrayList elementList = new java.util.ArrayList();
+        java.util.ArrayList attribList = new java.util.ArrayList();
+
+        if (localReferenceTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "Reference"));
+
+            elementList.add((localReference == null) ? null
+                                                     : org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localReference));
+        }
+
+        if (localReferenceAttributesDataTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceAttributesData"));
+
+            elementList.add((localReferenceAttributesData == null) ? null
+                                                                   : localReferenceAttributesData);
+        }
+
+        if (localReferenceCancelationDateTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceCancelationDate"));
+
+            if (localReferenceCancelationDate != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localReferenceCancelationDate));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ReferenceCancelationDate cannot be null!!");
+            }
+        }
+
+        if (localReferenceCreationDateTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceCreationDate"));
+
+            if (localReferenceCreationDate != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localReferenceCreationDate));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ReferenceCreationDate cannot be null!!");
+            }
+        }
+
+        if (localReferenceExpirationDateTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceExpirationDate"));
+
+            if (localReferenceExpirationDate != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localReferenceExpirationDate));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ReferenceExpirationDate cannot be null!!");
+            }
+        }
+
+        if (localReferenceMovimientosTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceMovimientos"));
+
+            elementList.add((localReferenceMovimientos == null) ? null
+                                                                : localReferenceMovimientos);
+        }
+
+        if (localReferenceStatusTracker) {
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                    "ReferenceStatus"));
+
+            elementList.add((localReferenceStatus == null) ? null
+                                                           : org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localReferenceStatus));
+        }
+
+        return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+            elementList.toArray(), attribList.toArray());
+    }
+
+    /**
+     *  Factory class that keeps the parse method
+     */
+    public static class Factory {
+        /**
+         * static method to create the object
+         * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+         *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+         * Postcondition: If this object is an element, the reader is positioned at its end element
+         *                If this object is a complex type, the reader is positioned at the end element of its outer element
+         */
+        public static ReferenceData parse(
+            javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
+            ReferenceData object = new ReferenceData();
+
+            int event;
+            java.lang.String nillableValue = null;
+            java.lang.String prefix = "";
+            java.lang.String namespaceuri = "";
+
+            try {
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.getAttributeValue(
+                            "http://www.w3.org/2001/XMLSchema-instance", "type") != null) {
+                    java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "type");
+
+                    if (fullTypeName != null) {
+                        java.lang.String nsPrefix = null;
+
+                        if (fullTypeName.indexOf(":") > -1) {
+                            nsPrefix = fullTypeName.substring(0,
+                                    fullTypeName.indexOf(":"));
+                        }
+
+                        nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                        java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                    ":") + 1);
+
+                        if (!"ReferenceData".equals(type)) {
+                            //find namespace for the prefix
+                            java.lang.String nsUri = reader.getNamespaceContext()
+                                                           .getNamespaceURI(nsPrefix);
+
+                            return (ReferenceData) org.tempuri.imports.ExtensionMapper.getTypeObject(nsUri,
+                                type, reader);
+                        }
+                    }
+                }
+
+                // Note all attributes that were handled. Used to differ normal attributes
+                // from anyAttributes.
+                java.util.Vector handledAttributes = new java.util.Vector();
+
+                reader.next();
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "Reference").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if (!"true".equals(nillableValue) &&
+                            !"1".equals(nillableValue)) {
+                        java.lang.String content = reader.getElementText();
+
+                        object.setReference(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                content));
+                    } else {
+                        reader.getElementText(); // throw away text nodes if any.
+                    }
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "ReferenceAttributesData").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        object.setReferenceAttributesData(null);
+                        reader.next();
+
+                        reader.next();
+                    } else {
+                        object.setReferenceAttributesData(org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData.Factory.parse(
+                                reader));
+
+                        reader.next();
+                    }
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "ReferenceCancelationDate").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ReferenceCancelationDate" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setReferenceCancelationDate(org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "ReferenceCreationDate").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ReferenceCreationDate" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setReferenceCreationDate(org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "ReferenceExpirationDate").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "The element: " + "ReferenceExpirationDate" +
+                            "  cannot be null");
+                    }
+
+                    java.lang.String content = reader.getElementText();
+
+                    object.setReferenceExpirationDate(org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(
+                            content));
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "ReferenceMovimientos").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if ("true".equals(nillableValue) ||
+                            "1".equals(nillableValue)) {
+                        object.setReferenceMovimientos(null);
+                        reader.next();
+
+                        reader.next();
+                    } else {
+                        object.setReferenceMovimientos(org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceMovimientosData.Factory.parse(
+                                reader));
+
+                        reader.next();
+                    }
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement() &&
+                        new javax.xml.namespace.QName(
+                            "http://schemas.datacontract.org/2004/07/WCFReferenceManager",
+                            "ReferenceStatus").equals(reader.getName())) {
+                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                            "nil");
+
+                    if (!"true".equals(nillableValue) &&
+                            !"1".equals(nillableValue)) {
+                        java.lang.String content = reader.getElementText();
+
+                        object.setReferenceStatus(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                content));
+                    } else {
+                        reader.getElementText(); // throw away text nodes if any.
+                    }
+
+                    reader.next();
+                } // End of if for expected property start element
+
+                else {
+                }
+
+                while (!reader.isStartElement() && !reader.isEndElement())
+                    reader.next();
+
+                if (reader.isStartElement()) {
+                    // A start element we are not expecting indicates a trailing invalid property
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Unexpected subelement " + reader.getName());
+                }
+            } catch (javax.xml.stream.XMLStreamException e) {
+                throw new java.lang.Exception(e);
+            }
+
+            return object;
+        }
+    } //end of factory class
+}

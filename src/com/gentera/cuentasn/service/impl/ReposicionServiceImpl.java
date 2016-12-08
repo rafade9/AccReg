@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.ReposicionService;
+import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 
 @Service
@@ -28,16 +29,32 @@ public class ReposicionServiceImpl implements ReposicionService{
 				respuesta = wsConnector.sendDataReposition(persona);
 			}
 			else{
-				String guid = "414e414c363230343932303731323136";
+				String guid = Util.createGUID(persona);
 				
 				//1. Validar referencia
-				Respuesta respuestaValidacion = wsConnector.validateReference(persona, guid);
+				if(!persona.getReferencia().isEmpty() && !persona.getFolio().isEmpty() && !persona.getFechaNacimiento().isEmpty()){
+				respuesta = wsConnector.validateReference(persona, guid);
 				
-				//2. Asignar plastico (si es correcto paso 1)
-				Respuesta respuestaAsignacion = wsConnector.assignCard(persona);
-				
-				//3. Commit a referencia (si es correcto paso 2)
-				Respuesta respuestaCommit = wsConnector.increaseReference(persona);
+				if(respuesta.getCodigo()==0){
+
+					//2. Asignar plastico (si es correcto paso 1)
+					respuesta = wsConnector.assignCard(persona);
+					
+					if(respuesta.getCodigo()==0){
+						//3. Commit a referencia (si es correcto paso 2)
+						respuesta = wsConnector.increaseReference(persona);
+					}else{
+						respuesta.setCodigo(99);
+					}
+					
+					
+					
+				}else{
+					respuesta.setCodigo(99);
+				}
+				}else{
+					respuesta.setCodigo(99);
+				}
 			}
 			
 		}catch(Exception e){

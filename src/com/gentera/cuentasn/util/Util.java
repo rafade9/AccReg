@@ -1,5 +1,7 @@
 package com.gentera.cuentasn.util;
 
+import java.math.BigInteger;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +13,26 @@ import java.util.TimeZone;
 import com.gentera.cuentasn.entities.Persona;
 
 public class Util {
+	
+	public static String createGUID(Persona cliente){
+		cliente.getFechaNacimiento().replaceAll("/", "");
+		
+		Calendar date = Calendar.getInstance();
+		DateFormat dateFormat = new SimpleDateFormat("ddMMyy");
+		System.out.println("date generada para GUID" + date.getTime());
+		String fecha = dateFormat.format(date.getTime());
+		String milis = String.valueOf(date.getTimeInMillis());
+		System.out.println("Crear cuenta implementacion");
+		String GUID = "";
+			   GUID =  cliente.getPrimerNombre().substring(0, 2);
+			   GUID += cliente.getPaterno().substring(0, 2);
+			   GUID += milis.substring(7, 13);
+			   GUID += fecha;
+			   
+			   GUID = String.format("%32x", new BigInteger(1, GUID.getBytes(/*YOUR_CHARSET?*/)));
+			   
+        return GUID;
+	}
 	
 	public static String convertToString(Date value){
 		Calendar calendar = Calendar.getInstance();

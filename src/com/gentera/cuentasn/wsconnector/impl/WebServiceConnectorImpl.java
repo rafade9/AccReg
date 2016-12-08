@@ -824,9 +824,21 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			test.setTestDataIndicator("X");
 			
 			
-			stub.increaseRequestReference(executeIncrease, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
-		}catch(Exception e){
+			org.tempuri.ExecuteResponse respon = stub.increaseRequestReference(executeIncrease, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
 			
+			respuesta.setCodigo(respon.getLog().getBusinessDocumentProcessingResultCode());
+			
+			if(respuesta.getCodigo()==0){
+				persona.setReferencia(respon.getExecuteResult().getReferenceNumber());
+				respuesta.setPersona(persona);
+			}else{
+				respuesta.setCodigo(99);
+			}
+			
+			
+		}catch(Exception e){
+			respuesta.setCodigo(99);
+			e.printStackTrace();
 		}
 		return respuesta;
 	}

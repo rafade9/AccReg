@@ -1,5 +1,6 @@
 package com.gentera.cuentasn.service.impl;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.ReposicionService;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
+import com.gentera.cuentasn.wsconnector.impl.WebServiceConnectorImpl;
 
 @Service
 public class ReposicionServiceImpl implements ReposicionService{
@@ -18,14 +20,28 @@ public class ReposicionServiceImpl implements ReposicionService{
 	@Autowired
 	WebServiceConnector wsConnector;
 	
+	/**
+	 * Variable reposicion
+	 */
+	final static String REPOSITION_STRING = "REPOSITION";
+	
+	/**
+	 * Variable asignacion
+	 */
+	final static String ASSIGN_STRING = "ASSIGN";
+	
+	/**
+	 * Variable log
+	 */
+	final static Logger logger = Logger.getLogger(WebServiceConnectorImpl.class);
+	
 	@Override
 	public Respuesta reposicion(Persona persona, String ip) throws Exception{
 		Respuesta respuesta = new Respuesta();
 		try{
 //			respuesta = wsConnector.sendData(persona, Util.convierteIpTerminaCero(ip));
-			Integer proceso = 1;
-			if(proceso == 1){ //Reposicion
-			
+			if(persona.getTipoReferencia().toUpperCase().equals(REPOSITION_STRING)){ //Reposicion
+				logger.info("Entra a proceso de reposicion");
 				respuesta = wsConnector.sendDataReposition(persona);
 			}
 			else{

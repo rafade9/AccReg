@@ -40,6 +40,7 @@ public class Persona implements Serializable{
 	private String numInterior;
 	private String folio;
 	private String referencia;
+	private String tipoReferencia;
 
 	/**
 	 * Getter TipoIdentificacion
@@ -423,6 +424,23 @@ public class Persona implements Serializable{
 	 */
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
+	}
+	
+	
+	/**
+	 * Getter TipoReferencia
+	 * @return
+	 */
+	public String getTipoReferencia() {
+		return tipoReferencia;
+	}
+
+	/**
+	 * Setter TipoReferencia
+	 * @param tipoReferencia
+	 */
+	public void setTipoReferencia(String tipoReferencia) {
+		this.tipoReferencia = tipoReferencia;
 	}
 
 	@Override

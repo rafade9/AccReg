@@ -606,119 +606,136 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	@Override
 	public Respuesta validateReference(Persona persona, String guid) throws Exception {
 		Respuesta respuesta = new Respuesta();
-		
-		/**
-		 * Endpoint
-		 */
-		String endPointRms = Properties.getProp("EndPointRMS");
-		
-		ReferenceManagerStub stub = new ReferenceManagerStub(endPointRms);
-		
-		//Timeout
-		stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutWS"))));
-		stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutWS"))));
-		
-		/**
-		 * FECHA DE CREACION - CreationDateTime
-		 */
-		CreationDateTime creationDateTime = new CreationDateTime();
-		creationDateTime.setCreationDateTime(Calendar.getInstance());
-		
-		/**
-		 * ID - ID
-		 */
-		ID id = new ID();
-		id.setID(guid); 
-		
-		/**
-		 * RECIPIENT BUSINESS SYSTEM - RecipientBusinessSystemID
-		 */
-		RecipientBusinessSystemID recipientBusinessSystemID = new RecipientBusinessSystemID();
-		recipientBusinessSystemID.setRecipientBusinessSystemID(Properties.getProp("recipient")); 
-		
-		/**
-		 * PERSONAS DE CONTACTO
-		 */
-		RecipientParty recipientParty = new RecipientParty();
-		
-		//Objeto que contiene array de contactos
-		ArrayOfContactPerson contactPersons = new ArrayOfContactPerson();
-		
-		//Array de contactos
-		ContactPerson[] contactPersonsArray = new ContactPerson[1];
-		
-		//Unico contacto
-		ContactPerson contactPerson = new ContactPerson();
-		contactPerson.setInternalID(Properties.getProp("internalId"));
-		contactPersonsArray[0] = contactPerson;
-		
-		contactPersons.setContactPerson(contactPersonsArray);
-		recipientParty.setRecipientParty(contactPersons);
-		
-		/**
-		 * REFERENCE ID
-		 */
-		ReferenceID referenceID = new ReferenceID();
-		referenceID.setReferenceID(guid); //32 HEX
-		
-		/**
-		 * REFERENCE UUID
-		 */
-		ReferenceUUID referenceUUID = new ReferenceUUID();
-		referenceUUID.setReferenceUUID(guid); //32 HEX
-		
-		/**
-		 * ORIGEN
-		 */
-		SenderBusinessSystemID senderBusinessSystemID = new SenderBusinessSystemID();
-		senderBusinessSystemID.setSenderBusinessSystemID(Properties.getProp("sender"));
-		
-		/**
-		 * 
-		 */
-		SenderParty senderParty = new SenderParty();
-		
-		//Objeto que contiene array de contactos
-//		ArrayOfContactPerson contactPersons2 = new ArrayOfContactPerson();
-		
-		senderParty.setSenderParty(contactPersons);
-		
-		//Objeto UUID - UUID
-		UUID uuid = new UUID();
-		uuid.setUUID(guid); //----GENERAR CODIGO 32 DIG HEX
-		
-		
-		TestDataIndicator test = new TestDataIndicator();
-		test.setTestDataIndicator("0"); //ENVIAR 0
-		
-		/*
-		 * DATA
-		 */
-		ExecuteValidate executeValidate = new ExecuteValidate();
-		org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteValidate param = new org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteValidate();
-		
-		//Tipo de referencia
-		param.setReferenceType(Properties.getProp("referenceType"));
-		//No. de Referencia
-		param.setReferenceNumber(persona.getReferencia());
-		//Atributos donde se envia la fecha de nacimiento
-		ArrayOfReferenceAttributeData attributesData = new ArrayOfReferenceAttributeData();
-		ReferenceAttributeData[] attributeData = new ReferenceAttributeData[1];
-		attributesData.setReferenceAttributeData(attributeData);
-
-		//BIRTHDATE: Dato de fecha de nacimiento
-		ReferenceAttributeData birthdate = new ReferenceAttributeData();
-		birthdate.setAttributeName("BIRTHDATE");
-		birthdate.setAttributeValue(persona.getFechaNacimiento());
-		attributeData[0] = birthdate;
-		
-		param.setReferenceAttributesData(attributesData);
-		
-		executeValidate.setExecuteValidate(param);
-		
-		org.tempuri.ExecuteResponse response = stub.validateRequestReference(executeValidate, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
-		logger.info("Respuesta RMS Validate: " + response.getLog().getBusinessDocumentProcessingResultCode());
-		respuesta.setCodigo(response.getLog().getBusinessDocumentProcessingResultCode());
+		try{
+			/**
+			 * Endpoint
+			 */
+			String endPointRms = Properties.getProp("EndPointRMS");
+			
+			ReferenceManagerStub stub = new ReferenceManagerStub(endPointRms);
+			
+			//Timeout
+			stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutWS"))));
+			stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutWS"))));
+			
+			/**
+			 * FECHA DE CREACION - CreationDateTime
+			 */
+			CreationDateTime creationDateTime = new CreationDateTime();
+			creationDateTime.setCreationDateTime(Calendar.getInstance());
+			
+			/**
+			 * ID - ID
+			 */
+			ID id = new ID();
+			id.setID(guid); 
+			
+			/**
+			 * RECIPIENT BUSINESS SYSTEM - RecipientBusinessSystemID
+			 */
+			RecipientBusinessSystemID recipientBusinessSystemID = new RecipientBusinessSystemID();
+			recipientBusinessSystemID.setRecipientBusinessSystemID(Properties.getProp("recipient")); 
+			
+			/**
+			 * PERSONAS DE CONTACTO
+			 */
+			RecipientParty recipientParty = new RecipientParty();
+			
+			//Objeto que contiene array de contactos
+			ArrayOfContactPerson contactPersons = new ArrayOfContactPerson();
+			
+			//Array de contactos
+			ContactPerson[] contactPersonsArray = new ContactPerson[1];
+			
+			//Unico contacto
+			ContactPerson contactPerson = new ContactPerson();
+			contactPerson.setInternalID(Properties.getProp("internalId"));
+			contactPersonsArray[0] = contactPerson;
+			
+			contactPersons.setContactPerson(contactPersonsArray);
+			recipientParty.setRecipientParty(contactPersons);
+			
+			/**
+			 * REFERENCE ID
+			 */
+			ReferenceID referenceID = new ReferenceID();
+			referenceID.setReferenceID(guid); //32 HEX
+			
+			/**
+			 * REFERENCE UUID
+			 */
+			ReferenceUUID referenceUUID = new ReferenceUUID();
+			referenceUUID.setReferenceUUID(guid); //32 HEX
+			
+			/**
+			 * ORIGEN
+			 */
+			SenderBusinessSystemID senderBusinessSystemID = new SenderBusinessSystemID();
+			senderBusinessSystemID.setSenderBusinessSystemID(Properties.getProp("sender"));
+			
+			/**
+			 * 
+			 */
+			SenderParty senderParty = new SenderParty();
+			
+			//Objeto que contiene array de contactos
+	//		ArrayOfContactPerson contactPersons2 = new ArrayOfContactPerson();
+			
+			senderParty.setSenderParty(contactPersons);
+			
+			//Objeto UUID - UUID
+			UUID uuid = new UUID();
+			uuid.setUUID(guid); //----GENERAR CODIGO 32 DIG HEX
+			
+			
+			TestDataIndicator test = new TestDataIndicator();
+			test.setTestDataIndicator("0"); //ENVIAR 0
+			
+			/*
+			 * DATA
+			 */
+			ExecuteValidate executeValidate = new ExecuteValidate();
+			org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteValidate param = new org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteValidate();
+			
+			//Tipo de referencia
+			param.setReferenceType(Properties.getProp("referenceType"));
+			//No. de Referencia
+			param.setReferenceNumber(persona.getReferencia());
+			//Atributos donde se envia la fecha de nacimiento
+			ArrayOfReferenceAttributeData attributesData = new ArrayOfReferenceAttributeData();
+			ReferenceAttributeData[] attributeData = new ReferenceAttributeData[1];
+			attributesData.setReferenceAttributeData(attributeData);
+	
+			//BIRTHDATE: Dato de fecha de nacimiento
+			ReferenceAttributeData birthdate = new ReferenceAttributeData();
+			birthdate.setAttributeName("BIRTHDATE");
+			birthdate.setAttributeValue(persona.getFechaNacimiento());
+			attributeData[0] = birthdate;
+			
+			param.setReferenceAttributesData(attributesData);
+			
+			executeValidate.setExecuteValidate(param);
+			
+			org.tempuri.ExecuteResponse response = stub.validateRequestReference(executeValidate, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
+			logger.info("Respuesta RMS Validate: " + response.getLog().getBusinessDocumentProcessingResultCode());
+			respuesta.setCodigo(response.getLog().getBusinessDocumentProcessingResultCode());
+			respuesta.setMensaje(response.getLog().getItem().getNote());
+			
+		}catch (AxisFault e) {
+			logger.error("REPOSICION. Error AxisFault " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
+			throw new Exception(e);
+		} catch (RemoteException e) {
+			logger.error("REPOSICION. Error Remote " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
+			throw new Exception(e);
+		} catch(Exception e){
+			logger.error("REPOSICION. Error general" + e);
+			e.printStackTrace();
+			throw new Exception(e);
+		}
 		
 		return respuesta;
 	}
@@ -836,10 +853,22 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 			
 			
-		}catch(Exception e){
+		}catch (AxisFault e) {
+			logger.error("REPOSICION. Error AxisFault " + e);
 			respuesta.setCodigo(99);
 			e.printStackTrace();
+			throw new Exception(e);
+		} catch (RemoteException e) {
+			logger.error("REPOSICION. Error Remote " + e);
+			respuesta.setCodigo(99);
+			e.printStackTrace();
+			throw new Exception(e);
+		} catch(Exception e){
+			logger.error("REPOSICION. Error general" + e);
+			e.printStackTrace();
+			throw new Exception(e);
 		}
+		
 		return respuesta;
 	}
 

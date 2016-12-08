@@ -24,8 +24,8 @@ public class Util {
 		String milis = String.valueOf(date.getTimeInMillis());
 		System.out.println("Crear cuenta implementacion");
 		String GUID = "";
-			   GUID =  cliente.getPrimerNombre().substring(0, 2);
-			   GUID += cliente.getPaterno().substring(0, 2);
+			   GUID =  cliente.getFechaNacimiento().substring(0, 2);
+			   GUID += cliente.getReferencia().substring(0, 2);
 			   GUID += milis.substring(7, 13);
 			   GUID += fecha;
 			   

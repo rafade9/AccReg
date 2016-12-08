@@ -59,5 +59,5 @@ public interface WebServiceConnector {
 	 * @return
 	 * @throws Exception
 	 */
-	public Respuesta assignCard(Persona persona) throws Exception;
+	public Respuesta assignCard(Persona persona, String bp, String account) throws Exception;
 }

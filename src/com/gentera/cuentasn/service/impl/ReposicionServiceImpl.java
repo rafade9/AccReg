@@ -45,16 +45,16 @@ public class ReposicionServiceImpl implements ReposicionService{
 				respuesta = wsConnector.sendDataReposition(persona);
 			}
 			else{
-				String guid = Util.createGUID(persona);
-				
 				//1. Validar referencia
 				if(!persona.getReferencia().isEmpty() && !persona.getFolio().isEmpty() && !persona.getFechaNacimiento().isEmpty()){
-				respuesta = wsConnector.validateReference(persona, guid);
+					String guid = Util.createGUID(persona);
+					respuesta = wsConnector.validateReference(persona, guid);
 				
 				if(respuesta.getCodigo()==0){
-
 					//2. Asignar plastico (si es correcto paso 1)
-					respuesta = wsConnector.assignCard(persona);
+					String bp = respuesta.getIdBP();
+					String account = respuesta.getCuenta();
+					respuesta = wsConnector.assignCard(persona, bp, account);
 					
 					if(respuesta.getCodigo()==0){
 						//3. Commit a referencia (si es correcto paso 2)

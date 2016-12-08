@@ -8,14 +8,40 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import mx.com.gentera.crm.level2accountmanage.int_0133.BusinessPartnerCreateLevel2AccountData;
+import mx.com.gentera.crm.level2accountmanage.int_0133.DT_Level2AccountCreationReq_sync;
+import mx.com.gentera.crm.level2accountmanage.int_0133.ExchangeFaultData;
+import mx.com.gentera.crm.level2accountmanage.int_0133.Identifiers;
+import mx.com.gentera.crm.level2accountmanage.int_0133.Level2AccountCreationData;
+import mx.com.gentera.crm.level2accountmanage.int_0133.SI_LEVEL2ACCOUNTMANAGESYStub;
+import mx.com.gentera.global.MT_Level2AccountCreationReq_sync;
+import mx.com.gentera.global.MT_Level2AccountCreationResp_sync;
+
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
 import org.apache.axis2.transport.http.HTTPConstants;
 import org.apache.axis2.transport.http.HttpTransportProperties;
 import org.apache.log4j.Logger;
+import org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfContactPerson;
+import org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData;
+import org.datacontract.schemas._2004._07.wcfreferencemanager.ContactPerson;
+import org.datacontract.schemas._2004._07.wcfreferencemanager.ReferenceAttributeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.tempuri.CreationDateTime;
+import org.tempuri.ExecuteIncrease;
+import org.tempuri.ExecuteValidate;
+import org.tempuri.ID;
+import org.tempuri.RecipientBusinessSystemID;
+import org.tempuri.RecipientParty;
+import org.tempuri.ReferenceID;
+import org.tempuri.ReferenceManagerStub;
+import org.tempuri.ReferenceUUID;
+import org.tempuri.SenderBusinessSystemID;
+import org.tempuri.SenderParty;
+import org.tempuri.TestDataIndicator;
+import org.tempuri.UUID;
 
 import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub;
 import com.compartamos.cm.cardmanagement.de_oa_i_104.CMS_AccountAsignRequestStub.Execute;
@@ -52,35 +78,7 @@ import com.gentera.cuentasn.entities.Usuario;
 import com.gentera.cuentasn.service.LeerCatalogos;
 import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
-import org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData;
-import org.datacontract.schemas._2004._07.wcfreferencemanager.ReferenceAttributeData;
-
-import org.tempuri.CreationDateTime;
-import org.tempuri.ExecuteIncrease;
-import org.tempuri.ID;
-import org.tempuri.RecipientBusinessSystemID;
-import org.tempuri.RecipientParty;
-import org.tempuri.ReferenceID;
-import org.tempuri.ReferenceUUID;
-import org.tempuri.SenderBusinessSystemID;
-import org.tempuri.SenderParty;
-import org.tempuri.TestDataIndicator;
-import org.tempuri.UUID;
-import org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfContactPerson;
-import org.datacontract.schemas._2004._07.wcfreferencemanager.ContactPerson;
-
-import org.tempuri.ExecuteValidate;
-import org.tempuri.ReferenceManagerStub;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
-
-import mx.com.gentera.crm.level2accountmanage.int_0133.BusinessPartnerCreateLevel2AccountData;
-import mx.com.gentera.crm.level2accountmanage.int_0133.DT_Level2AccountCreationReq_sync;
-import mx.com.gentera.crm.level2accountmanage.int_0133.ExchangeFaultData;
-import mx.com.gentera.crm.level2accountmanage.int_0133.Identifiers;
-import mx.com.gentera.crm.level2accountmanage.int_0133.Level2AccountCreationData;
-import mx.com.gentera.crm.level2accountmanage.int_0133.SI_LEVEL2ACCOUNTMANAGESYStub;
-import mx.com.gentera.global.MT_Level2AccountCreationReq_sync;
-import mx.com.gentera.global.MT_Level2AccountCreationResp_sync;
 
 /**
  * Clase que implementa WebServiceConnector para el consumo de Servicios Web
@@ -876,8 +874,53 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#assignCard(com.gentera.cuentasn.entities.Persona)
 	 */
 	@Override
-	public Respuesta assignCard(Persona persona) throws Exception {
-		// TODO Auto-generated method stub
+	public Respuesta assignCard(Persona persona, String bp, String account) throws Exception {
+		Respuesta respuesta = new Respuesta();
+		
+		try{
+			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub();
+			Execute execute0 = new Execute();
+			
+			String cardID = persona.getFolio();
+			String cardProductID = Properties.getProp("cardProductID");
+			String cardholderParty = bp;
+			String cardType = Properties.getProp("cardType");
+			String accountID = account;
+			String correncyCode = Properties.getProp("correncyCode");
+			String routingID = Properties.getProp("routingID");
+			String countryCode = Properties.getProp("countryCode");
+			String userID = Properties.getProp("userID");
+			String externalUser = Properties.getProp("UserCardManagerReposition");
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Calendar calendar = Calendar.getInstance();
+			String date = dateFormat.format(calendar.getTime());
+			String aditionalData = date;
+			
+			execute0.setCardID(cardID);
+			execute0.setBankCardProductID(cardProductID);
+			execute0.setBankCardCardHolderParty(cardholderParty);
+			execute0.setBankCardCardType(cardType);
+			execute0.setBankAccountID(accountID);
+			execute0.setBankAccountCurrencyCode(correncyCode);
+			execute0.setBankRoutingID(routingID);
+			execute0.setBankCountryCode(countryCode);
+			execute0.setCMSUserId(userID);
+			execute0.setExternalUser(externalUser);
+			execute0.setAditionalData(aditionalData);
+			
+			//Ejecuta el metodo de asignacion.			
+			stub.execute(execute0);
+			logger.info("Se realizo asignacion de la tarjeta, Metodo assignCard.");
+			
+		}catch(Exception e){
+			respuesta.setCodigo(99);
+			logger.info("Exception codigo 99 ");
+			e.printStackTrace();
+		}
+		persona.getFolio();
+		bp = "";
+		account = "";
 		return null;
 		
 		

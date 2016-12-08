@@ -1,3 +1,20 @@
+//funcion de validacion para radio asignacion y reposicion
+			var mensajeIdentificacion = "Por favor, proporciona el numero de identificacion correcto.<a href='#' class='close' data-dismiss='alert'>×</a>";
+	        $.validator.addMethod("identificacion",
+	                   function(value, element) {
+	        	var patron = "";
+	                                   if($("#pasaporte")[0].checked){
+	                                	   $("#numeroIdentificacion").pattern = "[a-zA-Z0-9]{9}";
+	                                	   	patron = "[a-zA-Z0-9]{9}";
+	                                	   mensajeIdentificacion = "Por favor, proporciona el numero de Pasaporte correcto.<a href='#' class='close' data-dismiss='alert'>×</a>";
+	                                   }else{
+	                                	   patron = "[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}(([0-3]{1}[0-9]{1})|87|88)[h-m|H-M]{1}[0-9]{3}";
+	                                	   $("#numeroIdentificacion").pattern = "[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}(([0-3]{1}[0-9]{1})|87|88)[h-m|H-M]{1}[0-9]{3}";
+	                                   }
+	                      return value.match(patron,'');
+	               },
+	        mensajeIdentificacion);
+	        
 //Js para el JSP registroYastas
 //Fecha 22/01/2016
 //Mara Vazquez

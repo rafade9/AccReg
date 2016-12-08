@@ -1,3 +1,78 @@
+//funcion de validacion para radio asignacion y reposicion
+			var mensajeIdentificacion = "Por favor, proporciona el numero de Referencia correcto.";
+	        $.validator.addMethod("radioReferencia",
+	                   function(value, element) {
+	        	var patron = "";
+	                                   if($("#reposicion")[0].checked){
+	                                	   $("#referenciaConf").pattern = "[a-zA-Z0-9]{10}";
+	                                	   	patron = "[a-zA-Z0-9]{9}";
+	                                	   mensajeIdentificacion = "Por favor, proporciona el numero de Reposicion correcto.";
+	                                	   if(value.match(patron,'')){return true;}else{return false;}
+	                                   }else{
+
+	                   					var referencia=$("#referencia").val();
+	                   					var validacion = referencia.substring(4,14);
+	                    
+	                   						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) <= 12){
+	                   							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
+	                   								if(parseInt(validacion.substring(2,4)) <= 30){
+	                   									if(parseInt(validacion.substring(4,6)) <= 23 ){
+	                   										if(parseInt(validacion.substring(6,8)) > 59 ){
+	                   											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   											return false;
+	                   										}
+	                   									}else{
+	                   										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   										return false;
+	                   									}
+	                   								}else{
+	                   									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   									return false;
+	                   								}
+	                   							}else if(parseInt(validacion.substring(0,2)) == 2){//febrero
+	                   								if(parseInt(validacion.substring(2,4)) <= 28){//dia
+	                   									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
+	                   										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
+	                   											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   											return false;
+	                   										}
+	                   									}else{
+	                   										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   										return false;
+	                   									}
+	                   								}else{
+	                   									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   									return false;
+	                   								}
+	                   									
+	                   							}else{
+	                   								if(parseInt(validacion.substring(2,4)) <= 31){//dia
+	                   									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
+	                   										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
+	                   											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   											return false;
+	                   										}
+	                   									}else{
+	                   										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   										return false;
+	                   									}
+	                   								}else{
+	                   									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   									return false;
+	                   								}
+	                   							}
+	                   							
+	                   						}else{
+	                   							$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+	                   							return false;
+	                   						}
+
+	                   					return true;
+	                                   }
+	                      return true;
+	               },
+	        mensajeIdentificacion);
+	        
 //Js para el JSP registroCompartamos
 //Fecha 06/05/2016
 //Mara Vazquez
@@ -47,7 +122,7 @@ $(document).ready(function(){
 	    	referencia: {
 	    		required: true,
 	    		minlength: 18,
-	    		validaReferencia:true
+	    		radioReferencia:true
 	          },
 	        referenciaConf: {
 	          required: true,
@@ -263,64 +338,6 @@ $(document).ready(function(){
 		
 		$.validator.addMethod("validaReferencia",
 				function(value, element) {
-					var referencia=$("#referencia").val();
-					var validacion = referencia.substring(4,14);
- 
-						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) <= 12){
-							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
-								if(parseInt(validacion.substring(2,4)) <= 30){
-									if(parseInt(validacion.substring(4,6)) <= 23 ){
-										if(parseInt(validacion.substring(6,8)) > 59 ){
-											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-											return false;
-										}
-									}else{
-										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-										return false;
-									}
-								}else{
-									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-									return false;
-								}
-							}else if(parseInt(validacion.substring(0,2)) == 2){//febrero
-								if(parseInt(validacion.substring(2,4)) <= 28){//dia
-									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
-										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
-											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-											return false;
-										}
-									}else{
-										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-										return false;
-									}
-								}else{
-									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-									return false;
-								}
-									
-							}else{
-								if(parseInt(validacion.substring(2,4)) <= 31){//dia
-									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
-										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
-											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-											return false;
-										}
-									}else{
-										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-										return false;
-									}
-								}else{
-									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-									return false;
-								}
-							}
-							
-						}else{
-							$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-							return false;
-						}
-
-					return true;
 				});
 		
 });

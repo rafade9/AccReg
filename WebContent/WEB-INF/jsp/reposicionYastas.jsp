@@ -35,8 +35,8 @@
 		<form id="formulario" action="" novalidate>
 				<div id="seccionReferencia" style='display:block;'>
 					<label class="texGris09_13">Tipo de referencia * </label>
-					<label class="texGris09_13"><input type="radio" name="tipoReferencia" id="reposition" value="reposition" class="inputRadio bloqueado" checked>Reposición</label>
-					<label class="texGris09_13"><input type="radio" name="tipoReferencia" id="assign" value="assign" class="inputRadio bloqueado">Asignación</label><br>
+					<label class="texGris09_13"><input onclick="radioReposicion()" type="radio" name="tipoIdentificacion" id="reposicion" value="reposition" class="inputRadio bloqueado" checked>Reposición</label>
+					<label class="texGris09_13"><input onclick="radioAsignacion()" type="radio" name="tipoIdentificacion" id="asignación" value="assign" class="inputRadio bloqueado">Asignación</label><br>
 					<label class="texGris09_13">Referencia * </label><input type="text" id="referencia" name="referencia" class=" texGris09_13 inputText" maxlength="18">
 					<label id= "errorcontainer-referencia"></label><br>
 					<div class="clear"> </div>

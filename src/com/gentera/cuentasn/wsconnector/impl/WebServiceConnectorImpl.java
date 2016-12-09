@@ -196,14 +196,15 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				
 				logger.info("ORIGINACION. Sucursal No. " + numPlaza);
 				officeId.setOrganisationalCentreID(new Token(numPlaza));
+				identifiers.setBusinessPartnerID(bpEmpleado);
 			}
 			
 			else{
 				
 				Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
 				
-				numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
-				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
+//				numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
+//				bpEmpleado.setBusinessPartnerInternalID(new Token(numEmpleado));
 				
 				numPlaza = usuario.getNumOficina();
 				officeId.setOrganisationalCentreID(new Token(numPlaza));
@@ -211,7 +212,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			}
 			
 			identifiers.setServiceOfficeID(officeId);
-			identifiers.setBusinessPartnerID(bpEmpleado);
+//			identifiers.setBusinessPartnerID(bpEmpleado);
 
 			// ID Comercio --- Propio
 			CommercelD commerce = new CommercelD();
@@ -365,7 +366,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			addressData.setStreetPostalCode(pc);
 			// Pais
 			pais.setLANGUAGEINDEPENDENT_MEDIUM_Name("MX");
-			addressData.setCountryName(pais);
+			addressData.setCountryCode(pais);
 			// Estado
 			RegionCode regionCode = new RegionCode();
 			regionCode.setRegionCode(new Token(persona.getEstado()));

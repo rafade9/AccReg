@@ -29,6 +29,12 @@ public class Identifiers implements org.apache.axis2.databinding.ADBBean {
      * field for BusinessPartnerID
      */
     protected com.compartamos.common.gdt.BusinessPartnerInternalID localBusinessPartnerID;
+    
+    /*  This tracker boolean wil be used to detect whether the user called the set method
+     *   for this attribute. It will be used to determine whether to include this field
+     *   in the serialized XML
+     */
+    protected boolean localBusinessPartnerIDTracker = false;
 
     /**
      * field for CommerceID
@@ -56,6 +62,10 @@ public class Identifiers implements org.apache.axis2.databinding.ADBBean {
         com.compartamos.common.gdt.OrganisationalCentreID param) {
         this.localServiceOfficeID = param;
     }
+    
+    public boolean isBusinessPartnerIDSpecified() {
+        return localBusinessPartnerIDTracker;
+    }
 
     /**
      * Auto generated getter method
@@ -71,6 +81,8 @@ public class Identifiers implements org.apache.axis2.databinding.ADBBean {
      */
     public void setBusinessPartnerID(
         com.compartamos.common.gdt.BusinessPartnerInternalID param) {
+    	localBusinessPartnerIDTracker = param != null;
+    	
         this.localBusinessPartnerID = param;
     }
 
@@ -165,13 +177,16 @@ public class Identifiers implements org.apache.axis2.databinding.ADBBean {
         localServiceOfficeID.serialize(new javax.xml.namespace.QName("",
                 "ServiceOfficeID"), xmlWriter);
 
-        if (localBusinessPartnerID == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "BusinessPartnerID cannot be null!!");
+        if (localBusinessPartnerIDTracker) {
+	        if (localBusinessPartnerID == null) {
+	            throw new org.apache.axis2.databinding.ADBException(
+	                "BusinessPartnerID cannot be null!!");
+	            
+	        }
+	
+	        localBusinessPartnerID.serialize(new javax.xml.namespace.QName("",
+	                "BusinessPartnerID"), xmlWriter);
         }
-
-        localBusinessPartnerID.serialize(new javax.xml.namespace.QName("",
-                "BusinessPartnerID"), xmlWriter);
 
         if (localCommerceID == null) {
             throw new org.apache.axis2.databinding.ADBException(
@@ -410,14 +425,18 @@ public class Identifiers implements org.apache.axis2.databinding.ADBBean {
 
         elementList.add(localServiceOfficeID);
 
-        elementList.add(new javax.xml.namespace.QName("", "BusinessPartnerID"));
+        if (localBusinessPartnerIDTracker) {
+        	elementList.add(new javax.xml.namespace.QName("", 
+        			"BusinessPartnerID"));
 
-        if (localBusinessPartnerID == null) {
-            throw new org.apache.axis2.databinding.ADBException(
-                "BusinessPartnerID cannot be null!!");
+	        if (localBusinessPartnerID == null) {
+	            throw new org.apache.axis2.databinding.ADBException(
+	                "BusinessPartnerID cannot be null!!");
+	            
+	        }
+
+	        elementList.add(localBusinessPartnerID);
         }
-
-        elementList.add(localBusinessPartnerID);
 
         elementList.add(new javax.xml.namespace.QName("", "CommerceID"));
 

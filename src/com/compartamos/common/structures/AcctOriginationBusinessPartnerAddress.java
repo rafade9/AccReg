@@ -31,9 +31,9 @@ public class AcctOriginationBusinessPartnerAddress implements org.apache.axis2.d
     protected com.compartamos.common.gdt.StreetName localStreetName;
 
     /**
-     * field for CountryName
+     * field for CountryCode
      */
-    protected com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name localCountryName;
+    protected com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name localCountryCode;
 
     /**
      * field for RegionCode
@@ -113,17 +113,17 @@ public class AcctOriginationBusinessPartnerAddress implements org.apache.axis2.d
      * Auto generated getter method
      * @return com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name
      */
-    public com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name getCountryName() {
-        return localCountryName;
+    public com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name getCountryCode() {
+        return localCountryCode;
     }
 
     /**
      * Auto generated setter method
-     * @param param CountryName
+     * @param param CountryCode
      */
-    public void setCountryName(
+    public void setCountryCode(
         com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name param) {
-        this.localCountryName = param;
+        this.localCountryCode = param;
     }
 
     /**
@@ -315,13 +315,13 @@ public class AcctOriginationBusinessPartnerAddress implements org.apache.axis2.d
         localStreetName.serialize(new javax.xml.namespace.QName("", "StreetName"),
             xmlWriter);
 
-        if (localCountryName == null) {
+        if (localCountryCode == null) {
             throw new org.apache.axis2.databinding.ADBException(
-                "CountryName cannot be null!!");
+                "CountryCode cannot be null!!");
         }
 
-        localCountryName.serialize(new javax.xml.namespace.QName("",
-                "CountryName"), xmlWriter);
+        localCountryCode.serialize(new javax.xml.namespace.QName("",
+                "CountryCode"), xmlWriter);
 
         if (localRegionCode == null) {
             throw new org.apache.axis2.databinding.ADBException(
@@ -610,14 +610,14 @@ public class AcctOriginationBusinessPartnerAddress implements org.apache.axis2.d
 
         elementList.add(localStreetName);
 
-        elementList.add(new javax.xml.namespace.QName("", "CountryName"));
+        elementList.add(new javax.xml.namespace.QName("", "CountryCode"));
 
-        if (localCountryName == null) {
+        if (localCountryCode == null) {
             throw new org.apache.axis2.databinding.ADBException(
                 "CountryName cannot be null!!");
         }
 
-        elementList.add(localCountryName);
+        elementList.add(localCountryCode);
 
         elementList.add(new javax.xml.namespace.QName("", "RegionCode"));
 
@@ -789,9 +789,9 @@ public class AcctOriginationBusinessPartnerAddress implements org.apache.axis2.d
                     reader.next();
 
                 if (reader.isStartElement() &&
-                        new javax.xml.namespace.QName("", "CountryName").equals(
+                        new javax.xml.namespace.QName("", "CountryCode").equals(
                             reader.getName())) {
-                    object.setCountryName(com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name.Factory.parse(
+                    object.setCountryCode(com.compartamos.common.gdt.LANGUAGEINDEPENDENT_MEDIUM_Name.Factory.parse(
                             reader));
 
                     reader.next();

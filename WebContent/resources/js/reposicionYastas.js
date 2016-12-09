@@ -202,6 +202,7 @@ $(document).ready(function(){
 	    	Persona['folio'] =  $("#folio").val();
 	    	Persona['referencia'] =  $("#referencia").val();
 	    	Persona['fechaNacimiento'] =  $("#fechaNacimiento").val();
+	    	Persona['tipoReferencia'] = $('input:radio[name=tipoReferencia]:checked').val();
      	    	
             $.ajax({
                 method: 'POST',

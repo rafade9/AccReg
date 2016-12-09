@@ -911,8 +911,19 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			execute0.setAditionalData(aditionalData);
 			
 			//Ejecuta el metodo de asignacion.			
-			stub.execute(execute0);
-			logger.info("Se realizo asignacion de la tarjeta, Metodo assignCard.");
+			ExecuteResponse respon = stub.execute(execute0);
+			
+			int rcCode = (int) respon.getExecuteResult().getRCCode();
+			respuesta.setCodigo(rcCode);
+			
+			if(respuesta.getCodigo()==5){
+				respuesta.setCodigo(0);
+				logger.info("Se realizo asignacion de la tarjeta, Metodo assignCard.");	
+			}else if(respuesta.getCodigo()==3){
+				respuesta.setCodigo(3);
+				logger.info("No se realizo la asignacion de la tarjeta, " + respon.getExecuteResult().getRCDescription());
+			}
+			
 			
 		}catch(Exception e){
 			respuesta.setCodigo(99);
@@ -920,9 +931,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			e.printStackTrace();
 		}
 		persona.getFolio();
-		bp = "";
-		account = "";
-		return null;
+		
+		
+		return respuesta;
 		
 		
 		

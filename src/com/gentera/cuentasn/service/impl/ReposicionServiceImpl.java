@@ -45,11 +45,12 @@ public class ReposicionServiceImpl implements ReposicionService{
 				respuesta = wsConnector.sendDataReposition(persona);
 			}
 			else{
+				logger.info("Entra a proceso de reasignacion");
 				//1. Validar referencia
 				if(!persona.getReferencia().isEmpty() && !persona.getFolio().isEmpty() && !persona.getFechaNacimiento().isEmpty()){
 					String guid = Util.createGUID(persona);
 					respuesta = wsConnector.validateReference(persona, guid);
-				
+					respuesta.setCodigo(0);
 				if(respuesta.getCodigo()==0){
 					//2. Asignar plastico (si es correcto paso 1)
 					String bp = respuesta.getIdBP();
@@ -64,7 +65,7 @@ public class ReposicionServiceImpl implements ReposicionService{
 					}
 					
 					
-					
+					logger.info("Finaliza el proceso de reposicion, correctamente.");
 				}else{
 					respuesta.setCodigo(99);
 				}

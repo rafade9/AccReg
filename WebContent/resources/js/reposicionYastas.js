@@ -1,21 +1,47 @@
-//funcion que cambia el maxleght segun el radio eliga validacion de ife(18 digitos) o pasaportes(9 digitos)
-function radioAsignacion(){
-	 $("#referencia").attr('maxlength','18');
-	 $("#referencia").attr("placeholder", "Referencia...");
-	 
-	 $("#referenciaConf").attr('maxlength','18');
-	 $("#referenciaConf").attr("placeholder", "Referencia...");
-}
-//maximo length sera 9
-function radioReposicion(){
-	 $("#referenciaConf").attr('maxlength','10');
-	 $("#referenciaConf").attr("placeholder", "Reposicion No...");
-	 $("#referenciaConf").pattern = "[a-zA-Z0-9]{10}";
-	 
-	 $("#referencia").attr('maxlength','10');
-	 $("#referencia").attr("placeholder", "Reposicion No...");
-	 $("#referencia").pattern = "[a-zA-Z0-9]{10}";
-}
+  var onlyNumber = false;
+//solo numeros
+  if(onlyNumber){
+	  console.log("onynumber ", onlyNumber);
+
+  }
+  
+	//funcion que cambia el maxleght segun el radio eliga validacion de ife(18 digitos) o pasaportes(9 digitos)
+	function radioAsignacion(){
+		 $("#referencia").attr('maxlength','18');
+		 $("#referencia").attr("placeholder", "Referencia...");
+		 
+		 $("#referenciaConf").attr('maxlength','18');
+		 $("#referenciaConf").attr("placeholder", "Referencia...");
+		 //add class inputText 
+		 onlyNumber=true;
+		  $("#referencia, #referenciaConf").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				  // Permite: Ctrl+A
+				  (e.keyCode == 65 && e.ctrlKey === true) ||
+				  // Permite: home, end, left, right
+				  (e.keyCode >= 35 && e.keyCode <= 39) && e.keyCode !== 190 && e.keyCode !== 186 && e.keyCode !== 187) {
+			  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+		  	}
+	  });
+	}
+	//maximo length sera 9
+	function radioReposicion(){
+		onlyNumber=false;
+		 $("#referenciaConf").attr('maxlength','10');
+		 $("#referenciaConf").attr("placeholder", "Reposicion No...");
+		 $("#referenciaConf").pattern = "[a-zA-Z0-9]{10}";
+		 
+		 $("#referencia").attr('maxlength','10');
+		 $("#referencia").attr("placeholder", "Reposicion No...");
+		 $("#referencia").pattern = "[a-zA-Z0-9]{10}";
+		 
+		 $("#referencia, #referenciaConf").off("keydown", null);
+	}
 
 //funcion de validacion para radio asignacion y reposicion
 			var mensajeIdentificacion = "Por favor, proporciona el numero de Referencia correcto.";
@@ -261,7 +287,7 @@ $(document).ready(function(){
 	
 //solo numeros
 	  
-	  $("#folio, #referencia, #referenciaConf").keydown(function (e) {
+	  $("#folio").keydown(function (e) {
 			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				  // Permite: Ctrl+A
 				  (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -275,8 +301,11 @@ $(document).ready(function(){
 				  e.preventDefault();
 		  	}
 	  });
+	
 	  
+	
 	  
+
 	//Funcion que enmascara el campo de fecha
 		$(function($){
 			$("#fechaNacimiento").mask("99/99/9999");

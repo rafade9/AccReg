@@ -696,6 +696,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			ExecuteValidate executeValidate = new ExecuteValidate();
 			org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteValidate param = new org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteValidate();
 			
+			
 			//Tipo de referencia
 			param.setReferenceType(Properties.getProp("referenceType"));
 			//No. de Referencia
@@ -719,6 +720,27 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			logger.info("Respuesta RMS Validate: " + response.getLog().getBusinessDocumentProcessingResultCode());
 			respuesta.setCodigo(response.getLog().getBusinessDocumentProcessingResultCode());
 			respuesta.setMensaje(response.getLog().getItem().getNote());
+			
+			
+			if(respuesta.getCodigo()==0){
+				ArrayOfReferenceAttributeData atributos = response.getExecuteResult().getReferenceData().getReferenceAttributesData();
+                
+                ReferenceAttributeData[] atributosAA = atributos.getReferenceAttributeData();
+                
+                
+                for(ReferenceAttributeData at: atributosAA){
+                       if(at.getAttributeName().toUpperCase().equals("BP")){
+                              respuesta.setIdBP(at.getAttributeValue());
+                       }
+                       
+                       if(at.getAttributeName().toUpperCase().equals("ACCOUNT")){
+                    	   respuesta.setCuenta(at.getAttributeValue());
+                       }
+                }
+			}else{
+				respuesta.setCodigo(99);
+			}
+			
 			
 		}catch (AxisFault e) {
 			logger.error("REPOSICION. Error AxisFault " + e);
@@ -879,7 +901,19 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 		Respuesta respuesta = new Respuesta();
 		
 		try{
-			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub();
+			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub(endPointCardManagerReposition);
+
+			// Se configura autenticación
+			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
+			ba.setUsername(Properties.getProp("UserCardManagerReposition"));
+			ba.setPassword(Properties.getProp("PasswordCardManagerReposition"));
+			
+			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
+					Boolean.FALSE);
+			stub._getServiceClient().getOptions()
+					.setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
+			
+			
 			Execute execute0 = new Execute();
 			
 			String cardID = persona.getFolio();

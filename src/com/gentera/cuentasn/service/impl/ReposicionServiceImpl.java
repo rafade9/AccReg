@@ -50,6 +50,7 @@ public class ReposicionServiceImpl implements ReposicionService{
 				if(!persona.getReferencia().isEmpty() && !persona.getFolio().isEmpty() && !persona.getFechaNacimiento().isEmpty()){
 					String guid = Util.createGUID(persona);
 					respuesta = wsConnector.validateReference(persona, guid);
+					logger.info("Se valida la referecia y responde "+ respuesta.getCodigo());
 					respuesta.setCodigo(0);
 				if(respuesta.getCodigo()==0){
 					//2. Asignar plastico (si es correcto paso 1)

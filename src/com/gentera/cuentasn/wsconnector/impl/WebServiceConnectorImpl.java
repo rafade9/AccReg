@@ -221,8 +221,13 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 
 			// ID Origen ---
 			PartyID origin = new PartyID();
-			origin.setPartyIDContent(new Token("Z06")); // Yastas
+			if(origen.equals("compartamos")){
+				origin.setPartyIDContent(new Token("Z06")); // Yastas, compartamos ZO7
+			}else{
+				origin.setPartyIDContent(new Token("Z07")); // Yastas, compartamos ZO7
+			}
 			identifiers.setOriginID(origin);
+			
 
 			data.setIdentifiers(identifiers);
 

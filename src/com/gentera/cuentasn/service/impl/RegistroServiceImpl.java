@@ -109,7 +109,7 @@ public class RegistroServiceImpl implements RegistroService {
 				else{
 					
 					
-					msj = "Se ha detectado un error: \n \n CRM ha devuelto Code " + respuesta.getCodigo() 
+					msj = "Se ha detectado un error: \n \n CardManager ha devuelto Code " + respuesta.getCodigo() 
 							+ "\n \n Mensaje: " + respuesta.getMensaje()
 							+ "\n \n ---------DATOS DE ORIGINACION----------- \n \n"
 							+ "\n Usuario: " + user.getUsername()

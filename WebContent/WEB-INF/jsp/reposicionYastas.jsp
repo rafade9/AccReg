@@ -37,10 +37,10 @@
 					<label class="texGris09_13">Tipo de referencia * </label>
 					<label class="texGris09_13"><input onclick="radioReposicion()" type="radio" name="tipoReferencia" id="reposicion" value="assign" class="inputRadio bloqueado" checked>Asignación</label>
 					<label class="texGris09_13"><input onclick="radioAsignacion()" type="radio" name="tipoReferencia" id="asignación" value="reposition" class="inputRadio bloqueado">Reposición</label><br>
-					<label class="texGris09_13">Referencia * </label><input type="text" id="referencia" name="referencia" class=" texGris09_13 inputText" maxlength="8">
+					<label class="texGris09_13">Referencia * </label><input type="text" id="referencia" name="referencia" class=" texGris09_13 inputText" maxlength="10">
 					<label id= "errorcontainer-referencia"></label><br>
 					<div class="clear"> </div>
-					<label class="texGris09_13">Confirmación *<br> Referencia </label><input type="text" id="referenciaConf" name="referenciaConf" class="texGris09_13 inputText" maxlength="8">
+					<label class="texGris09_13">Confirmación *<br> Referencia </label><input type="text" id="referenciaConf" name="referenciaConf" class="texGris09_13 inputText" maxlength="10">
 					<label id= "errorcontainer-referenciaConf"></label><br>
 					<div class="clear"> </div>
 				</div>

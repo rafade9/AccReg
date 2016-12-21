@@ -722,7 +722,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			executeValidate.setExecuteValidate(param);
 			
 			org.tempuri.ExecuteResponse response = stub.validateRequestReference(executeValidate, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
-			logger.info("Respuesta RMS Validate: " + response.getLog().getBusinessDocumentProcessingResultCode());
+			logger.info("Codigo Respuesta RMS Validate: " + response.getLog().getBusinessDocumentProcessingResultCode());
+			logger.info("Respuesta RMS Validate: " + response.getLog().getItem().getNote());
 			respuesta.setCodigo(response.getLog().getBusinessDocumentProcessingResultCode());
 			respuesta.setMensaje(response.getLog().getItem().getNote());
 			
@@ -742,7 +743,10 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
                     	   respuesta.setCuenta(at.getAttributeValue());
                        }
                 }
+			}else if(respuesta.getCodigo()==11){
+                logger.error("Mensaje de RMS" + response.getLog().getItem().getNote());
 			}else{
+				
 				respuesta.setCodigo(99);
 			}
 			

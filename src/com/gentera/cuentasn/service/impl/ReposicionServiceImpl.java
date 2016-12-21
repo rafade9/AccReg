@@ -33,7 +33,7 @@ public class ReposicionServiceImpl implements ReposicionService{
 	/**
 	 * Variable log
 	 */
-	final static Logger logger = Logger.getLogger(WebServiceConnectorImpl.class);
+	final static Logger logger = Logger.getLogger(ReposicionServiceImpl.class);
 	
 	@Override
 	public Respuesta reposicion(Persona persona, String ip) throws Exception{
@@ -50,28 +50,25 @@ public class ReposicionServiceImpl implements ReposicionService{
 				if(!persona.getReferencia().isEmpty() && !persona.getFolio().isEmpty() && !persona.getFechaNacimiento().isEmpty()){
 					String guid = Util.createGUID(persona);
 					respuesta = wsConnector.validateReference(persona, guid);
-					logger.info("Se valida la referecia y responde "+ respuesta.getCodigo());
-					respuesta.setCodigo(0);
-				if(respuesta.getCodigo()==0){
-					//2. Asignar plastico (si es correcto paso 1)
-					String bp = respuesta.getIdBP();
-					String account = respuesta.getCuenta();
-					respuesta = wsConnector.assignCard(persona, bp, account);
-					logger.info("Se asigna el folio. Respuesta de CMS: " + respuesta.getCodigo());
-					
 					if(respuesta.getCodigo()==0){
-						//3. Commit a referencia (si es correcto paso 2)
-						respuesta = wsConnector.increaseReference(persona,guid);
-						logger.info("Respuesta de increase " + respuesta.getCodigo());
+						//2. Asignar plastico (si es correcto paso 1)
+						String bp = respuesta.getIdBP();
+						String account = respuesta.getCuenta();
+						respuesta = wsConnector.assignCard(persona, bp, account);
+						if(respuesta.getCodigo()==0){
+							//3. Commit a referencia (si es correcto paso 2)
+							respuesta = wsConnector.increaseReference(persona,guid);
+						}else{
+							respuesta.setCodigo(99);
+						}
+						
+						logger.info("Finaliza el proceso de reposicion, correctamente.");
+					}else if (respuesta.getCodigo()==11){
+						logger.info("Error en referencia");
+						respuesta.setCodigo(102);
 					}else{
 						respuesta.setCodigo(99);
 					}
-					
-					
-					logger.info("Finaliza el proceso de reposicion, correctamente.");
-				}else{
-					respuesta.setCodigo(99);
-				}
 				}else{
 					respuesta.setCodigo(99);
 				}

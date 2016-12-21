@@ -142,6 +142,7 @@ $(document).ready(function(){
 	//Mensajes de respuesta
 	var mensajesRepo = [];
 	mensajesRepo[0] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora realiza el cobro de la comisi&oacute;n en tu TPV.</p><br>";
+	mensajesRepo[100] = "<p class='greenMsgClass'>Asignaci&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora realiza el cobro de apertura.</p><br>";
 	mensajesRepo[102] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia</p>";
 	mensajesRepo[103] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
 	mensajesRepo[120] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
@@ -222,10 +223,16 @@ $(document).ready(function(){
                 		$('#seccionBotones').css('display','none');
                 		$('#seccionSalir').css('display','block');
                 		$('#seccionError').css('display','none');
-                		$('#seccionOk').html(mensajesRepo[data.codigo]);
+                		
+                		if($('#reposicion').is(':checked')){//si el radio de asignacion esta activado, y es exitoso, se envia el mensaje 100, si no el 0
+                			$('#seccionOk').html(mensajesRepo[100]);
+                		}else{
+                			$('#seccionOk').html(mensajesRepo[data.codigo]);
+                		}
+                		
                 	}
                 	else if(data.codigo == 102){//Referencia inexistente
-                		console.log("Entra aqui")
+                		console.log("Entra aqui");
                 		$('#seccionFecha').css('display','none');
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');

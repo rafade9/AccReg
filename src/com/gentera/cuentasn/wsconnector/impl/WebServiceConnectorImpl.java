@@ -770,28 +770,20 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#increaseReference(com.gentera.cuentasn.entities.Persona)
 	 */
 	@Override
-	public Respuesta increaseReference(Persona persona) throws Exception {
+	public Respuesta increaseReference(Persona persona, String guid) throws Exception {
 		Respuesta respuesta = new Respuesta();
 		try{
-			ReferenceManagerStub stub = new ReferenceManagerStub(endPointCardManagerReposition);
+						
+			/**
+			 * Endpoint
+			 */
+			String endPointRms = Properties.getProp("EndPointRMS");
+			
+			ReferenceManagerStub stub = new ReferenceManagerStub(endPointRms);
 			
 			//Timeout
-			stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
-			stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutCRM"))));
-			
-			
-			/**
-			 * DATA
-			 */
-			
-			ExecuteIncrease executeIncrease = new ExecuteIncrease();
-			org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteIncrease data = new org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteIncrease();
-			
-			
-			//BIRTHDATE REFERENCEATTRIBUTESDATA
-			
-			//data.set
-			executeIncrease.setExecuteIncrease(data);
+			stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutWS"))));
+			stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT, new Integer(Integer.valueOf(Properties.getProp("timeoutWS"))));
 			
 			/**
 			 * FECHA DE CREACION - CreationDateTime
@@ -803,13 +795,13 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * ID - ID
 			 */
 			ID id = new ID();
-			id.setID("1");
+			id.setID(guid); 
 			
 			/**
 			 * RECIPIENT BUSINESS SYSTEM - RecipientBusinessSystemID
 			 */
 			RecipientBusinessSystemID recipientBusinessSystemID = new RecipientBusinessSystemID();
-			recipientBusinessSystemID.setRecipientBusinessSystemID("1");
+			recipientBusinessSystemID.setRecipientBusinessSystemID(Properties.getProp("recipient")); 
 			
 			/**
 			 * PERSONAS DE CONTACTO
@@ -824,7 +816,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//Unico contacto
 			ContactPerson contactPerson = new ContactPerson();
-			contactPerson.setInternalID("N2");
+			contactPerson.setInternalID(Properties.getProp("internalId"));
 			contactPersonsArray[0] = contactPerson;
 			
 			contactPersons.setContactPerson(contactPersonsArray);
@@ -834,19 +826,19 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			 * REFERENCE ID
 			 */
 			ReferenceID referenceID = new ReferenceID();
-			referenceID.setReferenceID("SDF10");
+			referenceID.setReferenceID(guid); //32 HEX
 			
 			/**
 			 * REFERENCE UUID
 			 */
 			ReferenceUUID referenceUUID = new ReferenceUUID();
-			referenceUUID.setReferenceUUID("SDF10");
+			referenceUUID.setReferenceUUID(guid); //32 HEX
 			
 			/**
 			 * ORIGEN
 			 */
 			SenderBusinessSystemID senderBusinessSystemID = new SenderBusinessSystemID();
-			senderBusinessSystemID.setSenderBusinessSystemID("N2WEB");
+			senderBusinessSystemID.setSenderBusinessSystemID(Properties.getProp("sender"));
 			
 			/**
 			 * 
@@ -854,43 +846,69 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			SenderParty senderParty = new SenderParty();
 			
 			//Objeto que contiene array de contactos
-//			ArrayOfContactPerson contactPersons2 = new ArrayOfContactPerson();
+	//		ArrayOfContactPerson contactPersons2 = new ArrayOfContactPerson();
 			
 			senderParty.setSenderParty(contactPersons);
 			
 			//Objeto UUID - UUID
 			UUID uuid = new UUID();
-			uuid.setUUID("X");
+			uuid.setUUID(guid); //----GENERAR CODIGO 32 DIG HEX
 			
 			
 			TestDataIndicator test = new TestDataIndicator();
-			test.setTestDataIndicator("X");
+			test.setTestDataIndicator("0"); //ENVIAR 0
 			
+			/*
+			 * DATA
+			 */
+			ExecuteIncrease executeIncrease = new ExecuteIncrease();
 			
-			org.tempuri.ExecuteResponse respon = stub.increaseRequestReference(executeIncrease, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
+			org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteIncrease param = new org.datacontract.schemas._2004._07.wcfreferencemanager.ExecuteIncrease(); 
 			
-			respuesta.setCodigo(respon.getLog().getBusinessDocumentProcessingResultCode());
+			//Tipo de referencia
+			param.setReferenceType(Properties.getProp("referenceType"));
+			//No. de Referencia
+			param.setReferenceNumber(persona.getReferencia());
+			//Atributos donde se envia la fecha de nacimiento
+			ArrayOfReferenceAttributeData attributesData = new ArrayOfReferenceAttributeData();
+			ReferenceAttributeData[] attributeData = new ReferenceAttributeData[1];
+			attributesData.setReferenceAttributeData(attributeData);
+	
+			//BIRTHDATE: Dato de fecha de nacimiento
+			ReferenceAttributeData birthdate = new ReferenceAttributeData();
+			birthdate.setAttributeName("N2");
+			birthdate.setAttributeValue("PORTALWEB");
+			attributeData[0] = birthdate;
+			
+			param.setReferenceAttributesData(attributesData);
+			
+			executeIncrease.setExecuteIncrease(param);
+			
+			org.tempuri.ExecuteResponse response = stub.increaseRequestReference(executeIncrease, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
+			logger.info("Respuesta RMS Increase: " + response.getLog().getBusinessDocumentProcessingResultCode());
+			respuesta.setCodigo(response.getLog().getBusinessDocumentProcessingResultCode());
+			respuesta.setMensaje(response.getLog().getItem().getNote());
+			
 			
 			if(respuesta.getCodigo()==0){
-				persona.setReferencia(respon.getExecuteResult().getReferenceNumber());
-				respuesta.setPersona(persona);
+				
 			}else{
 				respuesta.setCodigo(99);
 			}
 			
 			
 		}catch (AxisFault e) {
-			logger.error("REPOSICION. Error AxisFault " + e);
+			logger.error("ASIGNACION. Error AxisFault " + e);
 			respuesta.setCodigo(99);
 			e.printStackTrace();
 			throw new Exception(e);
 		} catch (RemoteException e) {
-			logger.error("REPOSICION. Error Remote " + e);
+			logger.error("ASIGNACION. Error Remote " + e);
 			respuesta.setCodigo(99);
 			e.printStackTrace();
 			throw new Exception(e);
 		} catch(Exception e){
-			logger.error("REPOSICION. Error general" + e);
+			logger.error("ASIGNACION. Error general" + e);
 			e.printStackTrace();
 			throw new Exception(e);
 		}
@@ -935,7 +953,12 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Calendar calendar = Calendar.getInstance();
 			String date = dateFormat.format(calendar.getTime());
-			String aditionalData = date;
+			
+			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+			String numPlaza = usuario.getNumOficina();
+			
+			String aditionalData = date + "|" + numPlaza + "|*|1001";
 			
 			execute0.setCardID(cardID);
 			execute0.setBankCardProductID(cardProductID);
@@ -955,12 +978,14 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			int rcCode = (int) respon.getExecuteResult().getRCCode();
 			respuesta.setCodigo(rcCode);
 			
-			if(respuesta.getCodigo()==5){
+			if(respuesta.getCodigo()==0){
 				respuesta.setCodigo(0);
 				logger.info("Se realizo asignacion de la tarjeta, Metodo assignCard.");	
 			}else if(respuesta.getCodigo()==3){
 				respuesta.setCodigo(3);
 				logger.info("No se realizo la asignacion de la tarjeta, " + respon.getExecuteResult().getRCDescription());
+			}else{
+				logger.info("Error no mapeado en CMS, " + respon.getExecuteResult().getRCDescription());
 			}
 			
 			

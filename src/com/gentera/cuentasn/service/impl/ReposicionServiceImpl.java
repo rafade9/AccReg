@@ -57,10 +57,12 @@ public class ReposicionServiceImpl implements ReposicionService{
 					String bp = respuesta.getIdBP();
 					String account = respuesta.getCuenta();
 					respuesta = wsConnector.assignCard(persona, bp, account);
+					logger.info("Se asigna el folio. Respuesta de CMS: " + respuesta.getCodigo());
 					
 					if(respuesta.getCodigo()==0){
 						//3. Commit a referencia (si es correcto paso 2)
-						respuesta = wsConnector.increaseReference(persona);
+						respuesta = wsConnector.increaseReference(persona,guid);
+						logger.info("Respuesta de increase " + respuesta.getCodigo());
 					}else{
 						respuesta.setCodigo(99);
 					}

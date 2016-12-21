@@ -32,13 +32,13 @@
 	//maximo length sera 9
 	function radioReposicion(){
 		onlyNumber=false;
-		 $("#referenciaConf").attr('maxlength','10');
+		 $("#referenciaConf").attr('maxlength','8');
 		 $("#referenciaConf").attr("placeholder", "Reposicion No...");
-		 $("#referenciaConf").pattern = "[a-zA-Z0-9]{10}";
+		 $("#referenciaConf").pattern = "[a-zA-Z0-9]{8}";
 		 
-		 $("#referencia").attr('maxlength','10');
+		 $("#referencia").attr('maxlength','8');
 		 $("#referencia").attr("placeholder", "Reposicion No...");
-		 $("#referencia").pattern = "[a-zA-Z0-9]{10}";
+		 $("#referencia").pattern = "[a-zA-Z0-9]{8}";
 		 
 		 $("#referencia, #referenciaConf").off("keydown", null);
 	}
@@ -49,9 +49,9 @@
 	                   function(value, element) {
 	        	var patron = "";
 	                                   if($("#reposicion")[0].checked){
-	                                	   $("#referencia").pattern = "[a-zA-Z0-9]{10}";
-	                                	   $("#referenciaConf").pattern = "[a-zA-Z0-9]{10}";
-	                                	   	patron = "[a-zA-Z0-9]{10}";
+	                                	   $("#referencia").pattern = "[a-zA-Z0-9]{8}";
+	                                	   $("#referenciaConf").pattern = "[a-zA-Z0-9]{8}";
+	                                	   	patron = "[a-zA-Z0-9]{8}";
 	                                	   mensajeIdentificacion = "Por favor, proporciona el numero de Reposicion correcto.";
 	                                	   if(value.match(patron,'')){return true;}else{return false;}
 	                                   }else{

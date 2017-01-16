@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
 import com.gentera.cuentasn.service.ReposicionService;
+import com.gentera.cuentasn.util.MailService;
+import com.gentera.cuentasn.util.Properties;
 import com.gentera.cuentasn.util.Util;
 import com.gentera.cuentasn.wsconnector.WebServiceConnector;
 import com.gentera.cuentasn.wsconnector.impl.WebServiceConnectorImpl;
@@ -19,6 +21,9 @@ public class ReposicionServiceImpl implements ReposicionService{
 	 */
 	@Autowired
 	WebServiceConnector wsConnector;
+	
+	@Autowired
+	MailService mailService;
 	
 	/**
 	 * Variable reposicion
@@ -50,22 +55,40 @@ public class ReposicionServiceImpl implements ReposicionService{
 				if(!persona.getReferencia().isEmpty() && !persona.getFolio().isEmpty() && !persona.getFechaNacimiento().isEmpty()){
 					String guid = Util.createGUID(persona);
 					respuesta = wsConnector.validateReference(persona, guid);
+					logger.info("Respuesta de validateReference " + respuesta.getCodigo());
 					if(respuesta.getCodigo()==0){
 						//2. Asignar plastico (si es correcto paso 1)
 						String bp = respuesta.getIdBP();
 						String account = respuesta.getCuenta();
+						logger.info("Entra al proceso de asignar tarjeta. CODIGO: " + respuesta.getCodigo());
 						respuesta = wsConnector.assignCard(persona, bp, account);
 						if(respuesta.getCodigo()==0){
 							//3. Commit a referencia (si es correcto paso 2)
-							respuesta = wsConnector.increaseReference(persona,guid);
+							respuesta = wsConnector.increaseReference(persona,guid, "UTILIZAR");//cancelar 3 check
+							logger.info("Finaliza el proceso de reposicion, correctamente.");
+						}else if(respuesta.getCodigo()==3){
+							respuesta.setCodigo(3);
 						}else{
 							respuesta.setCodigo(99);
 						}
 						
-						logger.info("Finaliza el proceso de reposicion, correctamente.");
+						
 					}else if (respuesta.getCodigo()==11){
 						logger.info("Error en referencia");
 						respuesta.setCodigo(102);
+						//enviar correo prevencion de fraudes;
+
+						String subject = "Error - Detección de Asignación sospechoso.";
+						//Se ha detectado un intento de originacion sospechoso. \n \n
+						String msj = "Se ha detectado un intento de asignación sospechoso, al ingresar el número de referencia y/o fecha de nacimiento.  \n \n";
+						
+//						"y/o fecha de nacimiento." +
+//						"Referencia: " +
+//						"Fecha de Nacimiento: " +
+//						"Reposicion N2 - Yastas.";
+								if(persona.isSms()){
+									mailService.sendMail(subject, msj);
+								}
 					}else{
 						respuesta.setCodigo(99);
 					}

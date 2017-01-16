@@ -90,4 +90,23 @@ public class MailService {
 //			throw new RuntimeException(e);
 //		}
 	}
+	
+	public void sendMail(String subject, String msj) {
+		try{
+			SimpleMailMessage message = new SimpleMailMessage();
+			String email = Properties.getProp("emailPrevencionFraudes");
+			
+			message.setFrom("webmaster@compartamos.com");
+			message.setTo(email);
+			message.setSubject(subject);
+			message.setText(msj);
+			
+			mailSender.send(message);
+			logger.info("Se ha enviado un email a " + email + " con subject " + subject);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error("No se ha podido enviar mail");
+		}
+	}
 }

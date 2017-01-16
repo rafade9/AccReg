@@ -51,7 +51,7 @@ public interface WebServiceConnector {
 	 * @return
 	 * @throws Exception
 	 */
-	public Respuesta increaseReference(Persona persona, String guid) throws Exception;
+	public Respuesta increaseReference(Persona persona, String guid, String referenceCode) throws Exception;
 	
 	/**
 	 * Consumo de Web Service Card Manager para asignacion de TDD

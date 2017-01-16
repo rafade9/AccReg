@@ -6,6 +6,7 @@ package com.gentera.cuentasn.wsconnector.impl;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import mx.com.gentera.crm.level2accountmanage.int_0133.BusinessPartnerCreateLevel2AccountData;
@@ -21,6 +22,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.databinding.types.Token;
 import org.apache.axis2.transport.http.HTTPConstants;
 import org.apache.axis2.transport.http.HttpTransportProperties;
+import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.log4j.Logger;
 import org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfContactPerson;
 import org.datacontract.schemas._2004._07.wcfreferencemanager.ArrayOfReferenceAttributeData;
@@ -542,14 +544,23 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub(endPointCardManagerReposition);
 			
 			// Se configura autenticación
+//			AuthPolicy.registerAuthScheme(AuthPolicy.NTLM, WebServiceConnectorImpl.class);
 			HttpTransportProperties.Authenticator ba = new HttpTransportProperties.Authenticator();
+//			ba.setAuthSchemes(Arrays.asList(AuthPolicy.NTLM));
 			ba.setUsername(Properties.getProp("UserCardManagerReposition"));
 			ba.setPassword(Properties.getProp("PasswordCardManagerReposition"));
+//			ba.setHost(Properties.getProp("HostCardManagerReposition"));
+//			ba.setRealm(Properties.getProp("HostCardManagerReposition"));
+//			ba.setDomain(Properties.getProp("DomainCardManagerReposition"));
 			
+//			logger.info("ATENTICATION - " + ba.toString());
+			
+		    
 			stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.CHUNKED,
 					Boolean.FALSE);
 			stub._getServiceClient().getOptions()
 					.setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, ba);
+			
 			
 			//Se genera instancia de Execute para data
 			Execute data = new Execute();
@@ -728,7 +739,18 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			respuesta.setMensaje(response.getLog().getItem().getNote());
 			
 			
+			
 			if(respuesta.getCodigo()==0){
+				
+				
+				String estado = "";
+				if(!response.getExecuteResult().getReferenceData().getReference().isEmpty() || response.getExecuteResult().getReferenceData().getReference() != null){
+					estado = response.getExecuteResult().getReferenceData().getReferenceStatus();
+				}
+				
+				logger.info("Respuesta RMS ESTADO: " + estado);
+				
+				if(estado.equals("Activo")){
 				ArrayOfReferenceAttributeData atributos = response.getExecuteResult().getReferenceData().getReferenceAttributesData();
                 
                 ReferenceAttributeData[] atributosAA = atributos.getReferenceAttributeData();
@@ -743,8 +765,15 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
                     	   respuesta.setCuenta(at.getAttributeValue());
                        }
                 }
+                
+				}
+				else{
+					respuesta.setCodigo(99);
+				}
+			}else if(respuesta.getCodigo() == 16){
+				logger.error("Mensaje de RMS 16" + response.getLog().getItem().getNote());
 			}else if(respuesta.getCodigo()==11){
-                logger.error("Mensaje de RMS" + response.getLog().getItem().getNote());
+                logger.error("Mensaje de RMS 11" + response.getLog().getItem().getNote());
 			}else{
 				
 				respuesta.setCodigo(99);
@@ -763,6 +792,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			throw new Exception(e);
 		} catch(Exception e){
 			logger.error("REPOSICION. Error general" + e);
+			respuesta.setCodigo(99);
 			e.printStackTrace();
 			throw new Exception(e);
 		}
@@ -774,7 +804,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 	 * @see com.gentera.cuentasn.wsconnector.WebServiceConnector#increaseReference(com.gentera.cuentasn.entities.Persona)
 	 */
 	@Override
-	public Respuesta increaseReference(Persona persona, String guid) throws Exception {
+	public Respuesta increaseReference(Persona persona, String guid, String referenceCode) throws Exception {
 		Respuesta respuesta = new Respuesta();
 		try{
 						
@@ -871,6 +901,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			//Tipo de referencia
 			param.setReferenceType(Properties.getProp("referenceType"));
+			//Reference Operation Code
+			param.setReferenceOperationCode(referenceCode);
 			//No. de Referencia
 			param.setReferenceNumber(persona.getReferencia());
 			//Atributos donde se envia la fecha de nacimiento
@@ -886,6 +918,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			param.setReferenceAttributesData(attributesData);
 			
+			
+//			param.setReferenceType(param)
 			executeIncrease.setExecuteIncrease(param);
 			
 			org.tempuri.ExecuteResponse response = stub.increaseRequestReference(executeIncrease, creationDateTime, id, recipientBusinessSystemID, recipientParty, referenceID, referenceUUID, senderBusinessSystemID, senderParty, test, uuid);
@@ -895,7 +929,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			
 			if(respuesta.getCodigo()==0){
-				
+				logger.info("Entra RMS - WS codigo 0");
+			}else if(respuesta.getCodigo() == 16){
+				logger.info("Error al validar referencia");
 			}else{
 				respuesta.setCodigo(99);
 			}

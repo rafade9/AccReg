@@ -1,5 +1,14 @@
 @CHARSET "ISO-8859-1";
 
+
+label.error {
+    width: 100%;
+    min-width: 300px;
+    text-align: left;
+    display: inline-block;
+}
+
+
 	form {
   	width: 80%;
   	margin: 0 auto;

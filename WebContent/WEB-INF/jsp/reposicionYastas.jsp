@@ -11,6 +11,7 @@
   <script src="resources/js/messages_es.js"></script>
   <script type="text/javascript" charset="UTF-8" src="resources/js/reposicionYastas.js"></script>
   <script src="resources/js/jquery.maskedinput.min.js" type="text/javascript"></script>    
+  <script src="resources/js/jquery.blockUI.js" type="text/javascript"></script>
  
   <link href="resources/css/YastasGen.css" rel="stylesheet" type="text/css">
   <link href="resources/css/reposicionYastas.css" rel="stylesheet" type="text/css">
@@ -27,20 +28,22 @@
  	<div id="formCompartamos">
  			<div id="seccionTitulo">
  				<center>
-					<p class="tituloMango">Reposición<br></p><br>
+					<p id="tituloHeader" class="tituloMango">Reposición<br></p><br>
 				</center>
  			</div>
  	
-			<div id="seccionError" style='display:none;' align="center"></div><br><br>
+			<div id="seccionError" align="center"></div><br><br>
 		<form id="formulario" action="" novalidate>
-				<div id="seccionReferencia" style='display:block;'>
+				<div id="seccionReferencia">
+				<div>
 					<label class="texGris09_13">Tipo de referencia * </label>
-					<label class="texGris09_13"><input onclick="radioReposicion()" type="radio" name="tipoReferencia" id="reposicion" value="assign" class="inputRadio bloqueado" checked>Asignación</label>
-					<label class="texGris09_13"><input onclick="radioAsignacion()" type="radio" name="tipoReferencia" id="asignación" value="reposition" class="inputRadio bloqueado">Reposición</label><br>
-					<label class="texGris09_13">Referencia * </label><input type="text" id="referencia" name="referencia" class=" texGris09_13 inputText" maxlength="10">
+					<label class="texGris09_13"><input onclick="radioReposicion()" type="radio" name="tipoReferencia" id="reposicion" value="reposition" class="inputRadio bloqueado" checked>Reposición</label>
+					<label class="texGris09_13"><input onclick="radioAsignacion()" type="radio" name="tipoReferencia" id="asignación" value="assign" class="inputRadio bloqueado">Asignación</label><br>
+				</div>
+					<label class="texGris09_13">Referencia * </label><input placeholder="99XXXXXXXXXXXXXXXX" type="text" id="referencia" name="referencia" class=" texGris09_13 inputText" maxlength="18">
 					<label id= "errorcontainer-referencia"></label><br>
 					<div class="clear"> </div>
-					<label class="texGris09_13">Confirmación *<br> Referencia </label><input type="text" id="referenciaConf" name="referenciaConf" class="texGris09_13 inputText" maxlength="10">
+					<label class="texGris09_13">Confirmación *<br> Referencia </label><input placeholder="99XXXXXXXXXXXXXXXX" type="text" id="referenciaConf" name="referenciaConf" class="texGris09_13 inputText" maxlength="18">
 					<label id= "errorcontainer-referenciaConf"></label><br>
 					<div class="clear"> </div>
 				</div>
@@ -56,6 +59,9 @@
 					<input type="hidden" id="origen" name="origen" value="yastas">
 					<input type="submit" id="enviar" name="enviar" value="Enviar">
 					<input type="button" id="salir" name="salir" value="Salir">
+				</div>
+				<div style="position: absolute; color: white; margin-top: -9px; border-radius: 7px; background: #fab035; text-align: center; padding: 4px; opacity: 0.8;">
+					<p id="notaID">Para el proceso de Reposición, la referencia deberá empezar con el numero 99XXX...</p>
 				</div>
 				<div id="seccionOk" style='display:none;' align="center">
 					<center>

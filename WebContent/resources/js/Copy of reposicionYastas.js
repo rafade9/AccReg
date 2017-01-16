@@ -1,8 +1,138 @@
+  var onlyNumber = false;
+//solo numeros
+  if(onlyNumber){
+	  console.log("onynumber ", onlyNumber);
+
+  }
+  
+	//funcion que cambia el maxleght segun el radio eliga validacion de ife(18 digitos) o pasaportes(9 digitos)
+	function radioAsignacion(){
+		 $("#referencia").attr('maxlength','18');
+		 $("#referencia").attr("placeholder", "Reposicion...");
+		 
+		 $("#referenciaConf").attr('maxlength','18');
+		 $("#referenciaConf").attr("placeholder", "Reposicion...");
+//		 $("#referencia").pattern = "[a-zA-Z0-9]{5,18}";
+		 
+		 $( "#tituloHeader" ).html( "Reposición" );
+		 //add class inputText 
+		 onlyNumber=true;
+		  $("#referencia, #referenciaConf").keydown(function (e) {
+			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				  // Permite: Ctrl+A
+				  (e.keyCode == 65 && e.ctrlKey === true) ||
+				  // Permite: home, end, left, right
+				  (e.keyCode >= 35 && e.keyCode <= 39) && e.keyCode !== 190 && e.keyCode !== 186 && e.keyCode !== 187) {
+			  // solo permitir lo que no este dentro de estas condiciones es un return false
+				  return;
+			  }
+			  // Aseguramos que son numeros
+			  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				  e.preventDefault();
+		  	}
+	  });
+	}
+	//maximo length sera 9
+	function radioReposicion(){
+		onlyNumber=false;
+		 $("#referenciaConf").attr('maxlength','10');
+		 $("#referenciaConf").attr("placeholder", "Referencia No...");
+//		 $("#referenciaConf").pattern = "[a-zA-Z0-9]{8,10}";
+		 $( "#tituloHeader" ).html( "Asignación" );
+		 
+		 $("#referencia").attr('maxlength','10');
+		 $("#referencia").attr("placeholder", "Referencia No...");
+//		 $("#referencia").pattern = "[a-zA-Z0-9]{8,10}";
+		 
+		 $("#referencia, #referenciaConf").off("keydown", null);
+	}
+
+	
+	$(document).ready(function(){
+//funcion de validacion para radio asignacion y reposicion
+			var mensajeIdentificacion = "Por favor, proporciona el numero de Referencia correcto.";
+	        $.validator.addMethod("validaReferencia",
+	                   function(value, element) {
+	        	var patron = "";
+	                                   if($("#reposicion")[0].checked){
+//	                                	   $("#referencia").pattern = "[a-zA-Z0-9]{8,10}";
+//	                                	   $("#referenciaConf").pattern = "[a-zA-Z0-9]{8,10}";
+//	                                	   	patron = "[a-zA-Z0-9]{8,10}";
+//	                                	   mensajeIdentificacion = "Por favor, proporciona el numero de Asignacion correcto.";
+//	                                	   if(value.match(patron,'')){return true;}else{return false;}
+	                                   }else{
+	                                	   $("#referenciaConf").attr('maxlength','18');
+//	                                	   $("#referencia").pattern = "[a-zA-Z0-9]{5,18}";
+	                                	   var referencia=$("#referencia").val();
+		                   					var validacion = referencia.substring(4,14);
+		                    
+		                   						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) <= 12){
+		                   							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
+		                   								if(parseInt(validacion.substring(2,4)) <= 30){
+		                   									if(parseInt(validacion.substring(4,6)) <= 23 ){
+		                   										if(parseInt(validacion.substring(6,8)) > 59 ){
+		                   											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   											return false;
+		                   										}
+		                   									}else{
+		                   										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   										return false;
+		                   									}
+		                   								}else{
+		                   									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   									return false;
+		                   								}
+		                   							}else if(parseInt(validacion.substring(0,2)) == 2){//febrero
+		                   								if(parseInt(validacion.substring(2,4)) <= 28){//dia
+		                   									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
+		                   										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
+		                   											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   											return false;
+		                   										}
+		                   									}else{
+		                   										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   										return false;
+		                   									}
+		                   								}else{
+		                   									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   									return false;
+		                   								}
+		                   									
+		                   							}else{
+		                   								if(parseInt(validacion.substring(2,4)) <= 31){//dia
+		                   									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
+		                   										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
+		                   											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   											return false;
+		                   										}
+		                   									}else{
+		                   										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   										return false;
+		                   									}
+		                   								}else{
+		                   									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   									return false;
+		                   								}
+		                   							}
+		                   							
+		                   						}else{
+		                   							$.validator.messages.validaReferencia = "La referencia es incorrecta.";
+		                   							return false;
+		                   						}
+
+		                   					
+	                                	   
+	                                	   
+	                                   }
+	                     
+	               },
+	        mensajeIdentificacion);
+	        
 //Js para el JSP registroCompartamos
 //Fecha 06/05/2016
 //Mara Vazquez
 
-$(document).ready(function(){
+
 	
 	varTimer = setTimeout(logoutFtn, 300000);
 	  
@@ -16,12 +146,13 @@ $(document).ready(function(){
 	}
 	
 	//Mensajes de respuesta
+	//Ahora realiza el cobro de apertura.
 	var mensajesRepo = [];
 	mensajesRepo[0] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora realiza el cobro de la comisi&oacute;n en tu TPV.</p><br>";
-	mensajesRepo[100] = "<p class='greenMsgClass'>Asignaci&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora para continuar el proceso, confirma que el cliente si haya hecho su pago por apertura de cuenta. En caso contrario apóyalo a realizarlo. </p><br>";
+	mensajesRepo[100] = "<p class='greenMsgClass'>Asignaci&oacute;n Exitosa.</p><p class='blackMsgClass'> </p><br>";
 	mensajesRepo[102] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia y/o Fecha de Nacimiento</p>";
-	mensajesRepo[103] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y/o Fecha de Nacimiento. y que se comunique a call center para generar una nueva</p>";
-	mensajesRepo[120] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y/o Fecha de Nacimiento. Y que se comunique a call center para generar una nueva</p>";
+	mensajesRepo[103] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y/o Fecha de Nacimiento. Y que se comunique a call center para generar una nueva</p>";
+	mensajesRepo[120] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y que se comunique a call center para generar una nueva</p>";
 	mensajesRepo[104] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
 	mensajesRepo[105] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia Bloqueada, </p><p class='blackMsgClass'>indica al cliente que la referencia fue bloqueada por exceder el No. de intentos, debe comunicarse a call center para generar una nueva.</p>";
 	mensajesRepo[3] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Folio inv&aacute;lido. Ingrese uno nuevo</p>";
@@ -77,26 +208,12 @@ $(document).ready(function(){
 		     }
 	    },
 	    submitHandler: function() {
-			 $.blockUI({
-				 css: { 
-			            border: 'none', 
-			            padding: '15px', 
-			            backgroundColor: '#000', 
-			            '-webkit-border-radius': '10px', 
-			            '-moz-border-radius': '10px', 
-			            opacity: .5, 
-			            color: '#fff' 
-			        },
-		         message: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Buffering...'
-		     });
-			 
+	    	
 	    	Persona = {};
 	    	Persona['folio'] =  $("#folio").val();
 	    	Persona['referencia'] =  $("#referencia").val();
 	    	Persona['fechaNacimiento'] =  $("#fechaNacimiento").val();
 	    	Persona['tipoReferencia'] = $('input:radio[name=tipoReferencia]:checked').val();
-	    	
-	    	//indicar 3 checks y enviar email
 	    	if(checks==3){
 	    		Persona['sms'] =  true;	
 	    		checks++;
@@ -104,6 +221,9 @@ $(document).ready(function(){
 	    		Persona['sms'] =  false;
 	    		checks++;
 	    	}
+	    	
+	    	
+	    	
      	    	
             $.ajax({
                 method: 'POST',
@@ -114,7 +234,6 @@ $(document).ready(function(){
                 success: function(data){
                 	console.log("Error", data.codigo);
                 	restartTimer();
-                	$("#notaID").css('display','none');
                 	if(data.codigo == 0){//caso exitoso
                 		$('#seccionOk').css('display','block');
                 		$('#seccionFecha').css('display','none');
@@ -124,10 +243,16 @@ $(document).ready(function(){
                 		$('#seccionBotones').css('display','none');
                 		$('#seccionSalir').css('display','block');
                 		$('#seccionError').css('display','none');
-                		$('#seccionOk').html(mensajesRepo[data.codigo]);
+                		
+                		if($('#reposicion').is(':checked')){//si el radio de asignacion esta activado, y es exitoso, se envia el mensaje 100, si no el 0
+                			$('#seccionOk').html(mensajesRepo[100]);
+                		}else{
+                			$('#seccionOk').html(mensajesRepo[data.codigo]);
+                		}
+                		
                 	}
                 	else if(data.codigo == 102){//Referencia inexistente
-//                		console.log("Entra aqui")
+                		console.log("Entra aqui");
                 		$('#seccionFecha').css('display','block');
                 		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
@@ -147,7 +272,7 @@ $(document).ready(function(){
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
                 	}
                 	else if(data.codigo == 104){//Fecha incorrecta
-                		$('#seccionFolio').css('display','block');
+                		$('#seccionFolio').css('display','none');
                 		$('#seccionError').css('display','block');
                 		$('#seccionFecha').css('display','block');
                 		$('#seccionReferencia').css('display','none');
@@ -183,17 +308,14 @@ $(document).ready(function(){
                 error: function(data){
                 	restartTimer();
                 }
-            }).complete(function() { //use this
-           	 $.unblockUI();
-        	 restartTimer();
-         });
+            });
 	            return false;  
 	    }
 	  });
 	
 //solo numeros
-	  //, #referencia, #referenciaConf
-	  $("#referencia, #referenciaConf, #folio").keydown(function (e) {
+	  
+	  $("#folio").keydown(function (e) {
 			  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				  // Permite: Ctrl+A
 				  (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -207,8 +329,11 @@ $(document).ready(function(){
 				  e.preventDefault();
 		  	}
 	  });
+	
 	  
+	
 	  
+
 	//Funcion que enmascara el campo de fecha
 		$(function($){
 			$("#fechaNacimiento").mask("99/99/9999");
@@ -242,27 +367,27 @@ $(document).ready(function(){
 						return false;
 					}else{
 					    if((fechaActual.getFullYear()-anioNac)>99){
-							$.validator.messages.dateRango = "El solicitante debe ser menor a 99 aÃ±os.";
+							$.validator.messages.dateRango = "El solicitante debe ser menor a 99 años.";
 							return false;
 						}else if((fechaActual.getFullYear()-anioNac)==99){
 							if((fechaActual.getMonth()-mesNac>0)){
-								$.validator.messages.dateRango = "El solicitante debe ser menor a 99 aÃ±os.";
+								$.validator.messages.dateRango = "El solicitante debe ser menor a 99 años.";
 								return false;
 							}
 							if((fechaActual.getMonth()-mesNac==0 && fechaActual.getDate()-diaNac >=0)){
-								$.validator.messages.dateRango = "El solicitante debe ser menor a 99 aÃ±os.";
+								$.validator.messages.dateRango = "El solicitante debe ser menor a 99 años.";
 								return false;
 							}
 						}else if((fechaActual.getFullYear()-anioNac)<18){
-							$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 aÃ±os.";
+							$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 años.";
 							return false;		
 						}else if((fechaActual.getFullYear()-anioNac)==18){
 								if(fechaActual.getMonth()-mesNac <0){
-									$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 aÃ±os.";
+									$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 años.";
 									return false;							
 								}else 
 									if(fechaActual.getMonth()-mesNac ==0 && fechaActual.getDate()-diaNac <0){
-									$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 aÃ±os.";
+									$.validator.messages.dateRango = "El solicitante debe ser mayor a 18 años.";
 								return false;
 							}
 						}
@@ -291,64 +416,6 @@ $(document).ready(function(){
 		
 		$.validator.addMethod("validaReferencia",
 				function(value, element) {
-					var referencia=$("#referencia").val();
-					var validacion = referencia.substring(4,14);
- 
-						if(parseInt(validacion.substring(0,2)) > 0 && parseInt(validacion.substring(0,2)) <= 12){
-							if(parseInt(validacion.substring(0,2)) == 4 || parseInt(validacion.substring(0,2)) == 6 || parseInt(validacion.substring(0,2)) == 9 || parseInt(validacion.substring(0,2)) == 11){
-								if(parseInt(validacion.substring(2,4)) <= 30){
-									if(parseInt(validacion.substring(4,6)) <= 23 ){
-										if(parseInt(validacion.substring(6,8)) > 59 ){
-											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-											return false;
-										}
-									}else{
-										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-										return false;
-									}
-								}else{
-									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-									return false;
-								}
-							}else if(parseInt(validacion.substring(0,2)) == 2){//febrero
-								if(parseInt(validacion.substring(2,4)) <= 28){//dia
-									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
-										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
-											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-											return false;
-										}
-									}else{
-										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-										return false;
-									}
-								}else{
-									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-									return false;
-								}
-									
-							}else{
-								if(parseInt(validacion.substring(2,4)) <= 31){//dia
-									if(parseInt(validacion.substring(4,6)) <=23 ){//hora
-										if(parseInt(validacion.substring(6,8)) > 59 ){//minutos
-											$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-											return false;
-										}
-									}else{
-										$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-										return false;
-									}
-								}else{
-									$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-									return false;
-								}
-							}
-							
-						}else{
-							$.validator.messages.validaReferencia = "La referencia es incorrecta.";
-							return false;
-						}
-
-					return true;
 				});
 		
 });
@@ -387,56 +454,6 @@ $(function() {
 				$('#detalle').css('display','none');
 			}
 	});
-	
-	
-	
-
-	
-
 });
 
 
-function radioReposicion(){
-	 $("#referencia").attr('maxlength','18');
-	 $("#referenciaConf").attr('maxlength','18');
-	 
-	 $("#referencia").attr("placeholder", "99XXXXXXXXXXXXXXXX");
-	 $("#referenciaConf").attr("placeholder", "99XXXXXXXXXXXXXXXX");
-	 
-	 //activa el keydown
-	  $("#referencia, #referenciaConf").keydown(function (e) {
-		  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-			  // Permite: Ctrl+A
-			  (e.keyCode == 65 && e.ctrlKey === true) ||
-			  // Permite: home, end, left, right
-			  (e.keyCode >= 35 && e.keyCode <= 39) && e.keyCode !== 190 && e.keyCode !== 186 && e.keyCode !== 187) {
-		  // solo permitir lo que no este dentro de estas condiciones es un return false
-			  return;
-		  }
-		  // Aseguramos que son numeros
-		  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-			  e.preventDefault();
-	  	}
- });
-	  $( "#tituloHeader" ).html( "Reposición" );
-	  $("#notaID").html("Para el proceso de Reposición, la referencia deberá empezar con el numero 99XXX...");
-}
-
-function radioAsignacion(){
-	 $("#referencia").attr('maxlength','10');
-	 $("#referenciaConf").attr('maxlength','10');
-	 $("#referencia").attr("placeholder", "0AXXXXXXXX");
-	 $("#referenciaConf").attr("placeholder", "0AXXXXXXXX");
-	 
-	 
-	 
-	//desactiva el keydown
-	$("#referencia, #referenciaConf").off("keydown", null);
-	
-	//desactiva el metodo validate
-	$.validator.addMethod("validaReferencia",function(value, element) {return true;});
-	
-	 $( "#tituloHeader" ).html( "Asignación" );
-	 $("#notaID").html("Para el proceso de Asignación, la referencia deberá empezar con el numero 0AXXX...");
-	
-}

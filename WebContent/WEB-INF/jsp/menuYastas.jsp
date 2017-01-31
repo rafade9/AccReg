@@ -23,8 +23,8 @@
   <div id="portalContent">
 	<center>
  	<div id="formCompartamos" style='display:block;'>
-		<input id="originacion" type="button" value="Originación" class="botonMenu">
-		<input id="reposicion" type="button" value="Reposición" class="botonMenu">
+		<input style="width: 240px; font-size: 20px;" id="originacion" type="button" value="Originación" class="botonMenu">
+		<input style="width: 240px; font-size: 20px;" id="reposicion" type="button" value="Reposición/Asignación" class="botonMenu">
 		<br><br>
 		<input type="hidden" id="origen" name="origen" value="yastas">
 		<input type="submit" id="salir" name="salir" value="Salir" class="botonSalir">

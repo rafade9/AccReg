@@ -45,6 +45,7 @@ public class ReposicionController {
 			
 //			request.getSession().setAttribute("respuesta", respuesta);
 			System.out.println("Mensaje: " + respuesta.getMensaje());
+			System.out.println("Codigo: " + respuesta.getCodigo());
 			
 			return new ResponseEntity<Respuesta>(respuesta , HttpStatus.OK);
 			

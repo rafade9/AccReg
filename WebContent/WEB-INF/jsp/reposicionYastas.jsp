@@ -60,7 +60,7 @@
 					<input type="submit" id="enviar" name="enviar" value="Enviar">
 					<input type="button" id="salir" name="salir" value="Salir">
 				</div>
-				<div style="position: absolute; color: white; margin-top: -9px; border-radius: 7px; background: #fab035; text-align: center; padding: 4px; opacity: 0.8;">
+				<div id="notaIDs" style="position: absolute; color: white; margin-top: -9px; border-radius: 7px; background: #fab035; text-align: center; padding: 4px; opacity: 0.8;">
 					<p id="notaID">Para el proceso de Reposición, la referencia deberá empezar con el numero 99XXX...</p>
 				</div>
 				<div id="seccionOk" style='display:none;' align="center">

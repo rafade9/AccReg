@@ -18,8 +18,9 @@ $(document).ready(function(){
 	//Mensajes de respuesta
 	var mensajesRepo = [];
 	mensajesRepo[0] = "<p class='greenMsgClass'>Reposici&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora realiza el cobro de la comisi&oacute;n en tu TPV.</p><br>";
-	mensajesRepo[100] = "<p class='greenMsgClass'>Asignaci&oacute;n Exitosa.</p><p class='blackMsgClass'>Ahora para continuar el proceso, confirma que el cliente si haya hecho su pago por apertura de cuenta. En caso contrario apóyalo a realizarlo. </p><br>";
-	mensajesRepo[102] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center para validar su No. de Referencia y/o Fecha de Nacimiento</p>";
+	mensajesRepo[100] = "<p class='greenMsgClass'>Asignación Exitosa.</p><p class='blackMsgClass'>Favor de entregar la tarjeta al cliente.. </p><br>";
+	mensajesRepo[102] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia inexistente o expirada,</p><p class='blackMsgClass'> indica al cliente que se debe comunicar a call center 01-800-220-9000</p>";
+	//para validar su No. de Referencia y/o Fecha de Nacimiento
 	mensajesRepo[103] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y/o Fecha de Nacimiento. y que se comunique a call center para generar una nueva</p>";
 	mensajesRepo[120] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Referencia no vigente </p><p class='blackMsgClass'>indica al cliente que su referencia esta vencida y/o Fecha de Nacimiento. Y que se comunique a call center para generar una nueva</p>";
 	mensajesRepo[104] = "<p class='redMsgClass'>Error</p><p class='blackMsgClass'>Fecha de Nacimiento Incorrecta, </p><p class='blackMsgClass'>valida nuevamente la fecha de nacimiento</p>";
@@ -77,6 +78,17 @@ $(document).ready(function(){
 		     }
 	    },
 	    submitHandler: function() {
+	    	
+	    	var tipoReferencia = $('input:radio[name=tipoReferencia]:checked').val();
+	    	var Buffering = "Buffering...";
+	    	var asignacion = 100;
+	    	if(tipoReferencia=="assign"){
+	    		Buffering = "Asignado la tarjeta";
+	    		asignacion = 0;
+	    	}else{
+	    		Buffering = "Buscado reposicion";
+	    	}
+	    	
 			 $.blockUI({
 				 css: { 
 			            border: 'none', 
@@ -87,7 +99,7 @@ $(document).ready(function(){
 			            opacity: .5, 
 			            color: '#fff' 
 			        },
-		         message: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Buffering...'
+		         message: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>'+Buffering
 		     });
 			 
 	    	Persona = {};
@@ -95,6 +107,8 @@ $(document).ready(function(){
 	    	Persona['referencia'] =  $("#referencia").val();
 	    	Persona['fechaNacimiento'] =  $("#fechaNacimiento").val();
 	    	Persona['tipoReferencia'] = $('input:radio[name=tipoReferencia]:checked').val();
+	    	
+	    	
 	    	
 	    	//indicar 3 checks y enviar email
 	    	if(checks==3){
@@ -115,6 +129,7 @@ $(document).ready(function(){
                 	console.log("Error", data.codigo);
                 	restartTimer();
                 	$("#notaID").css('display','none');
+                	$("#notaIDs").css('display','none');
                 	if(data.codigo == 0){//caso exitoso
                 		$('#seccionOk').css('display','block');
                 		$('#seccionFecha').css('display','none');
@@ -125,6 +140,18 @@ $(document).ready(function(){
                 		$('#seccionSalir').css('display','block');
                 		$('#seccionError').css('display','none');
                 		$('#seccionOk').html(mensajesRepo[data.codigo]);
+                		$('#butonDetalle').css('display','none');
+                	}else if(data.codigo == 100){//caso exitoso
+                		$('#seccionOk').css('display','block');
+                		$('#seccionFecha').css('display','none');
+                		$('#seccionFolio').css('display','none');
+                		$('#seccionTitulo').css('display','none');
+                		$('#seccionReferencia').css('display','none');
+                		$('#seccionBotones').css('display','none');
+                		$('#seccionSalir').css('display','block');
+                		$('#seccionError').css('display','none');
+                		$('#seccionOk').html(mensajesRepo[data.codigo]);
+                		$('#butonDetalle').css('display','none');
                 	}
                 	else if(data.codigo == 102){//Referencia inexistente
 //                		console.log("Entra aqui")
@@ -135,6 +162,7 @@ $(document).ready(function(){
                 		$('#seccionBotones').css('display','block');
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
+                		$('#butonDetalle').css('display','none');
                 	}
                 	else if(data.codigo == 103 || data.codigo == 120){//Referencia no vigente
                 		$('#seccionFecha').css('display','block');
@@ -145,6 +173,7 @@ $(document).ready(function(){
                 		$('#seccionSalir').css('display','block');
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
+                		$('#butonDetalle').css('display','none');
                 	}
                 	else if(data.codigo == 104){//Fecha incorrecta
                 		$('#seccionFolio').css('display','block');
@@ -154,6 +183,7 @@ $(document).ready(function(){
                 		$('#seccionBotones').css('display','block');
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
+                		$('#butonDetalle').css('display','none');
                 	}
                 	else if(data.codigo == 105){//Referencia bloqueada 3 intentos
                 		$('#seccionFolio').css('display','none');
@@ -164,6 +194,7 @@ $(document).ready(function(){
                 		$('#seccionSalir').css('display','block');
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
+                		$('#butonDetalle').css('display','none');
                 	}
                 	else if(data.codigo == 3 || data.codigo == 10){//Folio no existe, folio ya fue asignado
                 		$('#seccionFolio').css('display','block');
@@ -172,6 +203,8 @@ $(document).ready(function(){
                 		$('#seccionReferencia').css('display','none');
                 		
                 		$('#seccionError').html(mensajesRepo[data.codigo]);
+                		
+                		$('#butonDetalle').css('display','none');
                 	}
                 	else{//mensaje generico
                 		$('#seccionError').css('display','block');

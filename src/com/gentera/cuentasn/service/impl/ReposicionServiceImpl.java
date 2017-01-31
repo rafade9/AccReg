@@ -62,9 +62,12 @@ public class ReposicionServiceImpl implements ReposicionService{
 						String account = respuesta.getCuenta();
 						logger.info("Entra al proceso de asignar tarjeta. CODIGO: " + respuesta.getCodigo());
 						respuesta = wsConnector.assignCard(persona, bp, account);
+						
 						if(respuesta.getCodigo()==0){
 							//3. Commit a referencia (si es correcto paso 2)
+							
 							respuesta = wsConnector.increaseReference(persona,guid, "UTILIZAR");//cancelar 3 check
+							respuesta.setCodigo(100);
 							logger.info("Finaliza el proceso de reposicion, correctamente.");
 						}else if(respuesta.getCodigo()==3){
 							respuesta.setCodigo(3);

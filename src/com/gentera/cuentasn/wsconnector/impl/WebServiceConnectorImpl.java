@@ -774,6 +774,9 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 				logger.error("Mensaje de RMS 16" + response.getLog().getItem().getNote());
 			}else if(respuesta.getCodigo()==11){
                 logger.error("Mensaje de RMS 11" + response.getLog().getItem().getNote());
+			}else if(respuesta.getCodigo()==17){
+				logger.error("Mensaje de RMS 17" + response.getLog().getItem().getNote());
+				respuesta.setCodigo(11);
 			}else{
 				
 				respuesta.setCodigo(99);

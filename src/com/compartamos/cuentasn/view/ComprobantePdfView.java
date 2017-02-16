@@ -108,7 +108,7 @@ public class ComprobantePdfView extends AbstractPdfView{
 			sede.setBorder(0);
 
 			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			PdfPCell operador = new PdfPCell(new Phrase("Operador: " + user.getUsername(), letraM));//??
+			PdfPCell operador = new PdfPCell(new Phrase("Operador u Origne: " + user.getUsername(), letraM));//??
 			operador.setHorizontalAlignment(Element.ALIGN_CENTER);
 			operador.setExtraParagraphSpace(20);
 			operador.setBorder(0);

@@ -87,6 +87,7 @@ public class loginController {
 			//Origen compartamos
 			if(usuario.getOrigen()!=null && usuario.getOrigen().toLowerCase().equals("compartamos")){
 				model = new ModelAndView("redirect:/registroCompartamos");
+//				model = new ModelAndView("registroCompartamos");
 
 				//Verifica ip
 //				if(!leerCatalogos.isIpPermitida(req.getRemoteHost())){

@@ -1,12 +1,12 @@
 //funcion de validacion para radio asignacion y reposicion
-			var mensajeIdentificacion = "Por favor, proporciona el numero de identificacion correcto.<a href='#' class='close' data-dismiss='alert'>×</a>";
+			var mensajeIdentificacion = "Por favor, proporciona el numero de identificacion correcto.<a href='#' class='close' data-dismiss='alert'>ï¿½</a>";
 	        $.validator.addMethod("identificacion",
 	                   function(value, element) {
 	        	var patron = "";
 	                                   if($("#pasaporte")[0].checked){
 	                                	   $("#numeroIdentificacion").pattern = "[a-zA-Z0-9]{9}";
 	                                	   	patron = "[a-zA-Z0-9]{9}";
-	                                	   mensajeIdentificacion = "Por favor, proporciona el numero de Pasaporte correcto.<a href='#' class='close' data-dismiss='alert'>×</a>";
+	                                	   mensajeIdentificacion = "Por favor, proporciona el numero de Pasaporte correcto.<a href='#' class='close' data-dismiss='alert'>ï¿½</a>";
 	                                   }else{
 	                                	   patron = "[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}(([0-3]{1}[0-9]{1})|87|88)[h-m|H-M]{1}[0-9]{3}";
 	                                	   $("#numeroIdentificacion").pattern = "[a-zA-Z0-9]{6}[0-9]{2}[0-1]{1}[0-9]{1}[0-3]{1}[0-9]{1}(([0-3]{1}[0-9]{1})|87|88)[h-m|H-M]{1}[0-9]{3}";
@@ -581,15 +581,15 @@ $(document).ready(function(){
 				  	}
 			  });
 		
-			  
+			   
 			  
 	//Funcion para obtener los datos dependiendo del codigo postal	
 		$(function() {
 			$("#codigoPostal").focusout(
 				function() {
 					if (this.value.length >= 5 && this.value > 1000) {
-//	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
-						$.getJSON("resources/codPostal.json", function(data) {//desarrollo
+	              	$.getJSON("/FormularioProspectacion/getPostalCode.htm?cp=" + parseInt(this.value, 10), function(data) {//produccion
+//						$.getJSON("resources/codPostal.json", function(data) {//desarrollo
 							//Timer
 							restartTimer();
 							$("#colonia").prop('disabled', false);

@@ -1,11 +1,17 @@
 package com.gentera.cuentasn.service.impl;
 
+import java.util.Calendar;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.gentera.cuentasn.entities.Persona;
 import com.gentera.cuentasn.entities.Respuesta;
+import com.gentera.cuentasn.entities.Sucursal;
+import com.gentera.cuentasn.entities.Usuario;
+import com.gentera.cuentasn.service.LeerCatalogos;
 import com.gentera.cuentasn.service.ReposicionService;
 import com.gentera.cuentasn.util.MailService;
 import com.gentera.cuentasn.util.Properties;
@@ -24,6 +30,9 @@ public class ReposicionServiceImpl implements ReposicionService{
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	LeerCatalogos leerCatalogos;
 	
 	/**
 	 * Variable reposicion
@@ -80,15 +89,39 @@ public class ReposicionServiceImpl implements ReposicionService{
 						logger.info("Error en referencia");
 						respuesta.setCodigo(102);
 						//enviar correo prevencion de fraudes;
-
-						String subject = "Error - Detección de Asignación sospechoso.";
-						//Se ha detectado un intento de originacion sospechoso. \n \n
-						String msj = "Se ha detectado un intento de asignación sospechoso, al ingresar el número de referencia y/o fecha de nacimiento.  \n \n";
 						
-//						"y/o fecha de nacimiento." +
-//						"Referencia: " +
-//						"Fecha de Nacimiento: " +
-//						"Reposicion N2 - Yastas.";
+						//Recuperar 
+						Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+						String numPlazaOs = "";
+						String nombrePlazaOs = "";
+						if(user.getOrigen().equals("compartamos")){
+							Sucursal plaza = leerCatalogos.getSucursalPlaza(Util.convierteIpTerminaCero(ip));
+							
+							if(plaza==null){
+								numPlazaOs = "Plaza desconocida";
+							}else{
+								numPlazaOs = plaza.getId();
+								nombrePlazaOs = plaza.getPlaza();
+							}
+						}else{
+							Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
+							numPlazaOs = usuario.getNumOficina();
+						}
+
+
+						String subject = "Error - Detección de Asignación sospechoso. En YASTAS N2";
+						//Se ha detectado un intento de originacion sospechoso. \n \n
+						String msj = "Se ha detectado un intento de asignación sospechoso, al ingresar el número de referencia y/o fecha de nacimiento incorrecto.  \n \n";
+								msj += "\n Usuario: " + user.getUsername();
+								msj += "\n Folio: " + persona.getFolio();
+								msj += "\n Origen: " + user.getOrigen();
+								msj += "\n No. Plaza/OS: " + numPlazaOs;
+								
+								msj += "\n Fecha: " + Util.getDateTime();
+								msj += "\n\n\n Reposicion N2 - Yastas.";
+								
+
+
 								if(persona.isSms()){
 									mailService.sendMail(subject, msj);
 								}

@@ -538,7 +538,8 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			
 			Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
-			String numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
+			String numEmpleado = "";
+//				   numEmpleado = Util.formatNumEmpleado(usuario.getEmpleado());
 			
 			// Se genera el stub con el endpoint al cual apunta
 			CMS_AccountAsignRequestStub stub = new CMS_AccountAsignRequestStub(endPointCardManagerReposition);
@@ -1001,7 +1002,7 @@ public class WebServiceConnectorImpl implements WebServiceConnector {
 			Usuario usuario = leerCatalogos.getInfoPlazaByOperador(user.getUsername(), Properties.getProp("fileOperadores")+"OperadoresYastasN2.properties");
 			String numPlaza = usuario.getNumOficina();
 			
-			String aditionalData = date + "|" + numPlaza + "|*|1001";
+			String aditionalData = date + "|" + /*numPlaza +*/ "|*|1001";
 			
 			execute0.setCardID(cardID);
 			execute0.setBankCardProductID(cardProductID);

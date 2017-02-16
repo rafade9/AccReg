@@ -94,7 +94,18 @@ public class MailService {
 	public void sendMail(String subject, String msj) {
 		try{
 			SimpleMailMessage message = new SimpleMailMessage();
-			String email = Properties.getProp("emailPrevencionFraudes");
+			
+			String correoProp;
+			boolean todos = Properties.getProp("sendEmailAll") == "0";
+			
+			if(todos)
+				correoProp = Properties.getProp("emailPrevencionFraudesAll");
+			else
+				correoProp = Properties.getProp("emailPrevencionFraudes");
+			
+			String[] email = correoProp.split("; ");
+			
+//			String email = Properties.getProp("emailPrevencionFraudes");
 			
 			message.setFrom("webmaster@compartamos.com");
 			message.setTo(email);
